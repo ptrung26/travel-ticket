@@ -1,0 +1,153 @@
+<ng-container *ngIf="isView; else elseBlock">
+  <div>
+    <span class="label">
+      <nz-badge nzColor="#87d068" nzText="Tên dự án"></nz-badge>
+    </span>
+    <h3 class="text">
+      {{data.ten }}
+    </h3>
+  </div>
+  <div>
+    <span class="label">
+      <nz-badge nzColor="#87d068" nzText="Mô tả"></nz-badge>
+    </span>
+    <p class="text">{{data.moTa }}</p>
+  </div>
+  <div class="item">
+    <span class="label">
+      <nz-badge nzColor="#87d068" nzText="Ngày bắt đầu:"></nz-badge>
+    </span>
+    <span class="text">
+      {{data.ngayBatDau | date : 'dd/MM/yyyy' }}
+    </span>
+  </div>
+  <div class="item">
+    <span class="label">
+      <nz-badge nzColor="#87d068" nzText="Ngày kết thúc:"></nz-badge>
+    </span>
+    <span class="text">
+      <span class="text">{{data.ngayKetThuc | date : 'dd/MM/yyyy' }}</span>
+    </span>
+  </div>
+  <div class="item">
+    <span class="label">
+      <nz-badge nzColor="#87d068" nzText="Trạng thái:"></nz-badge>
+    </span>
+    <span class="text">
+      <nz-tag *ngIf="data.trangThai === TRANG_THAI_CONG_VIEC.TAO_MOI" nzColor="purple">Tạo mới</nz-tag>
+      <nz-tag *ngIf="data.trangThai === TRANG_THAI_CONG_VIEC.DANG_THUC_HIEN" nzColor="gold">Đang thực hiện</nz-tag>
+      <nz-tag *ngIf="data.trangThai === TRANG_THAI_CONG_VIEC.CHO_PHE_DUYET" nzColor="cyan">Phê duyệt</nz-tag>
+      <nz-tag *ngIf="data.trangThai === TRANG_THAI_CONG_VIEC.HOAN_THANH" nzColor="green">Hoàn thành</nz-tag>
+    </span>
+  </div>
+  <div class="item">
+    <span class="label">
+      <nz-badge nzColor="#87d068" nzText="Tổng số việc:"></nz-badge>
+    </span>
+    <span class="text">
+      {{data.soViec }}
+    </span>
+  </div>
+  <div class="item">
+    <span class="label">
+      <nz-badge nzColor="#87d068" nzText="Đã hoàn thành:"></nz-badge>
+    </span>
+    <span class="text">
+      {{data.soViecDaHoanThanh }}
+    </span>
+  </div>
+  <div class="item">
+    <span class="label">
+      <nz-badge nzColor="#87d068" nzText="Thành viên:"></nz-badge>
+    </span>
+    <span class="text">
+      <ng-container *ngIf="data.listUser?.length; else emptyBlock">
+        <nz-avatar *ngFor="let u of data.listUser" [nz-tooltip]="u.hoTen" [nzSrc]="sourceAvatar + u.userId"
+          nzIcon="user"></nz-avatar>
+      </ng-container>
+      <ng-template #emptyBlock>
+        <i>Hiện chưa có thành viên nào trong dự án</i>
+      </ng-template>
+    </span>
+  </div>
+</ng-container>
+<ng-template #elseBlock>
+  <form #form [formGroup]="rfDataModal" nz-form nzLayout="horizontal">
+    <nz-form-item>
+      <nz-form-label nzRequired nzSpan="24">Tên dự án</nz-form-label>
+      <nz-form-control nzErrorTip="Giá trị bắt buộc!" nzSpan="24">
+        <textarea formControlName="ten" nz-input placeholder="Nhập tên dự án" rows="2"></textarea>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label nzSpan="24">Mô tả</nz-form-label>
+      <nz-form-control nzSpan="24">
+        <textarea formControlName="moTa" nz-input placeholder="Mô tả công việc" rows="5"></textarea>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label nzRequired nzSpan="24">Ngày bắt đầu</nz-form-label>
+      <nz-form-control nzErrorTip="Giá trị bắt buộc!" nzSpan="24">
+        <ora-date-picker [disabledDate]="disabledStartDate" formControlName="ngayBatDau"></ora-date-picker>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label nzRequired nzSpan="24">Ngày kết thúc</nz-form-label>
+      <nz-form-control nzErrorTip="Giá trị bắt buộc!" nzSpan="24">
+        <ora-date-picker [disabledDate]="disabledEndDate" formControlName="ngayKetThuc"></ora-date-picker>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control>
+        <label nz-checkbox formControlName="isUuTien">
+          <span>Ưu tiên</span>
+        </label>
+      </nz-form-control>
+    </nz-form-item>
+    <ng-container *ngIf="isClone">
+      <nz-form-label>Chọn thành phần muốn nhân bản</nz-form-label>
+      <nz-form-item>
+        <nz-form-control>
+          <label nz-checkbox formControlName="isCloneCongViec">
+            Các công việc trong dự án nhóm
+          </label>
+        </nz-form-control>
+      </nz-form-item>
+    </ng-container>
+    <ng-container *ngIf="data?.id && !isClone">
+      <ng-container *ngIf="isCaNhan; else tplElse">
+        <nz-form-item>
+          <nz-form-label nzSpan="24">Thành viên được giao chính</nz-form-label>
+          <nz-form-control nzSpan="24">
+            <nz-avatar *ngFor="let u of getNhanVienDuAn()" [nz-tooltip]="u.hoTen" [nzSrc]="sourceAvatar + u.userId"
+              nzIcon="user"></nz-avatar>
+          </nz-form-control>
+        </nz-form-item>
+      </ng-container>
+      <ng-template #tplElse>
+        <nz-form-item>
+          <nz-form-label nzSpan="24">Thành viên được giao chính</nz-form-label>
+          <nz-form-control nzSpan="24">
+            <nz-avatar *ngFor="let u of getTruongPhongDuAn()" [nz-tooltip]="u.hoTen" [nzSrc]="sourceAvatar + u.userId"
+              nzIcon="user"></nz-avatar>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label nzSpan="24">Thành viên khác</nz-form-label>
+          <nz-form-control nzSpan="24">
+            <nz-avatar *ngFor="let u of getNhanVienDuAn()" [nz-tooltip]="u.hoTen" [nzSrc]="sourceAvatar + u.userId"
+              nzIcon="user"></nz-avatar>
+          </nz-form-control>
+        </nz-form-item>
+      </ng-template>
+    </ng-container>
+  </form>
+</ng-template>
+
+<ng-container *nzModalFooter>
+  <button (click)="save()" *ngIf="!isView" [disabled]="this.rfDataModal.invalid" nz-button nzType="primary"
+    type="button">
+    <i nz-icon nzTheme="outline" nzType="save"></i> Lưu
+  </button>
+  <button (click)="close()" nz-button nzType="danger"><i nz-icon nzTheme="outline" nzType="close"></i> Đóng</button>
+</ng-container>

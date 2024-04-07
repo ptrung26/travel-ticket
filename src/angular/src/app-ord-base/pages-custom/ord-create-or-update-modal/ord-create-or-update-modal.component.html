@@ -1,0 +1,47 @@
+<div class="ord-upsert-modal-form">
+  <ord-dynamic-form #createUpdateForm [listOfFormItems]="listOfFormItems" [dataForm]="dataItem" style="width: 100%" [urlUploadFile]="urlUploadFile"></ord-dynamic-form>
+</div>
+<nz-form-item>
+  <nz-form-control>
+    <div *nzModalFooter>
+      <ng-container [ngSwitch]="viewMode">
+        <ng-container *ngSwitchCase="'them'" [ngTemplateOutlet]="cheDoThem"></ng-container>
+        <ng-container *ngSwitchCase="'sua'" [ngTemplateOutlet]="cheDoSua"></ng-container>
+        <ng-container *ngSwitchCase="'xem'" [ngTemplateOutlet]="cheDoXem"></ng-container>
+      </ng-container>
+    </div>
+  </nz-form-control>
+</nz-form-item>
+
+<ng-template #cheDoThem>
+  <label nz-checkbox [(ngModel)]="isContinue"><b>Tiếp tục thêm</b></label>
+  <button type="submit" nz-button nzType="primary" [nzLoading]="isLoadingBtn" (click)="save(isContinue)"><i nz-icon nzType="save"></i>Lưu (F11)</button>
+  <button type="button" nz-button nzType="default" (click)="close()">Đóng (Esc)</button>
+
+  <!--  <button type="submit" nz-button nzType="default" [nzLoading]="isLoadingBtn" (click)="save(true)" [hidden]="isViewDetail===true">-->
+  <!--    <i nz-icon-->
+  <!--       nzType="save"></i>Lưu & thêm mới-->
+  <!--  </button>-->
+  <!--  <button type="submit" nz-button nzType="primary" [nzLoading]="isLoadingBtn" (click)="save()" [hidden]="isViewDetail===true">-->
+  <!--    <i nz-icon-->
+  <!--       nzType="save"></i>Lưu & đóng (F11)-->
+  <!--  </button>-->
+  <!--  <button type="button" nz-button nzType="default" [nzLoading]="isLoadingBtn" (click)="close()">Đóng (Esc)</button>-->
+</ng-template>
+<ng-template #cheDoSua>
+  <button type="submit" nz-button nzType="primary" [nzLoading]="isLoadingBtn" (click)="save()" [hidden]="isViewDetail === true"><i nz-icon nzType="save"></i>Lưu (F11)</button>
+  <button type="button" nz-button nzType="default" [nzLoading]="isLoadingBtn" (click)="close()">Đóng (Esc)</button>
+</ng-template>
+<ng-template #cheDoXem>
+  <button
+    type="submit"
+    nz-button
+    nzType="default"
+    [nzLoading]="isLoadingBtn"
+    (click)="chuyenCheDoSua()"
+    *ngIf="isViewDetail === true && isDisableEditMode != true && (hasPermission == null || hasPermission == true)"
+  >
+    <i nz-icon nzType="retweet"></i>Chuyển chế độ Sửa
+  </button>
+  <button type="button" nz-button nzType="default" [nzLoading]="isLoadingBtn" (click)="close()">Đóng (Esc)</button>
+</ng-template>

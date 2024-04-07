@@ -1,0 +1,22 @@
+.section-search {
+  margin-bottom: 8px;
+
+  .ord-form-control {
+    margin-bottom: 0 !important;
+  }
+}
+
+.group-control-search-box {
+  display: flex;
+  float: right;
+
+  .ant-btn {
+    &:first-child {
+      margin-left: 5px;
+    }
+  }
+}
+
+.margin-top-31 {
+  margin-top: 22px;
+}

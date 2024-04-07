@@ -1,0 +1,53 @@
+:host ::ng-deep {
+  .alain-default__header {
+    background-color: white;
+
+    .alain-default__nav-item,
+    .alain-default__nav nz-badge {
+      color: rgba(0, 0, 0, 0.65);
+    }
+
+    .alain-default__search .ant-input,
+    .alain-default__search .ant-input-group-addon,
+    .alain-default__search .ant-input-affix-wrapper {
+      color: rgba(0, 0, 0, 0.65);
+    }
+  }
+
+  .ant-tabs-tab-btn {
+    transition: none;
+
+    &:hover .reuse-tab__name:has(+ .anticon-close) {
+      padding: 8px 32px 8px 12px !important;
+    }
+  }
+
+  .text-right-content {
+    color: #255586;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .reuse-tab-sticky {
+    position: sticky;
+    top: 138px;
+    left: 0;
+    z-index: 10;
+    background-color: #fff;
+    margin-bottom: 16px;
+    padding: 0 40px;
+    border-bottom: 1px solid #e3e6e9;
+  }
+
+  .content_layout {
+    padding: 0 40px;
+  }
+}
+
+@media (max-width: 1366px) {
+  .reuse-tab-sticky,
+  .content_layout {
+    padding: 0 16px;
+  }
+}

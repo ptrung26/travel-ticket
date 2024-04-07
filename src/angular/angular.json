@@ -1,0 +1,206 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "cli": {
+    "analytics": false
+  },
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "angular2": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "skipTests": true,
+          "style": "scss"
+        },
+        "ng-alain:module": {
+          "routing": true,
+          "spec": false
+        },
+        "ng-alain:list": {
+          "spec": false
+        },
+        "ng-alain:edit": {
+          "spec": false,
+          "modal": true
+        },
+        "ng-alain:view": {
+          "spec": false,
+          "modal": true
+        },
+        "ng-alain:curd": {
+          "spec": false
+        },
+        "@schematics/angular:module": {
+          "routing": true,
+          "spec": false
+        },
+        "@schematics/angular:directive": {
+          "spec": false
+        },
+        "@schematics/angular:service": {
+          "spec": false
+        }
+      },
+      "root": "",
+      "sourceRoot": "src",
+      "prefix": "",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/angular2",
+            "index": "src/index.html",
+            "main": "src/main.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "tsconfig.app.json",
+            "aot": true,
+            "assets": ["src/favicon.ico", "src/assets"],
+            "styles": [
+              "src/styles.less",
+              "node_modules/primeicons/primeicons.css",
+              "node_modules/primeng/resources/themes/saga-blue/theme.css",
+              "node_modules/primeng/resources/primeng.min.css",
+              "node_modules/jquery-ui/themes/base/theme.css",
+              "node_modules/jquery-ui/themes/base/datepicker.css",
+              "node_modules/nouislider/distribute/nouislider.css",
+              "node_modules/select2/dist/css/select2.css",
+              "node_modules/pretty-checkbox/dist/pretty-checkbox.css",
+              "node_modules/bootstrap-slider/dist/css/bootstrap-slider.css",
+              "node_modules/jquery-bar-rating/dist/themes/bars-pill.css",
+              "node_modules/jquery-bar-rating/dist/themes/css-stars.css",
+              "node_modules/jquery-bar-rating/dist/themes/fontawesome-stars.css",
+              "node_modules/jquery-bar-rating/dist/themes/bars-1to10.css",
+              "node_modules/jquery-bar-rating/dist/themes/bars-horizontal.css",
+              "node_modules/jquery-bar-rating/dist/themes/bars-movie.css",
+              "node_modules/jquery-bar-rating/dist/themes/bars-reversed.css",
+              "node_modules/jquery-bar-rating/dist/themes/bars-square.css",
+              "node_modules/jquery-bar-rating/dist/themes/bootstrap-stars.css",
+              "node_modules/jquery-bar-rating/dist/themes/fontawesome-stars-o.css",
+              "node_modules/tabulator-tables/dist/css/tabulator.css",
+              "node_modules/survey-angular/modern.min.css",
+              "node_modules/survey-angular/defaultV2.min.css",
+              "node_modules/survey-core/defaultV2.min.css",
+              "node_modules/survey-creator-core/survey-creator-core.min.css",
+              "node_modules/survey-analytics/survey.analytics.min.css",
+              "node_modules/survey-analytics/survey.analytics.tabulator.min.css",
+              "node_modules/survey-analytics/survey.analytics.datatables.min.css"
+            ],
+            "scripts": [
+              "src/assets/scripts/trigger.js",
+              "src/assets/ckeditor5/build/ckeditor.js",
+              "node_modules/jspdf1/dist/jspdf.min.js",
+              "node_modules/jspdf-autotable/dist/jspdf.plugin.autotable.min.js",
+              "node_modules/jszip/dist/jszip.min.js",
+              "node_modules/xlsx/dist/xlsx.full.min.js"
+            ],
+            "allowedCommonJsDependencies": [
+              "@ant-design/colors",
+              "@antv/adjust",
+              "@antv/attr",
+              "@antv/component",
+              "@antv/g-base",
+              "@antv/g-canvas",
+              "@antv/g-math",
+              "@antv/g-svg",
+              "@antv/path-util",
+              "@antv/util",
+              "file-saver",
+              "hammerjs",
+              "ajv",
+              "ajv-formats",
+              "rxjs",
+              "@node_modules/rxjs",
+              "lodash",
+              "core-js",
+              "xlsx",
+              "@node_modules/xlsx",
+              "@babel",
+              "@babel/runtime",
+              "raf"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "7mb",
+                  "maximumError": "10mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "angular2:build",
+            "proxyConfig": "proxy.conf.json"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "angular2:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "angular2:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "src/test.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "tsconfig.spec.json",
+            "karmaConfig": "karma.conf.js",
+            "assets": ["src/favicon.ico", "src/assets"],
+            "styles": ["src/styles.less"],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["tsconfig.app.json", "tsconfig.spec.json", "e2e/tsconfig.json"],
+            "exclude": ["**/node_modules/**"]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "e2e/protractor.conf.js",
+            "devServerTarget": "angular2:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "angular2:serve:production"
+            }
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "angular2"
+}

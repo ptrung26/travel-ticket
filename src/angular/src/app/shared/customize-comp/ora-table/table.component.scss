@@ -1,0 +1,28 @@
+:host ::ng-deep nz-table {
+  thead {
+    nz-table-selection {
+      .ant-checkbox.ant-checkbox-checked {
+        .ant-checkbox-inner {
+          border-color: #fff;
+        }
+      }
+    }
+  }
+  //.ant-pagination-options {
+  //  position: absolute;
+  //  top: -40px;
+  //}
+}
+//.ora-table {
+//  position: relative;
+//  padding-top: 40px;
+//}
+// .is-selected {
+//   color: #0094d9;
+//   background-color: #e6fbff;
+// }
+
+.div-pagination-simple {
+  margin-top: 10px;
+  text-align: right;
+}

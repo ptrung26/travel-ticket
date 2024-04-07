@@ -1,0 +1,59 @@
+<ora-page-header title="Cấu hình hệ thống" [action]="actionHeader">
+  <ng-template #actionHeader> </ng-template>
+</ora-page-header>
+<form nz-form #form [formGroup]="rfDataModal" nzLayout="horizontal">
+  <div nz-row [nzGutter]="32" class="px-4">
+    <div nz-col [nzSpan]="16">
+      <div class="flex-center-between margin-bottom-10">
+        <h3>Cấu hình email</h3>
+        <button type="button" [nzLoading]="saving" nz-button nzType="primary" (click)="save()"><i nz-icon nzType="save"></i>Lưu</button>
+      </div>
+      <nz-form-item nzGutter="6">
+        <nz-form-label [nzSm]="8" nzRequired>Tên hiển thị</nz-form-label>
+        <nz-form-control [nzSm]="16" nzErrorTip="Giá trị bắt buộc!">
+          <textarea nz-input rows="1" formControlName="defaultFromDisplayName"></textarea>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item nzGutter="6">
+        <nz-form-label [nzSm]="8" nzRequired>Email mặc định</nz-form-label>
+        <nz-form-control [nzSm]="16" nzErrorTip="Giá trị bắt buộc!">
+          <input nz-input formControlName="defaultFromAddress" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item nzGutter="6">
+        <nz-form-label [nzSm]="8" nzRequired>Email Host</nz-form-label>
+        <nz-form-control [nzSm]="16" nzErrorTip="Giá trị bắt buộc!">
+          <input nz-input formControlName="smtpHost" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item nzGutter="6">
+        <nz-form-label [nzSm]="8" nzRequired>Email Port</nz-form-label>
+        <nz-form-control [nzSm]="16" nzErrorTip="Giá trị bắt buộc!">
+          <input nz-input formControlName="smtpPort" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item nzGutter="6">
+        <nz-form-label [nzSm]="8">Tên miền</nz-form-label>
+        <nz-form-control [nzSm]="16">
+          <input nz-input formControlName="smtpDomain" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item nzGutter="6">
+        <nz-form-label [nzSm]="8" nzRequired>Username</nz-form-label>
+        <nz-form-control [nzSm]="16" nzErrorTip="Giá trị bắt buộc!">
+          <input nz-input formControlName="smtpUserName" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item nzGutter="6">
+        <nz-form-label [nzSm]="8" nzRequired>Password</nz-form-label>
+        <nz-form-control [nzSm]="16" nzErrorTip="Giá trị bắt buộc!">
+          <input nz-input formControlName="smtpPassword" />
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+    <div nz-col class="gutter-row" [nzSpan]="8">
+      <h3>Mẫu email</h3>
+      <list-text-template></list-text-template>
+    </div>
+  </div>
+</form>

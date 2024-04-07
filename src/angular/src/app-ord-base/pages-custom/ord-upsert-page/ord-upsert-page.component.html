@@ -1,0 +1,47 @@
+<div class="row" tabindex="-1" *ngIf="isShow===true" id="{{idJquery}}">
+  <div class="col-sm-12 offset-md-1 col-md-10">
+    <nz-card [nzTitle]="cardtitle" [nzExtra]="cardClose">
+      <ord-dynamic-form #createUpdateForm [listOfFormItems]="listOfFormItems" [dataForm]="dataItem"
+                        [urlUploadFile]="urlUploadFile"
+                        style="width:100%">
+      </ord-dynamic-form>
+      <div class="text-right form-group">
+        <ng-container [ngSwitch]="viewMode">
+          <ng-container *ngSwitchCase="'them'" [ngTemplateOutlet]="cheDoThem"></ng-container>
+          <ng-container *ngSwitchCase="'sua'" [ngTemplateOutlet]="cheDoSua"></ng-container>
+          <ng-container *ngSwitchCase="'xem'" [ngTemplateOutlet]="cheDoXem"></ng-container>
+        </ng-container>
+      </div>
+
+    </nz-card>
+  </div>
+</div>
+<ng-template #cardClose>
+  <button nz-button nzType="default" nzShape="circle" nzSize="small" (click)="close()" title="Đóng">
+    <i nz-icon nzType="close"></i>
+  </button>
+</ng-template>
+<ng-template #cardtitle>
+  <h3 class="text-primary">{{title}}</h3>
+</ng-template>
+<ng-template #cheDoThem>
+  <label nz-checkbox [(ngModel)]="tiepTucThem">Tiếp tục thêm mới</label>
+  <button type="submit" nz-button nzType="primary" (click)="save(tiepTucThem)" [hidden]="isViewDetail===true">
+    <i nz-icon
+       nzType="save"></i>Lưu (F11)
+  </button>
+  <button type="button" nz-button nzType="default" (click)="close()">Đóng (Esc)</button>
+</ng-template>
+<ng-template #cheDoSua>
+  <button type="submit" nz-button nzType="primary" (click)="save()" [hidden]="isViewDetail===true">
+    <i nz-icon
+       nzType="save"></i>Lưu (F11)
+  </button>
+  <button type="button" nz-button nzType="default" (click)="close()">Đóng (Esc)</button>
+</ng-template>
+<ng-template #cheDoXem>
+<!--  <button type="submit" nz-button nzType="default" (click)="chuyenCheDoSua()" *ngIf="isViewDetail===true">-->
+<!--    <i nz-icon nzType="retweet"></i>Chuyển chế độ Sửa (F9)-->
+<!--  </button>-->
+  <button type="button" nz-button nzType="default" (click)="close()">Đóng (Esc)</button>
+</ng-template>

@@ -1,0 +1,49 @@
+<ng-container *ngIf="(loaiDanhMucText$ | async) as loaiDanhMucVm">
+  <span class="text-info margin-right-20">
+  {{loaiDanhMucVm}}
+</span>
+
+
+  <ng-container *ngIf="codeSystemDto.parentCode==='HeMayThietBi'">
+    <button nz-button nzSize="small" nzType="primary"
+            (click)="vcThietBiThuocHeMayModal.heMayModalService.open()">
+      <span nz-icon nzType="unordered-list" nzTheme="outline"></span>
+      Danh sách thiết bị
+    </button>
+    <ds-thiet-bi-thuoc-he-may-modal #vcThietBiThuocHeMayModal
+                                    [codeSystemDto]="codeSystemDto">
+    </ds-thiet-bi-thuoc-he-may-modal>
+  </ng-container>
+  <ng-container *ngIf="codeSystemDto.parentCode==='ThietBi'">
+    <nz-tag class="margin-left-5" title="Tên hệ máy" [nzColor]="'#2db7f5'" *ngIf="chonHeMayModalService.tenHeMay"
+            style="cursor: pointer"
+            (click)="chonHeMayModalService.open()"
+    >{{chonHeMayModalService.tenHeMay}}</nz-tag>
+    <button nz-button nzSize="small" nzType="default"
+            *ngIf="!!!chonHeMayModalService.tenHeMay"
+            (click)="chonHeMayModalService.open()">
+      Chọn hệ máy
+    </button>
+    <nz-modal [nzVisible]="chonHeMayModalService.isVisible" (nzOnCancel)="chonHeMayModalService.close()">
+      <ng-container *nzModalTitle>
+        Chọn hệ máy cho thiết bị {{codeSystemDto.display}}
+      </ng-container>
+      <ng-container *nzModalContent>
+        <div>
+          <nz-select [(ngModel)]="chonHeMayModalService.heMayId" style="width: 100%"
+                     nzPlaceHolder="Chọn hệ máy cho thiết bị">
+            <nz-option [nzValue]="it.id" nzLabel="{{it.display}}"
+                       *ngFor="let it of chonHeMayModalService.heMayItems"></nz-option>
+          </nz-select>
+        </div>
+      </ng-container>
+      <div *nzModalFooter>
+        <button nz-button nzType="default" (click)="chonHeMayModalService.close()">Đóng</button>
+        <button nz-button nzType="primary" (click)="chonHeMayModalService.save()">Lưu</button>
+      </div>
+    </nz-modal>
+
+  </ng-container>
+
+</ng-container>
+

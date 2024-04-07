@@ -1,0 +1,81 @@
+stages:
+  - qcc-hcm-tool-qa
+  - qcc-hcm-qa
+ ################################# tool-service  #################################
+01-tool-service-qa:
+ stage: qcc-hcm-tool-qa
+ when: manual
+ tags:
+  - 222-qcc-hcm
+ only: 
+  - qa
+ script:
+  - dotnet restore "./src/aspnet-core/DataBase/DataBase.sln"
+  - CI=false dotnet build  /nr:false "./src/aspnet-core/DataBase/src/Qcc/newPMS.Base.DbMigrator/newPMS.Base.DbMigrator.csproj"
+  - cp -r /home/deployment/tool/service/appsettings.json  ./src/aspnet-core/DataBase/src/Qcc/newPMS.Base.DbMigrator/bin/Debug/net5.0
+  - cd ./src/aspnet-core/DataBase/src/Qcc/newPMS.Base.DbMigrator/bin/Debug/net5.0
+  - dotnet newPMS.Base.DbMigrator.dll
+################################# tool-service  #################################
+
+ ################################# tool-identity  #################################
+02-tool-identity-qa:
+ stage: qcc-hcm-tool-qa
+ when: manual
+ tags:
+  - 222-qcc-hcm
+ only: 
+  - qa
+ script:
+  - dotnet restore "./src/aspnet-core/Identity/newPMS.sln"
+  - CI=false dotnet build  /nr:false "./src/aspnet-core/Identity/src/newPMS.DbMigrator/newPMS.DbMigrator.csproj"
+  - cp -r /home/deployment/tool/identity/appsettings.json ./src/aspnet-core/Identity/src/newPMS.DbMigrator/bin/Debug/net5.0
+  - cd ./src/aspnet-core/Identity/src/newPMS.DbMigrator/bin/Debug/net5.0
+  - dotnet newPMS.DbMigrator.dll
+################################# tool-identity  ################################# 
+################################# qcc-all #################################
+01-build-qcc-qa-api:
+  stage: qcc-hcm-qa
+  when: manual
+  tags:
+    - 222-qcc-hcm
+  only:
+    - qa
+  script:
+    - dotnet restore "./src/aspnet-core/modules/newPMS.All/newPMS.All.sln"
+    - rm -rf ../publish_all_qcc
+    - cd "./src/aspnet-core/modules/newPMS.All/src/HttpApi.Host"
+    # - rm -rf package-lock.json
+    # - rm -rf node_modules/
+    # - node -v
+    # - npm install
+    - CI=false dotnet publish /nr:false newPMS.All.HttpApi.Host.csproj -c Release -o ../publish_all_qcc
+    - cd ../publish_all_qcc
+    - rm -rf appsettings.json
+    - rm -rf package-lock.json
+    - docker build -t harbor.orenda.vn/qcchcm/qcchcm:full .
+    - docker-compose -f ../../../../../../cicd/qa/docker-compose.yaml down
+    - docker-compose -f ../../../../../../cicd/qa/docker-compose.yaml up -d
+    # - ls  | xargs -n1 -P10 -I% rsync -Pa %   /home/deployment/qcc-hcm/netcore/publish --exclude 'appsettings.*' --delete
+    # - chown -R www-data:www-data /home/deployment/qcc-hcm/netcore/publish
+    # - systemctl restart qcc-hcm.service    
+02-build-qcc-qa-angular:
+  stage: qcc-hcm-qa
+  when: manual
+  tags:
+    - 222-qcc-hcm
+  only:
+    - qa
+  script:
+    - cd ./src/angular
+    # - source ~/.nvm/nvm.sh
+    # - nvm use v16.19.1
+    # - npm install --force
+    # - mkdir node_modules
+    - cp -r /home/daonh/node_modules/ ${pwd}node_modules
+    - node --max_old_space_size=12000 ./node_modules/@angular/cli/bin/ng build --configuration production    
+    # - rm -rf dist
+    # - unzip dist.zip
+    - cp /home/deployment/qcc-hcm/angular/publish/assets/appconfig.* ./dist/angular2/assets/
+    - rm -rf /home/deployment/qcc-hcm/angular/publish/*
+    - cd dist/angular2/
+    - ls  | xargs -n1 -P10 -I% rsync -Pa %   /home/deployment/qcc-hcm/angular/publish

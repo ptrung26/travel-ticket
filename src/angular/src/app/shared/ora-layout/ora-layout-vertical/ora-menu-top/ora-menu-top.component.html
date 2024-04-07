@@ -1,0 +1,23 @@
+<div class="topnav" id="myTopnav">
+  <ng-container *ngFor="let item of menus | filter: filterItem">
+    <a [class.active]="item | checkActiveMenu | async" (click)="clickMenuItem(item)">
+      <!--      <i *ngIf="item.icon" nz-icon [nzType]="item.icon.value"></i>-->
+      {{ item.text | translate | uppercase }}
+    </a>
+  </ng-container>
+  <a href="javascript:void(0);" class="icon" nz-dropdown [nzDropdownMenu]="menu">
+    <i class="margin-right-5" nz-icon nzType="bars" nzTheme="outline"></i>Chức năng
+  </a>
+  <nz-dropdown-menu #menu="nzDropdownMenu">
+    <ul nz-menu>
+      <li
+        nz-menu-item
+        *ngFor="let item of menus | filter: filterItem"
+        [nzSelected]="item | checkActiveMenu | async"
+        (click)="clickMenuItem(item)"
+      >
+        {{ item.text | translate | uppercase }}
+      </li>
+    </ul>
+  </nz-dropdown-menu>
+</div>

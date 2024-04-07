@@ -1,0 +1,50 @@
+<nz-modal
+  [(nzVisible)]="isVisible"
+  [nzTitle]="modalTitle"
+  [nzContent]="modalContent"
+  [nzFooter]="modalFooter"
+  [nzWidth]="nzWidth"
+  (nzOnCancel)="handleCancel()"
+>
+  <ng-template #modalTitle>{{pageTitle}}</ng-template>
+  <ng-template #modalContent>
+    <div *ngIf="isVisible">
+      <ng-content></ng-content>
+    </div>
+  </ng-template>
+  <ng-template #modalFooter>
+    <div class="text-right btn-saving-group" *ngIf="btnGroupMode==='saveContinue'">
+      <label nz-checkbox [(ngModel)]="isContinue">Checkbox</label>
+      <button type="submit" nz-button nzType="primary" (click)="save(true)">
+        <i nz-icon
+           nzType="save"></i>Lưu (F11)
+      </button>
+      <button type="button" nz-button nzType="default" (click)="handleCancel()">Đóng (Esc)</button>
+    </div>
+    <div class="text-right btn-saving-group" *ngIf="btnGroupMode==='saveOnly'">
+      <button type="submit" nz-button nzType="primary" (click)="save(true)">
+        <i nz-icon
+           nzType="save"></i>Lưu (F11)
+      </button>
+      <button type="button" nz-button nzType="default" (click)="handleCancel()">Đóng (Esc)</button>
+    </div>
+<!--    <div class="of-text-right btn-saving-group" *ngIf="btnGroupMode==='saveContinue'">-->
+<!--      <button type="submit" nz-button nzType="default" (click)="save(false)">-->
+<!--        <i nz-icon-->
+<!--           nzType="save"></i>Lưu & thêm mới-->
+<!--      </button>-->
+<!--      <button type="submit" nz-button nzType="primary" (click)="save(true)">-->
+<!--        <i nz-icon-->
+<!--           nzType="save"></i>Lưu & đóng (F11)-->
+<!--      </button>-->
+<!--      <button type="button" nz-button nzType="default" (click)="handleCancel()">Đóng (Esc)</button>-->
+<!--    </div>-->
+<!--    <div class="of-text-right btn-saving-group" *ngIf="btnGroupMode==='saveOnly'">-->
+<!--      <button type="submit" nz-button nzType="primary" (click)="save(true)">-->
+<!--        <i nz-icon-->
+<!--           nzType="save"></i>Lưu (F11)-->
+<!--      </button>-->
+<!--      <button type="button" nz-button nzType="default" (click)="handleCancel()">Đóng (Esc)</button>-->
+<!--    </div>-->
+  </ng-template>
+</nz-modal>

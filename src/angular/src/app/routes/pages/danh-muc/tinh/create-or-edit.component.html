@@ -1,0 +1,52 @@
+<!--<of #vcForm [schemaModel]="formService.schemaModel"></of>-->
+<form nz-form #form [formGroup]="rfDataModal" (ngSubmit)="save()">
+  <nz-form-item>
+    <nz-form-label nzFor="id" [nzSm]="8" nzRequired>Id tỉnh/thành phố</nz-form-label>
+    <nz-form-control [nzSm]="16" [nzErrorTip]="tplErr">
+      <input nz-input formControlName="id" />
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label nzFor="ma" [nzSm]="8" nzRequired>Mã tỉnh/thành phố</nz-form-label>
+    <nz-form-control [nzSm]="16" [nzErrorTip]="tplErr">
+      <input nz-input formControlName="ma" />
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item nzGutter="6">
+    <nz-form-label nzFor="ten" [nzSm]="8" nzRequired>Tên tỉnh/thành phố</nz-form-label>
+    <nz-form-control [nzSm]="16" nzErrorTip="Giá trị không được để trống!">
+      <input nz-input formControlName="ten" />
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label nzFor="cap" [nzSm]="8">Cấp</nz-form-label>
+    <nz-form-control [nzSm]="16">
+      <input nz-input formControlName="cap" />
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label nzFor="phanVung" [nzSm]="8">Phân vùng</nz-form-label>
+    <nz-form-control [nzSm]="16">
+      <nz-select formControlName="phanVung" nzPlaceHolder="Chọn...">
+        <nz-option *ngFor="let item of listPhanVung" [nzValue]="item.value" [nzLabel]="item.displayText"></nz-option>
+      </nz-select>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label nzFor="isTinhGan" [nzSm]="8">Tỉnh gần</nz-form-label>
+    <nz-form-control [nzSm]="16">
+      <label nz-checkbox formControlName="isTinhGan"></label>
+    </nz-form-control>
+  </nz-form-item>
+</form>
+
+<ng-container *nzModalFooter>
+  <button nz-button nzType="default" (click)="close()">Đóng</button>
+  <button [nzLoading]="saving" nz-button nzType="primary" (click)="save()"><i nz-icon nzType="save"></i>Lưu</button>
+</ng-container>
+
+<ng-template #tplErr let-control>
+  <ng-container *ngIf="control.hasError('required')"> Giá trị không được để trống!</ng-container>
+  <ng-container *ngIf="control.hasError('IsMaExist')"> Mã tỉnh/thành phố đã tồn tại! </ng-container>
+  <ng-container *ngIf="control.hasError('IsTinhIdExist')"> Id tỉnh/thành phố đã tồn tại! </ng-container>
+</ng-template>

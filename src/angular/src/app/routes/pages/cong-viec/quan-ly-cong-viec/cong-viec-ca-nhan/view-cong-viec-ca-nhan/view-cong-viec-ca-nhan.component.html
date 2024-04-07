@@ -1,0 +1,129 @@
+<form #form [formGroup]="rfDataModal" nz-form>
+  <nz-tabset nzTabPosition="left" nzType="card">
+    <nz-tab nzTitle="Thông tin">
+      <nz-row nzGutter="12">
+        <nz-col nzLg="24">
+          <nz-form-item>
+            <nz-form-label [nzRequired]="showEdit" nzSpan="24"> Tên công việc</nz-form-label>
+            <nz-form-control nzSpan="24">
+              <label *ngIf="showEdit">
+                <input formControlName="ten" nz-input />
+              </label>
+              <h2 *ngIf="!showEdit">{{ congViec.ten }}&nbsp;&nbsp;</h2>
+            </nz-form-control>
+          </nz-form-item>
+        </nz-col>
+        <nz-col nzLg="24">
+          <nz-form-item>
+            <nz-form-label nzSpan="24"> Mô tả</nz-form-label>
+            <nz-form-control nzSpan="24">
+              <textarea
+                *ngIf="showEdit"
+                [nzAutosize]="{ minRows: 3, maxRows: 6 }"
+                formControlName="moTa"
+                nz-input
+                placeholder="Mô tả công việc..."
+              >
+              </textarea>
+
+              <ng-container *ngIf="!showEdit">
+                <i *ngIf="!congViec.moTa">(Chưa có mô tả cho công việc)</i>
+                <p *ngIf="congViec.moTa">{{ congViec.moTa }}</p>
+              </ng-container>
+            </nz-form-control>
+          </nz-form-item>
+        </nz-col>
+        <nz-col nzLg="6">
+          <nz-form-item>
+            <nz-form-label nzSpan="24">Mức độ</nz-form-label>
+            <nz-form-control nzSpan="24">
+              <nz-radio-group *ngIf="showEdit" formControlName="mucDo">
+                <label [nzValue]="MUC_DO_CONG_VIEC.BINH_THUONG" nz-radio>Bình thường</label>
+                <label [nzValue]="MUC_DO_CONG_VIEC.QUAN_TRONG" nz-radio>Quan trọng</label>
+              </nz-radio-group>
+              <ng-container *ngIf="!showEdit">
+                <nz-tag *ngIf="congViec.mucDo === MUC_DO_CONG_VIEC.QUAN_TRONG" [nzColor]="'#f50'">Quan trọng</nz-tag>
+                <nz-tag *ngIf="congViec.mucDo === MUC_DO_CONG_VIEC.BINH_THUONG" [nzColor]="'#2db7f5'">Bình thường </nz-tag>
+              </ng-container>
+            </nz-form-control>
+          </nz-form-item>
+        </nz-col>
+        <nz-col nzLg="6">
+          <nz-form-item>
+            <nz-form-label nzSpan="24">Thời gian dự kiến hoàn thành</nz-form-label>
+            <nz-form-control nzSpan="24">
+              <ora-date-picker *ngIf="showEdit" [disabledDate]="disabledDate" formControlName="ngayHoanThanh"></ora-date-picker>
+              <ng-container *ngIf="!showEdit">
+                {{ congViec.ngayHoanThanh | date : 'dd/MM/yyyy' }}
+              </ng-container>
+            </nz-form-control>
+          </nz-form-item>
+        </nz-col>
+        <nz-col [nzLg]="showEdit ? 12 : 6">
+          <nz-form-item>
+            <nz-form-label nzSpan="24">Thành viên</nz-form-label>
+            <nz-form-control nzSpan="24">
+              <nz-select *ngIf="showEdit" formControlName="idNhanVien" nzPlaceHolder="Chọn nhân viên">
+                <nz-option *ngFor="let item of listUser" [nzLabel]="item.hoTen" [nzValue]="item.id"></nz-option>
+              </nz-select>
+
+              <ng-container *ngIf="!showEdit">
+                <nz-avatar-group>
+                  <nz-avatar
+                    *ngFor="let u of congViec.listUser.slice(0, 2)"
+                    [nzSrc]="sourceAvatar + u.userId"
+                    nz-tooltip="{{ u.hoTen }}"
+                    nzIcon="user"
+                  ></nz-avatar>
+                  <nz-avatar
+                    *ngIf="congViec.listUser.length > 2"
+                    [nzText]="getNzText(congViec.listUser.length)"
+                    style="background-color: #fde3cf; color: #f56a00"
+                  ></nz-avatar>
+                </nz-avatar-group>
+                <div *ngIf="!congViec.listUser.length"><i>(Hiện chưa có thành viên tham gia)</i></div>
+              </ng-container>
+            </nz-form-control>
+          </nz-form-item>
+        </nz-col>
+        <ng-container *ngIf="!showEdit">
+          <nz-col nzLg="6">
+            <nz-form-item>
+              <nz-form-label nzSpan="24">Tiến độ công việc</nz-form-label>
+              <nz-form-control nzSpan="24">
+                <nz-progress
+                  [nz-tooltip]="'Hoàn thành ' + congViec.soViecDaHoanThanh + '/' + congViec.soViec + ' công việc'"
+                  [nzPercent]="percent(congViec.soViecDaHoanThanh, congViec.soViec)"
+                  [nzSteps]="congViec.soViec"
+                  nzStrokeColor="#1890ff"
+                ></nz-progress>
+              </nz-form-control>
+            </nz-form-item>
+          </nz-col>
+        </ng-container>
+        <nz-col nzSpan="24">
+          <ng-container *ngIf="showEdit">
+            <button (click)="save()" nz-button nzType="primary"><i nz-icon nzTheme="outline" nzType="save"></i> Lưu</button>
+            <button (click)="cancelEdit()" nz-button><i nz-icon nzTheme="outline" nzType="close"></i> Hủy</button>
+          </ng-container>
+          <ng-container *ngIf="(permission.truongPhong || permission.lanhDao) && congViec.isMyCreate && !showEdit">
+            <button (click)="edit()" nz-button><i nz-icon nzTheme="outline" nzType="edit"></i> Chỉnh sửa</button>
+          </ng-container>
+        </nz-col>
+      </nz-row>
+      <ng-template #prercent let-control>
+        <nav>Đã hoàn thành {{ congViec.phanTramHoanThanh !== null ? congViec?.phanTramHoanThanh : 0 }}% công việc</nav>
+      </ng-template>
+    </nz-tab>
+    <nz-tab nzTitle="Trao đổi">
+      <trao-doi-cong-viec [congViec]="congViec"></trao-doi-cong-viec>
+    </nz-tab>
+    <nz-tab nzTitle="Lịch sử">
+      <lich-su-cong-viec #lichSu [congViec]="congViec"></lich-su-cong-viec>
+    </nz-tab>
+  </nz-tabset>
+</form>
+
+<ng-container *nzModalFooter>
+  <button (click)="success()" nz-button nzType="danger" type="button"><i nz-icon nzTheme="outline" nzType="close"></i>Đóng</button>
+</ng-container>

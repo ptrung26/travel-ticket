@@ -1,0 +1,34 @@
+<form nz-form #form [formGroup]="rfDataModal" nzLayout="horizontal">
+  <nz-form-item nzGutter="6">
+    <nz-form-label [nzSm]="8" nzRequired>Tên tỉnh/thành phố</nz-form-label>
+    <nz-form-control [nzSm]="16" nzErrorTip="Giá trị bắt buộc!">
+      <ora-select formControlName="tinhId" dirTinh></ora-select>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSm]="8" nzRequired>Mã quận/huyện</nz-form-label>
+    <nz-form-control [nzSm]="16" [nzErrorTip]="HuyenIdErrorTpl">
+      <input [maxLength]="10" nz-input formControlName="id" />
+    </nz-form-control>
+    <ng-template #HuyenIdErrorTpl let-control>
+      <ng-container *ngIf="control.hasError('required')"> Giá trị không được để trống!</ng-container>
+      <ng-container *ngIf="control.hasError('IsHuyenIdExist')"> Mã quận/huyện đã tồn tại! </ng-container>
+    </ng-template>
+  </nz-form-item>
+  <nz-form-item nzGutter="6">
+    <nz-form-label [nzSm]="8" nzRequired>Tên quận/huyện</nz-form-label>
+    <nz-form-control [nzSm]="16" nzErrorTip="Giá trị bắt buộc!">
+      <input [maxLength]="200" nz-input formControlName="ten" />
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label nzFor="cap" [nzSm]="8">Cấp</nz-form-label>
+    <nz-form-control [nzSm]="16">
+      <input [maxLength]="200" nz-input formControlName="cap" />
+    </nz-form-control>
+  </nz-form-item>
+</form>
+<div *nzModalFooter>
+  <button type="button" nz-button nzType="default" (click)="close()">Đóng</button>
+  <button [nzLoading]="saving" nz-button nzType="primary" (click)="save()"><i nz-icon nzType="save"></i>Lưu</button>
+</div>

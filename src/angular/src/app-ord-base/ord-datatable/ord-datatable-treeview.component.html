@@ -1,0 +1,81 @@
+<!-- <div class="of-text-right column-select-show" *ngIf="showBtnSelectColums === true">
+    <app-btn-list-show-columns-config [columns]="columns" (columnsToDisplay)="columnsToDisplay=$event">
+    </app-btn-list-show-columns-config>
+</div> -->
+<div class="ord-data-table" tabindex="-1" (keydown)="pressUpDownKeyChangeSelectRow($event)">
+  <nz-table #datatable [nzData]="nzTable.items" [nzShowPagination]="false" [nzLoading]="nzTable.loading"
+            [nzTotal]="nzTable.totalCount" [nzBordered]="bordered" [nzScroll]="tblScroll"
+            [(nzPageIndex)]="nzTable.pageIndex" [(nzPageSize)]="nzTable.pageSize" [nzFrontPagination]="paging">
+    <thead>
+    <tr>
+      <!-- <th nzWidth="50px" nzAlign="center">
+          <span> STT</span>
+      </th> -->
+      <th nzWidth="30px"></th>
+
+      <ng-container *ngFor="let col of columns;trackBy: trackByFn;let idxColData = index">
+        <th *ngIf="checkDisplayColumn(idxColData)" nzWidth="{{col.width + 'px'}}" nzAlign="center"
+            [nzLeft]="col.nzLeft">
+          <span> {{col.header}}</span>
+        </th>
+      </ng-container>
+      <th nzWidth="120px" nzAlign="center" *ngIf="arrActionsIsAnyItem===true">
+        <span>Thao tác</span>
+      </th>
+    </tr>
+    </thead>
+    <tbody>
+    <ng-container *ngFor="let data of datatable.data;trackBy: trackByFn;let i = index">
+      <ng-container *ngFor="let item of lstTreeData[i + nzTable.getSkipCount()];let j = index">
+        <tr *ngIf="(item.parentId && data.expand) || !item.parentId" (click)="onClickRow(item,i)"
+            (dblclick)="dbClickRowEvent.emit(item)">
+          <!-- [ngClass]="i === recordSelectedIdx ? 'ord-row-selected':''" -->
+          <!-- <td nzAlign="center">
+              <div *ngIf="!item.parentId">
+                  {{nzTable.getSkipCount() + i + 1}}
+              </div>
+          </td> -->
+          <td [nzShowExpand]="item.hasChild" [(nzExpand)]="data.expand"
+              (nzExpandChange)="expandChange($event,data.id)">
+          </td>
+          <ng-container *ngFor="let col of columns;trackBy: trackByFn;let idxColData = index">
+            <td *ngIf="checkDisplayColumn(idxColData)" [nzAlign]="col.cellAlign" [nzLeft]="col.nzLeft">
+              <ng-container *ngIf="!col.cellTemplate">{{item[col.dataField]}}</ng-container>
+              <ng-template *ngIf="col.cellTemplate" [ngTemplateOutlet]="col.cellTemplate"
+                           [ngTemplateOutletContext]="{ $implicit: { value: item[col.dataField] }, record: item }">
+              </ng-template>
+
+            </td>
+          </ng-container>
+
+          <!-- col action -->
+          <td nzAlign="center" *ngIf="arrActionsIsAnyItem">
+            <ord-datatable-action-cell [actions]="actions" [record]="item"></ord-datatable-action-cell>
+          </td>
+        </tr>
+      </ng-container>
+    </ng-container>
+    </tbody>
+  </nz-table>
+  <app-ord-pagination *ngIf="paging" [(pageIndex)]="nzTable.pageIndex" [(pageSize)]="nzTable.pageSize"
+                      [totalCount]="nzTable.totalCount" [pageSizeOptions]="nzTable.defaultPageOptions"
+                      (refreshData)="getGridDataSource()" (pageSizeChange)="this.nzTable.shouldResetPaging(true)">
+  </app-ord-pagination>
+</div>
+<ng-template #ulActionDropDownTpl let-record="record">
+  <ul nz-menu nzSelectable>
+    <ng-container *ngFor="let act of actions; trackBy: trackByFn">
+      <li nz-menu-item (click)="act.callBack(record)">
+        <div class="row" [ngClass]="act.nzIcon ==='delete'? ' of-text-danger' : ''">
+          <div class="col-4">
+            <i nz-icon *ngIf="act.nzIcon" [nzType]="act.nzIcon" nzTheme="outline"></i>
+            <i *ngIf="act.icon" class="{{act.icon}}"></i>
+          </div>
+          <div class="col-8 font-weight-bolder">
+            {{act.name}}
+          </div>
+        </div>
+      </li>
+    </ng-container>
+  </ul>
+</ng-template>

@@ -1,0 +1,9 @@
+<ejs-filemanager id="default-filemanager" [ajaxSettings]="ajaxSettings" (fileSelect)="onFileSelect($event)"
+                 (fileOpen)="onFileOpen($event)"
+>
+  <ng-template #valueTemplate> </ng-template>
+</ejs-filemanager>
+<div *nzModalFooter>
+  <button type="button" nz-button nzType="default" (click)="close()">Đóng</button>
+  <button nz-button nzType="primary" (click)="save()"><i nz-icon nzType="save"></i>Chọn</button>
+</div>

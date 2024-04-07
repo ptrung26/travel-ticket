@@ -1,0 +1,15 @@
+export const SessionKey = {
+  allNhaPhanPhoi: 'all-nha-phan-phoi',
+  nhaPhanPhoi: 'nha-phan-phoi',
+  nhaTaiTro: 'nha-tai-tro',
+  danhMucQuocTich: 'danh-muc-quoc-tich',
+  danhMucTinh: 'danh-muc-tinh',
+  danhMucHuyen: 'danh-muc-huyen',
+  danhMucXa: 'danh-muc-xa',
+  danhMucChung: 'danh-muc-chung',
+  category: 'category',
+  khachHang: 'khach-hang',
+  baoCao: 'bao-cao',
+  hopDong: 'hop-dong',
+  danhMucPhongBan: 'phong-ban',
+};

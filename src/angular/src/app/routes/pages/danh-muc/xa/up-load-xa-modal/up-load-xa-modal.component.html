@@ -1,0 +1,97 @@
+<form nz-form [formGroup]="rfDataModal" nzLayout="horizontal">
+  <nz-form-item>
+    <nz-form-control [nzSm]="24">
+      <nz-table nzTemplateMode>
+        <thead>
+          <tr>
+            <th width="120px"></th>
+            <th nzAlign="center" width="150px">Lỗi</th>
+            <th nzAlign="center" width="80px">STT</th>
+            <th nzAlign="center">Mã Tỉnh</th>
+            <th nzAlign="center">Mã Huyện</th>
+            <th nzAlign="center">Mã Xã</th>
+            <th nzAlign="center">Tên (En)</th>
+            <th nzAlign="center">Cấp</th>
+            <th nzAlign="center">Active</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let contr of datas.controls; index as i">
+            <tr [formGroup]="contr" [ngClass]="contr.get('isValid').value ? 'errorRows' : ''">
+              <td nzAlign="center">
+                <a nz-button nzType="link" nzDanger nz-tooltip="{{ 'Delete' | translate }}" (click)="xoaBanGhi(i)">
+                  <i nz-icon nzType="delete"></i>
+                </a>
+              </td>
+              <td nzAlign="center" style="color: red">
+                <!-- {{contr.get('listError').value|json}} -->
+                <ul>
+                  <li *ngFor="let e of contr.get('listError').value">{{ e }}</li>
+                </ul>
+              </td>
+              <td nzAlign="center">{{ i + 1 }}</td>
+
+              <td>
+                <nz-form-item>
+                  <nz-form-control>
+                    <ora-select dirTinh formControlName="tinhId"></ora-select>
+                  </nz-form-control>
+                </nz-form-item>
+              </td>
+
+              <td>
+                <nz-form-item>
+                  <nz-form-control>
+                    <ora-select dirHuyen formControlName="huyenId" [tinhId]="contr.get('tinhId').value"></ora-select>
+                  </nz-form-control>
+                </nz-form-item>
+              </td>
+              <td>
+                <nz-form-item>
+                  <nz-form-control [nzErrorTip]="IdErrorTpl">
+                    <input nz-input formControlName="id" />
+                  </nz-form-control>
+                </nz-form-item>
+                <ng-template #IdErrorTpl let-control>
+                  <ng-container *ngIf="control.hasError('required')">Giá trị bắt buộc ! <br /> </ng-container>
+                  <ng-container *ngIf="control.hasError('whitespace')">Mã không được bao gồm chỉ khoảng trắng!<br /></ng-container>
+                </ng-template>
+              </td>
+              <td>
+                <nz-form-item>
+                  <nz-form-control [nzErrorTip]="tenErrorTpl">
+                    <input nz-input formControlName="ten" />
+                  </nz-form-control>
+                </nz-form-item>
+                <ng-template #tenErrorTpl let-control>
+                  <ng-container *ngIf="control.hasError('required')"> Giá trị bắt buộc !<br /></ng-container>
+                  <ng-container *ngIf="control.hasError('whitespace')">Tên không được bao gồm chỉ khoảng trắng!<br /></ng-container>
+                </ng-template>
+              </td>
+              <td>
+                <nz-form-item>
+                  <nz-form-control>
+                    <input nz-input formControlName="cap" />
+                  </nz-form-control>
+                </nz-form-item>
+              </td>
+
+              <td>
+                <nz-form-item>
+                  <nz-form-control>
+                    <label nz-checkbox formControlName="isActive"></label>
+                  </nz-form-control>
+                </nz-form-item>
+              </td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </nz-table>
+    </nz-form-control>
+  </nz-form-item>
+</form>
+
+<div *nzModalFooter>
+  <button type="button" nz-button nzType="default" (click)="close()">Đóng</button>
+  <button [disabled]="this.totalCurrentError > 0" type="button" nz-button nzType="primary" (click)="save()">Nhập dữ liệu</button>
+</div>

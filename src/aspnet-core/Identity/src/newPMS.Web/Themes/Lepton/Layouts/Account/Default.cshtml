@@ -1,0 +1,149 @@
+﻿@using System.Globalization
+@using Microsoft.Extensions.Localization
+@using Microsoft.Extensions.Options
+@using Volo.Abp.AspNetCore.MultiTenancy
+@using Volo.Abp.AspNetCore.Mvc.AntiForgery
+@using Volo.Abp.AspNetCore.Mvc.UI.Components.LayoutHook
+@using Volo.Abp.AspNetCore.Mvc.UI.Layout
+@using Volo.Abp.AspNetCore.Mvc.UI.MultiTenancy.Localization
+@using Volo.Abp.AspNetCore.Mvc.UI.Theme.Lepton.Bundling
+@using Volo.Abp.AspNetCore.Mvc.UI.Theme.Lepton.Themes.Lepton.Components.Content.Alerts
+@using Volo.Abp.AspNetCore.Mvc.UI.Theme.Lepton.Themes.Lepton.Components.Header.Brand
+@using Volo.Abp.AspNetCore.Mvc.UI.Theme.Lepton.Themes.Lepton.Components.Toolbar.LanguageSwitch
+@using Volo.Abp.AspNetCore.Mvc.UI.Theming
+@using Volo.Abp.AspNetCore.Mvc.UI.Widgets.Components.WidgetScripts
+@using Volo.Abp.AspNetCore.Mvc.UI.Widgets.Components.WidgetStyles
+@using Volo.Abp.Localization
+@using Volo.Abp.MultiTenancy
+@inject IAbpAntiForgeryManager AbpAntiForgeryManager
+@*@inject IBrandingProvider BrandingProvider*@
+@inject IPageLayout PageLayout
+@inject IOptions<AbpMultiTenancyOptions> MultiTenancyOptions
+@inject IOptions<AbpLocalizationOptions> LocalizationOptions
+@inject ICurrentTenant CurrentTenant
+@inject IStringLocalizer<AbpUiMultiTenancyResource> MultiTenancyStringLocalizer
+@inject ITenantResolveResultAccessor TenantResolveResultAccessor
+@{
+    Layout = null;
+    AbpAntiForgeryManager.SetCookie();
+    var containerClass = ViewBag.FluidLayout == true ? "container-fluid" : "container";
+}
+
+<!DOCTYPE html>
+
+<html lang="@System.Globalization.CultureInfo.CurrentCulture.Name">
+<head>
+    @await Component.InvokeLayoutHookAsync(LayoutHooks.Head.First, StandardLayouts.Account)
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Trung Tâm Kiểm Chuẩn Chất Lượng Xét Nghiệm Y Học - Trường Đại Học Y Hà Nội.</title>
+    <base href="/" /></title>
+    <link rel="icon" type="image/x-icon" href="/images/logo/logo-col.png" />
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@600;700&display=swap" rel="stylesheet">
+    <abp-style-bundle name="@LeptonThemeBundles.Styles.Global" />
+    @if (CurrentTenant.Id == null)
+    {
+        <abp-style src="/Themes/Lepton/Layouts/Account/Default.css" />
+    }
+    else
+    {
+        <abp-style src="/Themes/Lepton/Layouts/Account/Default-tenant.css" />
+    }
+    @await Component.InvokeAsync(typeof(WidgetStylesViewComponent))
+
+    @await RenderSectionAsync("styles", false)
+    @await Component.InvokeLayoutHookAsync(LayoutHooks.Head.Last, StandardLayouts.Account)
+</head>
+<body class="abp-account-layout login-page-body">
+    @await Component.InvokeLayoutHookAsync(LayoutHooks.Body.First, StandardLayouts.Account)
+
+    @*<div class="loader">
+            <div class="indicator">
+                <svg width="16px" height="12px">
+                    <polyline id="back" points="1 6 4 6 6 11 10 1 12 6 15 6"></polyline>
+                    <polyline id="front" points="1 6 4 6 6 11 10 1 12 6 15 6"></polyline>
+                </svg>
+            </div>
+        </div>*@
+    <div class="container-fluid">
+        @if (CurrentTenant.Id == null)
+        {
+            @*<div class="vidd-login">
+                <div class="vidd-form">
+                    <div class="title-form">
+                        <div class="logo">
+                            <img alt="" src="~/images/login/logokcb.png" class="logo" style="max-width:348px" />
+                        </div>
+                        <h1 class="mo-ta">HỆ THỐNG DANH MỤC DÙNG CHUNG</h1>
+                    </div>*@
+                    @if (MultiTenancyOptions.Value.IsEnabled &&
+(TenantResolveResultAccessor.Result?.AppliedResolvers?.Contains(CookieTenantResolveContributor.ContributorName) == true))
+                    {
+                        <div class="card-header bg-light">
+                            <div class="tenant-switch-box">
+
+                                <div class="row">
+                                    <div class="col pr-1">
+                                        <h6 class="m-0">
+                                            @MultiTenancyStringLocalizer["Tenant"]
+                                        </h6>
+                                        @if (CurrentTenant.Id == null)
+                                        {
+                                            <i class="text-muted">@MultiTenancyStringLocalizer["NotSelected"]</i>
+                                        }
+                                        else
+                                        {
+                                            <span> Your tenant name <strong>@(CurrentTenant.Name ?? CurrentTenant.Id.Value.ToString())</strong></span>
+                                        }
+                                    </div>
+                                    <div class="col-auto pl-1">
+                                        <a id="AbpTenantSwitchLink" style="cursor: pointer" href="javascript:;" class="btn btn-sm btn-outline-primary float-right">@MultiTenancyStringLocalizer["Switch"]</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    @RenderBody()
+                    @(await Component.InvokeAsync<ContentAlertsViewComponent>())
+                @*</div>
+            </div>*@
+        }
+        else
+        {
+            <div class="row">
+                <div class="col-lg-5 col-md-5 col-sm-5 d-none d-sm-block login-left">
+                    <div class="logo-area">
+                        <img alt="" src="~/images/logo/logo.png" class="icon1" />
+                    </div>
+                </div>
+                <div class="col-lg-7 col-md-7 col-sm-12 col-12 login-right">
+                    <div class="div-middle">
+                        <h2 class="title-form">Đăng nhập</h2>
+                        @(await Component.InvokeAsync<ContentAlertsViewComponent>())
+                        @RenderBody()
+                    </div>
+                    <div class="login-footer">
+                        @await Html.PartialAsync("~/Themes/Lepton/Layouts/Account/_Footer.cshtml")
+                    </div>
+                </div>
+            </div>
+        }
+
+
+    </div>
+    <abp-script-bundle name="@LeptonThemeBundles.Scripts.Global" />
+
+    <script type="text/javascript" src="~/Abp/ApplicationConfigurationScript"></script>
+    <script type="text/javascript" src="~/Abp/ServiceProxyScript"></script>
+
+    @await Component.InvokeAsync(typeof(WidgetScriptsViewComponent))
+
+    @await RenderSectionAsync("scripts", false)
+
+    @await Component.InvokeLayoutHookAsync(LayoutHooks.Body.Last, StandardLayouts.Account)
+</body>
+</html>

@@ -1,0 +1,73 @@
+<nz-tree-view [nzDataSource]="dataSource" [nzTreeControl]="treeControl">
+  <nz-tree-node *nzTreeNodeDef="let node" nzTreeNodePadding>
+    <nz-tree-node-toggle nzTreeNodeNoopToggle></nz-tree-node-toggle>
+    <nz-tree-node-option (nzClick)="selectListSelection.toggle(node)"
+      [nzSelected]="selectListSelection.isSelected(node)">
+      <div class="tree-item">
+        <div>
+          <div class="title">
+            <span *ngIf="node.mucDo === MUC_DO_CONG_VIEC.QUAN_TRONG" nz-tooltip="Công việc quan trọng">
+              <i class="badge-warning-color" nz-icon nzTheme="fill" nzType="star"></i>
+            </span> {{ node.ten }}
+            <span *ngIf="!compareDateTime(node.data.ngayHoanThanh)" class="c-h" nz-icon nz-tooltip="Quá hạn"
+              nzTheme="outline" nzType="warning"></span>
+          </div>
+          <div>
+            <ng-container *ngFor="let u of node.data.listUser">
+              <nz-avatar *ngIf="u.sysUserId" [nz-tooltip]="u.hoTen" [nzSrc]="sourceAvatar + u.userId"
+                nzIcon="user"></nz-avatar>
+            </ng-container>
+          </div>
+        </div>
+        <div>
+          <div class="date" nz-tooltip="Ngày hoàn thành">{{ node.data.ngayHoanThanh | date : 'dd/MM/yyyy' }}</div>
+          <nz-tag *ngIf="node.data.isHoanThanh" [nzColor]="'green'">Đã hoàn thành</nz-tag>
+          <nz-tag *ngIf="!node.data.isHoanThanh" [nzColor]="'volcano'">Chưa hoàn thành</nz-tag>
+        </div>
+      </div>
+    </nz-tree-node-option>
+  </nz-tree-node>
+
+  <nz-tree-node *nzTreeNodeDef="let node; when: hasChild" nzTreeNodePadding>
+    <nz-tree-node-toggle>
+      <span nz-icon nzTreeNodeToggleRotateIcon nzType="caret-down"></span>
+    </nz-tree-node-toggle>
+    <nz-tree-node-option (nzClick)="selectListSelection.toggle(node)"
+      [nzSelected]="selectListSelection.isSelected(node)">
+      <div class="tree-item">
+        <div>
+          <div class="title">
+            <span *ngIf="node.mucDo === MUC_DO_CONG_VIEC.QUAN_TRONG" nz-tooltip="Công việc quan trọng">
+              <i class="badge-warning-color" nz-icon nzTheme="fill" nzType="star"></i>
+            </span> {{ node.ten }}
+            <ng-container *ngIf="node.data.level === 0">
+              <span *ngIf="!compareDateTime(node.data.ngayKetThuc)" class="c-h" nz-icon nz-tooltip="Quá hạn"
+                nzTheme="outline" nzType="warning"></span>
+            </ng-container>
+          </div>
+          <div>
+            <ng-container *ngFor="let u of node.data.listUser">
+              <nz-avatar *ngIf="u.sysUserId" [nz-tooltip]="u.hoTen" [nzSrc]="sourceAvatar + u.userId"
+                nzIcon="user"></nz-avatar>
+            </ng-container>
+          </div>
+        </div>
+        <div>
+          <ng-container *ngIf="node.data.level === 0; else tplElse">
+            <div class="date">
+              <span nz-tooltip="Ngày bắt đầu">{{ node.data.ngayBatDau | date : 'dd/MM/yyyy' }}</span> -
+              <span nz-tooltip="Ngày kết thúc">{{ node.data.ngayKetThuc | date : 'dd/MM/yyyy' }}</span>
+            </div>
+          </ng-container>
+          <ng-template #tplElse>
+            <div class="date" nz-tooltip="Ngày hoàn thành">{{ node.data.ngayHoanThanh | date : 'dd/MM/yyyy' }}</div>
+          </ng-template>
+          <nz-progress
+            [nz-tooltip]="'Hoàn thành ' + node.data.soViecDaHoanThanh + '/' + node.data.soViec + ' công việc'"
+            [nzPercent]="percent(node.data.soViecDaHoanThanh, node.data.soViec)" [nzSteps]="node.data.soViec"
+            nzStrokeColor="#1890ff"></nz-progress>
+        </div>
+      </div>
+    </nz-tree-node-option>
+  </nz-tree-node>
+</nz-tree-view>

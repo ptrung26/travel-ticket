@@ -1,0 +1,31 @@
+{
+  "test": "AppConfig From Product",
+  "application": {
+    "baseUrl": "http://qcc-angular.orenda.vn",
+    "name": "QCC",
+    "logoUrl": ""
+  },
+  "oAuthConfig": {
+    "issuer": "http://qcc-api.orenda.vn",
+    "redirectUri": "http://qcc-angular.orenda.vn",
+    "clientId": "newPMS_App",
+    "responseType": "code",
+    "scope": "offline_access newPMS",
+    "requireHttps": false
+  },
+  "apis": {
+    "default": {
+      "url": "http://qcc-api.orenda.vn",
+      "rootNamespace": "QCC"
+    },
+    "taiKhoan": {
+      "url": "http://qcc-api.orenda.vn"
+    },
+    "danhMuc": {
+      "url": "http://qcc-api.orenda.vn"
+    },
+    "congViec": {
+      "url": "http://localhost:3012"
+    }
+  }
+}

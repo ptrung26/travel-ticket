@@ -1,0 +1,220 @@
+:host {
+
+  .bg {
+    max-width: 1920px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 15px;
+    position: relative;
+    min-height: 100vh;
+    //background: url(../../../../assets/images/bg-login-main.png), url(../../../../assets/images/bg-login-back.jpg);
+    background-position:  90% 80%, center;
+    background-repeat: no-repeat;
+  }
+
+  .ct {
+    position: absolute;
+    left: 155px;
+    top: 50%;
+    transform: translateY(-50%);
+    backdrop-filter: blur(3.5px);
+    border-radius: 8px;
+    background: rgba(255, 255, 255);
+    max-width: 700px;
+    width: 100%;
+  }
+
+  .login-form {
+    margin: 0 auto;
+    max-width: 562px;
+    width: 100%;
+  }
+
+  .logo {
+    display: flex;
+    justify-content: center;
+
+    img {
+      display: inline-block;
+      margin: 87px 0 16px;
+      width: 97px;
+      height: 92px;
+    }
+  }
+  //
+  //.ant-input-affix-wrapper {
+  //  background: #fff;
+  //  border: 1px solid #bdbdbd;
+  //  border-radius: 6px;
+  //}
+
+  .forgot-password {
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 21px;
+    color: #ED1C24;
+  }
+
+  .login-button {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 18px;
+    color: #fff;
+    background: #2F9DD7;
+    border-radius: 6px;
+    padding: 16px 0;
+    text-transform: uppercase;
+    border: none;
+    outline: none;
+    margin-top: 33px;
+  }
+
+  .ho-tr-tu-xa {
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 21px;
+    color: #2F9DD7;
+    margin-top: 6px;
+    display: inline-block;
+  }
+
+  .login-top-title {
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 32px;
+    margin-bottom: 0;
+    text-align: center;
+    color: #ED1C24;
+  }
+
+  .login-bottom-title {
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 32px;
+    color: #255586;
+    margin-bottom: 75px;
+    text-align: center;
+  }
+  .c-r {
+    text-align: center;
+    font-size: 16px;
+    font-weight: 600;
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #fff;
+    width: 100%;
+  }
+  .login-title {
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 30px;
+    color: #255586;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .flex-space {
+    margin: 41px auto 125px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 600px;
+
+    a {
+      color: #66686B;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 21px;
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    i {
+      font-size: 24px;
+      color: #fff;
+      margin-right: 8px;
+    }
+
+    a:nth-child(2) {
+      text-align: center;
+    }
+
+    a:nth-child(3) {
+      text-align: right;
+    }
+  }
+
+  .save-info {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 21px;
+    color: #151719;
+  }
+
+  @media only screen and (max-width: 1366px) {
+    .login-bottom-title {
+      margin-bottom: 12px;
+    }
+
+    .login-title {
+      margin-bottom: 0;
+    }
+
+    form {
+      padding: 25px 35px;
+    }
+
+    .flex-space {
+      margin-bottom: 20px;
+      margin-top: 20px;
+    }
+
+    .logo {
+      img {
+        margin: 30px 0 16px;
+      }
+    }
+
+    .ct {
+      left: 80px;
+    }
+
+  }
+
+  ::ng-deep {
+    input {
+      height: 48px !important;
+      font-weight: 500;
+      font-size: 16px;
+      padding: 12px !important;
+      border-radius: 8px;
+      border: 1px solid #D2D5D8;
+      background:  #FFF;
+
+      &:-webkit-autofill,
+      &:-webkit-autofill:focus {
+        transition: background-color 600000s 0s, color 600000s 0s
+      }
+
+      &[data-autocompleted] {
+        background-color: transparent !important;
+      }
+    }
+
+    .anticon.anticon-ora\:login-user,
+    .anticon.anticon-ora\:login-password
+    {
+      color: #fff !important;
+      font-size: 24px;
+    }
+  }
+}

@@ -1,0 +1,92 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+	<Import Project="..\..\common.props" />
+
+	<PropertyGroup>
+		<TargetFramework>net5.0</TargetFramework>
+		<AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+		<RootNamespace>newPMS</RootNamespace>
+		<PreserveCompilationReferences>true</PreserveCompilationReferences>
+		<LangVersion>8</LangVersion>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\..\..\DataBase\src\TravelTicket\newPMS.Base.EntityFrameworkCore\newPMS.Base.EntityFrameworkCore.csproj" />
+		<ProjectReference Include="..\..\..\..\shared\OrdBaseHttpApi\OrdBaseHttpApi.csproj" />
+		<ProjectReference Include="..\Application\newPMS.DanhMuc.Application.csproj" />
+		<PackageReference Include="Volo.Abp.Identity.EntityFrameworkCore" Version="4.3.2" />
+	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Volo.Abp.PermissionManagement.Application.Contracts" Version="4.3.2" />
+		<PackageReference Include="Volo.Abp.FeatureManagement.Application.Contracts" Version="4.3.2" />
+		<PackageReference Include="Volo.Abp.SettingManagement.Application.Contracts" Version="4.3.2" />
+		<PackageReference Include="Volo.Saas.Host.Application.Contracts" Version="4.3.2" />
+		<PackageReference Include="Volo.Abp.AuditLogging.Application.Contracts" Version="4.3.2" />
+		<PackageReference Include="Volo.Abp.Identity.Pro.Application.Contracts" Version="4.3.2" />
+		<PackageReference Include="Volo.Abp.IdentityServer.Application.Contracts" Version="4.3.2" />
+		<PackageReference Include="Volo.Abp.Account.Pro.Public.Application.Contracts" Version="4.3.2" />
+		<PackageReference Include="Volo.Abp.Account.Pro.Admin.Application.Contracts" Version="4.3.2" />
+		<PackageReference Include="Volo.Abp.LanguageManagement.Application.Contracts" Version="4.3.2" />
+		<PackageReference Include="Volo.Abp.TextTemplateManagement.Application.Contracts" Version="4.3.2" />
+		<PackageReference Include="Volo.Abp.LeptonTheme.Management.Application.Contracts" Version="4.3.2" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Compile Remove="Logs\**" />
+		<Compile Remove="wwwroot\Files\**" />
+		<Content Remove="Logs\**" />
+		<Content Remove="wwwroot\Files\**" />
+		<EmbeddedResource Remove="Logs\**" />
+		<EmbeddedResource Remove="wwwroot\Files\**" />
+		<None Remove="Logs\**" />
+		<None Remove="wwwroot\Files\**" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Content Remove="wwwroot\images\logo.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<None Update="Dockerfile">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+                <None Update="contoso.com.pfx">
+                        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+                </None>
+	</ItemGroup>
+	<ItemGroup>
+	  <None Include="wwwroot\images\logo.png" />
+	  <None Include="wwwroot\sampleFiles\flex-cel\danh-muc\danh-muc-chung\danh-muc-chung\danh-muc-export.xlsx" />
+	  <None Include="wwwroot\sampleFiles\flex-cel\danh-muc\danh-muc-chung\danh-muc-chung\danh-muc-model.xlsx" />
+	  <None Include="wwwroot\sampleFiles\flex-cel\danh-muc\dia-chinh\huyen\danh-muc-huyen-export.xlsx" />
+	  <None Include="wwwroot\sampleFiles\flex-cel\danh-muc\dia-chinh\quoc-tich\ExportQuocTich.xlsx" />
+	  <None Include="wwwroot\sampleFiles\flex-cel\danh-muc\dia-chinh\tinh\danh-muc-tinh-export.xlsx" />
+	  <None Include="wwwroot\sampleFiles\flex-cel\danh-muc\dia-chinh\xa\ExportXa.xlsx" />
+	  <None Include="wwwroot\sampleFiles\flex-cel\danh-muc\nha-cung-cap\ExportNhaCungCap.xlsx" />
+	  <None Include="wwwroot\sampleFiles\flex-cel\danh-muc\nha-tai-tro\ExportNhaTaiTro.xlsx" />
+	  <None Include="wwwroot\sampleFiles\word\ThongTinCanBo.docx" />
+	  <None Include="wwwroot\sampleFiles\word\ThongTinCanBo1.docx" />
+	</ItemGroup>
+	<ItemGroup>
+	  <PackageReference Include="SixLabors.ImageSharp" Version="1.0.1" />
+	  <PackageReference Include="SkiaSharp" Version="2.80.2" />
+	  <PackageReference Include="SkiaSharp.NativeAssets.Linux" Version="2.80.2" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Content Update="wwwroot\sampleFiles\flex-cel\danh-muc\dia-chinh\huyen\danh-muc-huyen-export.xlsx">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Update="wwwroot\sampleFiles\flex-cel\danh-muc\dia-chinh\quoc-tich\ExportQuocTich.xlsx">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Update="wwwroot\sampleFiles\flex-cel\danh-muc\dia-chinh\tinh\danh-muc-tinh-export.xlsx">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Update="wwwroot\sampleFiles\flex-cel\danh-muc\dia-chinh\xa\ExportXa.xlsx">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="wwwroot\sampleFiles\excel\" />
+	</ItemGroup>
+
+</Project>

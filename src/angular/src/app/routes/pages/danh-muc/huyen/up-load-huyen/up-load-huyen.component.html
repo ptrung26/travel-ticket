@@ -1,0 +1,77 @@
+<form nz-form [formGroup]="rfDataModal" nzLayout="horizontal">
+  <nz-row>
+    <nz-col nzSpan="12"> </nz-col>
+  </nz-row>
+
+  <nz-form-item>
+    <nz-form-control [nzSm]="24">
+      <nz-table nzTemplateMode>
+        <thead>
+          <tr>
+            <th nzAlign="center" width="80px">STT</th>
+            <th nzAlign="center">Xóa</th>
+            <th nzAlign="center">Lỗi</th>
+            <th nzAlign="center">Mã huyện</th>
+            <th nzAlign="center">Tên huyện</th>
+            <th nzAlign="center">Tên tỉnh</th>
+            <th nzAlign="center">Cấp</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let contr of datas.controls; index as i">
+            <tr [formGroup]="contr">
+              <td nzAlign="center">{{ i + 1 }}</td>
+              <td nzAlign="center">
+                <a nz-button nzType="link" nzDanger nz-tooltip="{{ 'Delete' | translate }}" (click)="removeItem(i)">
+                  <i nz-icon nzType="delete"></i>
+                </a>
+              </td>
+              <td>
+                <i class="text-error" nzTheme="outline">{{ contr.value.listError }} </i>
+              </td>
+              <td style="pointer-events: none">
+                <nz-form-item>
+                  <nz-form-control nzErrorTip="Giá trị không được để trống!">
+                    <input nz-input formControlName="id" />
+                  </nz-form-control>
+                </nz-form-item>
+              </td>
+
+              <td style="pointer-events: none">
+                <nz-form-item>
+                  <nz-form-control nzErrorTip="Giá trị không được để trống!">
+                    <input nz-input formControlName="ten" />
+                  </nz-form-control>
+                </nz-form-item>
+              </td>
+              <td style="pointer-events: none">
+                <nz-form-item>
+                  <nz-form-control nzErrorTip="Giá trị không được để trống!">
+                    <input nz-input formControlName="tenTinh" />
+                  </nz-form-control>
+                </nz-form-item>
+              </td>
+              <td style="pointer-events: none">
+                <nz-form-item>
+                  <nz-form-control nzErrorTip="Giá trị không được để trống!">
+                    <input nz-input formControlName="cap" />
+                  </nz-form-control>
+                </nz-form-item>
+              </td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </nz-table>
+    </nz-form-control>
+  </nz-form-item>
+</form>
+<div style="display: flex; justify-content: flex-end; margin-top: 10px">
+  <div class="text-danger italic font-weight-bold" *ngIf="rfDataModal.invalid">Dữ liệu không hợp lệ!</div>
+  <!-- <button class="margin-left-15" nzType="dashed" nz-button (click)="checkValidData()">Kiểm tra dữ liệu</button> -->
+</div>
+
+<div *nzModalFooter>
+  <button type="button" nz-button nzType="default" (click)="close()">Đóng</button>
+  <button [disabled]="this.rfDataModal.invalid" type="button" nz-button nzType="primary" (click)="save()">Nhập dữ
+    liệu</button>
+</div>

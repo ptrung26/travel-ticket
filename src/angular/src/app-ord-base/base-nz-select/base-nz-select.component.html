@@ -1,0 +1,23 @@
+<nz-select class="pt-select"
+           [ngStyle]="{'width': width}"
+           [nzAllowClear]="nzAllowClear"
+           [nzShowSearch]="nzShowSearch"
+           [nzServerSearch]="nzServerSearch"
+           [nzPlaceHolder]="placeHolder"
+           [nzMode]="selectMode"
+           [nzDisabled]='_isDisabled'
+           [nzAutoFocus]="nzAutoFocus"
+           [nzLoading]="nzLoading"
+           [nzOptionHeightPx]="nzOptionHeightPx"
+           [(ngModel)]="_value"
+           [(nzOpen)]="nzOpen"
+           [nzDropdownMatchSelectWidth]="false"
+           [nzAutoClearSearchValue]="true"
+           [nzMaxTagCount]="nzMaxTagCount"
+           (ngModelChange)="onChangeValue($event)"
+           (nzFocus)="(onFocus)"
+           (nzOnSearch)="search($event)">
+  <nz-option *ngFor="let option of options$ | async" [nzLabel]="option.displayText" [nzValue]="option.value">
+    {{option.displayText}}
+  </nz-option>
+</nz-select>

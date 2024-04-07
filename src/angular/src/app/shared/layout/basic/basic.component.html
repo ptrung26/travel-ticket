@@ -1,0 +1,80 @@
+<ora-layout-horizontal [options]="options" [content]="contentTpl" [rightContent]="rightContent">
+  <ng-template #contentTpl>
+    <reuse-tab [mode]="2" class="reuse-tab-sticky" #reuseTab [titleRender]="titleRender">
+      <ng-template #titleRender let-reuse>
+        <ng-container *ngIf="reuse.url === '/dashboard'; else elseBlock">
+          <i nz-icon nzType="ora:dashboard" nzTheme="outline" style="margin-right: 6px"></i> {{ reuse.title }}
+        </ng-container>
+        <ng-template #elseBlock>
+          {{ reuse.title }}
+        </ng-template>
+      </ng-template>
+    </reuse-tab>
+    <div class="content_layout">
+      <router-outlet (activate)="reuseTab.activate($event)"></router-outlet>
+    </div>
+  </ng-template>
+  <ng-template #rightContent>
+    <ul class="alain-default__nav ">
+      <li>
+        <button nz-button nzType="text" nz-dropdown [nzDropdownMenu]="menu1" nzPlacement="bottomCenter"
+          class="text-right-content ">
+          <i nz-icon nzType="bell" nzTheme="outline"></i> Thông báo
+        </button>
+        <nz-dropdown-menu #menu1="nzDropdownMenu">
+          <div class="box-notification"
+            style="border-radius: 4px; background-color: #fff; box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; border: 1px solid #e3e3e3">
+            <div style=" padding: 10px 15px; color: #000; display: grid; place-items: center">
+              <b>{{ numberIsNotReadNotifications }} thông báo mới</b>
+            </div>
+            <div style=" padding: 20px 15px">
+              <nz-timeline>
+                <nz-timeline-item *ngFor="let notifi of sysNotificationsView">
+                  <span *ngIf="notifi.isState === false"
+                    style="display: flex; justify-content: space-between; align-items: center; width: 320px; ">
+                    <b style="display: inline-block; width: 210px ">{{ notifi.message }}</b>
+                    <b style="display: inline-block; width: 80px"> {{ notifi.creationTime | dateAgoBasic }} </b>
+                  </span>
+                  <span *ngIf="notifi.isState === true"
+                    style="display: flex; justify-content: space-between; align-items: center; width: 320px; color: #bdbdbd">
+                    <span style="display: inline-block; width: 210px ">{{ notifi.message }}</span>
+                    <span style="display: inline-block; width: 80px"> {{ notifi.creationTime | dateAgoBasic }} </span>
+                  </span>
+                </nz-timeline-item>
+              </nz-timeline>
+              <div style="display: flex;justify-content: center">
+                <a routerLink="/notifications">Xem tất cả</a>
+              </div>
+            </div>
+          </div>
+        </nz-dropdown-menu>
+      </li>
+      <li>
+        <a nz-tooltip="Vấn đề thường gặp" nzTooltipPlacement="bottom" nz-button nzType="text" routerLink="/ho-tro/faqs">
+          <span nz-icon nzType="question-circle" style="color: #255586" nzTheme="outline"></span></a>
+      </li>
+      <li>
+        <button nz-button nzType="text" class=" text-right-content" nz-dropdown [nzDropdownMenu]="settingsMenu"
+          nzTrigger="hover" nzPlacement="bottomRight">
+          <i nz-icon nzType="setting"></i>
+          <nz-dropdown-menu #settingsMenu="nzDropdownMenu">
+            <div nz-menu style="width: 200px;">
+              <div nz-menu-item>
+                <header-fullscreen></header-fullscreen>
+              </div>
+              <div nz-menu-item>
+                <header-clear-storage></header-clear-storage>
+              </div>
+            </div>
+          </nz-dropdown-menu>
+        </button>
+      </li>
+      <li>
+        <header-user></header-user>
+      </li>
+    </ul>
+  </ng-template>
+</ora-layout-horizontal>
+
+<!--        <setting-drawer *ngIf="showSettingDrawer"></setting-drawer>-->
+<!--    <theme-btn></theme-btn>-->

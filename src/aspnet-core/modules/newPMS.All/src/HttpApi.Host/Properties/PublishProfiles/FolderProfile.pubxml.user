@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121.
+-->
+<Project>
+  <PropertyGroup>
+    <_PublishTargetUrl>E:\1.ORD\14. qcc-hcm\src\aspnet-core\modules\newPMS.All\src\HttpApi.Host\bin\Release\net5.0\publish\</_PublishTargetUrl>
+    <History>True|2024-01-17T02:30:40.1056085Z;False|2024-01-17T09:27:25.4495488+07:00;True|2024-01-11T12:22:23.1611491+07:00;True|2024-01-04T09:50:21.5932694+07:00;True|2024-01-03T12:13:03.0605513+07:00;</History>
+    <LastFailureDetails />
+  </PropertyGroup>
+</Project>

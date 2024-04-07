@@ -1,0 +1,25 @@
+<ng-container *ngIf="roleDto?.id>0;else tplChuaChon">
+
+  <nz-card style="height: 100%;">
+    <h4 class="margin-top-15 text-uppercase">Danh sách chức năng đã được gán</h4>
+    <div class="text-right margin-bottom-10">
+      <button nz-button nzType="primary" *ngIf="vcPermissionTree.isDaSelect===true"
+              (click)="luuPermission()">
+        <i nz-icon nzType="save"></i>Lưu quyền
+      </button>
+    </div>
+<!--    <app-permission-tree #vcPermissionTree [(listPermissionNameSelected)]="permissionsSelected"-->
+<!--                         [isRoleStatic]="false"></app-permission-tree>-->
+  </nz-card>
+</ng-container>
+
+<ng-template #tplChuaChon>
+  <nz-card>
+    <nz-empty [nzNotFoundContent]="contentTpl" style="margin-top: 111px;margin-bottom: 111px">
+      <ng-template #contentTpl>
+        <span class="text-primary font-weight-bold text-uppercase"> Vui lòng chọn quyền ở danh sách bên trái để xem chi tiết </span>
+      </ng-template>
+    </nz-empty>
+  </nz-card>
+</ng-template>
+

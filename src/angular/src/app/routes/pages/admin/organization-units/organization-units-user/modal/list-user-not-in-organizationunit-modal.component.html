@@ -1,0 +1,34 @@
+<div class="box-filter">
+  <nz-row nzGutter="8" [formGroup]="rfFormGroup">
+    <nz-col nzLg="8" nzSm="12">
+      <input formControlName="filter" (keydown.enter)="refresh()" nz-input placeholder="Nhập tên,email nhân viên để tìm kiếm" />
+    </nz-col>
+    <nz-col nzLg="2" nzMd="4">
+      <button nz-button nzType="primary" (click)="refresh()">Tìm kiếm</button>
+    </nz-col>
+  </nz-row>
+</div>
+
+<ora-table
+  [rows]="dataList"
+  [isLoading]="isTableLoading"
+  [totalRows]="totalItems"
+  [(pageSize)]="pageSize"
+  [(page)]="pageNumber"
+  (pageSizeChange)="pageSizeChange()"
+  [(selectedDataItems)]="selectedDataItems"
+  (pageChange)="pageNumberChange()"
+  (sortChange)="gridSort($event)"
+>
+  <ora-column width="40px" [dataType]="'Select'"></ora-column>
+  <ora-column headerAlign="center" header="STT" width="40px" align="center">
+    <ng-template oraCell let-data>
+      {{ totalCount - (pageNumber - 1) * pageSize - dataList.indexOf(data) }}
+    </ng-template>
+  </ora-column>
+  <ora-column header="Tên" key="tenNhanVien" width="300px"></ora-column>
+  <ora-column header="Vai trò" key="listRoleName" width="300px"></ora-column>
+</ora-table>
+<div *nzModalFooter>
+  <button [disabled]="!selectedDataItems?.length" type="button" nz-button nzType="primary" (click)="save()">Thêm nhân viên</button>
+</div>

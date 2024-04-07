@@ -1,0 +1,33 @@
+<div class="alain-default__progress-bar" *ngIf="isFetching"></div>
+<div class="ora-layout">
+  <div
+    class="ora-header"
+    style="
+      background: url('./../../../../assets/images/header-bg-layout.svg') no-repeat right center,
+        linear-gradient(to right, #e2f5fc, #e2f5fc) no-repeat;
+    "
+  >
+    <div class="logo">
+      <a [routerLink]="[options.logoLink ? options.logoLink : '/']" class="alain-default__header-logo-link">
+        <img [src]="options.logoExpanded" alt="logo" />
+      </a>
+    </div>
+    <div class="content-header">
+      <ng-container *ngTemplateOutlet="rightContent"></ng-container>
+    </div>
+  </div>
+  <div class="menu-top">
+    <layout-menu-top
+      [menusCongViec]="menusCongViec"
+      [menusDM]="menusDM"
+      [menusQT]="menusQT"
+      [currentUser]="currentUser"
+    ></layout-menu-top>
+  </div>
+  <div class="inner-layout">
+    <div class="inner-content-layout">
+      <ng-container *ngTemplateOutlet="content"></ng-container>
+      <ng-content></ng-content>
+    </div>
+  </div>
+</div>

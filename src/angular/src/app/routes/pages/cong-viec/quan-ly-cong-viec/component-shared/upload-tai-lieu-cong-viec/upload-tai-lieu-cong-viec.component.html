@@ -1,0 +1,52 @@
+<nz-button-group class="flex">
+  <button nz-tooltip="Xem chi tiết" (click)="viewFileList()" class="flex-1" nz-button>
+    <span *ngIf="!isUploading" nz-icon nzTheme="outline" nzType="paper-clip"></span>
+    <span *ngIf="isUploading" nz-icon nzTheme="outline" nzType="loading"></span>
+    {{ fileList?.length }}
+  </button>
+  <button (click)="themTaiLieu()" class="flex-1" nz-button *ngIf="isEnableAdd">
+    Thêm tài liệu
+  </button>
+</nz-button-group>
+<div class="margin-top-5" *ngIf="isEnableAdd">
+  <i>Chấp nhận định dạng .pdf, .xls, .xlsx, .doc, .docx</i>
+</div>
+<nz-upload #upload hidden [formControl]="control" (nzChange)="handleChange($event)"
+  [nzAccept]="['.pdf', '.xls', '.xlsx', '.doc', '.docx' ]" [nzAction]="nzAction" [nzMultiple]="true" ngDefaultControl>
+</nz-upload>
+
+<!--Modal-->
+<nz-modal [nzWidth]="992" nzMaskClosable [nzFooter]="footer" (nzOnCancel)="closeModal()" [(nzVisible)]="isOpen"
+  nzTitle="Tài liệu đính kèm">
+  <ng-container *nzModalContent>
+    <nz-table #table [nzData]="getDataList()">
+      <thead>
+        <tr>
+          <th nzAlign="center" nzWidth="80px">TT</th>
+          <th nzWidth="400px">Tên</th>
+          <th nzWidth="100px">Định dạng</th>
+          <th nzWidth="100px" nzAlign="center">Thao tác</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of table.data; index as i">
+          <td nzAlign="center">{{i + 1}}</td>
+          <td>{{data.name}}</td>
+          <td>{{data.type}}</td>
+          <td nzAlign="center">
+            <a nz-tooltip="Xem tệp đính kèm" (click)="viewFile(data)">
+              <i nz-icon nzType="eye"></i>
+            </a>
+            <a nz-tooltip="Xóa tệp đính kèm" (click)="removeFile(data, i)">
+              <i class="c-h" nz-icon nzType="delete"></i>
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </nz-table>
+  </ng-container>
+</nz-modal>
+<ng-template #footer>
+  <button (click)="closeModal()" nz-button nzType="danger"><i nz-icon nzTheme="outline" nzType="close"></i>
+    Đóng</button>
+</ng-template>

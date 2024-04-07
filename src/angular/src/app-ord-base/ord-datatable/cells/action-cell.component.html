@@ -1,0 +1,48 @@
+<ng-container *ngIf="!isNhieuHon3;else nhieuHon3Tpl">
+  <ng-container *ngFor="let act1 of actions; trackBy: trackByIndex">
+    <button *ngIf="!act1.hideAction || !act1.hideAction(record)" (click)="onClickMenuItem(record, act1.callBack)" title="{{act1.name}}"
+      nz-button [nzType]="act1.nzTypeBtn" nzShape="circle" nzSize="small">
+      <ng-container [ngTemplateOutlet]="iconTpl" [ngTemplateOutletContext]="{act:act1}"></ng-container>
+    </button>
+  </ng-container>
+
+</ng-container>
+
+<ng-template #nhieuHon3Tpl>
+  <ng-container *ngFor="let act2 of listOfActBenNgoai; trackBy: trackByIndex">
+    <button *ngIf="!act2.hideAction || !act2.hideAction(record)" (click)="onClickMenuItem(record, act2.callBack)" title="{{act2.name}}"
+      nz-button [nzType]="act2.nzTypeBtn" nzShape="circle" nzSize="small">
+      <ng-container [ngTemplateOutlet]="iconTpl" [ngTemplateOutletContext]="{act:act2}"></ng-container>
+    </button>
+  </ng-container>
+
+  <button nz-button nzType="default" nzShape="circle" nz-dropdown nzSize="small" nzPlacement="bottomRight"
+          [nzDropdownMenu]="menuContext" nzTrigger="click">
+    <i nz-icon nzType="dash" nzTheme="outline"></i>
+  </button>
+  <nz-dropdown-menu #menuContext="nzDropdownMenu">
+    <ul nz-menu nzSelectable>
+      <ng-container *ngFor="let act3 of listActDropDown; trackBy: trackByIndex">
+        <li *ngIf="!act3.hideAction || !act3.hideAction(record)" nz-menu-item (click)="onClickMenuItem(record, act3.callBack)">
+          <div class="row" [ngClass]="act3.actionType === 'xoa' ? ' of-text-danger' : ''">
+            <div class="col-4" style="max-width: 18px !important">
+              <ng-container [ngTemplateOutlet]="iconTpl" [ngTemplateOutletContext]="{act:act3}"></ng-container>
+            </div>
+            <div class="col-8 font-weight-bolder">
+              {{ act3.name }}
+            </div>
+          </div>
+        </li>
+      </ng-container>
+
+    </ul>
+  </nz-dropdown-menu>
+</ng-template>
+<ng-template #iconTpl let-act="act">
+  <div [ngSwitch]="act.iconType">
+    <i *ngSwitchCase="'nzIcon'" nz-icon [nzType]="act.nzIcon" nzTheme="outline"></i>
+    <i *ngSwitchCase="'icon'" class="{{ act.icon }}"></i>
+    <img *ngSwitchCase="'img'" src="assets/images/thao-tac-icon/{{act.img}}" [width]="act.imgWidth" alt="{{act.name}}">
+  </div>
+
+</ng-template>

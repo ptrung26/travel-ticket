@@ -1,0 +1,40 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+	<Import Project="..\..\common.props" />
+
+	<PropertyGroup>
+		<TargetFramework>net5.0</TargetFramework>
+		<AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+		<RootNamespace>newPMS</RootNamespace>
+		<PreserveCompilationReferences>true</PreserveCompilationReferences>
+		<LangVersion>8</LangVersion>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Compile Remove="Logs\**" />
+		<Content Remove="Logs\**" />
+		<EmbeddedResource Remove="Logs\**" />
+		<None Remove="Logs\**" />
+	</ItemGroup>
+	<ItemGroup>
+		<None Update="Dockerfile">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="contoso.com.pfx">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="SixLabors.ImageSharp" Version="1.0.1" />
+		<PackageReference Include="SkiaSharp" Version="2.80.2" />
+		<PackageReference Include="SkiaSharp.NativeAssets.Linux" Version="2.80.2" />
+	</ItemGroup>
+	<ItemGroup>
+		<Folder Include="wwwroot\sampleFiles\" />
+	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\..\..\..\DataBase\src\TravelTicket\newPMS.Base.EntityFrameworkCore\newPMS.Base.EntityFrameworkCore.csproj" />
+		<ProjectReference Include="..\..\..\..\shared\OrdBaseHttpApi\OrdBaseHttpApi.csproj" />
+		<ProjectReference Include="..\Application\newPMS.SanPham.Application.csproj" />
+	</ItemGroup>
+
+</Project>

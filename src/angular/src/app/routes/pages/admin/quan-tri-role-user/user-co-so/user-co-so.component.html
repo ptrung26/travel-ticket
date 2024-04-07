@@ -1,0 +1,152 @@
+<ora-page-header [action]="actionHeader" title="Tài khoản người dùng">
+  <ng-template #actionHeader>
+    <!-- <btn-add-item (clickEvent)="taoTaiKhoanNhanh()" title="Mở cửa sổ tạo tài khoản nhanh" icon="plus" text="Mở cửa sổ tạo tài khoản nhanh"></btn-add-item> -->
+    <button (click)="openModal()" nz-button nzType="primary"><i nz-icon nzType="plus-circle"></i>Thêm mới</button>
+    <button (click)="fileSendMail.click()" *ngIf="userSession?.username === 'admin'" class="folder-upload" nz-button>
+      <i nz-icon nzTheme="outline" nzType="send"></i> Gửi mật khẩu
+    </button>
+    <input
+      #fileSendMail
+      (change)="onSendMail($event)"
+      accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+      id="fileSendMail"
+      name="fileSendMail"
+      style="display: none"
+      type="file"
+    />
+    <button (click)="sendThongBaoHeThong()" *ngIf="userSession?.username === 'admin'" nz-button style="margin-left: 6px">
+      <span nz-icon nzTheme="outline" nzType="sound"></span> Thông báo hệ thống
+    </button>
+  </ng-template>
+</ora-page-header>
+
+<div class="box-filter">
+  <form [formGroup]="rfFormGroup" nz-form>
+    <nz-row nzGutter="16">
+      <nz-col nzSpan="8">
+        <input (keydown.enter)="refresh()" formControlName="filter" nz-input placeholder="Tên tài khoản, họ tên, số điện thoại, email" />
+      </nz-col>
+      <nz-col nzSpan="4">
+        <nz-select
+          style="width: 100%"
+          [nzMaxTagCount]="2"
+          [nzMaxTagPlaceholder]="tagPlaceHolder"
+          formControlName="listSysRoleId"
+          nzAllowClear
+          nzMode="multiple"
+          nzPlaceHolder="Chọn vai trò..."
+        >
+          <ng-container *ngFor="let o of listSysUerId">
+            <nz-option [nzLabel]="o.displayText" [nzValue]="o.value"></nz-option>
+          </ng-container>
+        </nz-select>
+        <ng-template #tagPlaceHolder let-selectedList>+ {{ selectedList.length }} lựa chọn</ng-template>
+      </nz-col>
+      <nz-col nzSpan="2">
+        <button (click)="refresh()" nz-button nzType="primary"><i nz-icon nzType="search"></i>Tìm kiếm</button>
+      </nz-col>
+    </nz-row>
+  </form>
+</div>
+
+<ora-table
+  [rows]="dataList"
+  [isLoading]="isTableLoading"
+  [totalRows]="totalItems"
+  [(pageSize)]="pageSize"
+  [(page)]="pageNumber"
+  (pageSizeChange)="refresh()"
+  (pageChange)="pageNumberChange()"
+  (sortChange)="gridSort($event)"
+>
+  <ora-column align="center" fixLeft header="STT" width="60px">
+    <ng-template let-data oraCell>
+      {{ totalItems - (pageNumber - 1) * pageSize - dataList.indexOf(data) }}
+    </ng-template>
+  </ora-column>
+
+  <ora-column [content]="userName" fixLeft header="Tên đăng nhập" key="userName" width="250px">
+    <ng-template #userName let-data="dataItem">
+      <ng-container *ngIf="!data.isLock">
+        <b>{{ data.userName }}</b>
+      </ng-container>
+      <ng-container *ngIf="data.isLock">
+        <b class="badge-danger-color" style="margin-right: 6px">{{ data.userName }}</b>
+        <span class="badge-danger-color" nz-icon nzTheme="outline" nzType="lock"></span>
+      </ng-container>
+    </ng-template>
+  </ora-column>
+
+  <ora-column header="Họ Tên" key="hoTen" width="200px"></ora-column>
+  <ora-column header="Email" key="email" width="200px"></ora-column>
+  <ora-column [content]="dienThoaiTemp" header="Số điện thoại" key="soDienThoai" width="100px">
+    <ng-template #dienThoaiTemp let-data="dataItem">
+      <ng-container *ngIf="data.soDienThoai">
+        {{ data.soDienThoai | slice : 0 : 3 }}.{{ data.soDienThoai | slice : 3 : 6 }}.{{ data.soDienThoai | slice : 6 : 12 }}
+      </ng-container>
+    </ng-template>
+  </ora-column>
+
+  <ora-column header="Vai trò" headerAlign="left" key="listRoleName" width="200px"></ora-column>
+  <ora-column [content]="creationTime" align="right" header="Thời gian tạo" headerAlign="right" key="creationTime" width="150px">
+    <ng-template #creationTime let-data="dataItem"> {{ data.creationTime | date : 'HH:mm - dd/MM/yyyy' }} <br /> </ng-template>
+  </ora-column>
+  <ora-column [content]="contentAction" align="center" fixRight header="Thao tác" width="120px">
+    <ng-template #contentAction let-data="dataItem">
+      <button [nzDropdownMenu]="menu" nz-button nz-dropdown>
+        Thao tác
+        <i nz-icon nzType="down" style="font-size: 12px !important"></i>
+      </button>
+      <nz-dropdown-menu #menu="nzDropdownMenu">
+        <ul nz-menu nzSelectable>
+          <li *ngIf="!isCurrentAccount(data.id) && grantedPermission.canLoginWithOther" nz-menu-item style="font-size: 15px">
+            <a (click)="loginPasswordless(data)">
+              <i class="badge-primary-color" nz-icon nzTheme="outline" nzType="login" style="font-size: 15px"></i> Đăng nhập bằng tài khoản
+              này
+            </a>
+          </li>
+          <li nz-menu-item style="font-size: 15px">
+            <a (click)="editPermission(data)">
+              <i class="badge-info-color" nz-icon nzTheme="outline" nzType="flag" style="font-size: 15px"></i> Chỉnh sửa quyền
+            </a>
+          </li>
+          <li nz-menu-item style="font-size: 15px">
+            <a (click)="editUser(data)">
+              <i class="badge-info-color" nz-icon nzTheme="outline" nzType="edit" style="font-size: 15px"></i> Chỉnh sửa tài khoản
+            </a>
+          </li>
+          <li *ngIf="!data.giangVienId" nz-menu-item style="font-size: 15px">
+            <a (click)="createGiangVien(data)">
+              <i class="badge-info-color" nz-icon nzTheme="outline" nzType="user-add" style="font-size: 15px"></i> Tạo thông tin giảng viên
+            </a>
+          </li>
+          <li *ngIf="data.doanDanhGiaId == null" nz-menu-item style="font-size: 15px">
+            <a (click)="createDoanDanhGia(data)">
+              <i class="badge-info-color" nz-icon nzTheme="outline" nzType="user-add" style="font-size: 15px"></i> Tạo thông tin đoàn đánh giá
+            </a>
+          </li>
+          <li *ngIf="!data.hocVienId" nz-menu-item style="font-size: 15px">
+            <a (click)="createHocVien(data)">
+              <i class="badge-info-color" nz-icon nzTheme="outline" nzType="user-add" style="font-size: 15px"></i> Tạo thông tin học viên
+            </a>
+          </li>
+          <li *ngIf="!data.isLock" nz-menu-item style="font-size: 15px">
+            <a (click)="lock(data)">
+              <i class="badge-danger-color" nz-icon nzTheme="outline" nzType="lock" style="font-size: 15px"></i> Khóa tài khoản
+            </a>
+          </li>
+          <li *ngIf="data.isLock" nz-menu-item style="font-size: 15px">
+            <a (click)="unlock(data)">
+              <i class="badge-success-color" nz-icon nzTheme="outline" nzType="unlock" style="font-size: 15px"></i> Mở khóa tài khoản
+            </a>
+          </li>
+          <li nz-menu-item style="font-size: 15px">
+            <a (click)="xoa(data)">
+              <i class="badge-danger-color" nz-icon nzTheme="outline" nzType="delete" style="font-size: 15px"></i> Xóa tài khoản
+            </a>
+          </li>
+        </ul>
+      </nz-dropdown-menu>
+    </ng-template>
+  </ora-column>
+</ora-table>

@@ -1,0 +1,18 @@
+<nz-tree-select
+  style="width: 100%"
+  [nzDropdownStyle]="{ 'max-height': '300px' }"
+  [nzNodes]="optionList"
+  nzShowSearch
+  nzServerSearch
+  [nzAllowClear]="nzAllowClear"
+  nzPlaceHolder="{{ placeHolder }}"
+  [nzMaxTagCount]="nzMaxTagCount"
+  [(ngModel)]="_value"
+  [nzDisabled]="getNzSelectDisable()"
+  (ngModelChange)="onChangeValue($event); emitItemSelected()"
+  (nzOnSearch)="search($event)"
+  [nzSize]="size"
+  [style.fontSize]="fontSize"
+  [nzMultiple]="isMulti"
+>
+</nz-tree-select>

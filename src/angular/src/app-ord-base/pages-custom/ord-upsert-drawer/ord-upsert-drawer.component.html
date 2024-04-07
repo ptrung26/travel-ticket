@@ -1,0 +1,67 @@
+<ng-container *ngIf="visible">
+  <nz-drawer nzPlacement="bottom" [nzMaskClosable]="true" nzHeight="100vh"
+             [nzClosable]="true" [nzVisible]="visible" [nzTitle]="titleTpl" nzMask="false"
+             (nzOnClose)="close()">
+    <ng-template #titleTpl>
+      <h5 class="font-weight-bold text-uppercase" style="margin-bottom: 0px;">{{pageTitle}}</h5>
+    </ng-template>
+    <div class="text-right btn-saving-group" *ngIf="isButtonOnTop">
+      <div *ngIf="btnGroupMode==='saveContinue'">
+        <!--        <button type="submit" nz-button nzType="default" (click)="save(false)">-->
+        <!--          <i nz-icon-->
+        <!--             nzType="save"></i>Lưu & thêm mới-->
+        <!--        </button>-->
+        <button type="submit" nz-button nzType="primary" (click)="save(true)">
+          <i nz-icon
+             nzType="save"></i>Lưu & đóng (F11)
+        </button>
+        <button type="button" nz-button nzType="default" (click)="close()">Đóng (Esc)</button>
+      </div>
+      <div *ngIf="btnGroupMode==='saveOnly'">
+        <button type="submit" nz-button nzType="primary" (click)="save(true)">
+          <i nz-icon
+             nzType="save"></i>Lưu (F11)
+        </button>
+        <button type="button" nz-button nzType="default" (click)="close()">Đóng (Esc)</button>
+      </div>
+      <div *ngIf="btnGroupMode==='viewOnly'">
+        <button type="submit" nz-button nzType="default" (click)="chuyenCheDoSua()">
+          <i nz-icon nzType="retweet"></i>Chuyển chế độ Sửa
+        </button>
+        <button type="button" nz-button nzType="default" (click)="close()">Đóng (Esc)</button>
+      </div>
+    </div>
+    <div class="upsert-content" tabindex="-1" (keydown)="onHotKey($event)">
+      <ng-content></ng-content>
+    </div>
+    <div class="text-right btn-saving-group">
+      <div *ngIf="btnGroupMode==='saveContinue'">
+        <!--        <button type="submit" nz-button nzType="default" (click)="save(false)">-->
+        <!--          <i nz-icon-->
+        <!--             nzType="save"></i>Lưu & thêm mới-->
+        <!--        </button>-->
+        <label nz-checkbox [(ngModel)]="tiepTucCheck">Tiếp tục thêm mới</label>
+        <button type="submit" nz-button nzType="primary" (click)="save(!this.tiepTucCheck)">
+          <i nz-icon
+             nzType="save"></i>Lưu (F11)
+        </button>
+        <button type="button" nz-button nzType="default" (click)="close()">Đóng (Esc)</button>
+      </div>
+      <div *ngIf="btnGroupMode==='saveOnly'">
+        <button type="submit" nz-button nzType="primary" (click)="save(true)">
+          <i nz-icon
+             nzType="save"></i>Lưu (F11)
+        </button>
+        <button type="button" nz-button nzType="default" (click)="close()">Đóng (Esc)</button>
+      </div>
+      <div *ngIf="btnGroupMode==='viewOnly'">
+        <button type="submit" nz-button nzType="default" (click)="chuyenCheDoSua()">
+          <i nz-icon nzType="retweet"></i>Chuyển chế độ Sửa
+        </button>
+        <button type="button" nz-button nzType="default" (click)="close()">Đóng (Esc)</button>
+      </div>
+    </div>
+  </nz-drawer>
+</ng-container>
+
+

@@ -1,0 +1,54 @@
+<form nz-form #form [formGroup]="rfDataModal" nzLayout="horizontal" (keyup.enter)="save()">
+  <nz-form-item>
+    <nz-form-label [nzSm]="8" nzRequired>Mã Quốc gia</nz-form-label>
+    <nz-form-control [nzSm]="16" [nzErrorTip]="QuocTichIdErrorTpl">
+      <input nz-input formControlName="id" />
+    </nz-form-control>
+    <ng-template #QuocTichIdErrorTpl let-control>
+      <ng-container *ngIf="control.hasError('required')"> {{ 'Error_Required' | translate }} </ng-container>
+      <ng-container *ngIf="control.hasError('IsQuocTichIdExist')"> Mã quốc gia đã tồn tại ! </ng-container>
+    </ng-template>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSm]="8" nzRequired>Tên</nz-form-label>
+    <nz-form-control [nzSm]="16" nzErrorTip="{{ 'Error_Required' | translate }}">
+      <input [maxLength]="100" nz-input formControlName="ten" />
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSm]="8" nzRequired>Tên (en)</nz-form-label>
+    <nz-form-control [nzSm]="16" nzErrorTip="{{ 'Error_Required' | translate }}">
+      <input [maxLength]="100" nz-input formControlName="tenEn" />
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSm]="8" nzRequired>alpha-2</nz-form-label>
+    <nz-form-control [nzSm]="16" [nzErrorTip]="alpha2ErrorTpl">
+      <input [maxLength]="2" nz-input formControlName="alpha2Code" />
+    </nz-form-control>
+    <ng-template #alpha2ErrorTpl let-control>
+      <ng-container *ngIf="control.hasError('required')"> {{ 'Error_Required' | translate }}</ng-container>
+      <ng-container *ngIf="!control.hasError('required') && control.hasError('ExactlyTwoCharacter')">
+        Mã alpha-2 không được khoảng trắng và có đúng 2 kí tự ! <br />
+      </ng-container>
+    </ng-template>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSm]="8" nzRequired>alpha-3</nz-form-label>
+    <nz-form-control [nzSm]="16" [nzErrorTip]="alpha3ErrorTpl">
+      <input [maxLength]="3" nz-input formControlName="alpha3Code" />
+    </nz-form-control>
+    <ng-template #alpha3ErrorTpl let-control>
+      <ng-container *ngIf="control.hasError('required')"> {{ 'Error_Required' | translate }} </ng-container>
+      <ng-container *ngIf="!control.hasError('required') && control.hasError('ExactlyThreeCharacter')">
+        Mã alpha-3 không được khoảng trắng và có đúng 3 kí tự ! <br />
+      </ng-container>
+    </ng-template>
+  </nz-form-item>
+  <div *nzModalFooter>
+    <button type="button" nz-button nzType="default" (click)="close()">{{ 'Close' | translate }}</button>
+    <button type="button" [nzLoading]="saving" nz-button nzType="primary" (click)="formSubmit$.next(rfDataModal.status)">
+      <i nz-icon nzType="save"></i>{{ 'Save' | translate }}
+    </button>
+  </div>
+</form>

@@ -1,0 +1,51 @@
+global:
+  scrape_interval: 10s
+scrape_configs:
+  - job_name: "auth-server"
+    scheme: https
+    tls_config:
+      insecure_skip_verify: true
+    static_configs:
+      - targets: ["auth-server"]
+
+  - job_name: "administration-service"
+    scheme: https
+    tls_config:
+      insecure_skip_verify: true
+    static_configs:
+      - targets: ["administration-service"]
+
+  - job_name: "identity-service"
+    scheme: https
+    tls_config:
+      insecure_skip_verify: true
+    static_configs:
+      - targets: ["identity-service"]
+
+  - job_name: "saas-service"
+    scheme: https
+    tls_config:
+      insecure_skip_verify: true
+    static_configs:
+      - targets: ["saas-service"]
+
+  - job_name: "product-service"
+    scheme: https
+    tls_config:
+      insecure_skip_verify: true
+    static_configs:
+      - targets: ["product-service"]
+
+  - job_name: "web"
+    scheme: https
+    tls_config:
+      insecure_skip_verify: true
+    static_configs:
+      - targets: ["web"]
+
+  - job_name: "public-web"
+    scheme: https
+    tls_config:
+      insecure_skip_verify: true
+    static_configs:
+      - targets: ["public-web"]

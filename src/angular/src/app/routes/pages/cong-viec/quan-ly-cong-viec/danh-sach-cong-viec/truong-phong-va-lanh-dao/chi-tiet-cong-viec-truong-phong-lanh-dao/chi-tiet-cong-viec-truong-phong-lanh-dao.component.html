@@ -1,0 +1,141 @@
+<ora-page-header [action]="actionHeader" [title]="duAn.ten">
+  <ng-template #actionHeader>
+    <button (click)="close()" nz-button nzType="default" type="button"><i nz-icon nzType="arrow-left"></i> Quay
+      lại</button>
+  </ng-template>
+</ora-page-header>
+
+<div class="box-filter">
+  <form [formGroup]="rfFormGroup" nz-form>
+    <div nz-row nzGutter="16">
+      <nz-col nzSpan="8">
+        <input (keydown.enter)="refresh()" formControlName="filter" nz-input placeholder="Nhập tên công việc" />
+      </nz-col>
+      <nz-col nzSpan="3">
+        <ora-date-picker formControlName="ngayTao" placeHolder="Ngày tạo"></ora-date-picker>
+      </nz-col>
+      <nz-col nzSpan="3">
+        <ora-date-picker formControlName="ngayHoanThanh" placeHolder="Ngày hoàn thành"></ora-date-picker>
+      </nz-col>
+      <nz-col nzSpan="2">
+        <nz-select style="width: 100%" nzAllowClear nzShowSearch formControlName="mucDo" nzPlaceHolder="Mức độ">
+          <nz-option *ngFor="let item of listMucDo" [nzLabel]="item.displayText" [nzValue]="item.value"></nz-option>
+        </nz-select>
+      </nz-col>
+      <nz-col nzLg="2" nzMd="4">
+        <button (click)="refresh()" nz-button nzType="primary">Tìm kiếm</button>
+      </nz-col>
+    </div>
+  </form>
+</div>
+
+<div class="d-grid">
+  <div>
+    <div class="box">
+      <div class="header">
+        <nz-tag>Tạo mới</nz-tag>
+        <div>
+          <img [src]="thumbnailUrl" alt="" class="tag-icon" />
+          {{ boards.taoMoi.length }}
+          <button (click)="add()" *ngIf="permission.lanhDao && duAn.trangThai !== TRANG_THAI_CONG_VIEC.HOAN_THANH"
+            nz-button nz-tooltip="Thêm công việc">
+            <span nz-icon nzTheme="outline" nzType="plus"></span>
+          </button>
+        </div>
+      </div>
+      <div class="content">
+        <div #taoMoiRef="cdkDropList"
+          (cdkDropListDropped)="dropped($event, boards.taoMoi, TRANG_THAI_CONG_VIEC.TAO_MOI)" [cdkDropListConnectedTo]="
+            permission.lanhDao ? [dangThucHienRef, choPheDuyetRef, pheDuyetRef, hoanThanhRef] : [dangThucHienRef, choPheDuyetRef]
+          " [cdkDropListData]="boards.taoMoi" cdkDropList class="example-list">
+          <cong-viec-truong-phong-lanh-dao-board #board (refreshEvent)="refresh()" [duAn]="duAn"
+            [listCongViec]="boards.taoMoi" [permission]="permission" [listUserCaNhan]="listUserCaNhan"
+            [trangThai]="TRANG_THAI_CONG_VIEC.TAO_MOI"></cong-viec-truong-phong-lanh-dao-board>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div class="box">
+      <div class="header">
+        <nz-tag [nzColor]="'#2db7f5'">Đang thực hiện</nz-tag>
+        <div>
+          <img [src]="thumbnailUrl" alt="" class="tag-icon" />
+          {{ boards.dangThucHien.length }}
+        </div>
+      </div>
+      <div class="content">
+        <div #dangThucHienRef="cdkDropList"
+          (cdkDropListDropped)="dropped($event, boards.dangThucHien, TRANG_THAI_CONG_VIEC.DANG_THUC_HIEN)"
+          [cdkDropListConnectedTo]="permission.lanhDao ? [taoMoiRef, choPheDuyetRef, pheDuyetRef, hoanThanhRef] : [choPheDuyetRef]"
+          [cdkDropListData]="boards.dangThucHien" cdkDropList class="example-list">
+          <cong-viec-truong-phong-lanh-dao-board #board (refreshEvent)="refresh()" [duAn]="duAn"
+            [listCongViec]="boards.dangThucHien" [permission]="permission"
+            [trangThai]="TRANG_THAI_CONG_VIEC.DANG_THUC_HIEN"></cong-viec-truong-phong-lanh-dao-board>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div class="box">
+      <div class="header">
+        <nz-tag [nzColor]="'#ffa3be'"> Chờ phê duyệt</nz-tag>
+        <div>
+          <img [src]="thumbnailUrl" alt="" class="tag-icon" />
+          {{ boards.choPheDuyet.length }}
+        </div>
+      </div>
+      <div>
+        <div #choPheDuyetRef="cdkDropList"
+          (cdkDropListDropped)="dropped($event, boards.choPheDuyet, TRANG_THAI_CONG_VIEC.CHO_PHE_DUYET)"
+          [cdkDropListConnectedTo]="permission.lanhDao ? [taoMoiRef, dangThucHienRef, pheDuyetRef, hoanThanhRef] : [dangThucHienRef]"
+          [cdkDropListData]="boards.choPheDuyet" cdkDropList class="example-list">
+          <cong-viec-truong-phong-lanh-dao-board #board (refreshEvent)="refresh()" [duAn]="duAn"
+            [listCongViec]="boards.choPheDuyet" [permission]="permission"
+            [trangThai]="TRANG_THAI_CONG_VIEC.CHO_PHE_DUYET"></cong-viec-truong-phong-lanh-dao-board>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div class="box">
+      <div class="header">
+        <nz-tag [nzColor]="'#87d068'"> Phê duyệt</nz-tag>
+        <div>
+          <img [src]="thumbnailUrl" alt="" class="tag-icon" />
+          {{ boards.pheDuyet.length }}
+        </div>
+      </div>
+      <div>
+        <div #pheDuyetRef="cdkDropList"
+          (cdkDropListDropped)="dropped($event, boards.pheDuyet, TRANG_THAI_CONG_VIEC.PHE_DUYET)"
+          [cdkDropListConnectedTo]="permission.lanhDao ? [taoMoiRef, dangThucHienRef, choPheDuyetRef, hoanThanhRef] : []"
+          [cdkDropListData]="boards.pheDuyet" cdkDropList class="example-list">
+          <cong-viec-truong-phong-lanh-dao-board #board (refreshEvent)="refresh()" [duAn]="duAn"
+            [listCongViec]="boards.pheDuyet" [permission]="permission"
+            [trangThai]="TRANG_THAI_CONG_VIEC.PHE_DUYET"></cong-viec-truong-phong-lanh-dao-board>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div class="box">
+      <div class="header">
+        <nz-tag [nzColor]="'#f50'"> Hoàn thành</nz-tag>
+        <div>
+          <img [src]="thumbnailUrl" alt="" class="tag-icon" />
+          {{ boards.hoanThanh.length }}
+        </div>
+      </div>
+      <div>
+        <div #hoanThanhRef="cdkDropList"
+          (cdkDropListDropped)="dropped($event, boards.hoanThanh, TRANG_THAI_CONG_VIEC.HOAN_THANH)"
+          [cdkDropListData]="boards.hoanThanh" cdkDropList class="example-list">
+          <cong-viec-truong-phong-lanh-dao-board #board (refreshEvent)="refresh()" [duAn]="duAn"
+            [listCongViec]="boards.hoanThanh" [permission]="permission"
+            [trangThai]="TRANG_THAI_CONG_VIEC.HOAN_THANH"></cong-viec-truong-phong-lanh-dao-board>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

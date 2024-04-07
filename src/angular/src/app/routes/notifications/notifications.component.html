@@ -1,0 +1,64 @@
+<div class="box-filter">
+  <nz-row nzGutter="8" [formGroup]="rfFormGroup">
+    <nz-col nzLg="4" nzSm="8">
+      <ora-select dirTrangThaiThongBao placeHolder="Chọn trạng thái" formControlName="isState"></ora-select>
+    </nz-col>
+    <nz-col nzLg="12" nzSm="12">
+      <input (keydown.enter)="refresh()" formControlName="filter" nz-input placeholder="Nhập từ khóa để tìm kiếm!"/>
+    </nz-col>
+    <nz-col nzLg="2" nzSm="4">
+      <button nz-button nzType="primary" (click)="refresh()">Tìm kiếm</button>
+    </nz-col>
+  </nz-row>
+</div>
+
+<ora-table
+  [rows]="dataList"
+  [isLoading]="isTableLoading"
+  [totalRows]="totalItems"
+  [(pageSize)]="pageSize"
+  [(page)]="pageNumber"
+  (pageSizeChange)="pageSizeChange()"
+  (pageChange)="pageNumberChange()"
+  (sortChange)="gridSort($event)"
+  [scroll]="{ y: scroll.y}"
+>
+  <ora-column headerAlign="center" header="STT" width="60px" align="center">
+    <ng-template oraCell let-data>
+      {{ totalCount - (pageNumber - 1) * pageSize - dataList.indexOf(data) }}
+    </ng-template>
+  </ora-column>
+  <ora-column header="Thông báo" key="message" headerAlign="center" [content]="message">
+    <ng-template #message let-data="dataItem">
+      <ng-container *ngIf="!data.isState">
+        {{ data.message }}
+      </ng-container>
+      <ng-container *ngIf="data.isState">
+        <span style="color: #bdbdbd">
+          {{ data.message }}
+        </span>
+      </ng-container>
+    </ng-template>
+  </ora-column>
+  <ora-column header="Thời gian tạo" width="160px" [content]="ThoiGianTao" headerAlign="center" align="center">
+    <ng-template #ThoiGianTao let-data="dataItem">
+      <div [nz-tooltip]="data.creationTime | luxonFormat: 'HH:mm - dd/MM/yyyy'">{{ data.creationTime | dateAgo }}</div>
+    </ng-template>
+  </ora-column>
+  <ora-column header="Thao tác" width="120px" [content]="Action" headerAlign="center" align="center">
+    <ng-template #Action let-data="dataItem">
+      <a (click)="readingNotifi(data)" *ngIf="data.isState === false" nz-tooltip nzTooltipTitle="Đánh dấu đã đọc">
+        <i nz-icon nzType="check-circle" nzTheme="outline"></i>
+      </a>
+      <a (click)="deleteNotifi(data)" nz-tooltip nzTooltipTitle="Xóa thông báo">
+        <i nz-icon nzType="delete" nzTheme="outline" style="color: #ff7875"></i>
+      </a>
+    </ng-template>
+  </ora-column>
+</ora-table>
+<div class="fade" *ngIf="showPopup===true">
+</div>
+<div class="popup" *ngIf="showPopup===true">
+  <a class="close" (click)="hidePopup()"><i nz-icon nzType="close-circle" nzTheme="outline"></i></a>
+  <div [innerHTML]="popupContent"></div>
+</div>

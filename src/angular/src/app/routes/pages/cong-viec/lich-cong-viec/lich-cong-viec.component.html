@@ -1,0 +1,52 @@
+<div class='flex-center justify-content-end'>
+  <nz-tag nzColor="#7F7C82">Tạo mới</nz-tag>
+  <nz-tag nzColor="#1890ff">Đang thực hiện</nz-tag>
+  <nz-tag nzColor="#00ab55">Hoàn thành</nz-tag>
+</div>
+<div class="flex-center-between">
+  <div>
+    <nz-select [nzDropdownClassName]="'calendar-select'" [(ngModel)]="selected" class="min-w-200">
+      <nz-option nzCustomContent nzLabel="Tháng" [nzValue]="1">
+        <a class="calendar-option" nz-button nzType="text" (click)="handleOptionCalendar('dayGridMonth', 1)"> Tháng </a>
+      </nz-option>
+      <nz-option nzCustomContent nzLabel="Tuần" [nzValue]="2">
+        <a class="calendar-option" nz-button nzType="text" (click)="handleOptionCalendar('dayGridWeek', 2)"> Tuần </a>
+      </nz-option>
+      <nz-option nzCustomContent nzLabel="Lịch biểu trong tháng" [nzValue]="3">
+        <a class="calendar-option" nz-button nzType="text" (click)="handleOptionCalendar('listMonth', 3)"> Lịch biểu trong tháng </a>
+      </nz-option>
+      <nz-option nzCustomContent nzLabel="Lịch biểu trong tuần" [nzValue]="4">
+        <a class="calendar-option" nz-button nzType="text" (click)="handleOptionCalendar('listWeek', 4)"> Lịch biểu trong tuần </a>
+      </nz-option>
+      <nz-option nzCustomContent nzLabel="Lịch biểu trong ngày" [nzValue]="5">
+        <a class="calendar-option" nz-button nzType="text" (click)="handleOptionCalendar('listDay', 5)"> Lịch biểu trong ngày </a>
+      </nz-option>
+    </nz-select>
+  </div>
+  <div>
+      <span
+        nz-tooltip="Năm trước"
+        class="font-20"
+        (click)="actionCalendar('prevYear')"
+        nz-icon
+        nzType="double-left"
+        nzTheme="outline"
+      ></span>
+    <span nz-tooltip="Tháng trước" class="font-20" (click)="actionCalendar('prevMonth')" nz-icon nzType="left" nzTheme="outline"></span>
+    <span class="title-header">{{ titleDate | date : 'dd - MM - yyyy' }}</span>
+    <span nz-tooltip="Tháng sau" class="font-20" (click)="actionCalendar('nextMonth')" nz-icon nzType="right" nzTheme="outline"></span>
+    <span
+      nz-tooltip="Năm sau"
+      class="font-20"
+      (click)="actionCalendar('nextYear')"
+      nz-icon
+      nzType="double-right"
+      nzTheme="outline"
+    ></span>
+  </div>
+  <div>
+    <a (click)="actionCalendar('today')" class="btn-today"> Hôm nay </a>
+  </div>
+</div>
+
+<full-calendar #fullcalendar id="calendar" style="margin-bottom: 20px" [options]="calendarOptions"></full-calendar>

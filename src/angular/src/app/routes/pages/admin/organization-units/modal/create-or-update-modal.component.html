@@ -1,0 +1,51 @@
+<form nz-form #form [formGroup]="rfFormGroup" nzLayout="horizontal" (keyup.enter)="save()">
+  <nz-form-item>
+    <nz-form-label [nzSm]="8">Phòng ban cha</nz-form-label>
+    <nz-form-control [nzSm]="16" >
+      <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Chọn phòng ban" formControlName="pId">
+        <nz-option *ngFor="let org of allSysOrganizationunits" [nzLabel]="org.displayText" [nzValue]="org.value"></nz-option>
+      </nz-select>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSm]="8" nzRequired>Mã phòng ban</nz-form-label>
+    <nz-form-control [nzSm]="16" [nzErrorTip]="ErrorTpl">
+      <input nz-input formControlName="maPhongBan" />
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSm]="8" nzRequired>Tên phòng ban</nz-form-label>
+    <nz-form-control [nzSm]="16" [nzErrorTip]="ErrorTpl">
+      <input nz-input formControlName="tenPhongBan" />
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSm]="8">Email</nz-form-label>
+    <nz-form-control [nzSm]="16" [nzErrorTip]="ErrorTpl">
+      <input nz-input formControlName="email" />
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSm]="8">Số điện thoại</nz-form-label>
+    <nz-form-control [nzSm]="16" [nzErrorTip]="ErrorTpl">
+      <input nz-input formControlName="soDienThoai" />
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSm]="8">Fax</nz-form-label>
+    <nz-form-control [nzSm]="16" [nzErrorTip]="ErrorTpl">
+      <input nz-input formControlName="fax" />
+    </nz-form-control>
+  </nz-form-item>
+  <div *nzModalFooter>
+    <button type="button" nz-button nzType="default" (click)="close()">{{ 'Close' | translate }}</button>
+    <button type="button" nz-button nzType="primary" (click)="save()">
+      <i nz-icon nzType="save"></i>{{ 'Save' | translate }}
+    </button>
+  </div>
+</form>
+<ng-template #ErrorTpl let-control>
+  <ng-container *ngIf="control.hasError('required')"> {{ 'Error_Required' | translate }} </ng-container>
+  <ng-container *ngIf="control.hasError('email')">{{ 'Email chưa đúng định dạng!' | translate }}</ng-container>
+  <ng-container *ngIf="control.hasError('sdtKhongHopLe')">{{ 'Số điện thoại không đúng!' | translate }}</ng-container>
+</ng-template>

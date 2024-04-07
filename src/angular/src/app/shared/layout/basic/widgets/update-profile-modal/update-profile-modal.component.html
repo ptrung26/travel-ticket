@@ -1,0 +1,36 @@
+<nz-spin [nzSpinning]="loading">
+  <form nz-form #form [formGroup]="rfDataModal" nzLayout="horizontal" (keydown.enter)="save()">
+    <!-- <nz-form-item nzGutter="6">
+      <nz-form-label [nzSm]="8" nzRequired>Tên tài khoản</nz-form-label>
+      <nz-form-control [nzSm]="16" nzErrorTip="Giá trị bắt buộc!">
+        <input nz-input formControlName="userName" />
+      </nz-form-control>
+    </nz-form-item> -->
+    <nz-form-item nzGutter="6">
+      <nz-form-label [nzSm]="8" nzRequired>Email</nz-form-label>
+      <nz-form-control [nzSm]="16" [nzErrorTip]="emailErrorTpl">
+        <input [readOnly]="true" nz-input formControlName="email" />
+        <ng-template #emailErrorTpl let-control>
+          <ng-container *ngIf="control.hasError('email')"> Yêu cầu nhập đúng định dạng email!</ng-container>
+          <ng-container *ngIf="control.hasError('required')"> Giá trị bắt buộc!</ng-container>
+        </ng-template>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item nzGutter="6">
+      <nz-form-label [nzSm]="8">Họ và tên</nz-form-label>
+      <nz-form-control [nzSm]="16" nzErrorTip="Giá trị bắt buộc!">
+        <input [readOnly]="true" nz-input formControlName="hoTen" />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item nzGutter="6">
+      <nz-form-label [nzSm]="8">Số điện thoại</nz-form-label>
+      <nz-form-control [nzSm]="16" nzErrorTip="Giá trị bắt buộc!">
+        <input nz-input formControlName="soDienThoai" />
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+  <div *nzModalFooter>
+    <button type="button" nz-button nzType="default" (click)="close()">Đóng</button>
+    <button type="button" nz-button nzType="primary" (click)="save()"><i nz-icon nzType="save"></i>Lưu</button>
+  </div>
+</nz-spin>

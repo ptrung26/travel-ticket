@@ -1,0 +1,43 @@
+<ora-page-header [title]="dataItem?.id ? 'Nhân viên phòng ban: ' + dataItem.tenPhongBan : 'Nhân viên phòng ban'" [action]="actionHeader">
+  <ng-template #actionHeader>
+    <button class="ml-3" *ngIf="selectedDataItems?.length > 0" nz-button nzType="default" (click)="deleteMultiple()">
+      <i class="c-h" nz-icon nzType="delete"></i> Xóa nhân viên
+    </button>
+    <button *ngIf="dataItem?.id" class="ml-3" nz-button nzType="primary" (click)="createOrUpdate()">
+      <i nz-icon nzType="plus-circle"></i>Thêm nhân viên
+    </button>
+  </ng-template>
+</ora-page-header>
+
+<div class="box-filter">
+  <nz-row nzGutter="8" [formGroup]="rfFormGroup">
+    <nz-col nzLg="8" nzSm="12">
+      <input formControlName="filter" (keydown.enter)="refresh()" nz-input placeholder="Nhập tên, email nhân viên để tìm kiếm" />
+    </nz-col>
+    <nz-col nzLg="2" nzMd="4">
+      <button nz-button nzType="primary" (click)="refresh()">Tìm kiếm</button>
+    </nz-col>
+  </nz-row>
+</div>
+
+<ora-table
+  [rows]="dataList"
+  [isLoading]="isTableLoading"
+  [totalRows]="totalItems"
+  [(pageSize)]="pageSize"
+  [(page)]="pageNumber"
+  (pageSizeChange)="pageSizeChange()"
+  [(selectedDataItems)]="selectedDataItems"
+  (pageChange)="pageNumberChange()"
+  (sortChange)="gridSort($event)"
+>
+  <ora-column width="40px" [dataType]="'Select'"></ora-column>
+  <ora-column headerAlign="center" header="STT" width="40px" align="center">
+    <ng-template oraCell let-data>
+      {{ totalCount - (pageNumber - 1) * pageSize - dataList.indexOf(data) }}
+    </ng-template>
+  </ora-column>
+  <ora-column header="Tên" key="tenNhanVien" width="300px"></ora-column>
+  <ora-column header="Email" key="email" width="300px"></ora-column>
+  <ora-column header="Số điện thoại" key="soDienThoai" width="300px"></ora-column>
+</ora-table>

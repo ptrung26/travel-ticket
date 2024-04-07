@@ -1,0 +1,27 @@
+<nz-spin [nzSpinning]="saving">
+  <form nz-form #changeProfilePictureModalForm="ngForm">
+    <nz-form-item>
+      <nz-form-control>
+        <input type="file" class="d-inline-block" (change)="fileChangeEvent($event)" />
+        <!-- <div>{{"ProfilePicture_Change_Info" | localize:maxProfilPictureBytesUserFriendlyValue}}</div> -->
+
+        <image-cropper
+          [imageChangedEvent]="imageChangedEvent"
+          [maintainAspectRatio]="aspectRatio"
+          [aspectRatio]="4 / 4"
+          [resizeToWidth]="imgWidthNeed"
+          [cropperMinWidth]="128"
+          [imageQuality]="100"
+          format="png"
+          (imageCropped)="imageCroppedFile($event)"
+        ></image-cropper>
+      </nz-form-control>
+    </nz-form-item>
+    <div *nzModalFooter>
+      <button nz-button type="button" nzType="default" (click)="close()" [disabled]="saving">Hủy</button>
+      <button nz-button type="submit" nzType="primary" (click)="save()" [disabled]="!changeProfilePictureModalForm.form.valid || saving">
+        <i nz-icon nzType="save"></i>Lưu
+      </button>
+    </div>
+  </form>
+</nz-spin>

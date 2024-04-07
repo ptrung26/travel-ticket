@@ -1,0 +1,25 @@
+<ora-table
+  [rows]="dataList"
+  [isLoading]="isTableLoading"
+  [totalRows]="totalItems"
+  [(pageSize)]="pageSize"
+  [(page)]="pageNumber"
+  (pageSizeChange)="refresh()"
+  (pageChange)="pageNumberChange()"
+  (sortChange)="gridSort($event)"
+>
+  <ora-column header="STT" width="50px" align="center">
+    <ng-template oraCell let-data>
+      {{ skipCount + dataList.indexOf(data) + 1 }}
+    </ng-template>
+  </ora-column>
+
+  <ora-column header="Tên" key="name"></ora-column>
+  <ora-column header="Thao tác" [content]="contentAction" width="150px" align="center" fixRight>
+    <ng-template #contentAction let-data="dataItem">
+      <a nz-button nzType="link" nz-tooltip="{{ 'Edit' | translate }}" (click)="showCreateOrEditModal(data)">
+        <i nz-icon nzType="edit"></i>
+      </a>
+    </ng-template>
+  </ora-column>
+</ora-table>

@@ -1,0 +1,41 @@
+<div class="root">
+  <div class="wrap-img">
+    <div class="img" (click)="showSelecImgModal()" nz-tooltip="Ấn vào để cập nhật hình ảnh" nzTooltipColor="#108ee9">
+      <ng-container *ngIf="!imgByteArrSource">
+        <img
+          *ngIf="!imgIdLinkInit"
+          [src]="srcImgDefault"
+          [ngClass]="{ 'img-upload': true, 'img-circle': isCircleImg }"
+          [ngStyle]="{ width: imgWidth, height: imgHeight }"
+        />
+        <img
+          *ngIf="imgIdLinkInit"
+          [src]="_imgIdLinkInit"
+          [ngClass]="{ 'img-upload': true, 'img-circle': isCircleImg }"
+          [ngStyle]="{ width: imgWidth, height: imgHeight }"
+        />
+      </ng-container>
+      <img
+        *ngIf="imgByteArrSource"
+        [src]="imgByteArrSource"
+        [ngClass]="{ 'img-upload': true, 'img-circle': isCircleImg }"
+        [ngStyle]="{ width: imgWidth, height: imgHeight }"
+      />
+    </div>
+    <div class="wrap-btn" *ngIf="showBtnButton">
+      <button *ngIf="imgIdLinkInit || imgByteArrSource" nz-button (click)="deleteImg()" nzType="default" nz-tooltip="Xóa ảnh" nzDanger>
+        <i nz-icon nzType="delete" nzTheme="outline"></i> <span class="font-weight-bold">Xóa ảnh</span>
+      </button>
+      <button
+        *ngIf="!(imgIdLinkInit || imgByteArrSource)"
+        nz-button
+        (click)="deleteImg()"
+        nzType="default"
+        nz-tooltip="Chọn ảnh"
+        (click)="showSelecImgModal()"
+      >
+        <i nz-icon nzType="upload" nzTheme="outline"></i> <span class="font-weight-bold">Chọn ảnh</span>
+      </button>
+    </div>
+  </div>
+</div>

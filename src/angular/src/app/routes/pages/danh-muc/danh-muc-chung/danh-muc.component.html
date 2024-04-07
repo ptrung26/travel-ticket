@@ -1,0 +1,61 @@
+<ora-page-header title="Danh mục chung" [action]="actionHeader">
+  <ng-template #actionHeader>
+    <button nz-button nzType="default" class="btn-import" (click)="importExcel()" title="Import danh sách ra excel">
+      <i nz-icon nzType="file-excel" nzTheme="outline"></i> Thêm dữ liệu từ Excel
+    </button>
+    <button [disabled]="disExport" nz-button (click)="exportExcel()"><i nz-icon nzType="export" nzTheme="outline"></i>
+      Xuất Excel</button>
+    <button nz-button nzType="primary" (click)="showCreateOrEditModal()">
+      <i nz-icon nzType="plus-circle" nzTheme="outline"></i>Thêm mới
+    </button>
+    <button *ngIf="this.selectedDataItems.length > 0" nz-button nzType="danger"
+      (click)="deleteMultiItem(selectedDataItems)">
+      <i nz-icon nzType="delete" nzTheme="outline"></i> Xóa mục đã chọn
+    </button>
+  </ng-template>
+</ora-page-header>
+<div class="box-filter">
+  <nz-row nzGutter="8" [formGroup]="rfFormGroup">
+    <nz-col nzLg="4" nzSm="8">
+      <ora-select (ngModelChange)="modelChanged($event)" dirCodeSystem [placeHolder]="'Chọn danh mục'"
+        formControlName="parentCode"></ora-select>
+    </nz-col>
+    <nz-col nzLg="12" nzSm="12">
+      <input (keydown.enter)="refresh()" formControlName="filter" nz-input
+        placeholder="Nhập tên hoặc mã để tìm kiếm!" />
+    </nz-col>
+    <nz-col nzLg="2" nzSm="4">
+      <button nz-button nzType="primary" (click)="refresh()">Tìm kiếm</button>
+    </nz-col>
+  </nz-row>
+</div>
+<ora-table [rows]="dataList" [isLoading]="isTableLoading" [totalRows]="totalItems" [(pageSize)]="pageSize"
+  [(page)]="pageNumber" (pageSizeChange)="refresh()" (pageChange)="pageNumberChange()" (sortChange)="gridSort($event)"
+  [(selectedDataItems)]="selectedDataItems">
+  <ora-column dataType="Select" width="50px"></ora-column>
+  <ora-column header="STT" width="50px" align="center">
+    <ng-template oraCell let-data>
+      {{ skipCount + dataList.indexOf(data) + 1 }}
+    </ng-template>
+  </ora-column>
+
+  <ora-column header="Mã" key="code" headerAlign="left"></ora-column>
+  <ora-column header="Tên" key="display" headerAlign="left"></ora-column>
+  <ora-column header="Loại danh mục" key="loaiDanhMuc" headerAlign="left">
+    <ng-template oraCell let-data>
+      <loai-danh-muc-cell dirCodeSystem [codeSystemDto]="data"></loai-danh-muc-cell>
+    </ng-template>
+  </ora-column>
+  <ora-column header="Ngày tạo" key="ngayTao" headerAlign="center" align="center"></ora-column>
+
+  <ora-column header="Thao tác" [content]="contentAction" width="150px" align="center" fixRight>
+    <ng-template #contentAction let-data="dataItem">
+      <a nz-button nzType="link" nz-tooltip="{{ 'Edit' | translate }}" (click)="showCreateOrEditModal(data)">
+        <i nz-icon nzType="edit"></i>
+      </a>
+      <a nz-button nzType="link" nzDanger nz-tooltip="{{ 'Delete' | translate }}" (click)="delete(data)">
+        <i nz-icon nzType="delete"></i>
+      </a>
+    </ng-template>
+  </ora-column>
+</ora-table>

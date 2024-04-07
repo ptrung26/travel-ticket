@@ -1,0 +1,87 @@
+<ora-page-header title="Vai trò" [action]="actionHeader">
+  <ng-template #actionHeader>
+    <button *ngIf="this.dataItem?.id" class="ml-3" nz-button nzType="primary" (click)="save()">
+      <i nz-icon nzType="save"></i>Lưu quyền
+    </button>
+  </ng-template>
+</ora-page-header>
+<div nz-row [nzGutter]="16">
+  <div nz-col [nzXXl]="10" [nzXl]="12" [nzMd]="24">
+    <form nz-form [formGroup]="rfFormGroup" class="box-filter">
+      <div class="flex-center p-2">
+        <div class="flex-grow-1">
+          <label>
+            <input formControlName="filter" (keydown.enter)="refresh()" nz-input placeholder="Nhập mã, tên vai trò để tìm kiếm" />
+          </label>
+        </div>
+        <div>
+          <button class="btn-search mx-3" nz-button nzType="primary" (click)="refresh()">Tìm kiếm</button>
+          <button nz-button nzType="primary" (click)="createOrUpdate()"><i nz-icon nzType="plus-circle"></i>Thêm mới</button>
+        </div>
+      </div>
+    </form>
+
+    <ora-table
+      [rows]="dataList"
+      [isLoading]="isTableLoading"
+      [totalRows]="totalItems"
+      [(pageSize)]="pageSize"
+      [(page)]="pageNumber"
+      (pageSizeChange)="pageSizeChange()"
+      [(selectedDataItems)]="selectedDataItems"
+      (pageChange)="pageNumberChange()"
+      (sortChange)="gridSort($event)"
+    >
+      <ora-column headerAlign="center" header="STT" width="40px" align="center">
+        <ng-template oraCell let-data>
+          <span [attr.class]="data.id === dataItem?.id ? 'active-text' : ''">
+            {{ totalCount - (pageNumber - 1) * pageSize - dataList.indexOf(data) }}</span
+          >
+        </ng-template>
+      </ora-column>
+      <ora-column header="Mã" width="150px" [content]="contentMa">
+        <ng-template #contentMa let-data="dataItem">
+          <span [attr.class]="data.id === dataItem?.id ? 'active-text' : ''"> {{ data.ma }}</span>
+        </ng-template>
+      </ora-column>
+      <ora-column header="Tên" [content]="contentTen" width="150px">
+        <ng-template #contentTen let-data="dataItem">
+          <span [attr.class]="data.id === dataItem?.id ? 'active-text' : ''"> {{ data.ten }}</span>
+        </ng-template>
+      </ora-column>
+      <ora-column fixRight header="Thao tác" [content]="contentAction" width="120px" align="center">
+        <ng-template #contentAction let-data="dataItem">
+          <button
+            nz-tooltip="Xóa vai trò"
+            nz-button
+            nzType="default"
+            nzShape="circle"
+            style="margin-right: 6px !important; color: #eb455f"
+            (click)="delete(data)"
+          >
+            <span nz-icon nzType="delete" nzTheme="outline"></span>
+          </button>
+          <button
+            nz-tooltip="Sửa vai trò"
+            nz-button
+            nzType="default"
+            nzShape="circle"
+            style="margin-right: 6px !important"
+            class="mr-2"
+            (click)="createOrUpdate(data)"
+          >
+            <span nz-icon nzType="edit" nzTheme="outline"></span>
+          </button>
+          <button nz-tooltip="Sửa quyền" nz-button nzType="default" nzShape="circle" (click)="selectRow(data)">
+            <span nz-icon nzType="right" nzTheme="outline"></span>
+          </button>
+        </ng-template>
+      </ora-column>
+    </ora-table>
+  </div>
+  <div nz-col [nzXXl]="14" [nzXl]="12" [nzMd]="24">
+    <div class="box-permisison-role">
+      <permission-tree-role [dataItem]="dataItem"></permission-tree-role>
+    </div>
+  </div>
+</div>

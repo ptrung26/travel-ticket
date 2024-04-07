@@ -1,0 +1,160 @@
+:host {
+  .ct {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 1920px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 15px;
+    min-height: 100vh;
+    background: url(../../../../assets/images/bg-login-back.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  .img-login {
+    display: block;
+    margin:  0 auto;
+    margin-bottom: 16px;
+    width: 97px;
+    height: 92px;
+  }
+
+  form {
+    background-color: #fff;
+    padding: 87px 55px 70px;
+    border-radius: 8px;
+    max-width: 1084px;
+    margin: 40px auto 0;
+    width: 100%;
+  }
+
+  h2 {
+    text-align: center;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #255586;
+    margin-bottom: 20px;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 30px;
+  }
+
+  .c-r {
+    text-align: center;
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+    margin-top: 60px;
+  }
+
+  .btn-register {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    color: #fff;
+    height: 48px;
+    background: #2F9DD7;
+    border-radius: 8px;
+    outline: none;
+    border: none;
+    width: 100%;
+    cursor: pointer;
+  }
+
+  .btn-login {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 13px 0;
+    font-weight: 700;
+    height: 48px;
+    background-color: #fff;
+    color: #255586;
+    border: 1px solid #255586;
+    border-radius: 8px;
+    outline: none;
+    width: 100%;
+    cursor: pointer;
+  }
+
+  .login-top-title {
+    letter-spacing: 0.2px;
+    text-transform: uppercase;
+    color: #ED1C24;
+    margin-bottom: 0;
+    text-align: center;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 32px;
+  }
+
+  .login-bottom-title {
+    letter-spacing: 0.2px;
+    text-transform: uppercase;
+    color: #255586;
+    margin-bottom: 42px;
+    text-align: center;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 32px;
+  }
+
+  @media only screen and (max-width: 1366px) {
+    .img-login {
+      margin: 12px auto 0;
+      max-width: 300px;
+    }
+
+    form {
+      padding: 25px 35px;
+    }
+  }
+
+  ::ng-deep {
+    input {
+      height: 48px !important;
+      font-weight: 500;
+      font-size: 16px;
+      padding: 12px !important;
+      border-radius: 8px;
+      border: 1px solid #D2D5D8;
+      background:  #FFF;
+
+      &:-webkit-autofill,
+      &:-webkit-autofill:focus {
+        transition: background-color 600000s 0s, color 600000s 0s
+      }
+
+      &[data-autocompleted] {
+        background-color: transparent !important;
+      }
+    }
+
+    .ant-select {
+      height: 48px !important;
+
+      input::placeholder {
+        padding: 8px 0 !important;
+      }
+    }
+
+    .ant-select-single:not(.ant-select-customize-input) .ant-select-selector {
+      padding-top: 8px !important;
+    }
+
+    .ant-form-item {
+      margin-bottom: 16px;
+    }
+    //
+    //.anticon.anticon-ora\:login-user,
+    //.anticon.anticon-ora\:login-password
+    //{
+    //  color: #fff !important;
+    //  font-size: 24px;
+    //}
+  }
+}

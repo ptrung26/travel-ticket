@@ -1,0 +1,55 @@
+<nz-spin nzSpinning="{{ isLoading$ | async }}" [nzDelay]="250">
+  <div class="bg" style="background-image: url('./../../../../assets/images/bg-login-main.png'), url('./../../../../assets/images/bg-login-back.jpg')">
+    <div class="ct">
+      <div class="logo">
+        <img src="./../../../../assets/logo/logo-col.png" />
+      </div>
+      <p class="login-top-title">ĐẠI HỌC Y DƯỢC THÀNH PHỐ HỒ CHÍ MINH</p>
+      <p class="login-bottom-title">
+        TRUNG TÂM KIỂM CHUẨN CHẤT LƯỢNG <br/>
+        XÉT NGHIỆM Y HỌC
+      </p>
+      <p class="login-title">ĐĂNG NHẬP</p>
+      <form nz-form [formGroup]="loginForm" class="login-form" (ngSubmit)="submit()">
+        <nz-form-item nz-row>
+          <nz-form-control nzErrorTip="Nhập tên đăng nhập hoặc email!" [nzSpan]="24">
+            <nz-input-group nzPrefixIcon="ora:login-user">
+              <input type="text" nz-input formControlName="userName" placeholder="Tên đăng nhập" (keydown)="keyDownHandler($event)" />
+            </nz-input-group>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item nz-row>
+          <nz-form-control nzErrorTip="Nhập mật khẩu!" [nzSpan]="24">
+            <nz-input-group nzPrefixIcon="ora:login-password">
+              <input type="password" nz-input formControlName="password" placeholder="Nhập mật khẩu của bạn" />
+            </nz-input-group>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item nz-row>
+          <nz-form-control [nzSpan]="6">
+            <label nz-checkbox>
+              <span class="save-info"> Lưu thông tin </span>
+            </label>
+          </nz-form-control>
+          <nz-form-control [nzSpan]="18" class="text-right">
+            <a class="ho-tr-tu-xa" href="/"><b>Tải công cụ hỗ trợ từ xa</b></a> /
+            <a class="forgot-password" href="/account/forgotpassword"><b>Quên mật khẩu</b></a>
+          </nz-form-control>
+        </nz-form-item>
+        <button class="login-button">Đăng nhập</button>
+      </form>
+      <div class="flex-space">
+        <a routerLink="/account/register" class="link-form">
+          <i nz-icon nzType="ora:register-account" nzTheme="outline" ></i>
+          Đăng ký tài khoản</a
+        >
+        <a class="link-form"><i nz-icon nzType="ora:video" nzTheme="outline" ></i> Video hướng dẫn</a>
+        <a [href]="linkVanDeThuongGap" class="link-form"> <i nz-icon nzType="ora:question" nzTheme="outline" ></i> Vấn đề thường gặp</a>
+      </div>
+
+    </div>
+  </div>
+
+  <p class="c-r">Copyright @ 2023 Đại học Y Dược Thành phố Hồ Chí Minh - Bộ Y tế</p>
+</nz-spin>
+

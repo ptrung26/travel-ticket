@@ -1,0 +1,37 @@
+<div class="menu-full">
+  <ng-container [ngTemplateOutlet]="refMenuUL" [ngTemplateOutletContext]="{ $implicit: 'horizontal' }"></ng-container>
+</div>
+<a nz-dropdown [nzDropdownMenu]="refMenuDropDown" class="menu-simple">
+  <i class="margin-right-5" nz-icon nzType="bars" nzTheme="outline"></i>Chức năng
+</a>
+<nz-dropdown-menu #refMenuDropDown="nzDropdownMenu">
+  <ng-container [ngTemplateOutlet]="refMenuUL" [ngTemplateOutletContext]="{ $implicit: 'vertical' }"></ng-container>
+</nz-dropdown-menu>
+<ng-template #refMenuUL let-mode>
+  <ul nz-menu [nzMode]="mode">
+    <ng-container *ngFor="let menu of menus">
+      <ng-container [ngTemplateOutlet]="tplMenu" [ngTemplateOutletContext]="{ $implicit: menu }"></ng-container>
+    </ng-container>
+
+    <ng-template #tplMenu let-menu>
+      <ng-container *ngIf="menu.children.length === 0; else menuGroup">
+        <li nz-menu-item nzMatchRouter [routerLink]="menu.link">
+          <span>{{ menu.text | translate }}</span>
+        </li>
+      </ng-container>
+      <ng-template #menuGroup>
+        <li nz-submenu [nzTitle]="titleGroup">
+          <ng-template #titleGroup>
+            <span class="titlte-group">{{ menu!.text | translate }}</span>
+            <i *ngIf="mode === 'horizontal'" style="font-size: 12px" nz-icon nzType="down" nzTheme="outline"></i>
+          </ng-template>
+          <ul>
+            <ng-container *ngFor="let menuChild of menu.children">
+              <ng-container [ngTemplateOutlet]="tplMenu" [ngTemplateOutletContext]="{ $implicit: menuChild }"></ng-container>
+            </ng-container>
+          </ul>
+        </li>
+      </ng-template>
+    </ng-template>
+  </ul>
+</ng-template>

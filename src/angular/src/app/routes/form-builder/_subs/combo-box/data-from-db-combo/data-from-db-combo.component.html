@@ -1,0 +1,38 @@
+
+<nz-select
+  nzShowSearch
+  class="w-100"
+  nzServerSearch
+  [nzAllowClear]="nzAllowClear"
+  nzPlaceHolder="{{ placeHolder }}"
+  [nzMode]="nzMode"
+  [(ngModel)]="_value"
+  [nzSize]="size"
+  [style.fontSize]="fontSize"
+  [nzDisabled]="getNzSelectDisable()"
+  [nzNotFoundContent]="notData"
+  [nzMaxTagCount]="nzMaxTagCount ? nzMaxTagCount : 1"
+  (nzFocus)="(onFocus)"
+  (ngModelChange)="onChangeValue($event); emitItemSelected()"
+  (nzOnSearch)="search($event)"
+  [nzDropdownRender]="renderTemplate"
+>
+  <nz-option *ngFor="let item of optionList; trackBy: trackByFn" [nzLabel]="item.displayText" [nzValue]="item.value"></nz-option>
+</nz-select>
+<ng-template #notData>
+  <nz-empty nzNotFoundImage="simple" [nzNotFoundContent]="contentTpl">
+    <ng-template #contentTpl>
+      <span> {{ notDataText }} </span>
+    </ng-template>
+  </nz-empty>
+</ng-template>
+
+<ng-template #renderTemplate>
+  <nz-container *ngIf="nzMode === 'multiple' && optionList.length > 3">
+    <nz-divider style="margin-top: 1%; margin-bottom: 1%"></nz-divider>
+    <div class="box-btn-check-all container">
+      <button nz-button nzType="primary" (click)="checkAll()" nzSize="small"><i nz-icon nzType="plus"></i> Chọn tất cả</button>
+      <button nz-button nzType="default" (click)="removeAll()" nzSize="small"><i nz-icon nzType="minus"></i> Bỏ chọn</button>
+    </div>
+  </nz-container>
+</ng-template>

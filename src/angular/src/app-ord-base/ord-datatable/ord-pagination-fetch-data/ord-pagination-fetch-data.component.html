@@ -1,0 +1,9 @@
+<app-ord-pagination
+  [(pageIndex)]="nzTable.pageIndex"
+  [(pageSize)]="nzTable.pageSize"
+  [totalCount]="nzTable.totalCount"
+  [pageSizeOptions]="nzTable.defaultPageOptions" [ordSize]="ordSize"
+  (pageIndexChange)="getGridDataSource()"
+  (refreshData)="getGridDataSource()"
+  (pageSizeChange)="this.nzTable.shouldResetPaging(true); getGridDataSource()"
+></app-ord-pagination>

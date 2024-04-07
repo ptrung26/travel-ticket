@@ -1,0 +1,204 @@
+{
+    "level-select": {
+        "type": "enum",
+        "name": "LEVEL"
+    },
+    "nguon-thong-tin-dong-bo-select": {
+      "type": "enum",
+      "name": "NGUON_THONG_TIN_DONG_BO"
+  },
+    "cap-do-select": {
+        "type": "enum",
+        "name": "CAP_DO_DON_VI_HANH_CHINH"
+    },
+    "enum-cap-nhat-lat-long-select": {
+        "type": "enum",
+        "name": "ENUM_CAP_NHAT_LAT_LONG"
+    },
+    "enum-cap-nhat-lat-long-thanh-cong-select": {
+        "type": "enum",
+        "name": "ENUM_CAP_NHAT_LAT_LONG_THANH_CONG"
+    },
+    "trang-thai-cap-nhat-cbs-select": {
+        "type": "enum",
+        "name": "TRANG_THAI_CAP_NHAT_CBS"
+    },
+    "trang-thai-quan-ly-select": {
+        "type": "enum",
+        "name": "TRANG_THAI_QUAN_LY_CBS"
+    },
+    "loai-co-so-select": {
+        "type": "enum",
+        "name": "LOAI_CO_SO"
+    },
+    "trang-thai-gui-dt-select": {
+        "type": "enum",
+        "name": "TRANG_THAI_CHUYEN_DT"
+    },
+    "trang-thai-gui-gsph-select": {
+        "type": "enum",
+        "name": "TRANG_THAI_GSPH"
+    },
+    "tlvr-select": {
+      "type": "enum",
+      "name": "TLVR"
+  },
+    "trang-thai-dieu-tri-select": {
+        "type": "dictionary",
+        "name": "TrangThaiDieuTri"
+    },
+    "trang-thai-bhyt-select": {
+      "type": "dictionary",
+      "name": "BaoHiem"
+  },
+    "khuVucLuuTruSelect": {
+        "type": "dictionary",
+        "name": "KhuVucLuuTru"
+    },
+    "gioi-tinh-select": {
+        "type": "dictionary",
+        "name": "gender"
+    },
+    "nhom-doi-tuong-select": {
+        "type": "dictionary",
+        "name": "population_group"
+    },
+    "duong-lay-nhiem-select": {
+        "type": "dictionary",
+        "name": "transmission_route"
+    },
+    "nguy-co-lay-nhiem-select": {
+      "type": "dictionary",
+      "name": "risk_behavior"
+  },
+    "dan-toc-select": {
+        "type": "dictionary",
+        "name": "ethnicity"
+    },
+    "chuc-vu-select": {
+        "type": "dictionary",
+        "name": "ChucVu"
+    },
+    "chuc-danh-select": {
+        "type": "dictionary",
+        "name": "ChucDanh"
+    },
+    "quoc-gia-select": {
+        "type": "dictionary",
+        "name": "QuocGia"
+    },
+    "hien-trang-cu-tru-select": {
+        "type": "dictionary",
+        "name": "HienTrangCuTru"
+    },
+    "tinh-trang-sinh-tu-select": {
+      "type": "dictionary",
+      "name": "TinhTrangSinhTu"
+  },
+    "kqxn-sang-loc-select": {
+        "type": "dictionary",
+        "name": "KQXN"
+    },
+    "kqxn-khang-dinh-select": {
+        "type": "dictionary",
+        "name": "KQXN_KhangDinh"
+    },
+    "kqxn-nhiem-moi-test-nhanh-select": {
+      "type": "dictionary",
+      "name": "test_result_rapid_test"
+    },
+    "klkd-nhiem-moi-select": {
+    "type": "dictionary",
+    "name": "recent_infection_conclusion"
+   },
+    "btbc-thuc-hien-xn-hiv-select": {
+        "type": "dictionary",
+        "name": "BTBCCoThucHienXN_HIV"
+    },
+    "loai-dich-vu-select": {
+        "type": "dictionary",
+        "name": "DichVu_XN"
+    },
+    "loai-benh-nhan-select": {
+        "type": "dictionary",
+        "name": "LoaiBenhNhan"
+    },
+
+    "don-vi-co-so-select": {
+        "type": "table",
+        "name": "DonViCoSo",
+        "init": true
+    },
+    "tinh-select": {
+        "type": "table",
+        "name": "Tinh",
+        "init": true,
+        "cascader": false
+    },
+    "xa-huyen-tinh-select": {
+        "type": "table",
+        "name": "XaHuyenTinh",
+        "init": true,
+        "cascader": false
+    },
+    "TinhSessionSelect": {
+        "type": "table",
+        "name": "TinhSession",
+        "init": true,
+        "cascader": false
+    },
+    "huyen-select": {
+        "type": "table",
+        "name": "Huyen",
+        "init": false,
+        "cascader": true
+    },
+    "HuyenSesionSelect": {
+        "type": "table",
+        "name": "HuyenSesion",
+        "init": false,
+        "cascader": true
+    },
+    "xa-select": {
+        "type": "table",
+        "name": "Xa",
+        "init": false,
+        "cascader": true
+    },
+    "thon-xom-select": {
+        "type": "table",
+        "name": "Thon",
+        "init": false,
+        "cascader": true
+    },
+    "tinh-multi-select": {
+      "type": "table",
+      "name": "TinhMultiSelect",
+      "init": true,
+      "cascader": false
+     },
+     "huyen-multi-select": {
+      "type": "table",
+      "name": "HuyenMultiSelect",
+      "init": false,
+      "cascader": true
+     },
+     "xa-multi-select": {
+      "type": "table",
+      "name": "XaMultiSelect",
+      "init": false,
+      "cascader": true
+     },
+    "lstdictionarytype-tree-view-select": {
+        "type": "tree",
+        "name": "LstDictionaryTypeTreeView",
+        "init": true,
+        "cascader": false
+    },
+    "lstdictionary-tree-view-select": {
+        "type": "tree",
+        "name": "LstDictionaryTreeView",
+        "init": true,
+        "cascader": true
+    }
+}

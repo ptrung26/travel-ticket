@@ -1,0 +1,55 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+	<Import Project="..\..\common.props" />
+
+	<PropertyGroup>
+		<TargetFramework>net5.0</TargetFramework>
+		<AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+		<RootNamespace>newPMS</RootNamespace>
+		<PreserveCompilationReferences>true</PreserveCompilationReferences>
+		<LangVersion>8</LangVersion>
+		<ErrorOnDuplicatePublishOutputFiles>false</ErrorOnDuplicatePublishOutputFiles>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Compile Remove="Logs\**" />
+		<Content Remove="Logs\**" />
+		<EmbeddedResource Remove="Logs\**" />
+		<None Remove="Logs\**" />
+	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Wkhtmltopdf.NetCore" Version="3.0.2" />
+	</ItemGroup>
+	<ItemGroup>
+	  <None Include="wwwroot\images\logo.png" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="Uploads\" />
+	  <Folder Include="wwwroot\Files\" />
+	  <Folder Include="wwwroot\sampleFiles\flex-cel\attachment-email\" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ProjectReference Include="..\..\..\newPMS.CongViec\src\HttpApi.Host\newPMS.CongViec.HttpApi.Host.csproj" />
+	  <ProjectReference Include="..\..\..\newPMS.DanhMuc\src\HttpApi.Host\newPMS.DanhMuc.HttpApi.Host.csproj" />
+	  <ProjectReference Include="..\..\..\newPMS.QuanLyTaiKhoan\src\HttpApi.Host\newPMS.QuanLyTaiKhoan.HttpApi.Host.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+	</ItemGroup>
+	<ItemGroup>
+		<Content Update="wwwroot\Fonts\Times New Roman.ttf">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Include="Rotativa\**" CopyToOutputDirectory="Always" />
+		
+		<Content Update="Views\**">
+			<ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+		</Content>
+		<Content Update="wwwroot\sampleFiles\**">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+	</ItemGroup>
+</Project>

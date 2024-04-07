@@ -1,0 +1,82 @@
+<ora-page-header title="Cơ cấu tổ chức" [action]="actionHeader">
+  <ng-template #actionHeader>
+  </ng-template>
+</ora-page-header>
+<div class="flex align-items-start">
+  <div class="min-width-450 mr-4">
+    <div class="flex flex-center justify-content-between mb-3">
+      <h3>Phòng ban</h3>
+      <button nz-button nzType="primary" (click)="createOrUpdate()">
+        <span nz-icon nzType="plus-circle" nzTheme="outline"></span> Thêm phòng ban
+      </button>
+    </div>
+    <ul nz-menu nzMode="inline">
+      <ng-container *ngTemplateOutlet="menuTpl; context: { $implicit: listData }"></ng-container>
+      <ng-template #menuTpl let-menus>
+        <ng-container *ngFor="let menu of menus">
+          <li
+            *ngIf="!menu.listSysOrganizationunits?.length"
+            nz-menu-item
+            [nzPaddingLeft]="menu.level * 24"
+            (click)="selectedMenuItem(menu); $event.stopPropagation()"
+          >
+            <span class="b-organization-single">
+               <span>
+                 <nz-badge nz-tooltip nzTooltipTitle="Tổng số nhân viên" [nzOffset]="[-5, -1]" [nzShowZero]="true" nzStandalone [nzCount]="menu.countUser"></nz-badge>
+            <span>{{ menu.tenPhongBan }}</span>
+          </span>
+            <span class="flex min-width-115 justify-content-end">
+                   <button nz-tooltip="Xóa phòng ban" nz-button nzType="default" nzShape="circle"
+                           style="color: #EB455F"
+                           (click)="delete(menu)"><span nz-icon style="margin-right: 0" nzType="delete"
+                                                        nzTheme="outline"></span>
+                  </button>
+                  <button nz-tooltip="Sửa phòng ban" nz-button nzType="default" nzShape="circle"
+                          style="margin-right: 16px !important;"
+                          (click)="createOrUpdate(menu)"><span nz-icon style="margin-right: 0" nzType="edit"
+                                                               nzTheme="outline"></span>
+                  </button>
+                </span>
+            </span>
+
+          </li>
+          <li
+            *ngIf="menu.listSysOrganizationunits.length"
+            nz-submenu
+            (click)="selectedSubmenu($event, menu); $event.stopPropagation()"
+            [nzPaddingLeft]="menu.level * 24"
+          >
+            <span title class=" b-organization">
+               <nz-badge nz-tooltip nzTooltipTitle="Tổng số nhân viên" nzStandalone [nzShowZero]="true" [nzOffset]="[-5, -1]" [nzCount]="menu.countUser"></nz-badge>
+              <span class="text-wrap">{{ menu.tenPhongBan }}</span>
+              <span class="actions">
+                   <button nz-tooltip="Xóa phòng ban" nz-button nzType="default" nzShape="circle"
+                           style=" color: #EB455F"
+                           (click)="delete(menu)"><span nz-icon style="margin-right: 0" nzType="delete"
+                                                        nzTheme="outline"></span>
+                  </button>
+                  <button nz-tooltip="Sửa phòng ban" nz-button nzType="default" nzShape="circle"
+                          style="margin-right: 6px !important; " class="mr-2"
+                          (click)="createOrUpdate(menu)"><span nz-icon style="margin-right: 0" nzType="edit"
+                                                               nzTheme="outline"></span>
+                  </button>
+                </span>
+            </span>
+            <ul>
+              <ng-container
+                *ngTemplateOutlet="menuTpl; context: { $implicit: menu.listSysOrganizationunits }"></ng-container>
+            </ul>
+          </li>
+
+        </ng-container>
+      </ng-template>
+    </ul>
+  </div>
+  <div class="flex-grow-1">
+    <app-organization-units-user [dataItem]="dataItem"></app-organization-units-user>
+  </div>
+</div>
+
+
+
+

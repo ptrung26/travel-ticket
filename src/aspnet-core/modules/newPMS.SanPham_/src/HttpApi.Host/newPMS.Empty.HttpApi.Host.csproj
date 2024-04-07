@@ -1,0 +1,39 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+	<Import Project="..\..\common.props" />
+
+	<PropertyGroup>
+		<TargetFramework>netcoreapp3.1</TargetFramework>
+		<AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+		<RootNamespace>newPMS</RootNamespace>
+		<PreserveCompilationReferences>true</PreserveCompilationReferences>
+		<LangVersion>8</LangVersion>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\..\..\DataBase\src\newPMS.Base.EntityFrameworkCore\newPMS.Base.EntityFrameworkCore.csproj" />
+		<ProjectReference Include="..\..\..\..\shared\OrdBaseHttpApiHost\OrdBaseHttpApiHost.csproj" />
+		<ProjectReference Include="..\..\..\newPMS.ApplicationShared\newPMS.ApplicationShared.csproj" />
+		<ProjectReference Include="..\Application\newPMS.Empty.Application.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Compile Remove="Logs\**" />
+		<Content Remove="Logs\**" />
+		<EmbeddedResource Remove="Logs\**" />
+		<None Remove="Logs\**" />
+	</ItemGroup>
+	<ItemGroup>
+		<None Update="Dockerfile">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+	<ItemGroup>
+	  <PackageReference Include="SixLabors.ImageSharp" Version="1.0.1" />
+	  <PackageReference Include="SkiaSharp" Version="2.80.2" />
+	  <PackageReference Include="SkiaSharp.NativeAssets.Linux" Version="2.80.2" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="wwwroot\sampleFiles\" />
+	</ItemGroup>
+
+</Project>

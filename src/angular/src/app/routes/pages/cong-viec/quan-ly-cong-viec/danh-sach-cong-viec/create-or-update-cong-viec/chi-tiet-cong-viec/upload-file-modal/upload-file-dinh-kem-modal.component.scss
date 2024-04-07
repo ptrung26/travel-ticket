@@ -1,0 +1,15 @@
+.flex-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.box + .box {
+  margin-top: 12px;
+}
+
+.box {
+  border: 1px solid #e3e3e3;
+  padding: 6px 12px;
+  border-radius: 2px;
+}

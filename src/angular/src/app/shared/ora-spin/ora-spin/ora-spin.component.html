@@ -1,0 +1,46 @@
+<!-- <div
+  class="preloader"
+  [ngClass]="{
+    preloader: loading,
+    'preloader-hidden-add': preHide,
+    'preloader-hidden-add-active': preHide,
+    'preloader-hidden': !loading
+  }"
+>
+  <div class="cs-loader">
+    <div class="cs-loader-inner">
+      <div class="container-load">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+        <div class="shape shape-4"></div>
+      </div>
+      <div class="loading {{ loadingTextClass }}">
+        <span *ngFor="let text of messageArray" [class.margin-left-5]="text === ' '">{{ text }}</span>
+      </div>
+    </div>
+  </div>
+</div> -->
+<div
+  class="preloader"
+  [ngClass]="{
+    preloader: loading,
+    'preloader-hidden-add': preHide,
+    'preloader-hidden-add-active': preHide,
+    'preloader-hidden': !loading
+  }"
+>
+  <div class="cs-loader">
+    <div class="cs-loader-inner" style="flex-direction: row">
+      <div class="flex">
+        <img style="max-height: 68px" src="./../../../../assets/logo/logo.png" />
+      </div>
+      <div class="container-load">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+        <div class="shape shape-4"></div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,112 @@
+<ng-container *ngIf="viewShow === 'list'">
+  <ora-page-header [action]="actionHeader" title="Công việc cá nhân">
+    <ng-template #actionHeader>
+      <button (click)="createOrUpdate()" nz-button nzType="primary"><i class="fa fa-plus"></i> Dự án mới</button>
+    </ng-template>
+  </ora-page-header>
+
+  <div class="box-filter">
+    <form [formGroup]="rfFormGroup" nz-form>
+      <div nz-row nzGutter="16">
+        <nz-col nzLg="12">
+          <input (keydown.enter)="refresh()" formControlName="filter" nz-input placeholder="Nhập tên dự án!" />
+        </nz-col>
+        <nz-col nzLg="2" nzMd="4">
+          <button (click)="refresh()" nz-button nzType="primary">Tìm kiếm</button>
+        </nz-col>
+      </div>
+    </form>
+  </div>
+
+  <ora-table [rows]="dataList" [(page)]="pageNumber" [(pageSize)]="pageSize" [isLoading]="isTableLoading"
+    [scroll]="{ y: scroll.y }" [totalRows]="totalItems" (pageChange)="pageNumberChange()" (pageSizeChange)="refresh()"
+    (sortChange)="gridSort($event)">
+    <ora-column align="center" header="STT" width="80px">
+      <ng-template let-data oraCell>
+        {{ skipCount + dataList.indexOf(data) + 1 }}
+      </ng-template>
+    </ora-column>
+    <ora-column align="center" header="Ưu tiên" key="IsUuTien" width="80px" [sort]="true">
+      <ng-template let-data oraCell>
+        <span *ngIf="data.isUuTien" nz-icon nzType="star" nzTheme="fill" style="color:#ffc107;"></span></ng-template>
+    </ora-column>
+    <ora-column header="Tên" headerAlign="left" key="ten" width="400px"></ora-column>
+    <ora-column header="Thời gian từ" width="120px">
+      <ng-template let-data oraCell>
+        {{ data.ngayBatDau | date : 'dd/MM/yyyy' }}
+      </ng-template>
+    </ora-column>
+    <ora-column header="Thời gian đến" width="120px">
+      <ng-template let-data oraCell>
+        {{ data.ngayKetThuc | date : 'dd/MM/yyyy' }}
+      </ng-template>
+    </ora-column>
+
+    <ora-column align="center" header="Trạng thái" headerAlign="center" width="120px">
+      <ng-template let-data oraCell>
+        <ng-container [ngSwitch]="data.trangThai">
+          <nz-tag *ngSwitchCase="TRANG_THAI_CONG_VIEC.TAO_MOI">Tạo mới</nz-tag>
+          <nz-tag *ngSwitchCase="TRANG_THAI_CONG_VIEC.DANG_THUC_HIEN" nzColor="gold">Đang thực hiện</nz-tag>
+          <nz-tag *ngSwitchCase="TRANG_THAI_CONG_VIEC.CHO_PHE_DUYET" nzColor="cyan">Chờ phê duyệt</nz-tag>
+          <nz-tag *ngSwitchCase="TRANG_THAI_CONG_VIEC.HOAN_THANH" nzColor="green">Đã hoàn thành</nz-tag>
+        </ng-container>
+      </ng-template>
+    </ora-column>
+
+    <ora-column header="Thành viên" width="120px">
+      <ng-template let-data oraCell>
+        <nz-avatar-group>
+          <ng-container *ngFor="let u of data.listUser.slice(0, 2)">
+            <nz-avatar [nzSrc]="api + u.userId" nz-tooltip="{{ u.hoTen }}" nzIcon="user"></nz-avatar>
+          </ng-container>
+          <ng-container *ngIf="data.listUser.length > 2">
+            <nz-avatar [nzText]="getNzText(data.listUser.length)"
+              style="background-color: #fde3cf; color: #f56a00"></nz-avatar>
+          </ng-container>
+        </nz-avatar-group>
+      </ng-template>
+    </ora-column>
+
+    <ora-column align="center" fixRight header="Thao tác" width="120px">
+      <ng-template let-data oraCell>
+        <button [nzDropdownMenu]="menu" nz-button nz-dropdown>
+          Thao tác
+          <i nz-icon nzType="down" style="font-size: 12px !important"></i>
+        </button>
+        <nz-dropdown-menu #menu="nzDropdownMenu">
+          <ul nz-menu>
+            <li nz-menu-item>
+              <a (click)="chiTietCongViec(data)"> <span nz-icon nzTheme="outline" nzType="edit"></span> Cập nhật công
+                việc </a>
+            </li>
+            <li *ngIf="data.trangThai !== TRANG_THAI_CONG_VIEC.HOAN_THANH && data.isMyCreate" nz-menu-item>
+              <a (click)="createOrUpdate(data)"> <span nz-icon nzTheme="outline" nzType="edit"></span> Cập nhật dự án
+              </a>
+            </li>
+            <li *ngIf="data.isMyCreate" nz-menu-item>
+              <a (click)="viewCongViec(data)"> <span nz-icon nzTheme="outline" nzType="eye"></span> Xem công việc </a>
+            </li>
+            <li *ngIf="data.trangThai === TRANG_THAI_CONG_VIEC.TAO_MOI && data.isMyCreate" nz-menu-item>
+              <a (click)="changeTrangThai(data, TRANG_THAI_CONG_VIEC.DANG_THUC_HIEN)">
+                <span nz-icon nzTheme="outline" nzType="file-sync"></span> Đang thực hiện
+              </a>
+            </li>
+            <li *ngIf="data.trangThai === TRANG_THAI_CONG_VIEC.DANG_THUC_HIEN && data.isMyCreate" nz-menu-item>
+              <a (click)="changeTrangThai(data, TRANG_THAI_CONG_VIEC.HOAN_THANH)">
+                <span nz-icon nzTheme="outline" nzType="file-done"></span> Hoàn thành
+              </a>
+            </li>
+            <li *ngIf="data.isMyCreate" nz-menu-item>
+              <a (click)="delete(data)"> <span nz-icon nzTheme="outline" nzType="delete" style="color: #f04"></span> Xóa
+                dự án </a>
+            </li>
+          </ul>
+        </nz-dropdown-menu>
+      </ng-template>
+    </ora-column>
+  </ora-table>
+</ng-container>
+
+<chi-tiet-cong-viec-ca-nhan *ngIf="viewShow === 'crud-cong-viec'" (backListEvent)="onBackToList()" [duAn]="duAn"
+  [permission]="permission">
+</chi-tiet-cong-viec-ca-nhan>

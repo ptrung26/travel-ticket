@@ -1,0 +1,166 @@
+<form nz-form #form [formGroup]="rfDataModal" nzLayout="horizontal">
+  <nz-row nzGutter="8">
+    <nz-col nzLg="6">
+      <nz-form-item nzGutter="8">
+        <nz-form-label nzFor="vanBanId" [nzSm]="24" nzRequired>Chọn danh mục</nz-form-label>
+        <nz-form-control [nzSm]="24" nzErrorTip="Vui lòng chọn danh mục!">
+          <ora-select
+            (onItemSelected)="selectedChange($event)"
+            #parent
+            formControlName="parentCode"
+            placeHolder="Chọn danh mục"
+            dirCodeSystem
+            [allowClear]="false"
+          ></ora-select>
+        </nz-form-control>
+      </nz-form-item>
+    </nz-col>
+    <nz-col nzLg="6">
+      <nz-form-item nzGutter="8">
+        <nz-form-label [nzSm]="24">Chọn đường dẫn</nz-form-label>
+        <nz-form-control [nzSm]="24">
+          <input
+            class="upload-file"
+            nz-input
+            placeholder="Chọn đường dẫn"
+            style="height: 32px"
+            (click)="fileUpload.click()"
+            [value]="fileName"
+            readonly
+          />
+        </nz-form-control>
+      </nz-form-item>
+    </nz-col>
+    <nz-col nzLg="12">
+      <nz-form-item nzGutter="8">
+        <nz-form-label [nzSm]="24">&nbsp;</nz-form-label>
+        <nz-form-control [nzSm]="24">
+          <button nz-button class="folder-upload" [disabled]="disExport" (click)="fileUpload.click()">
+            <i nz-icon nzType="folder" nzTheme="outline"></i>
+          </button>
+          <input
+            type="file"
+            #fileUpload
+            id="fileUpload"
+            name="fileUpload"
+            [formControl]="fileControl"
+            (change)="onFileChange($event)"
+            accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+            style="display: none"
+          />
+          <button
+            style="margin-left: 20px"
+            nz-button
+            nzType="primary"
+            class="btn-f-action"
+            [nzLoading]="checking"
+            (click)="checkValidData()"
+            [disabled]="disBtnKtra"
+          >
+            <i nz-icon nzType="highlight" nzTheme="outline"></i>Kiểm tra
+          </button>
+          <button nz-button nzType="primary" class="btn-f-action" (click)="clearFile()">
+            <i nz-icon nzType="sync" nzTheme="outline"></i>Tải lại file
+          </button>
+          <button nz-button [disabled]="disDownloadTemplate" nzType="default" (click)="DownloadTemplateFile(parent.value.displayText)">
+            Tải file mẫu tại đây
+          </button>
+        </nz-form-control>
+      </nz-form-item>
+    </nz-col>
+  </nz-row>
+
+  <nz-tabset nzType="card" style="width: 100%">
+    <nz-tab nzTitle="Dữ liệu hợp lệ ({{ listDataValid.length }})">
+      <nz-table
+        #nzTableValid
+        [nzData]="listDataValid"
+        [nzPageIndex]="pageIndex"
+        [nzPageSize]="pageSize"
+        (nzPageIndexChange)="pageChange($event)"
+        nzBordered
+        nzTableLayout="fixed"
+      >
+        <thead>
+          <tr>
+            <th width="110px">Mã</th>
+            <th width="110px">Tên</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of nzTableValid.data; index as i">
+            <td style="pointer-events: none">
+              {{ item.code }}
+            </td>
+            <td style="pointer-events: none">
+              {{ item.display }}
+            </td>
+          </tr>
+        </tbody>
+      </nz-table>
+    </nz-tab>
+    <nz-tab nzForceRender="true" nzTitle="Dữ liệu không hợp lệ ({{ listDataInvalid.length }})">
+      <nz-table
+        #nzTableInValid
+        [nzData]="listDataInvalid"
+        [nzPageIndex]="pageIndex"
+        [nzPageSize]="pageSize"
+        (nzPageIndexChange)="pageChange($event)"
+        nzBordered
+        nzTableLayout="fixed"
+      >
+        <thead>
+          <tr>
+            <th width="100px">Lỗi</th>
+            <th width="110px">Mã</th>
+            <th width="110px">Tên</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of nzTableInValid.data; index as i">
+            <td>
+              <a
+                nz-popover
+                nzPopoverTitle="Chi tiết lỗi"
+                [nzPopoverContent]="contentTemplate"
+                *ngIf="item.listError.length > 0"
+                nzPopoverTrigger="hover"
+                style="color: red"
+              >
+                Không hợp lệ
+              </a>
+              <span *ngIf="item.listError.length === 0">Hợp lệ</span>
+              <ng-template #contentTemplate>
+                <ul>
+                  <li *ngFor="let error of item.listError">
+                    {{ error }}
+                  </li>
+                </ul>
+              </ng-template>
+            </td>
+            <td style="pointer-events: none">
+              {{ item.code }}
+            </td>
+            <td style="pointer-events: none">
+              {{ item.display }}
+            </td>
+          </tr>
+        </tbody>
+      </nz-table>
+    </nz-tab>
+  </nz-tabset>
+  <div *nzModalFooter>
+    <button type="button" nz-button nzType="default" (click)="close()">Đóng</button>
+    <button
+      type="submit"
+      *ngIf="listDataValid.length > 0"
+      [nzLoading]="saving"
+      nz-button
+      nzType="primary"
+      (click)="save()"
+    >
+      <i nz-icon nzType="save"></i>Lưu dữ liệu hợp lệ
+    </button>
+  </div>
+</form>
+<span style="margin-left: 20px">(File dữ liệu tải lên tối đa 5000 dòng)</span>

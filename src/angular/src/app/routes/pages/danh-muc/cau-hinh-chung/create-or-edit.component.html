@@ -1,0 +1,38 @@
+<form nz-form #form [formGroup]="rfDataModal" nzLayout="horizontal">
+  <nz-form-item>
+    <nz-form-label [nzSm]="24" nzRequired>Mã</nz-form-label>
+    <nz-form-control [nzSm]="24" nzErrorTip="Giá trị bắt buộc!">
+      <input nz-input formControlName="ma" maxlength="100"/>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSm]="24" nzRequired>Giá trị</nz-form-label>
+    <nz-form-control [nzSm]="24" nzErrorTip="Giá trị bắt buộc!">
+      <input nz-input formControlName="giaTri"/>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSm]="24" nzRequired>Mô tả</nz-form-label>
+    <nz-form-control [nzSm]="24" nzErrorTip="Giá trị bắt buộc!">
+      <ora-ckeditor formControlName="moTa"></ora-ckeditor>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSm]="24" nzRequired>Từ ngày</nz-form-label>
+    <nz-form-control [nzSm]="24" nzErrorTip="Giá trị bắt buộc!">
+      <ora-date-picker formControlName="tuNgay">
+      </ora-date-picker>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSm]="24">Đến ngày</nz-form-label>
+    <nz-form-control [nzSm]="24">
+      <ora-date-picker formControlName="denNgay">
+      </ora-date-picker>
+    </nz-form-control>
+  </nz-form-item>
+</form>
+<ng-container *nzModalFooter>
+  <button nz-button (click)="close()">Đóng</button>
+  <button [nzLoading]="saving" nz-button nzType="primary" (click)="save()"><i nz-icon nzType="save"></i>Lưu</button>
+</ng-container>

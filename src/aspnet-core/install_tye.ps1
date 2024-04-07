@@ -1,0 +1,1 @@
+dotnet tool install -g Microsoft.Tye --version "0.6.0-alpha.21070.5"

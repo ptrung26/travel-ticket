@@ -1,0 +1,8 @@
+<nz-row class="root" nzJustify="center" nzGutter="16" style="align-items: center">
+  <div nz-col nzFlex="auto" class="col-content" (keydown.enter)="onEnter()">
+    <ng-content></ng-content>
+  </div>
+  <div nz-col class="col-action">
+    <button nz-button nzType="primary" (click)="search()">Tìm kiếm</button>
+  </div>
+</nz-row>

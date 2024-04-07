@@ -1,0 +1,94 @@
+<ora-page-header [action]="actionHeader" title="Danh sách nhà cung cấp">
+    <ng-template #actionHeader>
+        <button (click)="exportExcel()" class="margin-left-5 btn-export" nz-button nzType="default"
+            title="Xuất danh sách ra excel" type="button">
+            <i nz-icon nzTheme="outline" nzType="export"></i> Xuất Excel
+        </button>
+        <button (click)="showCreateOrEditModal()" nz-button nzType="primary" title="Thêm mới"><i
+                class="fa fa-plus"></i>Thêm mới</button>
+    </ng-template>
+</ora-page-header>
+
+<div class="box-filter">
+    <form [formGroup]="rfFormGroup" nz-form nzLayout="vertical">
+        <nz-row nzGutter="8">
+            <nz-col nzLg="10" nzSm="16">
+                <input (keydown.enter)="refresh()" autofocus formControlName="filter" nz-input
+                    placeholder="Nhập tên nhà phân phối, tên viết tắt, địa chỉ, tên người đại diện để tìm kiếm !" />
+            </nz-col>
+            <nz-col nzLg="4" nzSm="6">
+                <ora-select [placeHolder]="'Chọn trạng thái...'" dirTrangThaiNhaPhanPhoi
+                    formControlName="trangThai"></ora-select>
+            </nz-col>
+            <nz-col nzLg="4" nzSm="6">
+                <nz-select [nzMaxTagCount]="1" [nzMaxTagPlaceholder]="tagPlaceHolderLoaiChuongTrinh"
+                    formControlName="listPhanLoai" nzMode="multiple" nzPlaceHolder="Chọn loại chương trình"
+                    style="width: 100%">
+                    <nz-option *ngFor="let item of listPhanLoaiNhaCungCap" [nzLabel]="item.displayText"
+                        [nzValue]="item.value"></nz-option>
+                </nz-select>
+                <ng-template #tagPlaceHolderLoaiChuongTrinh let-selectedList>+ {{ selectedList.length }} </ng-template>
+            </nz-col>
+            <nz-col>
+                <button (click)="refresh()" nz-button nzType="primary"><i nz-icon nzType="search"></i>Tìm kiếm</button>
+            </nz-col>
+        </nz-row>
+    </form>
+</div>
+
+<ora-table [(page)]="pageNumber" [(pageSize)]="pageSize" [isLoading]="isTableLoading" [rows]="dataList"
+    [scroll]="{ x: '1200px' }" [totalRows]="totalItems" (pageChange)="pageNumberChange()" (pageSizeChange)="refresh()"
+    (sortChange)="gridSort($event)">
+    <ora-column align="center" header="STT" width="50px">
+        <ng-template let-data oraCell>
+            {{ skipCount + dataList.indexOf(data) + 1 }}
+        </ng-template>
+    </ora-column>
+    <ora-column [content]="tenNhaPhanPhoiContent" header="Tên" key="ten" width="100px">
+        <ng-template #tenNhaPhanPhoiContent let-data="dataItem">
+            <span> {{ data.ten }} </span>
+        </ng-template>
+    </ora-column>
+    <ora-column [content]="tenVietTatContent" header="Tên viết tắt" key="tenVietTat" width="80px">
+        <ng-template #tenVietTatContent let-data="dataItem">
+            <span> {{ data.tenVietTat }} </span>
+        </ng-template>
+    </ora-column>
+    <ora-column header="Địa chỉ" key="diaChi" width="100px"></ora-column>
+    <ora-column [content]="NgayContent" header="Ngày đăng ký" width="90px">
+        <ng-template #NgayContent let-data="dataItem">
+            <span> {{ data.ngayDangKy | date : 'dd/MM/yyyy' }}</span>
+        </ng-template>
+    </ora-column>
+    <ora-column header="Trụ sở tại Việt Nam" key="truSo" width="200px"></ora-column>
+    <ora-column header="Đại diện" key="daiDien" width="150px"></ora-column>
+    <ora-column header="Phân Loại" key="phanLoaiStr" width="250px"> </ora-column>
+
+    <ora-column [content]="TrangThaiContent" align="center" fixRight header="Trạng thái" headerAlign="center"
+        key="trangThai" width="100px">
+        <ng-template #TrangThaiContent let-data="dataItem">
+            <nz-tag *ngIf="data.trangThai === true" [nzColor]="'#3795d0'">Hoạt động</nz-tag>
+            <nz-tag *ngIf="data.trangThai === false" [nzColor]="'#f4516c'">Không hoạt động</nz-tag>
+        </ng-template>
+    </ora-column>
+    <ora-column [content]="contentAction" align="center" fixRight header="Thao tác" width="90px">
+        <ng-template #contentAction let-data="dataItem">
+            <button [nzDropdownMenu]="menu" nz-button nz-dropdown>
+                Thao tác
+                <i nz-icon nzType="down" style="font-size: 12px !important"></i>
+            </button>
+            <nz-dropdown-menu #menu="nzDropdownMenu">
+                <ul nz-menu nzSelectable>
+                    <li nz-menu-item style="font-size: 15px">
+                        <a (click)="showCreateOrEditModal(data)"> <i nz-icon nzTheme="outline" nzType="edit"
+                                style="font-size: 15px"></i>Sửa </a>
+                    </li>
+                    <li nz-menu-item style="font-size: 15px">
+                        <a (click)="delete(data)"> <i class="c-h" nz-icon nzTheme="outline" nzType="delete"
+                                style="font-size: 15px"></i> Xóa </a>
+                    </li>
+                </ul>
+            </nz-dropdown-menu>
+        </ng-template>
+    </ora-column>
+</ora-table>

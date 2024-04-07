@@ -1,0 +1,18 @@
+<div class="ora-auto-complete">
+  <base-nz-select [id]="attrId"
+                  [placeHolder]="placeHolder"
+                  [isMultiple]="isMultiple"
+                  [nzShowSearch]="true"
+                  [nzServerSearch]="true"
+                  [selectedItems]="selectedItems"
+                  [sources]="data"
+                  [nzLoading]="loading"
+                  [isDisabled]="isDisabled"
+                  [nzOptionHeightPx]="32"
+                  [nzMaxTagCount]="1"
+                  [nzOpen]="nzSelectOpen"
+                  (onSearch)="search($event)"
+                  (onFocus)="focus($event)"
+                  (onItemSelected)="itemSelected($event)">
+  </base-nz-select>
+</div>

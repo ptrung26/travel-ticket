@@ -1,0 +1,734 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <Import Project="..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+    <RootNamespace>newPMS.Web</RootNamespace>
+    <AssetTargetFallback>$(AssetTargetFallback);portable-net45+win8+wp8+wpa81;</AssetTargetFallback>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
+    <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
+    <PreserveCompilationContext>true</PreserveCompilationContext>
+    <MvcRazorExcludeRefAssembliesFromPublish>false</MvcRazorExcludeRefAssembliesFromPublish>
+    <PreserveCompilationReferences>true</PreserveCompilationReferences>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Logs\**" />
+    <Compile Remove="Views\Shared\Components\**" />
+    <Content Remove="Logs\**" />
+    <Content Remove="Views\Shared\Components\**" />
+    <EmbeddedResource Remove="Logs\**" />
+    <EmbeddedResource Remove="Views\Shared\Components\**" />
+    <None Remove="Logs\**" />
+    <None Remove="Views\Shared\Components\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Pages\**\*.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Pages\**\*.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Pages\Account\Index.css" />
+    <None Remove="Pages\Account\Index.js" />
+    <None Remove="Themes\Lepton\Layouts\Account\Default-tenant.css" />
+    <None Remove="Themes\Lepton\Layouts\Account\Default.css" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Themes\Lepton\Layouts\Account\Default-tenant.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Themes\Lepton\Layouts\Account\Default.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Views\Shared\_Layout.cshtml" />
+    <None Include="Views\Shared\_ValidationScriptsPartial.cshtml" />
+    <None Include="wwwroot\images\favicon\safari-pinned-tab.svg" />
+    <None Include="wwwroot\images\favicon\site.webmanifest" />
+    <None Include="wwwroot\libs\%40fortawesome\fontawesome-free\webfonts\fa-brands-400.svg" />
+    <None Include="wwwroot\libs\%40fortawesome\fontawesome-free\webfonts\fa-brands-400.woff2" />
+    <None Include="wwwroot\libs\%40fortawesome\fontawesome-free\webfonts\fa-regular-400.svg" />
+    <None Include="wwwroot\libs\%40fortawesome\fontawesome-free\webfonts\fa-regular-400.woff2" />
+    <None Include="wwwroot\libs\%40fortawesome\fontawesome-free\webfonts\fa-solid-900.svg" />
+    <None Include="wwwroot\libs\%40fortawesome\fontawesome-free\webfonts\fa-solid-900.woff2" />
+    <None Include="wwwroot\libs\abp\core\abp.js" />
+    <None Include="wwwroot\libs\abp\jquery\abp.jquery.js" />
+    <None Include="wwwroot\libs\abp\luxon\abp.luxon.js" />
+    <None Include="wwwroot\libs\abp\utils\abp-utils.umd.js" />
+    <None Include="wwwroot\libs\abp\utils\abp-utils.umd.js.map" />
+    <None Include="wwwroot\libs\abp\utils\abp-utils.umd.min.js" />
+    <None Include="wwwroot\libs\abp\utils\abp-utils.umd.min.js.map" />
+    <None Include="wwwroot\libs\bootstrap-datepicker\bootstrap-datepicker.css.map" />
+    <None Include="wwwroot\libs\bootstrap-datepicker\bootstrap-datepicker.min.js" />
+    <None Include="wwwroot\libs\bootstrap-datepicker\locales\bootstrap-datepicker-en-CA.min.js" />
+    <None Include="wwwroot\libs\bootstrap-datepicker\locales\bootstrap-datepicker.ar-tn.min.js" />
+    <None Include="wwwroot\libs\bootstrap-datepicker\locales\bootstrap-datepicker.ar.min.js" />
+    <None Include="wwwroot\libs\bootstrap-datepicker\locales\bootstrap-datepicker.az.min.js" />
+    <None Include="wwwroot\libs\bootstrap-datepicker\locales\bootstrap-datepicker.bg.min.js" />
+    <None Include="wwwroot\libs\bootstrap-datepicker\locales\bootstrap-datepicker.bm.min.js" />
+    <None Include="wwwroot\libs\bootstrap-datepicker\locales\bootstrap-datepicker.bn.min.js" />
+    <None Include="wwwroot\libs\bootstrap-datepicker\locales\bootstrap-datepicker.br.min.js" />
+    <None Include="wwwroot\libs\bootstrap-datepicker\locales\bootstrap-datepicker.bs.min.js" />
+    <None Include="wwwroot\libs\bootstrap-datepicker\locales\bootstrap-datepicker.ca.min.js" />
+    <None Include="wwwroot\libs\bootstrap-datepicker\locales\bootstrap-datepicker.cs.min.js" />
+    <None Include="wwwroot\libs\bootstrap-datepicker\locales\bootstrap-datepicker.cy.min.js" />
+    <None Include="wwwroot\libs\bootstrap-datepicker\locales\bootstrap-datepicker.da.min.js" />
+    <None Include="wwwroot\libs\bootstrap-datepicker\locales\bootstrap-datepicker.de.min.js" />
+    <None Include="wwwroot\libs\bootstrap-datepicker\locales\bootstrap-datepicker.el.min.js" />
+    <None Include="wwwroot\libs\bootstrap-datepicker\locales\bootstrap-datepicker.en-AU.min.js" />
+    <None Include="wwwroot\libs\bootstrap-datepicker\locales\bootstrap-datepicker.en-CA.min.js" />
+    <None Include="wwwroot\libs\bootstrap-datepicker\locales\bootstrap-datepicker.en-GB.min.js" />
+    <None Include="wwwroot\libs\bootstrap-datepicker\locales\bootstrap-datepicker.en-IE.min.js" />
+    <None Include="wwwroot\libs\bootstrap-datepicker\locales\bootstrap-datepicker.en-NZ.min.js" />
+    <None Include="wwwroot\libs\bootstrap-datepicker\locales\bootstrap-datepicker.en-ZA.min.js" />
+    <None Include="wwwroot\libs\bootstrap-datepicker\locales\bootstrap-datepicker.eo.min.js" />
+    <None Include="wwwroot\libs\bootstrap-datepicker\locales\bootstrap-datepicker.es.min.js" />
+    <None Include="wwwroot\libs\bootstrap-datepicker\locales\bootstrap-datepicker.et.min.js" />
+    <None Include="wwwroot\libs\bootstrap-datepicker\locales\bootstrap-datepicker.eu.min.js" />
+    <None Include="wwwroot\libs\bootstrap-datepicker\locales\bootstrap-datepicker.fa.min.js" />
+    <None Include="wwwroot\libs\bootstrap-datepicker\locales\bootstrap-datepicker.fi.min.js" />
+    <None Include="wwwroot\libs\bootstrap-datepicker\locales\bootstrap-datepicker.fo.min.js" />
+    <None Include="wwwroot\libs\bootstrap-datepicker\locales\bootstrap-datepicker.fr-CH.min.js" />
+    <None Include="wwwroot\libs\bootstrap-datepicker\locales\bootstrap-datepicker.fr.min.js" />
+    <None Include="wwwroot\libs\bootstrap-datepicker\locales\bootstrap-datepicker.gl.min.js" />
+    <None Include="wwwroot\libs\bootstrap-datepicker\locales\bootstrap-datepicker.he.min.js" />
+    <None Include="wwwroot\libs\bootstrap-datepicker\locales\bootstrap-datepicker.hi.min.js" />
+    <None Include="wwwroot\libs\bootstrap-datepicker\locales\bootstrap-datepicker.hr.min.js" />
+    <None Include="wwwroot\libs\bootstrap-datepicker\locales\bootstrap-datepicker.hu.min.js" />
+    <None Include="wwwroot\libs\bootstrap-datepicker\locales\bootstrap-datepicker.hy.min.js" />
+    <None Include="wwwroot\libs\bootstrap-datepicker\locales\bootstrap-datepicker.id.min.js" />
+    <None Include="wwwroot\libs\bootstrap-datepicker\locales\bootstrap-datepicker.is.min.js" />
+    <None Include="wwwroot\libs\bootstrap-datepicker\locales\bootstrap-datepicker.it-CH.min.js" />
+    <None Include="wwwroot\libs\bootstrap-datepicker\locales\bootstrap-datepicker.it.min.js" />
+    <None Include="wwwroot\libs\bootstrap-datepicker\locales\bootstrap-datepicker.ja.min.js" />
+    <None Include="wwwroot\libs\bootstrap-datepicker\locales\bootstrap-datepicker.ka.min.js" />
+    <None Include="wwwroot\libs\bootstrap-datepicker\locales\bootstrap-datepicker.kh.min.js" />
+    <None Include="wwwroot\libs\bootstrap-datepicker\locales\bootstrap-datepicker.kk.min.js" />
+    <None Include="wwwroot\libs\bootstrap-datepicker\locales\bootstrap-datepicker.km.min.js" />
+    <None Include="wwwroot\libs\bootstrap-datepicker\locales\bootstrap-datepicker.ko.min.js" />
+    <None Include="wwwroot\libs\bootstrap-datepicker\locales\bootstrap-datepicker.kr.min.js" />
+    <None Include="wwwroot\libs\bootstrap-datepicker\locales\bootstrap-datepicker.lt.min.js" />
+    <None Include="wwwroot\libs\bootstrap-datepicker\locales\bootstrap-datepicker.lv.min.js" />
+    <None Include="wwwroot\libs\bootstrap-datepicker\locales\bootstrap-datepicker.me.min.js" />
+    <None Include="wwwroot\libs\bootstrap-datepicker\locales\bootstrap-datepicker.mk.min.js" />
+    <None Include="wwwroot\libs\bootstrap-datepicker\locales\bootstrap-datepicker.mn.min.js" />
+    <None Include="wwwroot\libs\bootstrap-datepicker\locales\bootstrap-datepicker.ms.min.js" />
+    <None Include="wwwroot\libs\bootstrap-datepicker\locales\bootstrap-datepicker.nl-BE.min.js" />
+    <None Include="wwwroot\libs\bootstrap-datepicker\locales\bootstrap-datepicker.nl.min.js" />
+    <None Include="wwwroot\libs\bootstrap-datepicker\locales\bootstrap-datepicker.no.min.js" />
+    <None Include="wwwroot\libs\bootstrap-datepicker\locales\bootstrap-datepicker.oc.min.js" />
+    <None Include="wwwroot\libs\bootstrap-datepicker\locales\bootstrap-datepicker.pl.min.js" />
+    <None Include="wwwroot\libs\bootstrap-datepicker\locales\bootstrap-datepicker.pt-BR.min.js" />
+    <None Include="wwwroot\libs\bootstrap-datepicker\locales\bootstrap-datepicker.pt.min.js" />
+    <None Include="wwwroot\libs\bootstrap-datepicker\locales\bootstrap-datepicker.ro.min.js" />
+    <None Include="wwwroot\libs\bootstrap-datepicker\locales\bootstrap-datepicker.rs-latin.min.js" />
+    <None Include="wwwroot\libs\bootstrap-datepicker\locales\bootstrap-datepicker.rs.min.js" />
+    <None Include="wwwroot\libs\bootstrap-datepicker\locales\bootstrap-datepicker.ru.min.js" />
+    <None Include="wwwroot\libs\bootstrap-datepicker\locales\bootstrap-datepicker.si.min.js" />
+    <None Include="wwwroot\libs\bootstrap-datepicker\locales\bootstrap-datepicker.sk.min.js" />
+    <None Include="wwwroot\libs\bootstrap-datepicker\locales\bootstrap-datepicker.sl.min.js" />
+    <None Include="wwwroot\libs\bootstrap-datepicker\locales\bootstrap-datepicker.sq.min.js" />
+    <None Include="wwwroot\libs\bootstrap-datepicker\locales\bootstrap-datepicker.sr-latin.min.js" />
+    <None Include="wwwroot\libs\bootstrap-datepicker\locales\bootstrap-datepicker.sr.min.js" />
+    <None Include="wwwroot\libs\bootstrap-datepicker\locales\bootstrap-datepicker.sv.min.js" />
+    <None Include="wwwroot\libs\bootstrap-datepicker\locales\bootstrap-datepicker.sw.min.js" />
+    <None Include="wwwroot\libs\bootstrap-datepicker\locales\bootstrap-datepicker.ta.min.js" />
+    <None Include="wwwroot\libs\bootstrap-datepicker\locales\bootstrap-datepicker.tg.min.js" />
+    <None Include="wwwroot\libs\bootstrap-datepicker\locales\bootstrap-datepicker.th.min.js" />
+    <None Include="wwwroot\libs\bootstrap-datepicker\locales\bootstrap-datepicker.tk.min.js" />
+    <None Include="wwwroot\libs\bootstrap-datepicker\locales\bootstrap-datepicker.tr.min.js" />
+    <None Include="wwwroot\libs\bootstrap-datepicker\locales\bootstrap-datepicker.uk.min.js" />
+    <None Include="wwwroot\libs\bootstrap-datepicker\locales\bootstrap-datepicker.uz-cyrl.min.js" />
+    <None Include="wwwroot\libs\bootstrap-datepicker\locales\bootstrap-datepicker.uz-latn.min.js" />
+    <None Include="wwwroot\libs\bootstrap-datepicker\locales\bootstrap-datepicker.vi.min.js" />
+    <None Include="wwwroot\libs\bootstrap-datepicker\locales\bootstrap-datepicker.zh-CN.min.js" />
+    <None Include="wwwroot\libs\bootstrap-datepicker\locales\bootstrap-datepicker.zh-TW.min.js" />
+    <None Include="wwwroot\libs\bootstrap\css\bootstrap-grid.css.map" />
+    <None Include="wwwroot\libs\bootstrap\css\bootstrap-grid.min.css.map" />
+    <None Include="wwwroot\libs\bootstrap\css\bootstrap-reboot.css.map" />
+    <None Include="wwwroot\libs\bootstrap\css\bootstrap-reboot.min.css.map" />
+    <None Include="wwwroot\libs\bootstrap\css\bootstrap.css.map" />
+    <None Include="wwwroot\libs\bootstrap\css\bootstrap.min.css.map" />
+    <None Include="wwwroot\libs\bootstrap\js\bootstrap.bundle.js" />
+    <None Include="wwwroot\libs\bootstrap\js\bootstrap.bundle.js.map" />
+    <None Include="wwwroot\libs\bootstrap\js\bootstrap.bundle.min.js" />
+    <None Include="wwwroot\libs\bootstrap\js\bootstrap.bundle.min.js.map" />
+    <None Include="wwwroot\libs\chart.js\Chart.bundle.js" />
+    <None Include="wwwroot\libs\chart.js\Chart.bundle.min.js" />
+    <None Include="wwwroot\libs\chart.js\Chart.js" />
+    <None Include="wwwroot\libs\chart.js\Chart.min.js" />
+    <None Include="wwwroot\libs\codemirror\codemirror.js" />
+    <None Include="wwwroot\libs\cropperjs\js\cropper.min.js" />
+    <None Include="wwwroot\libs\css\register.scss" />
+    <None Include="wwwroot\libs\datatables.net-bs4\js\dataTables.bootstrap4.js" />
+    <None Include="wwwroot\libs\datatables.net\js\jquery.dataTables.js" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\ad.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\ae.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\af.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\ag.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\ai.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\al.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\am.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\ao.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\aq.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\ar.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\as.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\at.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\au.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\aw.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\ax.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\az.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\ba.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\bb.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\bd.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\be.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\bf.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\bg.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\bh.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\bi.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\bj.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\bl.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\bm.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\bn.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\bo.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\bq.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\br.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\bs.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\bt.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\bv.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\bw.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\by.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\bz.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\ca.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\cc.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\cd.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\cf.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\cg.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\ch.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\ci.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\ck.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\cl.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\cm.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\cn.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\co.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\cr.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\cu.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\cv.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\cw.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\cx.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\cy.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\cz.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\de.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\dj.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\dk.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\dm.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\do.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\dz.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\ec.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\ee.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\eg.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\eh.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\er.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\es-ca.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\es-ga.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\es.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\et.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\eu.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\fi.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\fj.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\fk.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\fm.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\fo.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\fr.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\ga.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\gb-eng.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\gb-nir.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\gb-sct.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\gb-wls.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\gb.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\gd.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\ge.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\gf.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\gg.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\gh.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\gi.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\gl.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\gm.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\gn.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\gp.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\gq.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\gr.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\gs.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\gt.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\gu.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\gw.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\gy.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\hk.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\hm.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\hn.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\hr.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\ht.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\hu.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\id.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\ie.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\il.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\im.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\in.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\io.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\iq.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\ir.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\is.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\it.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\je.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\jm.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\jo.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\jp.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\ke.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\kg.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\kh.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\ki.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\km.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\kn.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\kp.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\kr.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\kw.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\ky.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\kz.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\la.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\lb.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\lc.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\li.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\lk.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\lr.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\ls.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\lt.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\lu.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\lv.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\ly.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\ma.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\mc.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\md.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\me.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\mf.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\mg.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\mh.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\mk.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\ml.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\mm.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\mn.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\mo.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\mp.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\mq.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\mr.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\ms.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\mt.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\mu.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\mv.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\mw.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\mx.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\my.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\mz.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\na.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\nc.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\ne.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\nf.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\ng.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\ni.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\nl.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\no.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\np.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\nr.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\nu.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\nz.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\om.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\pa.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\pe.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\pf.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\pg.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\ph.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\pk.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\pl.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\pm.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\pn.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\pr.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\ps.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\pt.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\pw.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\py.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\qa.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\re.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\ro.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\rs.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\ru.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\rw.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\sa.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\sb.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\sc.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\sd.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\se.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\sg.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\sh.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\si.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\sj.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\sk.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\sl.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\sm.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\sn.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\so.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\sr.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\ss.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\st.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\sv.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\sx.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\sy.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\sz.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\tc.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\td.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\tf.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\tg.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\th.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\tj.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\tk.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\tl.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\tm.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\tn.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\to.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\tr.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\tt.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\tv.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\tw.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\tz.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\ua.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\ug.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\um.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\un.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\us.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\uy.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\uz.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\va.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\vc.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\ve.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\vg.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\vi.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\vn.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\vu.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\wf.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\ws.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\xk.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\ye.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\yt.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\za.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\zm.svg" />
+    <None Include="wwwroot\libs\flag-icon-css\flags\1x1\zw.svg" />
+    <None Include="wwwroot\libs\highlight.js\highlight.pack.js" />
+    <None Include="wwwroot\libs\jquery-ajax\jquery.unobtrusive-ajax.js" />
+    <None Include="wwwroot\libs\jquery-ajax\jquery.unobtrusive-ajax.min.js" />
+    <None Include="wwwroot\libs\jquery-form\jquery.form.min.js" />
+    <None Include="wwwroot\libs\jquery-form\jquery.form.min.js.map" />
+    <None Include="wwwroot\libs\jquery-validation-unobtrusive\jquery.validate.unobtrusive.js" />
+    <None Include="wwwroot\libs\jquery-validation\jquery.validate.js" />
+    <None Include="wwwroot\libs\jquery-validation\localization\messages_ar.js" />
+    <None Include="wwwroot\libs\jquery-validation\localization\messages_az.js" />
+    <None Include="wwwroot\libs\jquery-validation\localization\messages_bg.js" />
+    <None Include="wwwroot\libs\jquery-validation\localization\messages_bn_BD.js" />
+    <None Include="wwwroot\libs\jquery-validation\localization\messages_ca.js" />
+    <None Include="wwwroot\libs\jquery-validation\localization\messages_cs.js" />
+    <None Include="wwwroot\libs\jquery-validation\localization\messages_da.js" />
+    <None Include="wwwroot\libs\jquery-validation\localization\messages_de.js" />
+    <None Include="wwwroot\libs\jquery-validation\localization\messages_el.js" />
+    <None Include="wwwroot\libs\jquery-validation\localization\messages_es.js" />
+    <None Include="wwwroot\libs\jquery-validation\localization\messages_es_AR.js" />
+    <None Include="wwwroot\libs\jquery-validation\localization\messages_es_PE.js" />
+    <None Include="wwwroot\libs\jquery-validation\localization\messages_et.js" />
+    <None Include="wwwroot\libs\jquery-validation\localization\messages_eu.js" />
+    <None Include="wwwroot\libs\jquery-validation\localization\messages_fa.js" />
+    <None Include="wwwroot\libs\jquery-validation\localization\messages_fi.js" />
+    <None Include="wwwroot\libs\jquery-validation\localization\messages_fr.js" />
+    <None Include="wwwroot\libs\jquery-validation\localization\messages_ge.js" />
+    <None Include="wwwroot\libs\jquery-validation\localization\messages_gl.js" />
+    <None Include="wwwroot\libs\jquery-validation\localization\messages_he.js" />
+    <None Include="wwwroot\libs\jquery-validation\localization\messages_hr.js" />
+    <None Include="wwwroot\libs\jquery-validation\localization\messages_hu.js" />
+    <None Include="wwwroot\libs\jquery-validation\localization\messages_hy_AM.js" />
+    <None Include="wwwroot\libs\jquery-validation\localization\messages_id.js" />
+    <None Include="wwwroot\libs\jquery-validation\localization\messages_is.js" />
+    <None Include="wwwroot\libs\jquery-validation\localization\messages_it.js" />
+    <None Include="wwwroot\libs\jquery-validation\localization\messages_ja.js" />
+    <None Include="wwwroot\libs\jquery-validation\localization\messages_ka.js" />
+    <None Include="wwwroot\libs\jquery-validation\localization\messages_kk.js" />
+    <None Include="wwwroot\libs\jquery-validation\localization\messages_ko.js" />
+    <None Include="wwwroot\libs\jquery-validation\localization\messages_lt.js" />
+    <None Include="wwwroot\libs\jquery-validation\localization\messages_lv.js" />
+    <None Include="wwwroot\libs\jquery-validation\localization\messages_mk.js" />
+    <None Include="wwwroot\libs\jquery-validation\localization\messages_my.js" />
+    <None Include="wwwroot\libs\jquery-validation\localization\messages_nl.js" />
+    <None Include="wwwroot\libs\jquery-validation\localization\messages_no.js" />
+    <None Include="wwwroot\libs\jquery-validation\localization\messages_pl.js" />
+    <None Include="wwwroot\libs\jquery-validation\localization\messages_pt_BR.js" />
+    <None Include="wwwroot\libs\jquery-validation\localization\messages_pt_PT.js" />
+    <None Include="wwwroot\libs\jquery-validation\localization\messages_ro.js" />
+    <None Include="wwwroot\libs\jquery-validation\localization\messages_ru.js" />
+    <None Include="wwwroot\libs\jquery-validation\localization\messages_sd.js" />
+    <None Include="wwwroot\libs\jquery-validation\localization\messages_si.js" />
+    <None Include="wwwroot\libs\jquery-validation\localization\messages_sk.js" />
+    <None Include="wwwroot\libs\jquery-validation\localization\messages_sl.js" />
+    <None Include="wwwroot\libs\jquery-validation\localization\messages_sr.js" />
+    <None Include="wwwroot\libs\jquery-validation\localization\messages_sr_lat.js" />
+    <None Include="wwwroot\libs\jquery-validation\localization\messages_sv.js" />
+    <None Include="wwwroot\libs\jquery-validation\localization\messages_th.js" />
+    <None Include="wwwroot\libs\jquery-validation\localization\messages_tj.js" />
+    <None Include="wwwroot\libs\jquery-validation\localization\messages_tr.js" />
+    <None Include="wwwroot\libs\jquery-validation\localization\messages_uk.js" />
+    <None Include="wwwroot\libs\jquery-validation\localization\messages_ur.js" />
+    <None Include="wwwroot\libs\jquery-validation\localization\messages_vi.js" />
+    <None Include="wwwroot\libs\jquery-validation\localization\messages_zh.js" />
+    <None Include="wwwroot\libs\jquery-validation\localization\messages_zh_TW.js" />
+    <None Include="wwwroot\libs\jquery-validation\localization\methods_de.js" />
+    <None Include="wwwroot\libs\jquery-validation\localization\methods_es_CL.js" />
+    <None Include="wwwroot\libs\jquery-validation\localization\methods_fi.js" />
+    <None Include="wwwroot\libs\jquery-validation\localization\methods_nl.js" />
+    <None Include="wwwroot\libs\jquery-validation\localization\methods_pt.js" />
+    <None Include="wwwroot\libs\jquery\jquery.js" />
+    <None Include="wwwroot\libs\jstree\jstree.js" />
+    <None Include="wwwroot\libs\jstree\jstree.min.js" />
+    <None Include="wwwroot\libs\lodash\lodash.min.js" />
+    <None Include="wwwroot\libs\luxon\luxon.js" />
+    <None Include="wwwroot\libs\luxon\luxon.js.map" />
+    <None Include="wwwroot\libs\luxon\luxon.min.js" />
+    <None Include="wwwroot\libs\luxon\luxon.min.js.map" />
+    <None Include="wwwroot\libs\malihu-custom-scrollbar-plugin\jquery.mCustomScrollbar.concat.min.js" />
+    <None Include="wwwroot\libs\malihu-custom-scrollbar-plugin\jquery.mCustomScrollbar.js" />
+    <None Include="wwwroot\libs\malihu-custom-scrollbar-plugin\readme.md" />
+    <None Include="wwwroot\libs\markdown-it\markdown-it.min.js" />
+    <None Include="wwwroot\libs\select2\js\i18n\af.js" />
+    <None Include="wwwroot\libs\select2\js\i18n\ar.js" />
+    <None Include="wwwroot\libs\select2\js\i18n\az.js" />
+    <None Include="wwwroot\libs\select2\js\i18n\bg.js" />
+    <None Include="wwwroot\libs\select2\js\i18n\bn.js" />
+    <None Include="wwwroot\libs\select2\js\i18n\bs.js" />
+    <None Include="wwwroot\libs\select2\js\i18n\ca.js" />
+    <None Include="wwwroot\libs\select2\js\i18n\cs.js" />
+    <None Include="wwwroot\libs\select2\js\i18n\da.js" />
+    <None Include="wwwroot\libs\select2\js\i18n\de.js" />
+    <None Include="wwwroot\libs\select2\js\i18n\dsb.js" />
+    <None Include="wwwroot\libs\select2\js\i18n\el.js" />
+    <None Include="wwwroot\libs\select2\js\i18n\en.js" />
+    <None Include="wwwroot\libs\select2\js\i18n\es.js" />
+    <None Include="wwwroot\libs\select2\js\i18n\et.js" />
+    <None Include="wwwroot\libs\select2\js\i18n\eu.js" />
+    <None Include="wwwroot\libs\select2\js\i18n\fa.js" />
+    <None Include="wwwroot\libs\select2\js\i18n\fi.js" />
+    <None Include="wwwroot\libs\select2\js\i18n\fr.js" />
+    <None Include="wwwroot\libs\select2\js\i18n\gl.js" />
+    <None Include="wwwroot\libs\select2\js\i18n\he.js" />
+    <None Include="wwwroot\libs\select2\js\i18n\hi.js" />
+    <None Include="wwwroot\libs\select2\js\i18n\hr.js" />
+    <None Include="wwwroot\libs\select2\js\i18n\hsb.js" />
+    <None Include="wwwroot\libs\select2\js\i18n\hu.js" />
+    <None Include="wwwroot\libs\select2\js\i18n\hy.js" />
+    <None Include="wwwroot\libs\select2\js\i18n\id.js" />
+    <None Include="wwwroot\libs\select2\js\i18n\is.js" />
+    <None Include="wwwroot\libs\select2\js\i18n\it.js" />
+    <None Include="wwwroot\libs\select2\js\i18n\ja.js" />
+    <None Include="wwwroot\libs\select2\js\i18n\ka.js" />
+    <None Include="wwwroot\libs\select2\js\i18n\km.js" />
+    <None Include="wwwroot\libs\select2\js\i18n\ko.js" />
+    <None Include="wwwroot\libs\select2\js\i18n\lt.js" />
+    <None Include="wwwroot\libs\select2\js\i18n\lv.js" />
+    <None Include="wwwroot\libs\select2\js\i18n\mk.js" />
+    <None Include="wwwroot\libs\select2\js\i18n\ms.js" />
+    <None Include="wwwroot\libs\select2\js\i18n\nb.js" />
+    <None Include="wwwroot\libs\select2\js\i18n\ne.js" />
+    <None Include="wwwroot\libs\select2\js\i18n\nl.js" />
+    <None Include="wwwroot\libs\select2\js\i18n\pl.js" />
+    <None Include="wwwroot\libs\select2\js\i18n\ps.js" />
+    <None Include="wwwroot\libs\select2\js\i18n\pt-BR.js" />
+    <None Include="wwwroot\libs\select2\js\i18n\pt.js" />
+    <None Include="wwwroot\libs\select2\js\i18n\ro.js" />
+    <None Include="wwwroot\libs\select2\js\i18n\ru.js" />
+    <None Include="wwwroot\libs\select2\js\i18n\sk.js" />
+    <None Include="wwwroot\libs\select2\js\i18n\sl.js" />
+    <None Include="wwwroot\libs\select2\js\i18n\sq.js" />
+    <None Include="wwwroot\libs\select2\js\i18n\sr-Cyrl.js" />
+    <None Include="wwwroot\libs\select2\js\i18n\sr.js" />
+    <None Include="wwwroot\libs\select2\js\i18n\sv.js" />
+    <None Include="wwwroot\libs\select2\js\i18n\th.js" />
+    <None Include="wwwroot\libs\select2\js\i18n\tk.js" />
+    <None Include="wwwroot\libs\select2\js\i18n\tr.js" />
+    <None Include="wwwroot\libs\select2\js\i18n\uk.js" />
+    <None Include="wwwroot\libs\select2\js\i18n\vi.js" />
+    <None Include="wwwroot\libs\select2\js\i18n\zh-CN.js" />
+    <None Include="wwwroot\libs\select2\js\i18n\zh-TW.js" />
+    <None Include="wwwroot\libs\select2\js\select2-bootstrap-modal-patch.js" />
+    <None Include="wwwroot\libs\select2\js\select2.full.min.js" />
+    <None Include="wwwroot\libs\select2\js\select2.min.js" />
+    <None Include="wwwroot\libs\slugify\slugify.js" />
+    <None Include="wwwroot\libs\squire-rte\squire.js" />
+    <None Include="wwwroot\libs\sweetalert\sweetalert.min.js" />
+    <None Include="wwwroot\libs\timeago\jquery.timeago.js" />
+    <None Include="wwwroot\libs\timeago\locales\jquery.timeago.af.js" />
+    <None Include="wwwroot\libs\timeago\locales\jquery.timeago.am.js" />
+    <None Include="wwwroot\libs\timeago\locales\jquery.timeago.ar.js" />
+    <None Include="wwwroot\libs\timeago\locales\jquery.timeago.az-short.js" />
+    <None Include="wwwroot\libs\timeago\locales\jquery.timeago.az.js" />
+    <None Include="wwwroot\libs\timeago\locales\jquery.timeago.be.js" />
+    <None Include="wwwroot\libs\timeago\locales\jquery.timeago.bg.js" />
+    <None Include="wwwroot\libs\timeago\locales\jquery.timeago.bs.js" />
+    <None Include="wwwroot\libs\timeago\locales\jquery.timeago.ca.js" />
+    <None Include="wwwroot\libs\timeago\locales\jquery.timeago.cs.js" />
+    <None Include="wwwroot\libs\timeago\locales\jquery.timeago.cy.js" />
+    <None Include="wwwroot\libs\timeago\locales\jquery.timeago.da.js" />
+    <None Include="wwwroot\libs\timeago\locales\jquery.timeago.de-short.js" />
+    <None Include="wwwroot\libs\timeago\locales\jquery.timeago.de.js" />
+    <None Include="wwwroot\libs\timeago\locales\jquery.timeago.dv.js" />
+    <None Include="wwwroot\libs\timeago\locales\jquery.timeago.el.js" />
+    <None Include="wwwroot\libs\timeago\locales\jquery.timeago.en-short.js" />
+    <None Include="wwwroot\libs\timeago\locales\jquery.timeago.en.js" />
+    <None Include="wwwroot\libs\timeago\locales\jquery.timeago.es-short.js" />
+    <None Include="wwwroot\libs\timeago\locales\jquery.timeago.es.js" />
+    <None Include="wwwroot\libs\timeago\locales\jquery.timeago.et.js" />
+    <None Include="wwwroot\libs\timeago\locales\jquery.timeago.eu.js" />
+    <None Include="wwwroot\libs\timeago\locales\jquery.timeago.fa-short.js" />
+    <None Include="wwwroot\libs\timeago\locales\jquery.timeago.fa.js" />
+    <None Include="wwwroot\libs\timeago\locales\jquery.timeago.fi.js" />
+    <None Include="wwwroot\libs\timeago\locales\jquery.timeago.fr-short.js" />
+    <None Include="wwwroot\libs\timeago\locales\jquery.timeago.fr.js" />
+    <None Include="wwwroot\libs\timeago\locales\jquery.timeago.gl.js" />
+    <None Include="wwwroot\libs\timeago\locales\jquery.timeago.he.js" />
+    <None Include="wwwroot\libs\timeago\locales\jquery.timeago.hr.js" />
+    <None Include="wwwroot\libs\timeago\locales\jquery.timeago.hu.js" />
+    <None Include="wwwroot\libs\timeago\locales\jquery.timeago.hy.js" />
+    <None Include="wwwroot\libs\timeago\locales\jquery.timeago.id.js" />
+    <None Include="wwwroot\libs\timeago\locales\jquery.timeago.is.js" />
+    <None Include="wwwroot\libs\timeago\locales\jquery.timeago.it-short.js" />
+    <None Include="wwwroot\libs\timeago\locales\jquery.timeago.it.js" />
+    <None Include="wwwroot\libs\timeago\locales\jquery.timeago.ja.js" />
+    <None Include="wwwroot\libs\timeago\locales\jquery.timeago.jv.js" />
+    <None Include="wwwroot\libs\timeago\locales\jquery.timeago.ko.js" />
+    <None Include="wwwroot\libs\timeago\locales\jquery.timeago.ky.js" />
+    <None Include="wwwroot\libs\timeago\locales\jquery.timeago.lt.js" />
+    <None Include="wwwroot\libs\timeago\locales\jquery.timeago.lv.js" />
+    <None Include="wwwroot\libs\timeago\locales\jquery.timeago.mk.js" />
+    <None Include="wwwroot\libs\timeago\locales\jquery.timeago.nl.js" />
+    <None Include="wwwroot\libs\timeago\locales\jquery.timeago.no.js" />
+    <None Include="wwwroot\libs\timeago\locales\jquery.timeago.pl.js" />
+    <None Include="wwwroot\libs\timeago\locales\jquery.timeago.pt-br-short.js" />
+    <None Include="wwwroot\libs\timeago\locales\jquery.timeago.pt-br.js" />
+    <None Include="wwwroot\libs\timeago\locales\jquery.timeago.pt-short.js" />
+    <None Include="wwwroot\libs\timeago\locales\jquery.timeago.pt.js" />
+    <None Include="wwwroot\libs\timeago\locales\jquery.timeago.ro.js" />
+    <None Include="wwwroot\libs\timeago\locales\jquery.timeago.rs.js" />
+    <None Include="wwwroot\libs\timeago\locales\jquery.timeago.ru.js" />
+    <None Include="wwwroot\libs\timeago\locales\jquery.timeago.rw.js" />
+    <None Include="wwwroot\libs\timeago\locales\jquery.timeago.si.js" />
+    <None Include="wwwroot\libs\timeago\locales\jquery.timeago.sk.js" />
+    <None Include="wwwroot\libs\timeago\locales\jquery.timeago.sl.js" />
+    <None Include="wwwroot\libs\timeago\locales\jquery.timeago.sq.js" />
+    <None Include="wwwroot\libs\timeago\locales\jquery.timeago.sr.js" />
+    <None Include="wwwroot\libs\timeago\locales\jquery.timeago.sv.js" />
+    <None Include="wwwroot\libs\timeago\locales\jquery.timeago.th.js" />
+    <None Include="wwwroot\libs\timeago\locales\jquery.timeago.tr-short.js" />
+    <None Include="wwwroot\libs\timeago\locales\jquery.timeago.tr.js" />
+    <None Include="wwwroot\libs\timeago\locales\jquery.timeago.uk.js" />
+    <None Include="wwwroot\libs\timeago\locales\jquery.timeago.ur.js" />
+    <None Include="wwwroot\libs\timeago\locales\jquery.timeago.uz.js" />
+    <None Include="wwwroot\libs\timeago\locales\jquery.timeago.vi.js" />
+    <None Include="wwwroot\libs\timeago\locales\jquery.timeago.zh-CN.js" />
+    <None Include="wwwroot\libs\timeago\locales\jquery.timeago.zh-TW.js" />
+    <None Include="wwwroot\libs\timeago\locales\README.md" />
+    <None Include="wwwroot\libs\to-mark\to-mark.min.js" />
+    <None Include="wwwroot\libs\toastr\toastr.js.map" />
+    <None Include="wwwroot\libs\toastr\toastr.min.js" />
+    <None Include="wwwroot\libs\tui-code-snippet\tui-code-snippet.js" />
+    <None Include="wwwroot\libs\tui-code-snippet\tui-code-snippet.min.js" />
+    <None Include="wwwroot\libs\tui-editor\tui-editor-Editor-all.js" />
+    <None Include="wwwroot\libs\tui-editor\tui-editor-Editor-all.min.js" />
+    <None Include="wwwroot\libs\tui-editor\tui-editor-Editor-full.js" />
+    <None Include="wwwroot\libs\tui-editor\tui-editor-Editor-full.min.js" />
+    <None Include="wwwroot\libs\tui-editor\tui-editor-Editor.js" />
+    <None Include="wwwroot\libs\tui-editor\tui-editor-Editor.min.js" />
+    <None Include="wwwroot\libs\tui-editor\tui-editor-extChart.js" />
+    <None Include="wwwroot\libs\tui-editor\tui-editor-extChart.min.js" />
+    <None Include="wwwroot\libs\tui-editor\tui-editor-extColorSyntax.js" />
+    <None Include="wwwroot\libs\tui-editor\tui-editor-extColorSyntax.min.js" />
+    <None Include="wwwroot\libs\tui-editor\tui-editor-extScrollSync.js" />
+    <None Include="wwwroot\libs\tui-editor\tui-editor-extScrollSync.min.js" />
+    <None Include="wwwroot\libs\tui-editor\tui-editor-extTable.js" />
+    <None Include="wwwroot\libs\tui-editor\tui-editor-extTable.min.js" />
+    <None Include="wwwroot\libs\tui-editor\tui-editor-extUML.js" />
+    <None Include="wwwroot\libs\tui-editor\tui-editor-extUML.min.js" />
+    <None Include="wwwroot\libs\tui-editor\tui-editor-jquery-patch.js" />
+    <None Include="wwwroot\libs\tui-editor\tui-editor-Viewer-all.js" />
+    <None Include="wwwroot\libs\tui-editor\tui-editor-Viewer-all.min.js" />
+    <None Include="wwwroot\libs\tui-editor\tui-editor-Viewer-full.js" />
+    <None Include="wwwroot\libs\tui-editor\tui-editor-Viewer-full.min.js" />
+    <None Include="wwwroot\libs\tui-editor\tui-editor-Viewer.js" />
+    <None Include="wwwroot\libs\tui-editor\tui-editor-Viewer.min.js" />
+    <None Include="wwwroot\libs\uppy\uppy.js" />
+    <None Include="wwwroot\libs\uppy\uppy.js.map" />
+    <None Include="wwwroot\libs\uppy\uppy.min.js" />
+    <None Include="wwwroot\libs\uppy\uppy.min.js.map" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AspNetCore.HealthChecks.UI" Version="5.0.*" />
+    <PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="5.0.*" />
+    <PackageReference Include="AspNetCore.HealthChecks.UI.InMemory.Storage" Version="5.0.*" />
+    <PackageReference Include="Microsoft.AspNetCore.DataProtection.StackExchangeRedis" Version="5.0.7" />
+    <PackageReference Include="Serilog.AspNetCore" Version="4.0.0" />
+    <PackageReference Include="Serilog.Sinks.Async" Version="1.4.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="5.0.*" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.MicrosoftAccount" Version="5.0.*" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Twitter" Version="5.0.*" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Mvc" Version="4.3.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\DataBase\src\TravelTicket\newPMS.Base.Domain\newPMS.Base.Domain.csproj" />
+    <ProjectReference Include="..\..\..\DataBase\src\TravelTicket\newPMS.Base.EntityFrameworkCore.DbMigrations\newPMS.Base.EntityFrameworkCore.DbMigrations.csproj" />
+    <ProjectReference Include="..\..\..\modules\newPMS.QuanLyTaiKhoan\src\QuanLyTaiKhoan\newPMS.QuanLyTaiKhoan.csproj" />
+    <ProjectReference Include="..\..\..\modules\newPMS.Shared\src\Application\newPMS.Shared.Application.csproj" />
+    <ProjectReference Include="..\..\..\shared\OrdBaseApplication\OrdBaseApplication.csproj" />
+    <ProjectReference Include="..\newPMS.Application\newPMS.Application.csproj" />
+    <ProjectReference Include="..\newPMS.HttpApi\newPMS.HttpApi.csproj" />
+    <ProjectReference Include="..\newPMS.EntityFrameworkCore.DbMigrations\newPMS.EntityFrameworkCore.DbMigrations.csproj" />
+    <PackageReference Include="Volo.Abp.Autofac" Version="4.3.2" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Serilog" Version="4.3.2" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Authentication.JwtBearer" Version="4.3.2" />
+    <PackageReference Include="Volo.Abp.Swashbuckle" Version="4.3.2" />
+    <!--<PackageReference Include="Swashbuckle.AspNetCore" Version="5.5.1" />-->
+    <PackageReference Include="Volo.Abp.FeatureManagement.Web" Version="4.3.2" />
+    <PackageReference Include="Volo.Abp.Account.Pro.Public.Web.IdentityServer" Version="4.3.2" />
+    <PackageReference Include="Volo.Abp.Account.Pro.Admin.Web" Version="4.3.2" />
+    <PackageReference Include="Volo.Abp.AuditLogging.Web" Version="4.3.2" />
+    <PackageReference Include="Volo.Abp.Identity.Pro.Web" Version="4.3.2" />
+    <PackageReference Include="Volo.Abp.LeptonTheme.Management.Web" Version="4.3.2" />
+    <PackageReference Include="Volo.Abp.IdentityServer.Web" Version="4.3.2" />
+    <PackageReference Include="Volo.Abp.LanguageManagement.Web" Version="4.3.2" />
+    <PackageReference Include="Volo.Saas.Host.Web" Version="4.3.2" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.Theme.Lepton" Version="4.3.2" />
+    <PackageReference Include="Volo.Abp.TextTemplateManagement.Web" Version="4.3.2" />
+    <PackageReference Include="Volo.Abp.Caching.StackExchangeRedis" Version="4.3.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="contoso.com.pfx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Dockerfile">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

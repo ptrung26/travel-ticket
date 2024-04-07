@@ -1,0 +1,132 @@
+<div id="formUser">
+  <nz-tabset nzType="editable-card" nzHideAdd>
+    <nz-tab nzTitle="Thông tin tài khoản">
+      <div nz-row nzLayout="horizontal">
+        <!-- <div nz-col class="gutter-row ord-form-control" [nzSm]="24" [nzXs]="24">
+                    <nz-form-label nzRequired>Đơn vị cơ sở</nz-form-label>
+                    <nz-form-control>
+                        <don-vi-co-so-auto #donViDropDown style="width: 90%;" [(ngModel)]="dataItem.fildonViCoSoId" [isCreateKH]="true" (changeDV)="changeDonVi($event)" [isSearch]="true" #donViId id="donViId" name="donViId"></don-vi-co-so-auto>
+                        <validation-custom [sModel]="dataItem.donViCoSoId" [nativeElement]="donViId"></validation-custom>
+                    </nz-form-control>
+                </div> -->
+        <div nz-col class="gutter-row ord-form-control" [nzSm]="8" [nzXs]="12">
+          <nz-form-label nzRequired>Họ và tên <span class="font-red"> *</span></nz-form-label>
+          <nz-form-control>
+            <input nz-input [(ngModel)]="dataItem.hoTen" #hoTen />
+            <validation-custom [sModel]="dataItem.hoTen" [sMaxLength]="200" [nativeElement]="hoTen"></validation-custom>
+          </nz-form-control>
+        </div>
+
+        <div nz-col class="gutter-row ord-form-control" [nzSm]="8" [nzXs]="12">
+          <nz-form-label> Điện thoại </nz-form-label>
+          <nz-form-control>
+            <input nz-input class="ord-dynamic-input" [(ngModel)]="dataItem.soDienThoai" #soDienThoai />
+            <validation-custom
+              [sModel]="dataItem.soDienThoai"
+              [sMaxLength]="30"
+              [sType]="typeValidate.Phone"
+              [isNotValidateNullOrEmpty]="true"
+              [nativeElement]="soDienThoai"
+            ></validation-custom>
+          </nz-form-control>
+        </div>
+        <div nz-col class="gutter-row ord-form-control" [nzSm]="8" [nzXs]="12">
+          <nz-form-label> Email</nz-form-label>
+          <nz-form-control>
+            <input nz-input type="email" class="ord-dynamic-input" [(ngModel)]="dataItem.email" #email />
+            <validation-custom
+              *ngIf="dataItem.email"
+              [sModel]="dataItem.email"
+              [sMaxLength]="500"
+              [sType]="typeValidate.Email"
+              [nativeElement]="email"
+            ></validation-custom>
+          </nz-form-control>
+        </div>
+
+        <div nz-col class="gutter-row ord-form-control" [nzSm]="12" [nzXs]="12">
+          <nz-form-label nzRequired>Tên đăng nhập <span class="font-red"> *</span></nz-form-label>
+          <nz-form-control>
+            <input nz-input class="ord-dynamic-input" [(ngModel)]="dataItem.userName" #userName />
+            <validation-custom [sModel]="dataItem.userName" [nativeElement]="userName" [sMaxLength]="100"> </validation-custom>
+          </nz-form-control>
+        </div>
+        <div nz-col class="gutter-row ord-form-control" [nzSm]="12" [nzXs]="12" *ngIf="!dataItem.id">
+          <nz-form-label [nzRequired]="!dataItem.id">Mật khẩu <span class="font-red"> *</span></nz-form-label>
+          <nz-form-control>
+            <ord-pwd [(password)]="dataItem.matKhau" #matKhau></ord-pwd>
+            <validation-custom [sModel]="dataItem.matKhau" [sType]="typeValidate.PassWord" [nativeElement]="matKhau"> </validation-custom>
+          </nz-form-control>
+        </div>
+        <div nz-col class="gutter-row ord-form-control" [nzSm]="12" [nzXs]="12" *ngIf="dataItem.id">
+          <nz-form-label></nz-form-label>
+          <nz-form-control>
+            <label nz-checkbox [(ngModel)]="dataItem.isDoiMatKhau">Đổi mật khẩu</label>
+          </nz-form-control>
+        </div>
+        <div nz-col class="gutter-row ord-form-control" [nzSm]="12" [nzXs]="12" *ngIf="dataItem.isDoiMatKhau">
+          <nz-form-control>
+            <nz-form-label>Mật khẩu <span class="font-red"> *</span></nz-form-label>
+            <nz-form-control>
+              <ord-pwd [(password)]="dataItem.matKhau" #matKhau></ord-pwd>
+              <validation-custom [sModel]="dataItem.matKhau" [sType]="typeValidate.PassWord" [nativeElement]="matKhau"> </validation-custom>
+            </nz-form-control>
+          </nz-form-control>
+        </div>
+        <div nz-col class="gutter-row ord-form-control" [nzSm]="12" [nzXs]="12" *ngIf="dataItem.isDoiMatKhau">
+          <nz-form-label [nzRequired]="!dataItem.id">Nhập lại mật khẩu <span class="font-red"> *</span></nz-form-label>
+          <nz-form-control>
+            <ord-pwd [(password)]="dataItem.matKhauNhapLai" #matKhauNhapLai></ord-pwd>
+            <validation-custom
+              [sModel]="dataItem.matKhauNhapLai"
+              [sType]="typeValidate.PassWord"
+              [nativeElement]="matKhauNhapLai"
+            ></validation-custom>
+          </nz-form-control>
+        </div>
+      </div>
+    </nz-tab>
+    <nz-tab [nzTitle]="VaiTroTemplate">
+      <ng-template #VaiTroTemplate>
+        Vai trò
+        <nz-badge nzStandalone [nzCount]="lengthRolesActive" ></nz-badge>
+      </ng-template>
+      <div style="padding-left: 5px">
+        <div style="margin-bottom: 8px" *ngFor="let role of roles">
+          <label attr.for="EditUser_{{ role.ma }}" class="checkbox">
+            <input id="EditUser_{{ role.ma }}" type="checkbox" name="{{ role.ma }}" [(ngModel)]="role.isActive" />
+            {{ role.ten }}
+          </label>
+        </div>
+      </div>
+    </nz-tab>
+    <nz-tab [nzTitle]="PhongBanTemplate">
+      <ng-template #PhongBanTemplate>
+        Phòng ban
+        <!-- <nz-badge nzStandalone [nzCount]="lengthRolesActive" [nzStyle]="{ backgroundColor: '#52c41a' }"></nz-badge> -->
+      </ng-template>
+      <!-- <nz-tree [nzData]="arrPhongBan" #nzTreeComponent nzCheckable [nzCheckStrictly]="true" [nzCheckedKeys]="onInitPhongBanId"></nz-tree> -->
+
+      <nz-tree #nzTreeComponent [nzData]="arrPhongBan" nzCheckable [nzCheckedKeys]="onInitPhongBanId" [nzCheckStrictly]="true"></nz-tree>
+    </nz-tab>
+  </nz-tabset>
+</div>
+
+<nz-form-item *nzModalFooter>
+  <nz-form-control>
+    <div>
+      <btn-add-item typeBtn="primary" (clickEvent)="save()" icon="save" title="Lưu" text="Lưu"></btn-add-item>
+      <btn-add-item typeBtn="secondary" (clickEvent)="close()" icon="close" title="Đóng" text="Đóng"> </btn-add-item>
+    </div>
+  </nz-form-control>
+</nz-form-item>
+<style>
+  .divider-title {
+    border-bottom: 1px dashed #c1c1c1;
+    color: #193550;
+    font-weight: bold;
+    font-size: 16px;
+    padding-left: 10px;
+    margin: 10px 0px;
+  }
+</style>

@@ -1,0 +1,17 @@
+<nz-tabset [nzTabPosition]="'left'" nzType="card" >
+  <nz-tab *ngFor="let p of per" [nzTitle]="tabTitleTpl">
+    <ng-template #tabTitleTpl>
+      <nz-badge [nzOffset]="[20, 8]" [nzCount]="p.count">
+       <span class="head-example"> {{ p.title }}</span>
+      </nz-badge>
+    </ng-template>
+    <nz-tree
+      #nzTreeComponent
+      [nzCheckStrictly]="checkStrictly"
+      (nzCheckBoxChange)="checkboxChange($event)"
+      [nzData]="p.listTreePermission"
+      nzCheckable
+      nzMultiple
+    ></nz-tree>
+  </nz-tab>
+</nz-tabset>

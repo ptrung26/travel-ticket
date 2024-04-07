@@ -1,0 +1,38 @@
+<form nz-form #form [formGroup]="rfFormGroup" nzLayout="horizontal" (keyup.enter)="save()">
+  <nz-form-item>
+    <nz-form-label [nzSm]="8" nzRequired>Mã</nz-form-label>
+    <nz-form-control [nzSm]="16" [nzErrorTip]="ErrorTpl">
+      <input nz-input formControlName="ma" />
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSm]="8" nzRequired>Tên</nz-form-label>
+    <nz-form-control [nzSm]="16" [nzErrorTip]="ErrorTpl">
+      <input nz-input formControlName="ten" />
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSm]="8">Mặc định</nz-form-label>
+    <nz-form-control [nzSm]="16" [nzErrorTip]="ErrorTpl">
+      <label nz-checkbox formControlName="isDefault"></label>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSm]="8">Cấp độ</nz-form-label>
+    <nz-form-control [nzSm]="16" [nzErrorTip]="ErrorTpl">
+      <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Chọn cấp độ" formControlName="level">
+        <nz-option *ngFor="let l of levels" [nzLabel]="l.displayText" [nzValue]="+l.value"></nz-option>
+      </nz-select>
+    </nz-form-control>
+  </nz-form-item>
+  <div *nzModalFooter>
+    <button type="button" nz-button nzType="default" (click)="close()">{{ 'Close' | translate }}</button>
+    <button type="button" nz-button nzType="primary" (click)="save()">
+      <i nz-icon nzType="save"></i>{{ 'Save' | translate }}
+    </button>
+  </div>
+</form>
+<ng-template #ErrorTpl let-control>
+  <ng-container *ngIf="control.hasError('required')"> {{ 'Error_Required' | translate }} </ng-container>
+</ng-template>
+

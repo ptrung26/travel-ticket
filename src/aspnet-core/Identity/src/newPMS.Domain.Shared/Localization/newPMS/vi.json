@@ -1,0 +1,31 @@
+﻿{
+  "Culture": "vi-VN",
+  "Texts": {
+    "Menu:Home": "Trang chủ",
+    "Menu:ContactUs": "Liên hệ",
+    "Menu:ArticleSample": "Article Sample",
+    "Home": "Trang chủ",
+    "Welcome": "Chào mừng",
+    "LongWelcomeMessage": "Chào mừng các bạn đến với Hệ thống tư vấn thông minh về dinh dưỡng và vệ sinh an toàn thực phẩm",
+    "EndDate": "Ngày kết thúc",
+    "StartDate": "Ngày bắt đầu",
+    "Permission:Dashboard": "Bàn làm việc",
+    "Menu:Dashboard": "Bàn làm việc",
+    "Menu:HomePage": "Trang chủ",
+    "Dashboard": "Bàn làm việc",
+    "ExternalProvider:Google": "Google",
+    "ExternalProvider:Google:ClientId": "Client ID",
+    "ExternalProvider:Google:ClientSecret": "Client Secret",
+    "ExternalProvider:Microsoft": "Microsoft",
+    "ExternalProvider:Microsoft:ClientId": "Client ID",
+    "ExternalProvider:Microsoft:ClientSecret": "Client Secret",
+    "ExternalProvider:Twitter": "Twitter",
+    "ExternalProvider:Twitter:ConsumerKey": "Consumer Key",
+    "ExternalProvider:Twitter:ConsumerSecret": "Consumer Secret",
+    "NewsletterHeader": "Subscribe to the newsletter!",
+    "NewsletterInfo": "Get information about the latest happenings.",
+    "NewsletterPreference_Default": "Default Newsletter",
+    "NewsletterPrivacyAcceptMessage": "Tôi đồng ý với <a href='/privacy-policy'>Chính sách bảo mật</a>.",
+    "Register": "Đăng ký"
+  }
+}

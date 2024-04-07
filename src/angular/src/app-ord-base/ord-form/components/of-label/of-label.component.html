@@ -1,0 +1,12 @@
+<ng-container *ngIf="show">
+  <nz-form-label *ngIf="isVerticalLayout; else tplHorizontalLabel">
+    <span class="font-weight-500" [innerHTML]="labelHtml"></span>
+    <span class="font-red ml-1" *ngIf="required"> *</span>
+  </nz-form-label>
+  <ng-template #tplHorizontalLabel>
+    <nz-form-label  [nzSm]="24" [nzXs]="24">
+      <span class="font-weight-500" [style.fontSize]="fontSize" [innerHTML]="labelHtml"></span>
+      <span class="font-red" *ngIf="required"> *</span>
+    </nz-form-label>
+  </ng-template>
+</ng-container>

@@ -1,0 +1,10 @@
+<div class="form-group">
+    <btn-upload-file #uploadBtn [(fileHopLe)]="fileHopLe" (selectFileSuccessEvent)="readFileHandler($event)" [listOfLoaiFile]="['xlsx', 'xls']"></btn-upload-file>
+</div>
+<div class="form-group">
+    <p><span class="text-danger font-weight-bolder  margin-right-5">(*)</span> Để upload dữ liệu được chính xác nhất, vui lòng điền thông tin theo mẫu file bên dưới. Xin cảm ơn! </p>
+    <span class="font-weight-bolder"><i class="fa fa-download kt-margin-r-5"></i>
+      <a *ngIf="!IsCustomFromServer" [href]="'/assets/sampleFiles/' + urlSampleFile"> Tải file mẫu tại đây</a>
+      <a *ngIf="IsCustomFromServer" (click)="eventChange.emit()"> Tải file mẫu tại đây</a>
+    </span>
+</div>

@@ -1,0 +1,42 @@
+<form nz-form #form [formGroup]="rfDataModal" nzLayout="horizontal">
+  <nz-form-item nzGutter="6">
+    <nz-form-label [nzSm]="8" nzRequired>Tỉnh/Thành phố</nz-form-label>
+    <nz-form-control [nzSm]="16" nzErrorTip="{{ 'Error_Required' | translate }}">
+      <ora-select formControlName="tinhId" dirTinh></ora-select>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item nzGutter="6">
+    <nz-form-label [nzSm]="8" nzRequired>Quận/Huyện</nz-form-label>
+    <nz-form-control [nzSm]="16" nzErrorTip="{{ 'Error_Required' | translate }}">
+      <ora-select formControlName="huyenId" dirHuyen [tinhId]="rfDataModal.get('tinhId').value"></ora-select>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSm]="8" nzRequired>Mã Xã/Phường</nz-form-label>
+    <nz-form-control [nzSm]="16" [nzErrorTip]="XaIdErrorTpl">
+      <input [maxLength]="10" nz-input formControlName="id" [readOnly]="dataItem?.id" />
+    </nz-form-control>
+    <ng-template #XaIdErrorTpl let-control>
+      <ng-container *ngIf="control.hasError('required')"> {{ 'Error_Required' | translate }} </ng-container>
+      <ng-container *ngIf="control.hasError('IsXaIdExist')"> Mã xã đã tồn tại !</ng-container>
+    </ng-template>
+  </nz-form-item>
+  <nz-form-item nzGutter="6">
+    <nz-form-label [nzSm]="8" nzRequired>Tên Xã/Phường</nz-form-label>
+    <nz-form-control [nzSm]="16" nzErrorTip="{{ 'Error_Required' | translate }}">
+      <input [maxLength]="200" nz-input formControlName="ten" />
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label nzFor="cap" [nzSm]="8">Cấp</nz-form-label>
+    <nz-form-control [nzSm]="16">
+      <input [maxLength]="200" nz-input formControlName="cap" />
+    </nz-form-control>
+  </nz-form-item>
+  <div *nzModalFooter>
+    <button type="button" nz-button nzType="default" (click)="close()">{{ 'Close' | translate }}</button>
+    <button type="button" [nzLoading]="saving" nz-button nzType="primary" (click)="formSubmit$.next(rfDataModal.status)">
+      <i nz-icon nzType="save"></i>{{ 'Save' | translate }}
+    </button>
+  </div>
+</form>

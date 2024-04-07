@@ -1,0 +1,28 @@
+<ora-table
+  [rows]="dataList"
+  [isLoading]="isTableLoading"
+  [totalRows]="totalItems"
+  [(pageSize)]="pageSize"
+  [(page)]="pageNumber"
+  (pageSizeChange)="refresh()"
+  (pageChange)="pageNumberChange()"
+  (sortChange)="gridSort($event)"
+>
+  <ora-column align="center" header="STT" width="50px">
+    <ng-template let-data oraCell>
+      {{ skipCount + dataList.indexOf(data) + 1 }}
+    </ng-template>
+  </ora-column>
+  <ora-column header="Người thực hiện" width="120px" key="tenNguoiThucHien"> </ora-column>
+  <ora-column header="Ảnh" width="70px" align="center" headerAlign="center">
+    <ng-template let-data oraCell>
+      <nz-avatar [nzSrc]="sourceAvatar + data.userId"  nzIcon="user"></nz-avatar>
+    </ng-template>
+  </ora-column>
+  <ora-column header="Hành động" key="hanhDong" width="270px"></ora-column>
+  <ora-column header="Ngày thực hiện" headerAlign="right" align="right" width="120px">
+    <ng-template let-data oraCell>
+      {{ data.creationTime | date: 'HH:mm - dd/MM/yyyy' }}
+    </ng-template>
+  </ora-column>
+</ora-table>

@@ -1,0 +1,53 @@
+<div #container class="container show-controls">
+  <div class="wrapper">
+    <div #videoTimeline class="video-timeline">
+      <div class="progress-area">
+        <span>00:00</span>
+        <div #progressBar class="progress-bar"></div>
+      </div>
+    </div>
+    <ul class="video-controls">
+      <li class="options left">
+        <button type="button" class="volume">
+          <span #volume nz-icon nzType="ora:volume" nzTheme="outline"></span>
+          <span #mute class="hidden" nz-icon nzType="ora:volume-mute" nzTheme="outline"></span>
+        </button>
+        <input #input type="range" min="0" max="1" step="any" />
+        <div class="video-timer">
+          <p #currentTime class="current-time">00:00</p>
+          <p class="separator">/</p>
+          <p #videoDuration class="video-duration">00:00</p>
+        </div>
+      </li>
+      <li class="options center">
+        <button type="button" class="skip-backward"><span #backward nz-icon nzType="backward" nzTheme="outline"></span></button>
+        <button type="button" class="play-pause">
+          <span #play class="hidden" nz-icon nzType="caret-right" nzTheme="outline"></span>
+          <span #pause nz-icon nzType="ora:pause" nzTheme="outline"></span>
+        </button>
+        <button type="button" class="skip-forward"><span #forward nz-icon nzType="forward" nzTheme="outline"></span></button>
+      </li>
+      <li class="options right">
+        <div class="playback-content">
+          <button type="button" class="playback-speed">
+            <span #playbackSpeed nz-icon nzType="ora:slowmotion" nzTheme="outline"></span>
+          </button>
+          <ul #speedOptions class="speed-options">
+            <li data-speed="2">2x</li>
+            <li data-speed="1.5">1.5x</li>
+            <li data-speed="1" class="active">Normal</li>
+            <li data-speed="0.75">0.75x</li>
+            <li data-speed="0.5">0.5x</li>
+          </ul>
+        </div>
+        <button type="button" class="pic-in-pic">
+          <span #picInPic nz-icon nzType="ora:pic-in-pic" nzTheme="outline"></span>
+        </button>
+        <button type="button" class="fullscreen">
+          <span #fullscreen nz-icon nzType="ora:expand" nzTheme="outline"></span>
+        </button>
+      </li>
+    </ul>
+  </div>
+  <video #video></video>
+</div>

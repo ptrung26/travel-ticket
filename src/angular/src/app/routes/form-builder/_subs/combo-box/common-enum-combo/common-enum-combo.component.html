@@ -1,0 +1,20 @@
+
+<nz-select
+  nzShowSearch
+  nzServerSearch
+  [nzAllowClear]="nzAllowClear"
+  nzPlaceHolder="{{ placeHolder }}"
+  [nzMaxTagCount]="nzMaxTagCount"
+  [nzMode]="nzMode"
+  [(ngModel)]="_value"
+  [nzSize]="size"
+  [style.fontSize]="fontSize"
+  [nzDisabled]="_isDisabled"
+  (nzFocus)="(onFocus)"
+  style="width: 100%"
+  (ngModelChange)="onChangeValue($event); emitItemSelected()"
+  (nzOnSearch)="search($event)"
+>
+
+  <nz-option *ngFor="let item of optionList; trackBy: trackByFn" [nzLabel]="item.displayText" [nzValue]="item.value"></nz-option>
+</nz-select>

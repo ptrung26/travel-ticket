@@ -1,0 +1,69 @@
+<div class="text-right column-select-show" *ngIf="showBtnSelectColums === true">
+  <app-btn-list-show-columns-config [columns]="columns" (columnsToDisplay)="columnsToDisplay = $event">
+  </app-btn-list-show-columns-config>
+</div>
+<div class="ord-data-table" tabindex="-1" (keydown)="pressUpDownKeyChangeSelectRow($event)">
+  <!--table -->
+  <nz-table [nzData]="nzTable.items" [nzFrontPagination]="false"
+    [nzNoResult]="customizeNotResult ? nzNoResultTpl : undefined" [nzLoading]="nzTable.loading"
+    [nzTotal]="nzTable.totalCount" [nzShowPagination]="false" [nzBordered]="bordered" [nzScroll]="tblScroll">
+    <thead>
+      <tr>
+        <th nzWidth="50px" nzAlign="center" [nzLeft]="true">
+          <span> STT</span>
+        </th>
+        <ng-container *ngFor="let col of columns; trackBy: trackByFn; let idxColData = index">
+          <ng-container *ngIf="!col.hiddenColumn">
+            <th *ngIf="idxColData | showColumn: showBtnSelectColums:columnsToDisplay" nzWidth="{{ col.width + 'px' }}"
+              nzAlign="{{col.cellAlign}}" [nzLeft]="col.nzLeft" [nzShowSort]="col.sortField? true : false"
+              (nzSortOrderChange)='sortChange(col.sortField,$event)'>
+              <span *ngIf="col.isCheckbox == false"> {{ col.header }}</span>
+              <label [(ngModel)]="isCheckAll" (ngModelChange)="checkAllEvent.emit(isCheckAll)" nz-checkbox
+                *ngIf="col.isCheckbox == true"></label>
+            </th>
+          </ng-container>
+        </ng-container>
+
+        <th nzWidth="111px" nzAlign="center" *ngIf="arrActionsIsAnyItem === true" nzRight>
+          <span>Thao tác</span>
+        </th>
+      </tr>
+    </thead>
+
+    <tbody *ngFor="let record of nzTable.items; trackBy: trackByFn; let i = index">
+      <tr [ngClass]="i === recordSelectedIdx ? 'ord-row-selected' : ''" (click)="onClickRow(i)"
+        (dblclick)="dbClickRowEvent.emit(record)">
+        <!--     stt col-->
+        <td nzAlign="center" [nzLeft]="true">
+          {{ nzTable.getSkipCount() + i + 1 }}
+        </td>
+        <!--    col thông tin-->
+        <ng-container *ngFor="let col of columns; trackBy: trackByFn; let idxColData = index">
+          <td [title]="record[col.dataField]" [nzEllipsis]="col.isEllipsis"
+            *ngIf="(idxColData | showColumn: showBtnSelectColums:columnsToDisplay) && !col.hiddenColumn"
+            [nzAlign]="col.cellAlign" [nzLeft]="col.nzLeft">
+            <ng-container *ngIf="!col.cellTemplate">{{ record[col.dataField] }}</ng-container>
+            <ng-template *ngIf="col.cellTemplate" [ngTemplateOutlet]="col.cellTemplate"
+              [ngTemplateOutletContext]="{ $implicit: { value: record[col.dataField] }, record: record }"></ng-template>
+          </td>
+        </ng-container>
+        <!-- col action -->
+        <td nzAlign="center" *ngIf="arrActionsIsAnyItem">
+          <ord-datatable-action-cell [actions]="actions" [record]="record"></ord-datatable-action-cell>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+</div>
+<div class="ord-pagination" *ngIf="showPagination">
+  <app-ord-pagination [ordSize]="ordPaginationSize" [(pageIndex)]="nzTable.pageIndex" [(pageSize)]="nzTable.pageSize"
+    [totalCount]="nzTable.totalCount" [pageSizeOptions]="nzTable.defaultPageOptions"
+    (pageIndexChange)="getGridDataSource()" (refreshData)="getGridDataSource()"
+    (pageSizeChange)="this.nzTable.shouldResetPaging(true); getGridDataSource()"></app-ord-pagination>
+</div>
+
+<ng-template #nzNoResultTpl let-name>
+  <div style="text-align: center">
+    <ng-content select="[noDataContent]"></ng-content>
+  </div>
+</ng-template>

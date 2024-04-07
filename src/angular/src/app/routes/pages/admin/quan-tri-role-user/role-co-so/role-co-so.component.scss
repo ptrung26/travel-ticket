@@ -1,0 +1,51 @@
+
+.box-permisison-role {
+  min-height: 50vh;
+  padding: 12px;
+  overflow-y: auto;
+  background: #fff;
+  border-radius: 4px;
+}
+
+.ant-tabs-card.ant-tabs-left > .ant-tabs-nav .ant-tabs-tab + .ant-tabs-tab{
+  margin: 7px 0 0 0 !important;
+}
+
+.ant-tabs-card.ant-tabs-left > .ant-tabs-nav .ant-tabs-tab {
+  padding-right: 34px;
+}
+
+.ant-tabs-card.ant-tabs-left > .ant-tabs-nav .ant-tabs-tab-active {
+  position: relative;
+  border-radius: 0 !important;
+
+  &::before {
+    position: absolute;
+    content: '';
+    top: 0px;
+    left: 0px;
+    width: 4px;
+    height: 100%;
+    background-color: #3795d0;
+  }
+
+  .head-example {
+    color: #3795d0 !important;
+  }
+}
+
+.ant-tree-list {
+  max-height: 75vh;
+  overflow-y: auto;
+}
+
+.active-text {
+  color: #3795d0;
+  font-weight: 600;
+}
+.p-2 {
+  padding-bottom: 8px;
+}
+.mx-3 {
+  margin: 0 12px;
+}

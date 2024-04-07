@@ -1,0 +1,35 @@
+:host {
+  .folder-upload {
+    margin-left: 8px;
+  }
+
+  .btn-group {
+    display: flex;
+    justify-content: space-evenly;
+  }
+
+  .form-group {
+    display: flex;
+    justify-content: space-between;
+
+    .ant-col {
+      flex: none !important;
+    }
+
+    input {
+      width: 32px !important;
+    }
+
+    .ant-btn-group {
+      &:first-child {
+        margin-right: 10px;
+      }
+
+      &:last-child {
+        margin-left: 10px;
+      }
+
+    }
+  }
+
+}

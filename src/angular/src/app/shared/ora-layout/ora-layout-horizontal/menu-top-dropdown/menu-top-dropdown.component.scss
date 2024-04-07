@@ -1,0 +1,85 @@
+:host ::ng-deep {
+  .max-width-200 {
+    max-width: 200px;
+  }
+
+  .ant-tabs[tabLayout] {
+    .ant-tabs-tab {
+      padding: 8px 4px !important;
+      margin-bottom: 0;
+    }
+
+    & > .ant-tabs-nav .ant-tabs-nav-list {
+      padding: 16px;
+      background-color: #e2f5fc;
+      border-radius: 0 0 0 8px;
+    }
+
+    .ant-tabs-tabpane {
+      padding-left: 0 !important;
+    }
+
+    .ant-tabs-tab-btn {
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 21px;
+    }
+
+    & > .ant-tabs-nav {
+      border-right: 1px solid #88d4f2;
+    }
+
+    .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
+      background-color: #45b7e9;
+      color: #fff;
+      border-radius: 4px;
+      padding: 8px 6px;
+
+      a {
+        color: #fff;
+      }
+    }
+
+    .ant-tabs-ink-bar {
+      display: none;
+    }
+
+    .content {
+      padding: 24px 0 12px 26px;
+
+      a {
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 21px;
+        color: #151719;
+        text-decoration: none;
+        min-width: 300px;
+        display: inline-block;
+        position: relative;
+        cursor: pointer;
+
+        &::before {
+          position: absolute;
+          content: '';
+          left: -12px;
+          top: 50%;
+          transform: translateY(-50%);
+          width: 6px;
+          height: 6px;
+          background-color: #7ba2cb;
+          border-radius: 100%;
+        }
+      }
+    }
+
+    .nav-item {
+      margin-bottom: 12px;
+    }
+
+    .active-nav {
+      color: #45b7e9 !important;
+      font-weight: 500 !important;
+    }
+  }
+}

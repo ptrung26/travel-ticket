@@ -1,0 +1,73 @@
+<div nz-row [nzGutter]="[24, 6]">
+  <ng-container *ngFor="let control of listOfFormItems; trackBy: trackByDataField">
+    <div nz-col class="gutter-row ord-form-control {{ control?.classCss }}" [nzSpan]="control.width" [nzXs]="control.widthMobile"
+    [nzLg]="control.width" *ngIf="dataForm | showFormControl: control">
+      <section *ngIf="layout === 'vertical'" class="ord-vertical-form">
+        <of-label [label]="control?.label" [labelHtml]="control?.labelHtml" [required]="control?.required"></of-label>
+        <of-form-switch
+          [control]="control"
+          [dataForm]="dataForm"
+          [valueOfControl]="dataForm[control?.dataField]"
+          [listOfFormItems]="listOfFormItems"
+          urlUploadFile="urlUploadFile"
+          [dynamicFormItemTemplate]="dynamicFormItemTemplate"
+          (resetSearchEvent)="resetSearchEvent.emit()"
+          (searchEvent)="searchEvent.emit()"
+          [submitted]="submitted"
+          [keyControlElementId]="keyControlElementId"
+        ></of-form-switch>
+      </section>
+      <section *ngIf="layout === 'horizontal'" class="ord-horizontal-form">
+        <div nz-row>
+          <div nz-col [nzSm]="10" [nzXs]="24" style="text-align: right; padding-right: 5px; margin-bottom: 5px">
+            <of-label [fontSize]="control?.fontSize" [label]="control?.label" [labelHtml]="control?.labelHtml" [required]="control?.required" [isVerticalLayout]="false"></of-label>
+          </div>
+          <div nz-col [nzSm]="14" [nzXs]="24">
+            <of-form-switch
+              [control]="control"
+              [dataForm]="dataForm"
+              [valueOfControl]="dataForm[control?.dataField]"
+              [listOfFormItems]="listOfFormItems"
+              urlUploadFile="urlUploadFile"
+              [dynamicFormItemTemplate]="dynamicFormItemTemplate"
+              (resetSearchEvent)="resetSearchEvent.emit()"
+              (searchEvent)="searchEvent.emit()"
+              [submitted]="submitted"
+              [keyControlElementId]="keyControlElementId"
+            ></of-form-switch>
+          </div>
+        </div>
+        <!-- <nz-form-item>
+          <of-label [label]="control?.label" [labelHtml]="control?.labelHtml" [required]="control?.required" [isVerticalLayout]="false"></of-label>
+          <nz-form-control [nzSm]="15" [nzXs]="24">
+            <of-form-switch
+              [control]="control"
+              [dataForm]="dataForm"
+              [valueOfControl]="dataForm[control?.dataField]"
+              [listOfFormItems]="listOfFormItems"
+              urlUploadFile="urlUploadFile"
+              [dynamicFormItemTemplate]="dynamicFormItemTemplate"
+              (resetSearchEvent)="resetSearchEvent.emit()"
+              (searchEvent)="searchEvent.emit()"
+              [submitted]="submitted"
+              [keyControlElementId]="keyControlElementId"
+            ></of-form-switch>
+          </nz-form-control>
+        </nz-form-item> -->
+      </section>
+    </div>
+  </ng-container>
+  <!-- <div *ngIf="hasBtnSearchBottom" nz-col class="gutter-row ord-form-control" [nzSpan]="6">
+    <button nz-button nzType="primary" class="margin-top-27" (click)="searchEvent.emit()">Tìm kiếm</button>
+    <button nz-button nzType="default" class="margin-top-27" (click)="resetSearchEvent.emit()">Đặt lại</button>
+  </div> -->
+</div>
+<validate-ord-dynamic-form
+  #formValidView
+  [listOfFormItems]="listOfFormItems"
+  [(dataForm)]="dataForm"
+  (dataFormChange)="onChangeDataOfForm($event)"
+  [focusFirstItem]="focusFirstItem"
+  [keyControlElementId]="keyControlElementId"
+  [(submitted)]="submitted"
+></validate-ord-dynamic-form>

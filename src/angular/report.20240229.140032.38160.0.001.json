@@ -1,0 +1,620 @@
+
+{
+  "header": {
+    "reportVersion": 1,
+    "event": "Allocation failed - JavaScript heap out of memory",
+    "trigger": "FatalError",
+    "filename": "report.20240229.140032.38160.0.001.json",
+    "dumpEventTime": "2024-02-29T14:00:32Z",
+    "dumpEventTimeStamp": "1709190032902",
+    "processId": 38160,
+    "cwd": "D:\\qcc-hcm\\src\\angular",
+    "commandLine": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Program Files\\JetBrains\\WebStorm 2023.3\\plugins\\javascript-impl\\jsLanguageServicesImpl\\js-language-service.js",
+      "-id=1709172475209",
+      "-debug-name=typescript",
+      "--pluginProbeLocations",
+      "C:\\Program Files\\JetBrains\\WebStorm 2023.3\\plugins\\javascript-impl\\jsLanguageServicesImpl\\typescript,D:\\qcc-hcm\\src\\angular",
+      "--globalPlugins",
+      "tsc-ide-plugin"
+    ],
+    "nodejsVersion": "v12.11.0",
+    "wordSize": 64,
+    "arch": "x64",
+    "platform": "win32",
+    "componentVersions": {
+      "node": "12.11.0",
+      "v8": "7.7.299.11-node.12",
+      "uv": "1.32.0",
+      "zlib": "1.2.11",
+      "brotli": "1.0.7",
+      "ares": "1.15.0",
+      "modules": "72",
+      "nghttp2": "1.39.2",
+      "napi": "5",
+      "llhttp": "1.1.4",
+      "http_parser": "2.8.0",
+      "openssl": "1.1.1c",
+      "cldr": "35.1",
+      "icu": "64.2",
+      "tz": "2019a",
+      "unicode": "12.1"
+    },
+    "release": {
+      "name": "node",
+      "headersUrl": "https://nodejs.org/download/release/v12.11.0/node-v12.11.0-headers.tar.gz",
+      "sourceUrl": "https://nodejs.org/download/release/v12.11.0/node-v12.11.0.tar.gz",
+      "libUrl": "https://nodejs.org/download/release/v12.11.0/win-x64/node.lib"
+    },
+    "osName": "Windows_NT",
+    "osRelease": "10.0.19043",
+    "osVersion": "Windows 10 Pro",
+    "osMachine": "x86_64",
+    "cpus": [
+      {
+        "model": "Intel(R) Xeon(R) CPU E5-2683 v4 @ 2.10GHz",
+        "speed": 2095,
+        "user": 35200250,
+        "nice": 0,
+        "sys": 29641656,
+        "idle": 848206343,
+        "irq": 957062
+      },
+      {
+        "model": "Intel(R) Xeon(R) CPU E5-2683 v4 @ 2.10GHz",
+        "speed": 2095,
+        "user": 28043156,
+        "nice": 0,
+        "sys": 18898546,
+        "idle": 866106437,
+        "irq": 366843
+      },
+      {
+        "model": "Intel(R) Xeon(R) CPU E5-2683 v4 @ 2.10GHz",
+        "speed": 2095,
+        "user": 162166953,
+        "nice": 0,
+        "sys": 31316703,
+        "idle": 719564390,
+        "irq": 715609
+      },
+      {
+        "model": "Intel(R) Xeon(R) CPU E5-2683 v4 @ 2.10GHz",
+        "speed": 2095,
+        "user": 36018265,
+        "nice": 0,
+        "sys": 11967640,
+        "idle": 865062187,
+        "irq": 343218
+      },
+      {
+        "model": "Intel(R) Xeon(R) CPU E5-2683 v4 @ 2.10GHz",
+        "speed": 2095,
+        "user": 64752703,
+        "nice": 0,
+        "sys": 19758250,
+        "idle": 828537187,
+        "irq": 632562
+      },
+      {
+        "model": "Intel(R) Xeon(R) CPU E5-2683 v4 @ 2.10GHz",
+        "speed": 2095,
+        "user": 22950265,
+        "nice": 0,
+        "sys": 10975328,
+        "idle": 879122515,
+        "irq": 371734
+      },
+      {
+        "model": "Intel(R) Xeon(R) CPU E5-2683 v4 @ 2.10GHz",
+        "speed": 2095,
+        "user": 51774937,
+        "nice": 0,
+        "sys": 16268859,
+        "idle": 845004312,
+        "irq": 589765
+      },
+      {
+        "model": "Intel(R) Xeon(R) CPU E5-2683 v4 @ 2.10GHz",
+        "speed": 2095,
+        "user": 27708218,
+        "nice": 0,
+        "sys": 8523187,
+        "idle": 876816703,
+        "irq": 442343
+      },
+      {
+        "model": "Intel(R) Xeon(R) CPU E5-2683 v4 @ 2.10GHz",
+        "speed": 2095,
+        "user": 40792750,
+        "nice": 0,
+        "sys": 13837734,
+        "idle": 858417328,
+        "irq": 570000
+      },
+      {
+        "model": "Intel(R) Xeon(R) CPU E5-2683 v4 @ 2.10GHz",
+        "speed": 2095,
+        "user": 27244671,
+        "nice": 0,
+        "sys": 8085625,
+        "idle": 877717781,
+        "irq": 494078
+      },
+      {
+        "model": "Intel(R) Xeon(R) CPU E5-2683 v4 @ 2.10GHz",
+        "speed": 2095,
+        "user": 46081921,
+        "nice": 0,
+        "sys": 17918750,
+        "idle": 849047390,
+        "irq": 685578
+      },
+      {
+        "model": "Intel(R) Xeon(R) CPU E5-2683 v4 @ 2.10GHz",
+        "speed": 2095,
+        "user": 23389843,
+        "nice": 0,
+        "sys": 7268078,
+        "idle": 882390140,
+        "irq": 421562
+      },
+      {
+        "model": "Intel(R) Xeon(R) CPU E5-2683 v4 @ 2.10GHz",
+        "speed": 2095,
+        "user": 35272468,
+        "nice": 0,
+        "sys": 18001578,
+        "idle": 859773984,
+        "irq": 847578
+      },
+      {
+        "model": "Intel(R) Xeon(R) CPU E5-2683 v4 @ 2.10GHz",
+        "speed": 2095,
+        "user": 27103375,
+        "nice": 0,
+        "sys": 7982468,
+        "idle": 877962218,
+        "irq": 498187
+      },
+      {
+        "model": "Intel(R) Xeon(R) CPU E5-2683 v4 @ 2.10GHz",
+        "speed": 2095,
+        "user": 43572125,
+        "nice": 0,
+        "sys": 18644468,
+        "idle": 850831390,
+        "irq": 737187
+      },
+      {
+        "model": "Intel(R) Xeon(R) CPU E5-2683 v4 @ 2.10GHz",
+        "speed": 2095,
+        "user": 22200968,
+        "nice": 0,
+        "sys": 6957531,
+        "idle": 883889578,
+        "irq": 402890
+      },
+      {
+        "model": "Intel(R) Xeon(R) CPU E5-2683 v4 @ 2.10GHz",
+        "speed": 2095,
+        "user": 49291703,
+        "nice": 0,
+        "sys": 15683781,
+        "idle": 848072546,
+        "irq": 698750
+      },
+      {
+        "model": "Intel(R) Xeon(R) CPU E5-2683 v4 @ 2.10GHz",
+        "speed": 2095,
+        "user": 19795828,
+        "nice": 0,
+        "sys": 5574500,
+        "idle": 887677734,
+        "irq": 399765
+      },
+      {
+        "model": "Intel(R) Xeon(R) CPU E5-2683 v4 @ 2.10GHz",
+        "speed": 2095,
+        "user": 48428640,
+        "nice": 0,
+        "sys": 13642015,
+        "idle": 850977359,
+        "irq": 629062
+      },
+      {
+        "model": "Intel(R) Xeon(R) CPU E5-2683 v4 @ 2.10GHz",
+        "speed": 2095,
+        "user": 20797656,
+        "nice": 0,
+        "sys": 6400875,
+        "idle": 885849515,
+        "irq": 398812
+      },
+      {
+        "model": "Intel(R) Xeon(R) CPU E5-2683 v4 @ 2.10GHz",
+        "speed": 2095,
+        "user": 46712984,
+        "nice": 0,
+        "sys": 14686593,
+        "idle": 851648468,
+        "irq": 684906
+      },
+      {
+        "model": "Intel(R) Xeon(R) CPU E5-2683 v4 @ 2.10GHz",
+        "speed": 2095,
+        "user": 18842968,
+        "nice": 0,
+        "sys": 5871703,
+        "idle": 888333359,
+        "irq": 410750
+      },
+      {
+        "model": "Intel(R) Xeon(R) CPU E5-2683 v4 @ 2.10GHz",
+        "speed": 2095,
+        "user": 49635484,
+        "nice": 0,
+        "sys": 24295031,
+        "idle": 839117515,
+        "irq": 5122859
+      },
+      {
+        "model": "Intel(R) Xeon(R) CPU E5-2683 v4 @ 2.10GHz",
+        "speed": 2095,
+        "user": 19769328,
+        "nice": 0,
+        "sys": 5636031,
+        "idle": 887642656,
+        "irq": 403906
+      },
+      {
+        "model": "Intel(R) Xeon(R) CPU E5-2683 v4 @ 2.10GHz",
+        "speed": 2095,
+        "user": 47209187,
+        "nice": 0,
+        "sys": 14285453,
+        "idle": 851553328,
+        "irq": 676093
+      },
+      {
+        "model": "Intel(R) Xeon(R) CPU E5-2683 v4 @ 2.10GHz",
+        "speed": 2095,
+        "user": 19679921,
+        "nice": 0,
+        "sys": 6881703,
+        "idle": 886486375,
+        "irq": 408203
+      },
+      {
+        "model": "Intel(R) Xeon(R) CPU E5-2683 v4 @ 2.10GHz",
+        "speed": 2095,
+        "user": 34982093,
+        "nice": 0,
+        "sys": 12478484,
+        "idle": 865587406,
+        "irq": 549359
+      },
+      {
+        "model": "Intel(R) Xeon(R) CPU E5-2683 v4 @ 2.10GHz",
+        "speed": 2095,
+        "user": 19527328,
+        "nice": 0,
+        "sys": 5943109,
+        "idle": 887577546,
+        "irq": 416656
+      },
+      {
+        "model": "Intel(R) Xeon(R) CPU E5-2683 v4 @ 2.10GHz",
+        "speed": 2095,
+        "user": 32312750,
+        "nice": 0,
+        "sys": 13134718,
+        "idle": 867600484,
+        "irq": 603515
+      },
+      {
+        "model": "Intel(R) Xeon(R) CPU E5-2683 v4 @ 2.10GHz",
+        "speed": 2095,
+        "user": 19172906,
+        "nice": 0,
+        "sys": 5931093,
+        "idle": 887944000,
+        "irq": 451281
+      },
+      {
+        "model": "Intel(R) Xeon(R) CPU E5-2683 v4 @ 2.10GHz",
+        "speed": 2095,
+        "user": 29589171,
+        "nice": 0,
+        "sys": 13493953,
+        "idle": 869964812,
+        "irq": 594906
+      },
+      {
+        "model": "Intel(R) Xeon(R) CPU E5-2683 v4 @ 2.10GHz",
+        "speed": 2095,
+        "user": 17926796,
+        "nice": 0,
+        "sys": 6773359,
+        "idle": 888347828,
+        "irq": 401578
+      }
+    ],
+    "networkInterfaces": [
+      {
+        "name": "Ethernet",
+        "internal": false,
+        "mac": "00:e0:4f:21:bc:4b",
+        "address": "fe80::68e7:88e2:9896:c9ac",
+        "netmask": "ffff:ffff:ffff:ffff::",
+        "family": "IPv6",
+        "scopeid": 15
+      },
+      {
+        "name": "Ethernet",
+        "internal": false,
+        "mac": "00:e0:4f:21:bc:4b",
+        "address": "192.168.5.66",
+        "netmask": "255.255.255.0",
+        "family": "IPv4"
+      },
+      {
+        "name": "Loopback Pseudo-Interface 1",
+        "internal": true,
+        "mac": "00:00:00:00:00:00",
+        "address": "::1",
+        "netmask": "ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff",
+        "family": "IPv6",
+        "scopeid": 0
+      },
+      {
+        "name": "Loopback Pseudo-Interface 1",
+        "internal": true,
+        "mac": "00:00:00:00:00:00",
+        "address": "127.0.0.1",
+        "netmask": "255.0.0.0",
+        "family": "IPv4"
+      }
+    ],
+    "host": "Admin"
+  },
+  "javascriptStack": {
+    "message": "No stack.",
+    "stack": [
+      "Unavailable."
+    ]
+  },
+  "nativeStack": [
+    {
+      "pc": "0x00007ff6c52b7539",
+      "symbol": "std::basic_ostream<char,std::char_traits<char> >::operator<<+10873"
+    },
+    {
+      "pc": "0x00007ff6c52bb8cc",
+      "symbol": "std::basic_ostream<char,std::char_traits<char> >::operator<<+28172"
+    },
+    {
+      "pc": "0x00007ff6c52ba878",
+      "symbol": "std::basic_ostream<char,std::char_traits<char> >::operator<<+23992"
+    },
+    {
+      "pc": "0x00007ff6c53a8c0b",
+      "symbol": "v8::base::CPU::has_sse+37563"
+    },
+    {
+      "pc": "0x00007ff6c5ba9aee",
+      "symbol": "v8::Isolate::ReportExternalAllocationLimitReached+94"
+    },
+    {
+      "pc": "0x00007ff6c5b91b31",
+      "symbol": "v8::SharedArrayBuffer::Externalize+833"
+    },
+    {
+      "pc": "0x00007ff6c5a5f4bc",
+      "symbol": "v8::internal::Heap::EphemeronKeyWriteBarrierFromCode+1436"
+    },
+    {
+      "pc": "0x00007ff6c5a6a860",
+      "symbol": "v8::internal::Heap::ProtectUnprotectedMemoryChunks+1312"
+    },
+    {
+      "pc": "0x00007ff6c5a67394",
+      "symbol": "v8::internal::Heap::PageFlagsAreConsistent+3204"
+    },
+    {
+      "pc": "0x00007ff6c5a5cc23",
+      "symbol": "v8::internal::Heap::CollectGarbage+1283"
+    },
+    {
+      "pc": "0x00007ff6c5a5b3f4",
+      "symbol": "v8::internal::Heap::AddRetainedMap+2356"
+    },
+    {
+      "pc": "0x00007ff6c5a7c6c5",
+      "symbol": "v8::internal::Factory::NewFillerObject+53"
+    },
+    {
+      "pc": "0x00007ff6c57e8e99",
+      "symbol": "v8::internal::interpreter::JumpTableTargetOffsets::iterator::operator=+4057"
+    },
+    {
+      "pc": "0x00007ff6c5fd580d",
+      "symbol": "v8::internal::SetupIsolateDelegate::SetupHeap+567949"
+    },
+    {
+      "pc": "0x00000098678890d3",
+      "symbol": ""
+    }
+  ],
+  "javascriptHeap": {
+    "totalMemory": 2160099328,
+    "totalCommittedMemory": 2160099328,
+    "usedMemory": 2128878264,
+    "availableMemory": 40824728,
+    "memoryLimit": 2197815296,
+    "heapSpaces": {
+      "read_only_space": {
+        "memorySize": 262144,
+        "committedMemory": 262144,
+        "capacity": 261872,
+        "used": 32296,
+        "available": 229576
+      },
+      "new_space": {
+        "memorySize": 2097152,
+        "committedMemory": 2097152,
+        "capacity": 1047488,
+        "used": 361392,
+        "available": 686096
+      },
+      "old_space": {
+        "memorySize": 1941286912,
+        "committedMemory": 1941286912,
+        "capacity": 1915017568,
+        "used": 1913871968,
+        "available": 1145600
+      },
+      "code_space": {
+        "memorySize": 7766016,
+        "committedMemory": 7766016,
+        "capacity": 6689376,
+        "used": 6689376,
+        "available": 0
+      },
+      "map_space": {
+        "memorySize": 1052672,
+        "committedMemory": 1052672,
+        "capacity": 751200,
+        "used": 751200,
+        "available": 0
+      },
+      "large_object_space": {
+        "memorySize": 207585280,
+        "committedMemory": 207585280,
+        "capacity": 207168480,
+        "used": 207168480,
+        "available": 0
+      },
+      "code_large_object_space": {
+        "memorySize": 49152,
+        "committedMemory": 49152,
+        "capacity": 3552,
+        "used": 3552,
+        "available": 0
+      },
+      "new_large_object_space": {
+        "memorySize": 0,
+        "committedMemory": 0,
+        "capacity": 1047488,
+        "used": 0,
+        "available": 1047488
+      }
+    }
+  },
+  "resourceUsage": {
+    "userCpuSeconds": 986.031,
+    "kernelCpuSeconds": 38.375,
+    "cpuConsumptionPercent": 5.83474,
+    "maxRss": 2208993280,
+    "pageFaults": {
+      "IORequired": 3654364,
+      "IONotRequired": 0
+    },
+    "fsActivity": {
+      "reads": 120809,
+      "writes": 114890
+    }
+  },
+  "libuv": [
+  ],
+  "environmentVariables": {
+    "": "::=::\\",
+    "": "C:=C:\\",
+    "ALLUSERSPROFILE": "C:\\ProgramData",
+    "APPDATA": "C:\\Users\\Admin\\AppData\\Roaming",
+    "COLORTERM": "true",
+    "CommonProgramFiles": "C:\\Program Files\\Common Files",
+    "CommonProgramFiles(x86)": "C:\\Program Files (x86)\\Common Files",
+    "CommonProgramW6432": "C:\\Program Files\\Common Files",
+    "COMPUTERNAME": "ADMIN",
+    "ComSpec": "C:\\Windows\\system32\\cmd.exe",
+    "DEBUG_COLORS": "true",
+    "DriverData": "C:\\Windows\\System32\\Drivers\\DriverData",
+    "FORCE_COLOR": "true",
+    "HOMEDRIVE": "C:",
+    "HOMEPATH": "\\Users\\Admin",
+    "IDEA_INITIAL_DIRECTORY": "C:\\Program Files\\JetBrains\\WebStorm 2023.3\\bin",
+    "LOCALAPPDATA": "C:\\Users\\Admin\\AppData\\Local",
+    "LOGONSERVER": "\\\\ADMIN",
+    "MOCHA_COLORS": "1",
+    "npm_config_color": "always",
+    "NUMBER_OF_PROCESSORS": "32",
+    "OneDrive": "C:\\Users\\Admin\\OneDrive",
+    "OS": "Windows_NT",
+    "Path": "C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Windows\\System32\\OpenSSH\\;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Program Files\\Microsoft SQL Server\\150\\Tools\\Binn\\;C:\\Program Files\\Microsoft SQL Server\\Client SDK\\ODBC\\170\\Tools\\Binn\\;C:\\Program Files\\dotnet\\;C:\\Program Files (x86)\\Microsoft SQL Server\\160\\Tools\\Binn\\;C:\\Program Files\\Microsoft SQL Server\\160\\Tools\\Binn\\;C:\\Program Files\\Microsoft SQL Server\\160\\DTS\\Binn\\;C:\\Program Files (x86)\\Microsoft SQL Server\\160\\DTS\\Binn\\;C:\\Program Files\\Azure Data Studio\\bin;C:\\Users\\Admin\\node_modules\\@angular\\cli\\bin;C:\\Users\\Admin\\node_modules;C:\\Program Files\\Git\\cmd;C:\\Program Files\\nodejs\\;C:\\Program Files\\Microsoft SQL Server\\130\\Tools\\Binn\\;C:\\Program Files (x86)\\dotnet\\;C:\\Users\\Admin\\AppData\\Local\\Microsoft\\WindowsApps;C:\\Users\\Admin\\.dotnet\\tools;C:\\Program Files\\Azure Data Studio\\bin;C:\\Users\\Admin\\AppData\\Local\\Programs\\Microsoft VS Code\\bin;C:\\Users\\Admin\\node_modules\\@angular\\cli\\bin;C:\\Users\\Admin\\node_modules;C:\\Users\\Admin\\AppData\\Roaming\\npm",
+    "PATHEXT": ".COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC",
+    "PROCESSOR_ARCHITECTURE": "AMD64",
+    "PROCESSOR_IDENTIFIER": "Intel64 Family 6 Model 79 Stepping 1, GenuineIntel",
+    "PROCESSOR_LEVEL": "6",
+    "PROCESSOR_REVISION": "4f01",
+    "ProgramData": "C:\\ProgramData",
+    "ProgramFiles": "C:\\Program Files",
+    "ProgramFiles(x86)": "C:\\Program Files (x86)",
+    "ProgramW6432": "C:\\Program Files",
+    "PSModulePath": "C:\\Program Files\\WindowsPowerShell\\Modules;C:\\Windows\\system32\\WindowsPowerShell\\v1.0\\Modules;C:\\Program Files (x86)\\Microsoft SQL Server\\160\\Tools\\PowerShell\\Modules\\",
+    "PUBLIC": "C:\\Users\\Public",
+    "SESSIONNAME": "Console",
+    "SystemDrive": "C:",
+    "SystemRoot": "C:\\Windows",
+    "TEMP": "C:\\Users\\Admin\\AppData\\Local\\Temp",
+    "TMP": "C:\\Users\\Admin\\AppData\\Local\\Temp",
+    "TS_TSLINT_ENABLE_WORKSPACE_LIBRARY_EXECUTION": "true",
+    "USERDOMAIN": "ADMIN",
+    "USERDOMAIN_ROAMINGPROFILE": "ADMIN",
+    "USERNAME": "Admin",
+    "USERPROFILE": "C:\\Users\\Admin",
+    "windir": "C:\\Windows"
+  },
+  "sharedObjects": [
+    "C:\\Program Files\\nodejs\\node.exe",
+    "C:\\Windows\\SYSTEM32\\ntdll.dll",
+    "C:\\Windows\\System32\\KERNEL32.DLL",
+    "C:\\Windows\\System32\\KERNELBASE.dll",
+    "C:\\Windows\\System32\\WS2_32.dll",
+    "C:\\Windows\\System32\\RPCRT4.dll",
+    "C:\\Windows\\SYSTEM32\\dbghelp.dll",
+    "C:\\Windows\\System32\\ADVAPI32.dll",
+    "C:\\Windows\\System32\\ucrtbase.dll",
+    "C:\\Windows\\System32\\msvcrt.dll",
+    "C:\\Windows\\System32\\sechost.dll",
+    "C:\\Windows\\System32\\USER32.dll",
+    "C:\\Windows\\System32\\win32u.dll",
+    "C:\\Windows\\System32\\GDI32.dll",
+    "C:\\Windows\\System32\\gdi32full.dll",
+    "C:\\Windows\\System32\\msvcp_win.dll",
+    "C:\\Windows\\System32\\PSAPI.DLL",
+    "C:\\Windows\\System32\\CRYPT32.dll",
+    "C:\\Windows\\System32\\bcrypt.dll",
+    "C:\\Windows\\SYSTEM32\\IPHLPAPI.DLL",
+    "C:\\Windows\\SYSTEM32\\USERENV.dll",
+    "C:\\Windows\\SYSTEM32\\WINMM.dll",
+    "C:\\Windows\\System32\\IMM32.DLL",
+    "C:\\Windows\\SYSTEM32\\powrprof.dll",
+    "C:\\Windows\\SYSTEM32\\UMPDC.dll",
+    "C:\\Windows\\system32\\uxtheme.dll",
+    "C:\\Windows\\System32\\combase.dll",
+    "C:\\Windows\\system32\\mswsock.dll",
+    "C:\\Windows\\SYSTEM32\\kernel.appcore.dll",
+    "C:\\Windows\\System32\\bcryptprimitives.dll",
+    "C:\\Windows\\System32\\NSI.dll",
+    "C:\\Windows\\SYSTEM32\\dhcpcsvc6.DLL",
+    "C:\\Windows\\SYSTEM32\\dhcpcsvc.DLL",
+    "C:\\Windows\\SYSTEM32\\DNSAPI.dll",
+    "C:\\Windows\\system32\\napinsp.dll",
+    "C:\\Windows\\system32\\pnrpnsp.dll",
+    "C:\\Windows\\system32\\wshbth.dll",
+    "C:\\Windows\\system32\\NLAapi.dll",
+    "C:\\Windows\\System32\\winrnr.dll"
+  ]
+}

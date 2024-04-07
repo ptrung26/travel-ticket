@@ -1,0 +1,87 @@
+<ora-page-header title="Tỉnh/Thành phố" [action]="actionHeader">
+  <ng-template #actionHeader>
+    <button nz-button (click)="deleteAll()"><i nz-icon nzType="delete"></i>Xóa tất cả</button>
+    <dropdown-up-excel
+      class="margin-left-10"
+      (onUpload)="onClickUpload($event)"
+      urlMauFile="/assets/templateFile/ImportDanhMucTinh.xlsx"
+      [itemMenu1]="excelMenu1"
+    >
+      <ng-template #excelMenu1>
+        <button nz-button (click)="exportExcel()"><i nz-icon nzType="export" nzTheme="outline"></i> Xuất Excel</button>
+      </ng-template>
+    </dropdown-up-excel>
+    <button nz-button nzType="primary" (click)="showCreateOrEditModal()"><i nz-icon nzType="plus-circle"></i>Thêm mới</button>
+  </ng-template>
+</ora-page-header>
+
+<div class="box-filter">
+  <nz-row nzGutter="8" [formGroup]="rfFormGroup">
+    <nz-col nzLg="8" nzSm="12">
+      <input formControlName="filter" (keydown.enter)="refresh()" nz-input placeholder="Nhập tên tỉnh hoặc mã tỉnh để tìm kiếm" />
+    </nz-col>
+    <nz-col nzLg="2" nzMd="4">
+      <button nz-button nzType="primary" (click)="refresh()">Tìm kiếm</button>
+    </nz-col>
+  </nz-row>
+</div>
+
+<nz-table
+  style="margin-top: 12px"
+  [nzData]="dataList"
+  nzShowSizeChanger
+  [nzFrontPagination]="false"
+  [nzLoading]="isTableLoading"
+  [nzTotal]="totalItems"
+  [nzShowTotal]="totalTpl"
+  [(nzPageIndex)]="pageNumber"
+  [(nzPageSize)]="pageSize"
+  nzBordered="true"
+  (nzPageIndexChange)="pageNumberChange()"
+  (nzPageSizeChange)="refresh()"
+>
+  <thead (nzSortOrderChange)="gridSort($event)">
+    <tr>
+      <th nzAlign="center" width="10px">STT</th>
+      <th nzAlign="center" width="100px">Thao tác</th>
+      <th nzShowSort [nzSortFn]="true" nzColumnKey="ma">Mã tỉnh/thành phố</th>
+      <th nzShowSort [nzSortFn]="true" nzColumnKey="ten">Tên tỉnh/thành phố</th>
+      <th nzShowSort [nzSortFn]="true" nzColumnKey="cap">Cấp</th>
+      <th nzShowSort [nzSortFn]="true" nzColumnKey="phanVung">Phân vùng</th>
+      <th nzAlign="center" width="100px">Tỉnh gần</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let dataItem of dataList; index as i">
+      <td nzAlign="center">{{ skipCount + i + 1 }}</td>
+      <td nzAlign="center">
+        <a nz-button nzType="link" nz-tooltip="{{ 'Edit' | translate }}" (click)="showCreateOrEditModal(dataItem)">
+          <i nz-icon nzType="edit"></i>
+        </a>
+        <a nz-button nzType="link" nzDanger nz-tooltip="{{ 'Delete' | translate }}" (click)="delete(dataItem)">
+          <i nz-icon nzType="delete"></i>
+        </a>
+      </td>
+      <td>
+        {{ dataItem.ma }}
+      </td>
+      <td>
+        {{ dataItem.ten }}
+      </td>
+      <td>
+        {{ dataItem.cap }}
+      </td>
+      <td>
+        {{ dataItem.phanVungStr }}
+      </td>
+      <td nzAlign="center">
+        <a (click)="changeTinhGan(dataItem)">
+          <nz-switch [(ngModel)]="dataItem.isTinhGan" style="pointer-events: none"></nz-switch>
+        </a>
+      </td>
+    </tr>
+  </tbody>
+</nz-table>
+<ng-template #totalTpl let-range="range" let-total>
+  <span class="kt-font-primary kt-font-bold">Tổng số bản ghi: {{ total }}</span>
+</ng-template>

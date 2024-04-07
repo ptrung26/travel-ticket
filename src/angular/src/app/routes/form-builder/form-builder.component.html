@@ -1,0 +1,53 @@
+<ng-container [ngSwitch]="formType">
+  <app-common-enum-combo
+    *ngSwitchCase="'common-enum'"
+    [control]="formItem"
+    [isMulti]="formItem.option.isMultiSelect"
+    [disabled]="formItem.disabled"
+    [(ngModel)]="dataForm[formItem.dataField]"
+    [typeEnum]="typeEnumCommon"
+    [size]="formItem.size"
+    [fontSize]="formItem.fontSize"
+    [placeHolder]="formItem.placeholder"
+    (itemSelectedEmit)="onChangeItemSelected($event)"
+  ></app-common-enum-combo>
+  <app-data-from-db-combo
+    *ngSwitchCase="'data-from-db-select'"
+    [control]="formItem"
+    [isMulti]="formItem.option.isMultiSelect"
+    [nzMaxTagCount]="formItem.option.nzMaxTagCount"
+    [disabled]="formItem.disabled"
+    [(ngModel)]="dataForm[formItem.dataField]"
+    [placeHolder]="formItem.placeholder"
+    [tableName]="comboDataFromDbConfig.tableName"
+    [hasAllOptions]="formItem.hasAllOptions"
+    [fontSize]="formItem.fontSize"
+    [size]="formItem.size"
+    [cascader]="dataForm[formItem.option.cascaderField]"
+    [isLoadByCascader]="comboDataFromDbConfig.isLoadByCascader"
+    [isLoadWhenInit]="comboDataFromDbConfig.isLoadWhenInit"
+    (itemSelectedEmit)="onChangeItemSelected($event)"
+  ></app-data-from-db-combo>
+
+  <app-tree-view-select
+    *ngSwitchCase="'tree-view-select'"
+    [isMulti]="formItem.option.isMultiSelect"
+    [control]="formItem"
+    [placeHolder]="formItem.placeholder"
+    [disabled]="formItem.disabled"
+    [(ngModel)]="dataForm[formItem.dataField]"
+    [placeHolder]="formItem.placeholder"
+    [size]="formItem.size"
+    [fontSize]="formItem.fontSize"
+    [tableName]="comboDataFromDbConfig.tableName"
+    [cascader]="dataForm[formItem.option.cascaderField]"
+    [isLoadByCascader]="comboDataFromDbConfig.isLoadByCascader"
+    [isLoadWhenInit]="comboDataFromDbConfig.isLoadWhenInit"
+    (itemSelectedEmit)="onChangeItemSelected($event)"
+  ></app-tree-view-select>
+  <fb-switch-ac *ngSwitchCase="'switch-auto-compelete'" [dataForm]="dataForm" [valueOfDataField]="dataForm[formItem.dataField]" [disabled]="formItem.disabled" [formItem]="formItem"></fb-switch-ac>
+
+
+
+</ng-container>
+<ng-container #dynamicComponent></ng-container>

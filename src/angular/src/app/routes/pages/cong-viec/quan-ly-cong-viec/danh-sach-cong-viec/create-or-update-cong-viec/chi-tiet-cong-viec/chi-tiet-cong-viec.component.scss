@@ -1,0 +1,38 @@
+:host::ng-deep {
+    .form {
+        background: #f2f2f2;
+        border-radius: 8px;
+        padding: 0px 10px 0px 8px;
+        margin-right: 20px;
+        color: black;
+    }
+
+    .infomation {
+        display: flex;
+        justify-content: space-around;
+
+        i:hover {
+            cursor: pointer;
+        }
+    }
+
+    .formadd {
+        width: 99%;
+    }
+
+    .show-time {
+
+        width: 100%;
+        margin-top: 10px;
+        height: 30px;
+        border-radius: 8px;
+        border: 0.1px solid;
+        /* align-items: center; */
+        text-align: center;
+        /* align-self: center; */
+        line-height: 30px;
+        font-size: 18px;
+        background: rgba(255, 255, 255, 0.996);
+
+    }
+}

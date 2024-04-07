@@ -1,0 +1,73 @@
+.root {
+  flex-flow: row;
+  margin: 0 0 10px !important;
+  background-color: white;
+  border-radius: 3px;
+  .col-filter {
+    text-align: center;
+  }
+
+  .col-content {
+    padding: 5px;
+    border-right: 1px solid #ecedf3;
+    border-left: 1px solid #ecedf3;
+  }
+
+  .col-action {
+    text-align: center;
+
+    .btn-search {
+      color: white;
+      background-color: #00719f;
+      border: 1px solid #00719f;
+
+      &:hover {
+        color: #00719f;
+        background-color: #fff;
+      }
+    }
+  }
+}
+//
+//:host  {
+//  ::ng-deep {
+//    .ora-layout-filter {
+//      display: flex;
+//      flex-wrap: wrap;
+//      align-items: center;
+//
+//      .search-btn {
+//        padding: 0 34px;
+//        height: 48px;
+//        display: inline-flex;
+//        align-items: center;
+//        justify-content: center;
+//        background: #255586;
+//        box-shadow: 0 2px 4px 0 rgba(44, 39, 56, 0.08), 0 1px 2px 0 rgba(44, 39, 56, 0.08);
+//        margin-left: 8px;
+//        font-size: 16px;
+//        font-weight: 600;
+//        border-radius: 8px;
+//        color: #fff;
+//      }
+//
+//      .ant-input {
+//        height: 48px;
+//        width: 100%;
+//      }
+//    }
+//  }
+//
+//  .icon {
+//    width: 48px;
+//    height: 48px;
+//    display: inline-flex;
+//    align-items: center;
+//    justify-content: center;
+//    border-radius: 10px;
+//    border: 1px solid #AEB0B3;
+//    margin-right: 8px;
+//  }
+//}
+
+

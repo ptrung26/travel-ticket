@@ -1,0 +1,21 @@
+<nz-tabset [nzSelectedIndex]="tabIndex" tabLayout nzTabPosition="left">
+  <nz-tab *ngFor="let menu of listMenu" [nzTitle]="tplTitle">
+    <ng-template #tplTitle>
+      <ng-container *ngIf="menu.link">
+        <span [routerLink]="menu?.link" (click)="handleClick()"> {{ menu.text }} </span>
+      </ng-container>
+      <ng-container *ngIf="!menu.link">
+        {{ menu.text }}
+      </ng-container>
+    </ng-template>
+    <div class="content" *ngIf="menu?.children?.length" [ngStyle]="{ 'max-width.px': caculateMaxWidth(menu?.children?.length) }">
+      <div nz-row nzGutter="24">
+        <ng-container *ngFor="let child of menu?.children">
+          <div class="nav-item" nz-col [nzSpan]="getColMenu(menu?.children?.length)">
+            <a [routerLink]="child?.link" [routerLinkActive]="'active-nav'" (click)="handleClick()"> {{ child.text }} </a>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </nz-tab>
+</nz-tabset>

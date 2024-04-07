@@ -1,0 +1,69 @@
+<div [id]="control?.dataField | elementIdControl:keyControlElementId">
+  <ng-container [ngSwitch]="control?.type">
+    <!--template-->
+    <ng-container *ngSwitchCase="'note'" style="width: 100%;">
+      <span [innerHTML]="control.dataNote"></span>
+    </ng-container>
+    <ng-container *ngSwitchCase="'template'" [ngTemplateOutlet]="dynamicFormItemTemplate"
+      [ngTemplateOutletContext]="{dataForm: dataForm,formItem: control}"></ng-container>
+    <ord-base-control-text-area *ngSwitchCase="'textarea'" [dataForm]="dataForm" [allControls]="listOfFormItems"
+      [control]="control"></ord-base-control-text-area>
+    <ord-base-control-text *ngSwitchCase="'text'" [dataForm]="dataForm" [allControls]="listOfFormItems"
+      [control]="control"></ord-base-control-text>
+    <ord-base-control-only-number *ngSwitchCase="'only-number'" [dataForm]="dataForm" [allControls]="listOfFormItems"
+      [control]="control"></ord-base-control-only-number>
+    <ord-base-control-select *ngSwitchCase="'select'" [dataForm]="dataForm" [allControls]="listOfFormItems"
+      [control]="control"></ord-base-control-select>
+    <ord-base-control-check-box *ngSwitchCase="'check-box'" [dataForm]="dataForm" [allControls]="listOfFormItems"
+      [control]="control"></ord-base-control-check-box>
+    <ord-base-control-switch *ngSwitchCase="'switch'" [dataForm]="dataForm" [allControls]="listOfFormItems"
+      [control]="control"></ord-base-control-switch>
+    <ord-base-control-radio *ngSwitchCase="'radio'" [dataForm]="dataForm" [allControls]="listOfFormItems"
+      [control]="control"></ord-base-control-radio>
+    <!-- <ord-non-dynamic-date-picker *ngSwitchCase="'date'" [dataForm]="dataForm" [allControls]="listOfFormItems"
+      [control]="control"></ord-non-dynamic-date-picker> -->
+    <ord-base-control-date-picker *ngSwitchCase="'date'" [dataForm]="dataForm" [allControls]="listOfFormItems"
+      [control]="control"></ord-base-control-date-picker>
+    <ord-base-control-date-picker *ngSwitchCase="'year'" [dataForm]="dataForm" [allControls]="listOfFormItems"
+      [control]="control"></ord-base-control-date-picker>
+    <ord-date-picker-range *ngSwitchCase="'date-ranger'" [dataForm]="dataForm" [allControls]="listOfFormItems"
+      [control2]="control"></ord-date-picker-range>
+    <ord-base-control-date-month-picker *ngSwitchCase="'month'" [dataForm]="dataForm" [allControls]="listOfFormItems"
+      [control]="control"></ord-base-control-date-month-picker>
+    <ord-base-control-hour-text *ngSwitchCase="'hour'" [dataForm]="dataForm" [allControls]="listOfFormItems"
+      [control]="control"></ord-base-control-hour-text>
+    <ord-base-control-currency *ngSwitchCase="'currency'" [dataForm]="dataForm" [allControls]="listOfFormItems"
+      [control]="control"></ord-base-control-currency>
+    <ord-base-control-number *ngSwitchCase="'number'" [dataForm]="dataForm" [allControls]="listOfFormItems"
+      [control]="control"></ord-base-control-number>
+    <ord-base-control-pwd *ngSwitchCase="'password'" [dataForm]="dataForm" [allControls]="listOfFormItems"
+      [control]="control"></ord-base-control-pwd>
+    <ord-base-control-file *ngSwitchCase="'file'" [dataForm]="dataForm" [allControls]="listOfFormItems"
+      [control]="control" [urlUploadFile]="urlUploadFile"></ord-base-control-file>
+    <!--input-with-search-->
+    <input-with-search-icon *ngSwitchCase="'input-with-search'" [searchModel]="dataForm"
+      [placeholder]="control.placeholder" (searchEvent)="searchEvent.emit()"
+      (resetSearchEvent)="resetSearchEvent.emit()"></input-with-search-icon>
+    <!--form-builder-->
+    <dynamic-form-builder *ngSwitchCase="'form-builder'" [dataForm]="dataForm" [formItem]="control">
+    </dynamic-form-builder>
+
+    <!--form-custom-->
+    <ord-combo-extension *ngSwitchCase="'form-ext'" [dataForm]="dataForm" [control]="control">
+    </ord-combo-extension>
+
+    <search-button *ngSwitchCase="'search-button'" (searchEvent)="searchEvent.emit()"
+      (resetSearchEvent)="resetSearchEvent.emit()"></search-button>
+    <ng-container *ngSwitchCase="'templateRef'">
+      <ng-container [ngTemplateOutlet]="control.templateRef"
+        [ngTemplateOutletContext]="{control:control,data:dataForm, df: control.dataField}"></ng-container>
+    </ng-container>
+
+  </ng-container>
+</div>
+<ng-container *ngIf="submitted">
+  <span *ngIf="control?.message" class="form-control-err" [innerHTML]="control?.message"></span>
+</ng-container>
+<span class="margin-top-5" *ngIf="control.infoBottomControlHtml">
+  <span [innerHTML]="control.infoBottomControlHtml"></span>
+</span>

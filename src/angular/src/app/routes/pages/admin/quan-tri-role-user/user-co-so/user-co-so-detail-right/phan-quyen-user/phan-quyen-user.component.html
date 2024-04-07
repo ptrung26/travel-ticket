@@ -1,0 +1,44 @@
+<div class="row margin-top-10 margin-bottom-10">
+  <div class="col-md-7">
+    <h4>Danh sách quyền</h4>
+  </div>
+  <div class="col-md-5 text-right" *ngIf="showSaveBtn()">
+    <button nz-button nzType="primary" nzSize="small" (click)="luuPhanQuyen()">
+      <i nz-icon nzType="save"></i>Lưu phân quyền
+    </button>
+  </div>
+</div>
+<nz-table [nzData]="listOfRole"
+          nzBordered
+          [nzShowPagination]="false">
+  <thead>
+  <tr>
+    <th nzWidth="50px">
+      <label nz-checkbox [(ngModel)]="isAllCheck" (ngModelChange)="onChangeCheckAll($event)"></label>
+    </th>
+    <th nzWidth="130px">Mã</th>
+    <th>Tên</th>
+    <th nzWidth="120px">Thao tác</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let data of listOfRole">
+    <td nzAlign="center">
+      <label nz-checkbox [(ngModel)]="data.isCheck" (ngModelChange)="onChangeCheckItem()"></label>
+    </td>
+    <td>{{ data.ma }}</td>
+    <td>
+      {{ data.ten }}
+      <span class="badge badge-secondary  margin-left-20" *ngIf="data?.isStatic">Quyền chung</span>
+      <span class="badge badge-primary margin-left-20" *ngIf="data?.isAdminTuyen">Quản trị</span>
+    </td>
+    <td nzAlign="center">
+      <button nz-button nzType="primary" nzShape="circle" nzSize="small"
+              nz-tooltip nzTooltipTitle="Xem quyền chức năng"
+              (click)="viewPermission(data)">
+        <i nz-icon nzType="info" nzTheme="outline"></i>
+      </button>
+    </td>
+  </tr>
+  </tbody>
+</nz-table>

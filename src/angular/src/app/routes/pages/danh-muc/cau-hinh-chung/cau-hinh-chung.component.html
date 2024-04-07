@@ -1,0 +1,57 @@
+<ora-page-header [action]="actionHeader" title="Cấu hình chung">
+  <ng-template #actionHeader>
+    <button (click)="showCreateOrEditModal()" nz-button nzType="primary">
+      <i nz-icon nzTheme="outline" nzType="plus-circle"></i>Thêm mới
+    </button>
+  </ng-template>
+</ora-page-header>
+<div class="box-filter">
+  <form [formGroup]="rfFormGroup" nz-form>
+    <nz-row nzGutter="8">
+      <nz-col nzLg="12" nzSm="12">
+        <input (keydown.enter)="refresh()" formControlName="filter" nz-input placeholder="Nhập mã, giá trị để tìm kiếm!" />
+      </nz-col>
+      <nz-col nzLg="2" nzSm="4">
+        <button (click)="refresh()" nz-button nzType="primary">Tìm kiếm</button>
+      </nz-col>
+    </nz-row>
+  </form>
+</div>
+<ora-table
+  [rows]="dataList"
+  [(page)]="pageNumber"
+  [(pageSize)]="pageSize"
+  [isLoading]="isTableLoading"
+  [totalRows]="totalItems"
+  (pageChange)="pageNumberChange()"
+  (pageSizeChange)="refresh()"
+  (sortChange)="gridSort($event)"
+>
+  <ora-column align="center" header="STT" width="50px">
+    <ng-template let-data oraCell>
+      {{ skipCount + dataList.indexOf(data) + 1 }}
+    </ng-template>
+  </ora-column>
+  <ora-column header="Mã" key="ma" width="200px"></ora-column>
+  <ora-column header="Giá trị" key="giaTri" width="250px"></ora-column>
+  <ora-column header="Từ ngày" width="120px">
+    <ng-template let-data oraCell>
+      {{ data.tuNgay ? data.tuNgay.toFormat('dd/MM/yyyy') : '' }}
+    </ng-template>
+  </ora-column>
+  <ora-column header="Đến ngày" width="120px">
+    <ng-template let-data oraCell>
+      {{ data.denNgay ? data.denNgay.toFormat('dd/MM/yyyy') : '' }}
+    </ng-template>
+  </ora-column>
+  <ora-column align="center" fixRight header="Thao tác" width="150px">
+    <ng-template let-data oraCell>
+      <a (click)="showCreateOrEditModal(data)" nz-button nz-tooltip="{{ 'Edit' | translate }}" nzType="link">
+        <i nz-icon nzType="edit"></i>
+      </a>
+      <a (click)="delete(data)" nz-button nz-tooltip="{{ 'Delete' | translate }}" nzDanger nzType="link">
+        <i nz-icon nzType="delete"></i>
+      </a>
+    </ng-template>
+  </ora-column>
+</ora-table>

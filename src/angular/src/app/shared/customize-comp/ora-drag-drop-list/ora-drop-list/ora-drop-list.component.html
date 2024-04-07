@@ -1,0 +1,25 @@
+<div
+  cdkDropList
+  #dropList="cdkDropList"
+  [cdkDropListData]="dataSource"
+  [cdkDropListConnectedTo]="$connectedTo | async"
+  [cdkDropListSortingDisabled]="sortingDisabled"
+  class="{{ type }}-drag-drop root-drag-drop"
+  [class.drop-list-empty]="showEmpty"
+  (cdkDropListEntered)="onEnter($event)"
+  (cdkDropListExited)="onEdited($event)"
+  (cdkDropListDropped)="drop($event)"
+>
+  <div [hidden]="!showEmpty" class="box-empty has-advanced-upload">
+    <div class="rain-brow"></div>
+    <div class="text">{{ emptyText }}</div>
+  </div>
+  <div class="{{ type }}-item-drag-drop custom" *ngFor="let item of dataSource" cdkDrag [cdkDragBoundary]="dragBoundary">
+    <ng-container *ngIf="usingCustomPlaceholder">
+      <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
+    </ng-container>
+    <ng-container *nzStringTemplateOutlet="content; context: { $implicit: item }">
+      {{ content }}
+    </ng-container>
+  </div>
+</div>

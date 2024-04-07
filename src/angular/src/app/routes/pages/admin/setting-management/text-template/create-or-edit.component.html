@@ -1,0 +1,12 @@
+<form nz-form #form [formGroup]="rfDataModal" nzLayout="horizontal">
+  <nz-form-item nzGutter="6">
+    <nz-form-label [nzSm]="4" nzRequired>Nội dung</nz-form-label>
+    <nz-form-control [nzSm]="20" nzErrorTip="Giá trị bắt buộc!">
+      <textarea nz-input rows="20" formControlName="content"></textarea>
+    </nz-form-control>
+  </nz-form-item>
+</form>
+<div *nzModalFooter>
+  <button type="button" nz-button nzType="default" (click)="close()">Đóng</button>
+  <button [nzLoading]="saving" nz-button nzType="primary" (click)="save()"><i nz-icon nzType="save"></i>Lưu</button>
+</div>

@@ -1,0 +1,47 @@
+name: OrdCore
+services:
+  # - name: auth-server
+  #   project: Identity/src/newPMS.Web/newPMS.Web.csproj
+  #   bindings:
+  #     - protocol: http
+  #       port: 16102
+  - name: danhmuc-server
+    project: modules/newPMS.DanhMuc/src/HttpApi.Host/newPMS.DanhMuc.HttpApi.Host.csproj
+    bindings:
+      - protocol: http
+        port: 3000
+  - name: taikhoan-server
+    project: modules/newPMS.QuanLyTaiKhoan/src/HttpApi.Host/newPMS.QuanLyTaiKhoan.HttpApi.Host.csproj
+    bindings:
+      - protocol: http
+        port: 3001
+  # - name: ngoaikiem-server
+  #   project: modules/newPMS.NgoaiKiem/src/HttpApi.Host/newPMS.NgoaiKiem.HttpApi.Host.csproj
+  #   bindings:
+  #     - protocol: http
+  #       port: 3002
+  # - name: kho-server
+  #   project: modules/newPMS.Kho/src/HttpApi.Host/newPMS.Kho.HttpApi.Host.csproj
+  #   bindings:
+  #     - protocol: http
+  #       port: 3003
+  # - name: hotro-server
+  #   project: modules/newPMS.HoTro/src/HttpApi.Host/newPMS.HoTro.HttpApi.Host.csproj
+  #   bindings:
+  #     - protocol: http
+  #       port: 3004
+  # - name: vanban-server
+  #   project: modules/newPMS.VanBan/src/HttpApi.Host/newPMS.VanBan.HttpApi.Host.csproj
+  #   bindings:
+  #     - protocol: http
+  #       port: 3005
+  # - name: daotao-server
+  #   project: modules/newPMS.DaoTao/src/HttpApi.Host/newPMS.DaoTao.HttpApi.Host.csproj
+  #   bindings:
+  #     - protocol: http
+  #       port: 3006
+  # - name: portal-server
+  #   project: modules/newPMS.Portal/src/HttpApi.Host/newPMS.Portal.HttpApi.Host.csproj
+  #   bindings:
+  #     - protocol: http
+  #       port: 3009

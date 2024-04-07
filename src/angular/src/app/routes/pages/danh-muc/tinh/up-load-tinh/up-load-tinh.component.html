@@ -1,0 +1,73 @@
+<form nz-form [formGroup]="rfDataModal" nzLayout="horizontal">
+  <nz-table nzTemplateMode>
+    <thead>
+      <tr>
+        <th nzAlign="center" width="80px">STT</th>
+        <th nzAlign="center">Xóa</th>
+        <th nzAlign="center">Lỗi</th>
+        <th nzAlign="center">Mã tỉnh</th>
+        <th nzAlign="center">Tên tỉnh</th>
+        <th nzAlign="center">Cấp</th>
+        <th nzAlign="center">Phân vùng</th>
+        <th nzAlign="center">Tỉnh gần</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let contr of datas.controls; index as i">
+        <tr [formGroup]="contr">
+          <td nzAlign="center">{{ i + 1 }}</td>
+          <td nzAlign="center">
+            <a nz-button nzType="link" nzDanger nz-tooltip="{{ 'Delete' | translate }}" (click)="removeItem(i)">
+              <i nz-icon nzType="delete"></i>
+            </a>
+          </td>
+          <td>
+            <ul class="text-error">
+              <li *ngFor="let e of contr.get('listError').value">{{ e }}</li>
+            </ul>
+          </td>
+          <td style="pointer-events: none">
+            <nz-form-item>
+              <nz-form-control nzErrorTip="Giá trị không được để trống!">
+                <input nz-input formControlName="ma" />
+              </nz-form-control>
+            </nz-form-item>
+          </td>
+          <td style="pointer-events: none">
+            <nz-form-item>
+              <nz-form-control nzErrorTip="Giá trị giá trị không được để trống!">
+                <input nz-input formControlName="ten" />
+              </nz-form-control>
+            </nz-form-item>
+          </td>
+          <td style="pointer-events: none">
+            <nz-form-item>
+              <nz-form-control nzErrorTip="Giá trị không được để trống!">
+                <input nz-input formControlName="cap" />
+              </nz-form-control>
+            </nz-form-item>
+          </td>
+          <td style="pointer-events: none">
+            <nz-form-item>
+              <nz-form-control>
+                <input nz-input formControlName="strPhanVung" />
+              </nz-form-control>
+            </nz-form-item>
+          </td>
+          <td style="pointer-events: none">
+            <nz-form-item>
+              <nz-form-control>
+                <input nz-input formControlName="strTinhGan" />
+              </nz-form-control>
+            </nz-form-item>
+          </td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </nz-table>
+</form>
+
+<div *nzModalFooter>
+  <button type="button" nz-button nzType="default" (click)="close()">Đóng</button>
+  <button [disabled]="rfDataModal.invalid || !datas?.length" type="button" nz-button nzType="primary" (click)="save()">Nhập dữ liệu</button>
+</div>

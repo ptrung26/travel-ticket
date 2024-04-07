@@ -1,0 +1,11 @@
+qccswap:
+ stage: qccswap
+ when: manual
+ tags:
+  - qcc-197
+ only:
+  - qa
+ script:
+    - kubectl apply -f ./src/aspnet-core/_docker/k8s-swap
+    - kubectl delete -f ./src/aspnet-core/_docker/k8s-swap
+    - kubectl apply -f ./src/aspnet-core/_docker/k8s-swap

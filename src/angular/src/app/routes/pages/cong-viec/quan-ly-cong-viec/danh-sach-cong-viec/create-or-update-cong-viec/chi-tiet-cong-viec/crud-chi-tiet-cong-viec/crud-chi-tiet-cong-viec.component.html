@@ -1,0 +1,47 @@
+<form #form [formGroup]="rfFormData" nz-form nzLayout="horizontal">
+  <nz-form-item>
+    <nz-form-label nzRequired nzSpan="24">Tên công việc</nz-form-label>
+    <nz-form-control nzErrorTip="Giá trị bắt buộc!" nzSpan="24">
+      <textarea formControlName="ten" rows="3" nz-input placeholder="Nhập tên công việc mới"></textarea>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-row nzGutter="16">
+    <nz-col nzLg="12">
+      <nz-form-item>
+        <nz-form-label nzSpan="24" nzRequired>Ngày hoàn thành</nz-form-label>
+        <nz-form-control nzSpan="24" nzErrorTip="Giá trị bắt buộc!">
+          <ora-date-picker [disabledDate]="disabledDate" formControlName="ngayHoanThanh" placeHolder="Ngày/Tháng/Năm">
+          </ora-date-picker>
+        </nz-form-control>
+      </nz-form-item>
+    </nz-col>
+    <nz-col nzLg="12">
+      <nz-form-item>
+        <nz-form-label nzRequired nzSpan="24">Chọn nhân viên</nz-form-label>
+        <nz-form-control nzErrorTip="Giá trị bắt buộc!" nzSpan="24">
+          <nz-select formControlName="sysUserId" nzPlaceHolder="Chọn..." style="width: 100%">
+            <nz-option *ngFor="let us of listUser" [nzLabel]="us.hoTen" [nzValue]="us.id" nzCustomContent>
+              <div nz-tooltip="Số công việc đang thực hiện" class="bagde-custom">{{ us.soCongViecDangThucHien }}</div>
+              {{ us.hoTen }}
+            </nz-option>
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
+    </nz-col>
+    <nz-col nzLg="24">
+      <nz-form-item>
+        <nz-form-label nzSpan="24">Trạng thái đã hoàn thành công việc</nz-form-label>
+        <nz-form-control nzSpan="24">
+          <nz-switch formControlName="isHoanThanh"> </nz-switch>
+        </nz-form-control>
+      </nz-form-item>
+    </nz-col>
+  </nz-row>
+</form>
+
+<ng-container *nzModalFooter>
+  <button (click)="save()" [disabled]="rfFormData.invalid" nz-button nzType="primary">
+    <i nz-icon nzTheme="outline" nzType="save"></i> Lưu
+  </button>
+  <button (click)="close()" nz-button><i nz-icon nzTheme="outline" nzType="close"></i> Đóng</button>
+</ng-container>

@@ -1,0 +1,12 @@
+<button nz-button nzType="default" nz-popover [nzPopoverTitle]="titleTemplate" nzPopoverPlacement="leftTop"
+        [nzPopoverContent]="contentTemplate">
+  <i nz-icon nzType="setting"></i>
+</button>
+<ng-template #titleTemplate>Chọn cột muốn hiện thị</ng-template>
+<ng-template #contentTemplate>
+  <label nz-checkbox [(ngModel)]="isShowAllCol" (ngModelChange)="changeAllCheckBoxShow()" class="d-block">Chọn tất
+    cả</label>
+  <nz-checkbox-group (ngModelChange)="onChangeSelectColumnCheckboxGroup()"
+                     [(ngModel)]="lstOfShowHideColumns"
+  ></nz-checkbox-group>
+</ng-template>

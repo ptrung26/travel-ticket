@@ -1,0 +1,18 @@
+<!-- upload ảnh -->
+<div class="ord-file-dinh-kem">
+    <img *ngIf="filePath == null " style="height: 165px; width: 200px;margin: 0 auto; display: block;" src="{{noimageDefault}}" />
+
+    <img *ngIf="filePath != null"
+        style="height: 165px; width: 200px;margin: 0 auto; display: block;object-fit: cover;"
+        [src]="'data:image/jpg;base64,'+ fileBytes" />
+
+    <input type="file" #file placeholder="Choose file" (change)="uploadFile(file.files)" style="display:none;">
+
+    <div class="btnGroup" style="margin: 7px auto 0px;text-align: center;">
+        <button type="button" class="btn btn-success" *ngIf="!isViewChiTiet"
+        (click)="file.click()"><span>{{textBtn}}</span></button>
+
+    <button type="button" *ngIf="filePath != null && !isViewChiTiet" class="btn btn-danger" title="Xóa"
+        (click)="removeFile(filePath)"><span class="fas fa-times"></span></button>
+    </div>
+</div>

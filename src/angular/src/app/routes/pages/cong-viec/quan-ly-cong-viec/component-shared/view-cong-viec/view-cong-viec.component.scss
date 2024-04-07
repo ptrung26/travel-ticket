@@ -1,0 +1,45 @@
+:host ::ng-deep {
+  .ant-tree .ant-tree-treenode, .ant-tree .ant-tree-node-content-wrapper {
+    width: 100%;
+  }
+
+  .ant-progress-steps-outer {
+    justify-content: flex-end;
+  }
+
+  nz-avatar + nz-avatar {
+    margin-left: 12px;
+  }
+}
+
+::ng-deep {
+  .view-cong-viec  {
+    .ant-modal-header {
+      border-bottom-color: #f6f6f6;
+    }
+
+    .ant-modal-body {
+      background-color: #f6f6f6;
+    }
+  }
+}
+
+.tree-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #fff;
+  box-shadow: rgba(100, 100, 111, 0.2) 0 7px 29px 0;
+  margin-bottom: 6px;
+  border-radius: 4px;
+  padding: 10px 14px;
+
+  .title {
+    font-weight: 500;
+    margin-bottom: 6px;
+  }
+
+  .date {
+    margin-bottom: 6px;
+  }
+}

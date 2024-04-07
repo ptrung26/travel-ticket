@@ -1,0 +1,86 @@
+<ng-container [ngSwitch]="ordSize" *ngIf="totalCount > 0;else khongDuLieuTpl">
+  <ng-container *ngSwitchCase="'default'">
+    <div nz-row class="form-group margin-top-10">
+      <div nz-col nzSpan="17" class="text-left">
+        <ng-container [ngTemplateOutlet]="btnChuyenTrangTpl"></ng-container>
+        <ng-container [ngTemplateOutlet]="btnReloadTpl"></ng-container>
+        <ng-container [ngTemplateOutlet]="selectPageSizeTpl"></ng-container>
+      </div>
+      <div nz-col nzSpan="7">
+        <ng-container [ngTemplateOutlet]="dangXemTpl"></ng-container>
+      </div>
+    </div>
+  </ng-container>
+  <ng-container *ngSwitchCase="'sm'">
+    <div nz-row class="form-group margin-top-10">
+      <div nz-col nzSpan="24">
+        <ng-container [ngTemplateOutlet]="btnChuyenTrangTpl"></ng-container>
+      </div>
+    </div>
+  </ng-container>
+  <ng-container *ngSwitchCase="'md'">
+    <div nz-row class="form-group margin-top-10">
+      <div nz-col nzFlex="5">
+        <ng-container [ngTemplateOutlet]="btnChuyenTrangTpl"></ng-container>
+      </div>
+      <div nz-col nzFlex="3">
+        <ng-container [ngTemplateOutlet]="dangXemTpl"></ng-container>
+      </div>
+    </div>
+  </ng-container>
+</ng-container>
+
+<!-- <ng-template #khongDuLieuTpl>
+  <div nz-row class="form-group margin-top-10">
+    <div nz-col nzSpan="24" class="text-right font-weight-bolder">
+      <span>Không có dữ liệu</span>
+    </div>
+  </div>
+</ng-template> -->
+
+<ng-template #khongDuLieuTpl>
+  <nz-empty style="margin-top: 20px;" [nzNotFoundContent]="contentTpl" class="kt-margin-t-5">
+    <ng-template #contentTpl>
+      <span>Không có dữ liệu !</span>
+    </ng-template>
+  </nz-empty>
+</ng-template>
+
+
+<ng-template #btnChuyenTrangTpl>
+  <nz-button-group>
+    <button nz-button nzType="default" title="Trang đầu" (click)="trangDauClick()" [disabled]="disableBackBtn()">
+      <i nz-icon nzType="step-backward"></i>
+    </button>
+    <button nz-button nzType="default" title="Trang trước" (click)="trangTruocClick()" [disabled]="disableBackBtn()">
+      <i nz-icon nzType="caret-left"></i>
+    </button>
+  </nz-button-group>
+  <span class="font-weight-bolder margin-left-10 margin-right-5">Trang</span>
+  <input nz-input [OnlyNumber]="true" style="width: 68px" (keydown)="keyDownInputPageIndex($event)"
+    [(ngModel)]="pageIndex" (keyup.enter)="pageIndexEnter()" (focusout)="onFocusOutPageIndexInput()" nz-tooltip
+    nzTooltipTitle="Nhập số trang. Ấn enter" nzTooltipPlacement="bottom" />
+  <span class="font-weight-bolder margin-right-10"> / {{getTotalPage()}}</span>
+  <nz-button-group>
+    <button nz-button nzType="default" title="Trang sau" (click)="trangSauClick()" [disabled]="disableNextBtn()">
+      <i nz-icon nzType="caret-right"></i>
+    </button>
+    <button nz-button nzType="default" title="Trang cuối" (click)="trangCuoiClick()" [disabled]="disableNextBtn()">
+      <i nz-icon nzType="step-forward"></i>
+    </button>
+  </nz-button-group>
+</ng-template>
+<ng-template #btnReloadTpl>
+  <button nz-button nzType="dashed" class="recover margin-left-20" nz-tooltip nzTooltipTitle="Lấy lại dữ liệu"
+    (click)="refreshData.emit()">
+    <i nz-icon nzType="redo" nzTheme="outline"></i>
+  </button>
+</ng-template>
+<ng-template #selectPageSizeTpl>
+  <nz-select style="width: 169px;" class="margin-left-20" [(ngModel)]="pageSize" (ngModelChange)="onChangePageSize()">
+    <nz-option *ngFor="let pz of listPageSizeOptionsSelect" [nzValue]="pz.value" [nzLabel]="pz.display"></nz-option>
+  </nz-select>
+</ng-template>
+<ng-template #dangXemTpl>
+  <div class="text-right font-weight-bolder">{{getDangXemTxt()}} </div>
+</ng-template>

@@ -1,0 +1,61 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<Import Project="..\..\common.props" />
+
+	<PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+		<RootNamespace>newPMS.QuanLyTaiKhoan</RootNamespace>
+    <GenerateEmbeddedFilesManifest>true</GenerateEmbeddedFilesManifest>
+	</PropertyGroup>
+  <ItemGroup>
+    <None Remove="_TemplateDefinition\Template\*.tpl" />
+    <EmbeddedResource Include="_TemplateDefinition\Template\*.tpl" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="EPPlus" Version="5.5.5" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="6.0.3" />
+    <PackageReference Include="NETStandard.Library" Version="2.0.3" />
+    <PackageReference Include="RestSharp" Version="106.11.7" />
+    <PackageReference Include="Volo.Abp.Ddd.Application" Version="4.3.2" />
+    <PackageReference Include="Volo.Abp.AutoMapper" Version="4.3.2" />
+    <PackageReference Include="Volo.Abp.Identity.Domain" Version="4.3.2" />
+    <PackageReference Include="Volo.Abp.Identity.Domain.Shared" Version="4.3.2" />
+    <PackageReference Include="Volo.Abp.Identity.EntityFrameworkCore" Version="4.3.2" />
+    <PackageReference Include="Volo.Abp.PermissionManagement.Application" Version="4.3.2" />
+    <PackageReference Include="Volo.Abp.PermissionManagement.Application.Contracts" Version="4.3.2" />
+    <PackageReference Include="Volo.Abp.PermissionManagement.Domain" Version="4.3.2" />
+    <PackageReference Include="Volo.Abp.PermissionManagement.Domain.Shared" Version="4.3.2" />
+    <PackageReference Include="Volo.Abp.PermissionManagement.EntityFrameworkCore" Version="4.3.2" />
+    <PackageReference Include="Volo.Abp.Users.Domain" Version="4.3.2" />
+	</ItemGroup>
+
+	<ItemGroup>
+    <ProjectReference Include="..\..\..\..\DataBase\src\TravelTicket\newPMS.Base.Domain\newPMS.Base.Domain.csproj" />
+    <ProjectReference Include="..\..\..\..\DataBase\src\TravelTicket\newPMS.Base.EntityFrameworkCore\newPMS.Base.EntityFrameworkCore.csproj" />
+		<ProjectReference Include="..\..\..\..\Identity\src\newPMS.Application.Contracts\newPMS.Application.Contracts.csproj" />
+		<ProjectReference Include="..\..\..\..\shared\ModuleBaseAbp\newPMS.SettingManagement\newPMS.SettingManagement.csproj" />
+		<ProjectReference Include="..\..\..\..\shared\OrdBaseApplication\OrdBaseApplication.csproj" />
+		<ProjectReference Include="..\..\..\newPMS.ApplicationShared\newPMS.ApplicationShared.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <EmbeddedResource Update="_TemplateDefinition\Template\GuiTaiKhoanQuaEmail.tpl">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Update="_TemplateDefinition\Template\SendThongBaoHeThong.tpl">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Update="_TemplateDefinition\Template\SendPassword.tpl">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Update="_TemplateDefinition\Template\SendPasswordResetCode.tpl">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="QuanTriHeThong\UserManagement\Request\" />
+	</ItemGroup>
+</Project>

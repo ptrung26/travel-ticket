@@ -1,0 +1,102 @@
+<nz-modal [(nzVisible)]="heMayModalService.isVisible"
+          nzWidth="90vw"
+          [nzStyle]="{top:'10px'}"
+          nzTitle="Danh sách thiết bị trong hệ máy {{codeSystemDto.display}}"
+          (nzOnCancel)="heMayModalService.close()">
+  <ng-container *nzModalContent>
+    <ng-container [ngTemplateOutlet]="tplGrid"></ng-container>
+  </ng-container>
+  <div *nzModalFooter>
+    <button nz-button nzType="default" (click)="heMayModalService.close()">Đóng</button>
+  </div>
+</nz-modal>
+
+<ng-template #tplGrid>
+  <div nz-row nzGutter="16">
+    <div nz-col nzSpan="12">
+      <div class="box-filter">
+        <nz-row nzGutter="8" [formGroup]="heMayModalService.rfFormGroup">
+          <nz-col nzLg="20" nzSm="20">
+            <input (keydown.enter)="refresh()" formControlName="filter" nz-input
+                   placeholder="Nhập tên hoặc mã để tìm kiếm!"/>
+          </nz-col>
+          <nz-col nzLg="2" nzSm="4">
+            <button nz-button nzType="primary" (click)="refresh()">Tìm kiếm</button>
+          </nz-col>
+        </nz-row>
+      </div>
+      <div class="margin-top-10">
+        <button
+          *ngIf="this.heMayModalService.selectedDataItems.length > 0"
+          nz-button
+          (click)="addMulti(this.heMayModalService.selectedDataItems)"
+        >
+          <i nz-icon nzType="plus" nzTheme="outline"></i> Thêm mục đã chọn
+        </button>
+      </div>
+      <ora-table
+        [rows]="heMayModalService.dataList"
+        [isLoading]="heMayModalService.isTableLoading"
+        [totalRows]="heMayModalService.totalItems"
+        [(pageSize)]="heMayModalService.pageSize"
+        [(page)]="heMayModalService.pageNumber"
+        (pageSizeChange)="heMayModalService.refresh()"
+        (pageChange)="heMayModalService.pageNumberChange()"
+        (sortChange)="heMayModalService.gridSort($event)"
+        [(selectedDataItems)]="heMayModalService.selectedDataItems"
+      >
+        <ora-column dataType="Select" width="50px"></ora-column>
+        <ora-column header="Mã" key="code" headerAlign="left"></ora-column>
+        <ora-column header="Tên" key="display" headerAlign="left"></ora-column>
+        <ora-column header="Thao tác" [content]="contentAction" width="150px" align="center" fixRight>
+          <ng-template #contentAction let-data="dataItem">
+            <a nz-button nzType="link" nz-tooltip="{{ 'Add' | translate }}"
+               [hidden]="listThietBi | checkIncludeDsThietBiDaChon : data.id"
+               (click)="addThietBi(data)">
+              <i nz-icon nzType="plus"></i>
+            </a>
+            <span nz-icon nzType="check-circle" nzTheme="outline"
+                  class="text-success"
+                  *ngIf="listThietBi | checkIncludeDsThietBiDaChon : data.id"></span>
+          </ng-template>
+        </ora-column>
+      </ora-table>
+    </div>
+    <div nz-col nzSpan="12">
+      <h4>Danh sách thiết bị thuộc hệ máy ({{listThietBi.length}} thiết bị)</h4>
+      <nz-input-group nzSize="small" [nzSuffix]="suffixIconSearch" [formGroup]="heMayModalService.rfFormGroup">
+        <input type="text" formControlName="filterThietBiDaCo" nz-input placeholder="Nhập từ khóa tìm kiếm"/>
+      </nz-input-group>
+      <ng-template #suffixIconSearch>
+        <span nz-icon nzType="search"></span>
+      </ng-template>
+      <div class="margin-top-20">
+
+        <nz-table [nzData]="listVm" nzShowPagination="false"
+                  [nzScroll]="{y:'500px'}">
+          <thead>
+          <tr>
+            <th nzWidth="60px">STT</th>
+            <th nzWidth="140px">Mã</th>
+            <th>Tên</th>
+            <th nzWidth="60px"></th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let item of listVm;trackBy:trackByItem;let idx = index">
+            <td>{{ idx + 1 }}</td>
+            <td>{{ item.code }}</td>
+            <td>{{ item.display }}</td>
+            <td>
+              <span style="cursor: pointer"
+                    (click)="removeThietBi(item)"
+                    nz-icon nzType="delete" nzTheme="outline"></span>
+            </td>
+          </tr>
+          </tbody>
+        </nz-table>
+      </div>
+    </div>
+  </div>
+</ng-template>
+

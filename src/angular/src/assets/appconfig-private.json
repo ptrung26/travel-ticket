@@ -1,0 +1,31 @@
+{
+  "test": "AppConfig From Dev",
+
+  "application": {
+    "baseUrl": "http://localhost:4200",
+    "name": "QCC",
+    "logoUrl": ""
+  },
+  "oAuthConfig": {
+    "issuer": "http://localhost:16102",
+    "redirectUri": "http://localhost:4200",
+    "clientId": "newPMS_App",
+    "scope": "offline_access newPMS",
+    "requireHttps": false
+  },
+  "apis": {
+    "default": {
+      "url": "http://localhost:16102",
+      "rootNamespace": "QCC"
+    },
+    "taiKhoan": {
+      "url": "http://localhost:3001"
+    },
+    "danhMuc": {
+      "url": "http://localhost:3000"
+    },
+    "congViec": {
+      "url": "http://localhost:3012"
+    }
+  }
+}

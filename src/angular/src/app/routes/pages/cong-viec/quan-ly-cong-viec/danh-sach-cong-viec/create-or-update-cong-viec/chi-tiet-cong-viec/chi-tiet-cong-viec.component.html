@@ -1,0 +1,71 @@
+<button (click)="createOrUpdate()"
+  *ngIf="permission.truongPhong && congViec.trangThai < TRANG_THAI_CONG_VIEC.CHO_PHE_DUYET" nz-button
+  style="margin-bottom: 12px; float: right">
+  Thêm một mục
+</button>
+<ora-table [rows]="dataList" [(page)]="pageNumber" [(pageSize)]="pageSize" [isLoading]="isTableLoading"
+  [totalRows]="totalItems" (pageChange)="pageNumberChange()" (pageSizeChange)="refresh()"
+  (sortChange)="gridSort($event)">
+  <ora-column align="center" header="STT" width="50px">
+    <ng-template let-data oraCell>
+      {{ skipCount + dataList.indexOf(data) + 1 }}
+    </ng-template>
+  </ora-column>
+  <ora-column header="Người được phân công" width="120px">
+    <ng-template let-data oraCell>
+      <ng-container *ngIf="data.listUser?.length">
+        {{ data.listUser[0]?.hoTen }}
+      </ng-container>
+    </ng-template>
+  </ora-column>
+  <ora-column align="center" header="Ảnh" headerAlign="center" width="70px">
+    <ng-template let-data oraCell>
+      <nz-avatar *ngIf="data.listUser?.length" [nzSrc]="sourceAvatar + data.listUser[0]?.userId"
+        nzIcon="user"></nz-avatar>
+    </ng-template>
+  </ora-column>
+  <ora-column header="Nội dung" key="ten" width="200px"></ora-column>
+  <ora-column header="Ngày hoàn thành" width="90px">
+    <ng-template let-data oraCell>
+      {{ data.ngayHoanThanh | date : 'dd/MM/yyyy' }}
+    </ng-template>
+  </ora-column>
+  <ora-column align="center" header="Trạng thái" headerAlign="center" width="90px">
+    <ng-template let-data oraCell>
+      <nz-tag *ngIf="data.isHoanThanh" [nzColor]="'green'">Đã hoàn thành</nz-tag>
+      <nz-tag *ngIf="!data.isHoanThanh" [nzColor]="'volcano'">Chưa hoàn thành</nz-tag>
+    </ng-template>
+  </ora-column>
+  <ora-column align="center" fixRight header="Thao tác" width="90px">
+    <ng-template #contentAction let-data oraCell>
+      <button nz-button nz-dropdown [nzDropdownMenu]="menu">
+        Thao tác
+        <i nz-icon nzType="down" style="font-size: 12px !important"></i>
+      </button>
+      <nz-dropdown-menu #menu="nzDropdownMenu">
+        <ul nz-menu nzSelectable>
+          <li *ngIf="!permission.lanhDao &&
+            ((permission.nhanVien && congViec?.trangThai < TRANG_THAI_CONG_VIEC.CHO_PHE_DUYET) ||
+              (permission.truongPhong && congViec?.trangThai < TRANG_THAI_CONG_VIEC.CHO_PHE_DUYET))" nz-menu-item
+            style="padding-right: 60px; font-size: 15px" (click)="createOrUpdate(data)">
+            <i nz-icon nzTheme="outline" nzType="edit"></i>Chỉnh sửa
+          </li>
+          <li nz-menu-item style="padding-right: 60px; font-size: 15px" (click)="deleteCongViec(data)"
+            *ngIf="!permission.lanhDao &&
+              ((permission.nhanVien && congViec?.trangThai < TRANG_THAI_CONG_VIEC.CHO_PHE_DUYET) ||
+                (permission.truongPhong && congViec?.trangThai < TRANG_THAI_CONG_VIEC.CHO_PHE_DUYET)) && data.isMyCreate">
+            <i nz-icon nzTheme="outline" nzType="delete"></i>Xoá
+          </li>
+          <li nz-menu-item style="padding-right: 60px; font-size: 15px" (click)="upload(data)"
+            *ngIf="permission.nhanVien">
+            <i nz-icon nzTheme="outline" nzType="upload"></i>Upload tệp đính kèm
+          </li>
+          <li nz-menu-item style="padding-right: 60px; font-size: 15px" (click)="upload(data, true)"
+            *ngIf="permission.truongPhong || permission.lanhDao">
+            <i nz-icon nzTheme="outline" nzType="eye"></i>Xem tệp đính kèm
+          </li>
+        </ul>
+      </nz-dropdown-menu>
+    </ng-template>
+  </ora-column>
+</ora-table>

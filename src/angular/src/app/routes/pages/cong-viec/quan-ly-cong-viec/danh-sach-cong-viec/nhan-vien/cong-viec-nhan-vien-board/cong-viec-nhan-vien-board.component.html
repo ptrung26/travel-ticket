@@ -1,0 +1,36 @@
+<div
+  (cdkDragStarted)="dragStart($event)"
+  *ngFor="let data of listCongViec"
+  [cdkDragData]="data"
+  [cdkDragDisabled]="!data.isCaNhan"
+  cdkDrag
+  class="item"
+>
+  <div (click)="suaCongViec(data)">
+    <div class="head">
+      <div *ngIf="!data.isCaNhan" nz-tooltip="Số đã hoàn thành/Tổng số mục trong danh sách công việc" nzTooltipPlacement="topLeft">
+        <span nz-icon nzTheme="outline" nzType="profile"></span> {{ data.soViecDaHoanThanh }} / {{ data.soViec }}
+      </div>
+      <div nz-tooltip="Thời gian hoàn thành" nzTooltipPlacement="topRight">
+        {{ data.ngayHoanThanh | date : 'dd/MM/yyyy ' }}
+      </div>
+    </div>
+    <h6>{{ data.ten }}</h6>
+    <!--    <div [ngSwitch]="data.mucDo">-->
+    <!--      <nz-tag *ngSwitchCase="MUC_DO_CONG_VIEC.QUAN_TRONG" nz-tooltip="Mức độ ưu tiên" nzColor="volcano">Quan trọng-->
+    <!--      </nz-tag>-->
+    <!--      <nz-tag *ngSwitchCase="MUC_DO_CONG_VIEC.BINH_THUONG" nz-tooltip="Mức độ ưu tiên" nzColor="cyan">Bìnhthường-->
+    <!--      </nz-tag>-->
+    <!--    </div>-->
+    <div class="bot">
+      <div>
+        <span *ngIf="data.mucDo === MUC_DO_CONG_VIEC.QUAN_TRONG" nz-tooltip="Công việc quan trọng">
+          <i class="badge-warning-color" nz-icon nzTheme="fill" nzType="star"></i>
+        </span>
+        <span nz-tooltip="Số tài liệu đính kèm"> <i nz-icon nzTheme="outline" nzType="paper-clip"></i> {{ data.soTaiLieu }} </span>
+        <span nz-tooltip="Số trao đổi"> <i nz-icon nzTheme="outline" nzType="message"></i> {{ data.soTraoDoi }} </span>
+        <span nz-tooltip="Số thành viên"> <i nz-icon nzTheme="outline" nzType="usergroup-add"></i> {{ data.listUser?.length || 0 }} </span>
+      </div>
+    </div>
+  </div>
+</div>

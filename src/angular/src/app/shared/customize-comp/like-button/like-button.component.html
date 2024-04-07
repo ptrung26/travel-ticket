@@ -1,0 +1,5 @@
+<nav>
+    <a (click)="onClick()" *ngIf="this.isActive"> <span nz-icon nzType="like" nzTheme="fill"></span>
+        ({{ likesCount}})</a>
+    <a (click)="onClick()" *ngIf="!this.isActive"> <span nz-icon nzType="like"></span> ({{ likesCount }})</a>
+</nav>

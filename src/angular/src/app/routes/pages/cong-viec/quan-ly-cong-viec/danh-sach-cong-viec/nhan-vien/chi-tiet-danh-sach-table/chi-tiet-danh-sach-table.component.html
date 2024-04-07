@@ -1,0 +1,82 @@
+<ora-page-header [action]="actionHeader" [title]="duAn.ten">
+  <ng-template #actionHeader>
+    <button (click)="close()" nz-button nzType="default" type="button"><i nz-icon nzType="arrow-left"></i> Quay lại</button>
+  </ng-template>
+</ora-page-header>
+
+<div class="box-filter">
+  <form [formGroup]="rfFormGroup" nz-form>
+    <div nz-row nzGutter="16">
+      <nz-col nzLg="12">
+        <input (keydown.enter)="refresh()" formControlName="filter" nz-input placeholder="Nhập tên dự án!" />
+      </nz-col>
+      <nz-col nzLg="2" nzMd="4">
+        <button (click)="refresh()" nz-button nzType="primary">Tìm kiếm</button>
+      </nz-col>
+    </div>
+  </form>
+</div>
+
+<ora-table
+  [rows]="dataList"
+  [(page)]="pageNumber"
+  [(pageSize)]="pageSize"
+  [isLoading]="isTableLoading"
+  [scroll]="{ x: ' 1200px', y: scroll.y }"
+  [totalRows]="totalItems"
+  (pageChange)="pageNumberChange()"
+  (pageSizeChange)="refresh()"
+  (sortChange)="gridSort($event)"
+>
+  <ora-column align="center" header="STT" width="80px">
+    <ng-template let-data oraCell>
+      {{ skipCount + dataList.indexOf(data) + 1 }}
+    </ng-template>
+  </ora-column>
+  <ora-column header="Tên" key="ten" width="400px"></ora-column>
+  <ora-column align="right" header="Số công việc" headerAlign="right" width="100px">
+    <ng-template let-data oraCell>
+      <div nz-tooltip="Số đã hoàn thành/Tổng số mục trong danh sách công việc" nzTooltipPlacement="topLeft">
+        {{ data.soViecDaHoanThanh }} / {{ data.soViec }}
+      </div>
+    </ng-template>
+  </ora-column>
+  <ora-column align="right" header="Số trao đổi" headerAlign="right" key="soTraoDoi" width="100px"></ora-column>
+  <ora-column align="right" header="Số tài liệu" headerAlign="right" key="soTaiLieu" width="100px"></ora-column>
+  <ora-column align="right" header="Số thành viên" headerAlign="right" width="100px">
+    <ng-template let-data oraCell>
+      {{ data.listUser?.length || 0 }}
+    </ng-template>
+  </ora-column>
+  <ora-column header="Mức độ" headerAlign="center" align="center" width="120px">
+    <ng-template let-data oraCell>
+      <ng-container [ngSwitch]="data.mucDo">
+        <nz-tag *ngSwitchCase="MUC_DO_CONG_VIEC.QUAN_TRONG" nz-tooltip="Mức độ ưu tiên" nzColor="volcano">Quan trọng </nz-tag>
+        <nz-tag *ngSwitchCase="MUC_DO_CONG_VIEC.BINH_THUONG" nz-tooltip="Mức độ ưu tiên" nzColor="cyan">Bìnhthường </nz-tag>
+      </ng-container>
+    </ng-template>
+  </ora-column>
+  <ora-column align="center" header="Trạng thái" headerAlign="center" width="120px">
+    <ng-template let-data oraCell>
+      <ng-container [ngSwitch]="data.trangThai">
+        <nz-tag *ngSwitchCase="TRANG_THAI_CONG_VIEC.TAO_MOI">Tạo mới</nz-tag>
+        <nz-tag *ngSwitchCase="TRANG_THAI_CONG_VIEC.DANG_THUC_HIEN" [nzColor]="'#2db7f5'">Đang thực hiện</nz-tag>
+        <nz-tag *ngSwitchCase="TRANG_THAI_CONG_VIEC.CHO_PHE_DUYET" [nzColor]="'#ffa3be'"> Chờ phê duyệt</nz-tag>
+        <nz-tag *ngSwitchCase="TRANG_THAI_CONG_VIEC.PHE_DUYET" [nzColor]="'#87d068'"> Phê duyệt</nz-tag>
+        <nz-tag *ngSwitchCase="TRANG_THAI_CONG_VIEC.HOAN_THANH" [nzColor]="'#f50'"> Hoàn thành</nz-tag>
+      </ng-container>
+    </ng-template>
+  </ora-column>
+  <ora-column header="Thời gian hoàn thành" width="150px">
+    <ng-template let-data oraCell>
+      {{ data.ngayHoanThanh | date : 'dd/MM/yyyy ' }}
+    </ng-template>
+  </ora-column>
+  <ora-column align="center" header="Thao tác" headerAlign="center" width="100px">
+    <ng-template let-data oraCell>
+      <button (click)="createOrUpdate(data)" nz-button nzShape="circle">
+        <i nz-icon nz-tooltip="Cập nhật công việc" nzTheme="outline" nzType="edit"> </i>
+      </button>
+    </ng-template>
+  </ora-column>
+</ora-table>
