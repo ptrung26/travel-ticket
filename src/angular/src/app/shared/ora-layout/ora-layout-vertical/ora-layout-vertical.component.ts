@@ -24,7 +24,8 @@ export class OraLayoutVerticalComponent implements OnInit, OnDestroy, AfterViewI
   @Input() rightContent: TemplateRef<void>;
   $destroy = new Subject<boolean>();
   @Input() options: LayoutDefaultOptions = {
-    logoExpanded: `./assets/logo.png`,
+    // logoExpanded: `./assets/logo.png`,
+    logoExpanded: ``,
     logoCollapsed: `./assets/logo-col.png`,
     hideAside: false,
   };

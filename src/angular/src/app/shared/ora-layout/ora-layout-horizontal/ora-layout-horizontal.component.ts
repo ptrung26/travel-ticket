@@ -28,7 +28,8 @@ export class OraLayoutHorizontalComponent implements OnInit, OnDestroy {
   @Input() content: TemplateRef<void>;
   @Input() rightContent: TemplateRef<void>;
   @Input() options: LayoutDefaultOptions = {
-    logoExpanded: `./assets/logo.png`,
+    // logoExpanded: `./assets/logo.png`,
+    logoExpanded: ``,
     logoCollapsed: `./assets/logo-col.png`,
     hideAside: false,
   };

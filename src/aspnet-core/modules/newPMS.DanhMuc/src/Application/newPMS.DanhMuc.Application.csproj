@@ -8,6 +8,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="NewFolder\**" />
+    <EmbeddedResource Remove="NewFolder\**" />
+    <None Remove="NewFolder\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Abp.AspNetZeroCore" Version="2.0.0" />
     <PackageReference Include="EPPlus" Version="5.5.5" />
     <PackageReference Include="RestSharp" Version="106.11.7" />
@@ -37,7 +43,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="NewFolder\" />
+    <Folder Include="DanhMucChung\DichVu\" />
   </ItemGroup>
 
 </Project>

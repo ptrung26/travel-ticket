@@ -27,7 +27,8 @@ export class LayoutBasicComponent extends AppComponentBase implements OnInit {
   userSession: UserSessionDto;
   counterNoti = 0;
   options: LayoutDefaultOptions = {
-    logoExpanded: `./assets/logo/logo.png`,
+    // logoExpanded: `./assets/logo/logo.png`,
+    logoExpanded: "",
     logoCollapsed: `./assets/logo/logo-col.png`,
   };
   searchToggleStatus = true;

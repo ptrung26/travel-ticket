@@ -11729,6 +11729,216 @@ export class NhaCungCapServiceProxy {
 @Injectable({
     providedIn: 'root'
 })
+export class NhaCungCapKhachSanServiceProxy {
+    private http: HttpClient;
+    private baseUrl: string;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+
+    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+        this.http = http;
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
+    }
+
+    /**
+     * @param body (optional) 
+     * @return Success
+     */
+    paginglist(body: PagingListNhaCungCapKhachSanRequest | undefined): Observable<NhaCungCapKhachSanDtoPagedResultDto> {
+        let url_ = this.baseUrl + "/api/danh-muc/nha-cung-cap-khach-san/paginglist";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processPaginglist(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processPaginglist(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<NhaCungCapKhachSanDtoPagedResultDto>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<NhaCungCapKhachSanDtoPagedResultDto>;
+        }));
+    }
+
+    protected processPaginglist(response: HttpResponseBase): Observable<NhaCungCapKhachSanDtoPagedResultDto> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = NhaCungCapKhachSanDtoPagedResultDto.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status === 403) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result403: any = null;
+            let resultData403 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result403 = RemoteServiceErrorResponse.fromJS(resultData403);
+            return throwException("Forbidden", status, _responseText, _headers, result403);
+            }));
+        } else if (status === 401) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result401: any = null;
+            let resultData401 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result401 = RemoteServiceErrorResponse.fromJS(resultData401);
+            return throwException("Unauthorized", status, _responseText, _headers, result401);
+            }));
+        } else if (status === 400) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result400: any = null;
+            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result400 = RemoteServiceErrorResponse.fromJS(resultData400);
+            return throwException("Bad Request", status, _responseText, _headers, result400);
+            }));
+        } else if (status === 404) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result404: any = null;
+            let resultData404 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result404 = RemoteServiceErrorResponse.fromJS(resultData404);
+            return throwException("Not Found", status, _responseText, _headers, result404);
+            }));
+        } else if (status === 501) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result501: any = null;
+            let resultData501 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result501 = RemoteServiceErrorResponse.fromJS(resultData501);
+            return throwException("Server Error", status, _responseText, _headers, result501);
+            }));
+        } else if (status === 500) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result500: any = null;
+            let resultData500 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result500 = RemoteServiceErrorResponse.fromJS(resultData500);
+            return throwException("Server Error", status, _responseText, _headers, result500);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<NhaCungCapKhachSanDtoPagedResultDto>(null as any);
+    }
+
+    /**
+     * @param body (optional) 
+     * @return Success
+     */
+    createorupdate(body: CreateOrUpdateNhaCungCapKhachSanRequest | undefined): Observable<Int64CommonResultDto> {
+        let url_ = this.baseUrl + "/api/danh-muc/nha-cung-cap-khach-san/createorupdate";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processCreateorupdate(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processCreateorupdate(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<Int64CommonResultDto>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<Int64CommonResultDto>;
+        }));
+    }
+
+    protected processCreateorupdate(response: HttpResponseBase): Observable<Int64CommonResultDto> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = Int64CommonResultDto.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status === 403) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result403: any = null;
+            let resultData403 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result403 = RemoteServiceErrorResponse.fromJS(resultData403);
+            return throwException("Forbidden", status, _responseText, _headers, result403);
+            }));
+        } else if (status === 401) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result401: any = null;
+            let resultData401 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result401 = RemoteServiceErrorResponse.fromJS(resultData401);
+            return throwException("Unauthorized", status, _responseText, _headers, result401);
+            }));
+        } else if (status === 400) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result400: any = null;
+            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result400 = RemoteServiceErrorResponse.fromJS(resultData400);
+            return throwException("Bad Request", status, _responseText, _headers, result400);
+            }));
+        } else if (status === 404) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result404: any = null;
+            let resultData404 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result404 = RemoteServiceErrorResponse.fromJS(resultData404);
+            return throwException("Not Found", status, _responseText, _headers, result404);
+            }));
+        } else if (status === 501) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result501: any = null;
+            let resultData501 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result501 = RemoteServiceErrorResponse.fromJS(resultData501);
+            return throwException("Server Error", status, _responseText, _headers, result501);
+            }));
+        } else if (status === 500) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result500: any = null;
+            let resultData500 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result500 = RemoteServiceErrorResponse.fromJS(resultData500);
+            return throwException("Server Error", status, _responseText, _headers, result500);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<Int64CommonResultDto>(null as any);
+    }
+}
+
+@Injectable({
+    providedIn: 'root'
+})
 export class OrdApplicationConfigurationServiceProxy {
     private http: HttpClient;
     private baseUrl: string;
@@ -17346,7 +17556,6 @@ export interface ITinhDtoCommonResultDto {
 }
 
 export class CheckValidImportExcelDanhMucTinhDto implements ICheckValidImportExcelDanhMucTinhDto {
-    id!: string | undefined;
     ten!: string | undefined;
     ma!: string | undefined;
     cap!: string | undefined;
@@ -17370,7 +17579,6 @@ export class CheckValidImportExcelDanhMucTinhDto implements ICheckValidImportExc
 
     init(_data?: any) {
         if (_data) {
-            this.id = _data["id"];
             this.ten = _data["ten"];
             this.ma = _data["ma"];
             this.cap = _data["cap"];
@@ -17398,7 +17606,6 @@ export class CheckValidImportExcelDanhMucTinhDto implements ICheckValidImportExc
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["id"] = this.id;
         data["ten"] = this.ten;
         data["ma"] = this.ma;
         data["cap"] = this.cap;
@@ -17419,7 +17626,6 @@ export class CheckValidImportExcelDanhMucTinhDto implements ICheckValidImportExc
 }
 
 export interface ICheckValidImportExcelDanhMucTinhDto {
-    id: string | undefined;
     ten: string | undefined;
     ma: string | undefined;
     cap: string | undefined;
@@ -18618,6 +18824,330 @@ export class ExportExcelNhaCungCapRequest implements IExportExcelNhaCungCapReque
 
 export interface IExportExcelNhaCungCapRequest {
     filterInput: PagingNhaCungCapRequest;
+}
+
+export class PagingListNhaCungCapKhachSanRequest implements IPagingListNhaCungCapKhachSanRequest {
+    soSao!: number | undefined;
+    filter!: string | undefined;
+    isActive!: boolean | undefined;
+    readonly filterFullText!: string | undefined;
+    readonly mySqlFullTextSearch!: string | undefined;
+    sorting!: string | undefined;
+    skipCount!: number;
+    maxResultCount!: number;
+
+    constructor(data?: IPagingListNhaCungCapKhachSanRequest) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.soSao = _data["soSao"];
+            this.filter = _data["filter"];
+            this.isActive = _data["isActive"];
+            (<any>this).filterFullText = _data["filterFullText"];
+            (<any>this).mySqlFullTextSearch = _data["mySqlFullTextSearch"];
+            this.sorting = _data["sorting"];
+            this.skipCount = _data["skipCount"];
+            this.maxResultCount = _data["maxResultCount"];
+        }
+    }
+
+    static fromJS(data: any): PagingListNhaCungCapKhachSanRequest {
+        data = typeof data === 'object' ? data : {};
+        let result = new PagingListNhaCungCapKhachSanRequest();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["soSao"] = this.soSao;
+        data["filter"] = this.filter;
+        data["isActive"] = this.isActive;
+        data["filterFullText"] = this.filterFullText;
+        data["mySqlFullTextSearch"] = this.mySqlFullTextSearch;
+        data["sorting"] = this.sorting;
+        data["skipCount"] = this.skipCount;
+        data["maxResultCount"] = this.maxResultCount;
+        return data;
+    }
+}
+
+export interface IPagingListNhaCungCapKhachSanRequest {
+    soSao: number | undefined;
+    filter: string | undefined;
+    isActive: boolean | undefined;
+    filterFullText: string | undefined;
+    mySqlFullTextSearch: string | undefined;
+    sorting: string | undefined;
+    skipCount: number;
+    maxResultCount: number;
+}
+
+export class NhaCungCapKhachSanDto implements INhaCungCapKhachSanDto {
+    ma!: string | undefined;
+    ten!: string | undefined;
+    loaiKhachSanCode!: string | undefined;
+    tinhTrang!: boolean;
+    quocGiaId!: number | undefined;
+    tinhId!: number | undefined;
+    diaChi!: string | undefined;
+    email!: string | undefined;
+    fax!: string | undefined;
+    website!: string | undefined;
+    moTa!: string | undefined;
+    anhDaiDienUrl!: string | undefined;
+    taiLieuJson!: string | undefined;
+    isHasVAT!: boolean;
+    dichVu!: string | undefined;
+    soSao!: number;
+    ngayHetHanHopDong!: DateTime;
+    ngayCuoiTuan!: string | undefined;
+    id!: number;
+
+    constructor(data?: INhaCungCapKhachSanDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.ma = _data["ma"];
+            this.ten = _data["ten"];
+            this.loaiKhachSanCode = _data["loaiKhachSanCode"];
+            this.tinhTrang = _data["tinhTrang"];
+            this.quocGiaId = _data["quocGiaId"];
+            this.tinhId = _data["tinhId"];
+            this.diaChi = _data["diaChi"];
+            this.email = _data["email"];
+            this.fax = _data["fax"];
+            this.website = _data["website"];
+            this.moTa = _data["moTa"];
+            this.anhDaiDienUrl = _data["anhDaiDienUrl"];
+            this.taiLieuJson = _data["taiLieuJson"];
+            this.isHasVAT = _data["isHasVAT"];
+            this.dichVu = _data["dichVu"];
+            this.soSao = _data["soSao"];
+            this.ngayHetHanHopDong = _data["ngayHetHanHopDong"] ? DateTime.fromISO(_data["ngayHetHanHopDong"].toString()) : <any>undefined;
+            this.ngayCuoiTuan = _data["ngayCuoiTuan"];
+            this.id = _data["id"];
+        }
+    }
+
+    static fromJS(data: any): NhaCungCapKhachSanDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new NhaCungCapKhachSanDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["ma"] = this.ma;
+        data["ten"] = this.ten;
+        data["loaiKhachSanCode"] = this.loaiKhachSanCode;
+        data["tinhTrang"] = this.tinhTrang;
+        data["quocGiaId"] = this.quocGiaId;
+        data["tinhId"] = this.tinhId;
+        data["diaChi"] = this.diaChi;
+        data["email"] = this.email;
+        data["fax"] = this.fax;
+        data["website"] = this.website;
+        data["moTa"] = this.moTa;
+        data["anhDaiDienUrl"] = this.anhDaiDienUrl;
+        data["taiLieuJson"] = this.taiLieuJson;
+        data["isHasVAT"] = this.isHasVAT;
+        data["dichVu"] = this.dichVu;
+        data["soSao"] = this.soSao;
+        data["ngayHetHanHopDong"] = this.ngayHetHanHopDong ? this.ngayHetHanHopDong.toString() : <any>undefined;
+        data["ngayCuoiTuan"] = this.ngayCuoiTuan;
+        data["id"] = this.id;
+        return data;
+    }
+}
+
+export interface INhaCungCapKhachSanDto {
+    ma: string | undefined;
+    ten: string | undefined;
+    loaiKhachSanCode: string | undefined;
+    tinhTrang: boolean;
+    quocGiaId: number | undefined;
+    tinhId: number | undefined;
+    diaChi: string | undefined;
+    email: string | undefined;
+    fax: string | undefined;
+    website: string | undefined;
+    moTa: string | undefined;
+    anhDaiDienUrl: string | undefined;
+    taiLieuJson: string | undefined;
+    isHasVAT: boolean;
+    dichVu: string | undefined;
+    soSao: number;
+    ngayHetHanHopDong: DateTime;
+    ngayCuoiTuan: string | undefined;
+    id: number;
+}
+
+export class NhaCungCapKhachSanDtoPagedResultDto implements INhaCungCapKhachSanDtoPagedResultDto {
+    totalCount!: number;
+    items!: NhaCungCapKhachSanDto[] | undefined;
+
+    constructor(data?: INhaCungCapKhachSanDtoPagedResultDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.totalCount = _data["totalCount"];
+            if (Array.isArray(_data["items"])) {
+                this.items = [] as any;
+                for (let item of _data["items"])
+                    this.items!.push(NhaCungCapKhachSanDto.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): NhaCungCapKhachSanDtoPagedResultDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new NhaCungCapKhachSanDtoPagedResultDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["totalCount"] = this.totalCount;
+        if (Array.isArray(this.items)) {
+            data["items"] = [];
+            for (let item of this.items)
+                data["items"].push(item.toJSON());
+        }
+        return data;
+    }
+}
+
+export interface INhaCungCapKhachSanDtoPagedResultDto {
+    totalCount: number;
+    items: NhaCungCapKhachSanDto[] | undefined;
+}
+
+export class CreateOrUpdateNhaCungCapKhachSanRequest implements ICreateOrUpdateNhaCungCapKhachSanRequest {
+    ma!: string | undefined;
+    ten!: string | undefined;
+    loaiKhachSanCode!: string | undefined;
+    tinhTrang!: boolean;
+    quocGiaId!: number | undefined;
+    tinhId!: number | undefined;
+    diaChi!: string | undefined;
+    email!: string | undefined;
+    fax!: string | undefined;
+    website!: string | undefined;
+    moTa!: string | undefined;
+    anhDaiDienUrl!: string | undefined;
+    taiLieuJson!: string | undefined;
+    isHasVAT!: boolean;
+    dichVu!: string | undefined;
+    ngayHetHanHopDong!: DateTime;
+    ngayCuoiTuan!: string | undefined;
+    id!: number;
+
+    constructor(data?: ICreateOrUpdateNhaCungCapKhachSanRequest) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.ma = _data["ma"];
+            this.ten = _data["ten"];
+            this.loaiKhachSanCode = _data["loaiKhachSanCode"];
+            this.tinhTrang = _data["tinhTrang"];
+            this.quocGiaId = _data["quocGiaId"];
+            this.tinhId = _data["tinhId"];
+            this.diaChi = _data["diaChi"];
+            this.email = _data["email"];
+            this.fax = _data["fax"];
+            this.website = _data["website"];
+            this.moTa = _data["moTa"];
+            this.anhDaiDienUrl = _data["anhDaiDienUrl"];
+            this.taiLieuJson = _data["taiLieuJson"];
+            this.isHasVAT = _data["isHasVAT"];
+            this.dichVu = _data["dichVu"];
+            this.ngayHetHanHopDong = _data["ngayHetHanHopDong"] ? DateTime.fromISO(_data["ngayHetHanHopDong"].toString()) : <any>undefined;
+            this.ngayCuoiTuan = _data["ngayCuoiTuan"];
+            this.id = _data["id"];
+        }
+    }
+
+    static fromJS(data: any): CreateOrUpdateNhaCungCapKhachSanRequest {
+        data = typeof data === 'object' ? data : {};
+        let result = new CreateOrUpdateNhaCungCapKhachSanRequest();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["ma"] = this.ma;
+        data["ten"] = this.ten;
+        data["loaiKhachSanCode"] = this.loaiKhachSanCode;
+        data["tinhTrang"] = this.tinhTrang;
+        data["quocGiaId"] = this.quocGiaId;
+        data["tinhId"] = this.tinhId;
+        data["diaChi"] = this.diaChi;
+        data["email"] = this.email;
+        data["fax"] = this.fax;
+        data["website"] = this.website;
+        data["moTa"] = this.moTa;
+        data["anhDaiDienUrl"] = this.anhDaiDienUrl;
+        data["taiLieuJson"] = this.taiLieuJson;
+        data["isHasVAT"] = this.isHasVAT;
+        data["dichVu"] = this.dichVu;
+        data["ngayHetHanHopDong"] = this.ngayHetHanHopDong ? this.ngayHetHanHopDong.toString() : <any>undefined;
+        data["ngayCuoiTuan"] = this.ngayCuoiTuan;
+        data["id"] = this.id;
+        return data;
+    }
+}
+
+export interface ICreateOrUpdateNhaCungCapKhachSanRequest {
+    ma: string | undefined;
+    ten: string | undefined;
+    loaiKhachSanCode: string | undefined;
+    tinhTrang: boolean;
+    quocGiaId: number | undefined;
+    tinhId: number | undefined;
+    diaChi: string | undefined;
+    email: string | undefined;
+    fax: string | undefined;
+    website: string | undefined;
+    moTa: string | undefined;
+    anhDaiDienUrl: string | undefined;
+    taiLieuJson: string | undefined;
+    isHasVAT: boolean;
+    dichVu: string | undefined;
+    ngayHetHanHopDong: DateTime;
+    ngayCuoiTuan: string | undefined;
+    id: number;
 }
 
 export class PagingTepDinhKemRequest implements IPagingTepDinhKemRequest {

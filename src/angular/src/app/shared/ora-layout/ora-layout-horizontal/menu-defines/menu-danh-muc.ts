@@ -59,10 +59,10 @@ export const LayoutMenuDM: ILayoutMenu[] = [
     link: '',
     children: [
       {
-        text: 'Nhà cung cấp',
+        text: 'Khách sạn',
         permission: 'DanhMuc.NhaCungCap',
         level: 1,
-        link: preFix + 'nha-cung-cap',
+        link: preFix + 'nha-cung-cap/khach-san',
       },
     ],
   },

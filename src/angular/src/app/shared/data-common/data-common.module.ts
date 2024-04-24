@@ -22,6 +22,7 @@ import { InputTimePickerComponent } from './ora-select/component/input-time-pick
 import { HuyenComboDirective } from './ora-select/directive/huyen.directive';
 import { XaComboDirective } from './ora-select/directive/xa.directive';
 import { CodeSystemComboDirective } from './ora-select/directive/code-system-combo.directive';
+import { SoSaoKhachSanComboDirective } from './ora-select/directive/so-sao-khach-san-combo.directive';
 const com = [
   OraSelectComponent,
   OraRadioComponent,
@@ -35,6 +36,7 @@ const com = [
   HuyenComboDirective,
   XaComboDirective,
   CodeSystemComboDirective,
+  SoSaoKhachSanComboDirective,
 ];
 
 @NgModule({

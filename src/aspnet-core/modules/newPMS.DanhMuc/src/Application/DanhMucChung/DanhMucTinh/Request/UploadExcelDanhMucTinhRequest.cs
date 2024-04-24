@@ -1,7 +1,9 @@
 ﻿using MediatR;
+using Microsoft.EntityFrameworkCore;
 using newPMS.DanhMuc.Dtos;
 using newPMS.Entities;
 using OrdBaseApplication;
+using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -30,20 +32,27 @@ namespace newPMS.DanhMuc.Request
 
         private async Task CreateOrUpdate(CheckValidImportExcelDanhMucTinhDto input)
         {
-            var _repos = Factory.Repository<DanhMucTinhEntity, string>();
-            var data = await _repos.FindAsync(x => x.Id == input.Id);
-            if (data == null)
+            try
             {
-                var insertInput = new DanhMucTinhEntity();
-                Factory.ObjectMapper.Map(input, insertInput);
-                await _repos.InsertAsync(insertInput);
-            }
-            else
+                var _repos = Factory.Repository<DanhMucTinhEntity, string>();
+                var data = await _repos.FindAsync(x => x.Ma == input.Ma);
+                if (data == null)
+                {
+                    var insertInput = new DanhMucTinhEntity();
+                    Factory.ObjectMapper.Map(input, insertInput);
+                    await _repos.InsertAsync(insertInput);
+                }
+                else
+                {
+                    var updateData = await _repos.FirstOrDefaultAsync(x => x.Ma == input.Ma);
+                    Factory.ObjectMapper.Map(input, updateData);
+                    await _repos.UpdateAsync(updateData);
+                }
+            } catch(Exception ex)
             {
-                var updateData = await _repos.GetAsync(input.Id);
-                Factory.ObjectMapper.Map(input, updateData);
-                await _repos.UpdateAsync(updateData);
+
             }
+           
         }
     }
 }

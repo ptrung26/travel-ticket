@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using newPMS.Entities;
+using newPMS.Entities.DanhMuc.NhaCungCap;
 using newPMS.Entities.DichVu;
 using newPMS.Entities.TableDungChung;
 using Volo.Abp;
@@ -56,6 +57,11 @@ namespace newPMS.EntityFrameworkCore
                 // index
             });
             builder.Entity<NhaCungCapEntity>(b =>
+            {
+                b.ConfigureByConvention();
+                // index
+            });
+            builder.Entity<NhaCungCapKhachSanEntity>(b =>
             {
                 b.ConfigureByConvention();
                 // index
@@ -134,6 +140,13 @@ namespace newPMS.EntityFrameworkCore
             {
                 b.ConfigureByConvention();
                 // index
+            });
+            #endregion
+
+            #region Sản phẩm 
+            builder.Entity<TourSanPhamEntity>(b =>
+            {
+                b.ConfigureByConvention();
             });
             #endregion
 

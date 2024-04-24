@@ -48,12 +48,11 @@ export class UpLoadTinhComponent extends ModalComponentBase implements OnInit {
       if (index > 0) {
         controls.push(
           this.fb.group({
-            id: [(item[1] + '').trim(), [Validators.required]],
-            ma: [(item[2] + '').trim(), [Validators.required]],
-            ten: [(item[3] + '').trim(), [Validators.required]],
-            cap: [(item[4] + '').trim(), [Validators.required]],
-            strTinhGan: [(item[5] + '').trim()],
-            strPhanVung: [(item[6] + '').trim()],
+            ma: [(item[1] + '').trim(), [Validators.required]],
+            ten: [(item[2] + '').trim(), [Validators.required]],
+            cap: [(item[3] + '').trim(), [Validators.required]],
+            strTinhGan: [(item[4] + '').trim()],
+            strPhanVung: [(item[5] + '').trim()],
             tenEn: [],
             isTinhGan: [],
             phanVung: [],
@@ -73,7 +72,6 @@ export class UpLoadTinhComponent extends ModalComponentBase implements OnInit {
     const input = new CheckValidImportExcelDanhMucTinhRequest();
     input.input = data.map((item) => {
       const res = new CheckValidImportExcelDanhMucTinhDto();
-      res.id = item.id;
       res.ten = item.ten;
       res.ma = item.ma;
       res.cap = item.cap;
@@ -85,14 +83,12 @@ export class UpLoadTinhComponent extends ModalComponentBase implements OnInit {
       return res;
     });
 
-    this.dataService
-      .checkValidImportExcelDanhMucTinh(input)
-      .pipe(finalize(ora.ui.clearBusy))
-      .subscribe((result) => {
-        this.datas.controls.forEach((contr, index) => {
-          contr.setValue(result[index]);
-        });
+    this.dataService.checkValidImportExcelDanhMucTinh(input).subscribe((result) => {
+      ora.ui.clearBusy();
+      this.datas.controls.forEach((contr, index) => {
+        contr.setValue(result[index]);
       });
+    });
   }
 
   save() {

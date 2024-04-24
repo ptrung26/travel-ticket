@@ -4,8 +4,6 @@ namespace newPMS.DanhMuc.Dtos
 {
     public class CheckValidImportExcelDanhMucTinhDto
     {
-        public string Id { get; set; }
-
         public string Ten { get; set; }
         public string Ma { get; set; }
 

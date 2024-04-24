@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using newPMS.Entities;
+using newPMS.Entities.DanhMuc.NhaCungCap;
 using newPMS.Entities.DichVu;
 using newPMS.Entities.TableDungChung;
 using Volo.Abp.Data;
@@ -31,6 +32,8 @@ namespace newPMS.EntityFrameworkCore
         public virtual DbSet<DanhMucXaEntity> DanhMucXaEntity { get; set; }
         public virtual DbSet<DanhMucQuocGiaEntity> DanhMucQuocGiaEntity { get; set; }
         public virtual DbSet<NhaCungCapEntity> NhaCungCapEntity { get; set; }
+
+        public virtual DbSet<NhaCungCapKhachSanEntity> NhaCungCapKhachSanEntity { get;set; }
         #endregion "Danh mục dùng chung"
 
         #region Dịch vụ
@@ -51,7 +54,13 @@ namespace newPMS.EntityFrameworkCore
         public virtual DbSet<SysNotificationsEntity> SysNotifications { get; set; }
         public virtual DbSet<UserFireBaseTokenEntity> UserFireBaseTokenEntity { get; set; }
         #endregion
-      
+
+        #region Sản phẩm 
+        public virtual DbSet<TourSanPhamEntity> TourSanPhamEntity { get; set; }
+        public virtual DbSet<ChuongTrinhTourEntity> ChuongTrinhTourEntity { get; set; }
+
+        #endregion
+
         #region "Công việc"
         public virtual DbSet<CongViecEntity> CongViecEntity { get; set; }
         public virtual DbSet<CongViecUserEntity> CongViecUserEntity { get; set; }

@@ -7,6 +7,7 @@ import { QuocTichComponent } from './quoc-tich/quoc-tich.component';
 import { NhaCungCapComponent } from './nha-cung-cap/nha-cung-cap.component';
 import { CauHinhChungComponent } from './cau-hinh-chung/cau-hinh-chung.component';
 import { DanhMucComponent } from './danh-muc-chung/danh-muc.component';
+import { NhaCungCapKhachSanComponent } from './nha-cung-cap/khach-san/nha-cung-cap-khach-san.component';
 
 const routes: Routes = [
   {
@@ -41,8 +42,8 @@ const routes: Routes = [
   },
   {
     path: 'nha-cung-cap',
-    component: NhaCungCapComponent,
     data: { permission: 'DanhMuc.NhaCungCap' },
+    children: [{ path: 'khach-san', component: NhaCungCapKhachSanComponent, data: { permission: 'DanhMuc.NhaCungCap' } }],
   },
 ];
 

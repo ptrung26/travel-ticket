@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
   isLoading$ = new BehaviorSubject(false);
   passwordVisible = false;
   linkForgotPassword = UrlServices.identityUrl() + '/Account/ForgotPassword';
-  linkVanDeThuongGap = 'http://qcc-web.orenda.vn/vi/faqs/';
+  linkVanDeThuongGap = '';
 
   constructor(
     private fb: FormBuilder,

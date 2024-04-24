@@ -34,6 +34,9 @@ import { LoaiDanhMucCellComponent } from './danh-muc-chung/loai-danh-muc-cell/lo
 import { DsThietBiThuocHeMayModalComponent } from './danh-muc-chung/loai-danh-muc-cell/ds-thiet-bi-thuoc-he-may-modal/ds-thiet-bi-thuoc-he-may-modal.component';
 import { CreateOrEditCauHinhChungComponent } from './cau-hinh-chung/create-or-edit.component';
 import { DanhMucComponent } from './danh-muc-chung/danh-muc.component';
+import { NhaCungCapKhachSanComponent } from './nha-cung-cap/khach-san/nha-cung-cap-khach-san.component';
+import { CreateOrUpdateKhachSanComponent } from './nha-cung-cap/khach-san/create-or-update/create-or-update-khach-san.component';
+import { LienHeKhachSanComponent } from './nha-cung-cap/khach-san/lien-he/lien-he-khach-san.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -74,6 +77,9 @@ import { DanhMucComponent } from './danh-muc-chung/danh-muc.component';
     LoaiDanhMucCellComponent,
     DsThietBiThuocHeMayModalComponent,
     DanhMucComponent,
+    NhaCungCapKhachSanComponent,
+    CreateOrUpdateKhachSanComponent,
+    LienHeKhachSanComponent,
   ],
 })
 export class DanhMucModule {}

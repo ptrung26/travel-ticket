@@ -1,8 +1,11 @@
 ﻿using MediatR;
+using Microsoft.EntityFrameworkCore;
 using newPMS.DanhMuc.Dtos;
 using newPMS.Entities;
 using OrdBaseApplication;
+using System;
 using System.Collections.Generic;
+using System.Linq.Dynamic.Core;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -33,26 +36,36 @@ namespace newPMS.DanhMuc.Request
 
         private async Task CreateOrUpdate(CheckValidImportExcelDanhMucHuyenDto input)
         {
-            var _repos = Factory.Repository<DanhMucHuyenEntity, string>();
-            var _tinhRepos = Factory.Repository<DanhMucTinhEntity, string>();
-
-            var dataTinh = await _tinhRepos.FindAsync(x => x.Ten.ToLower() == input.TenTinh.ToLower());
-            var data = await _repos.FindAsync(x => x.Id == input.Id);
-
-            if (data == null)
+           try
             {
-                var insertInput = new DanhMucHuyenEntity();
-                Factory.ObjectMapper.Map(input, insertInput);
-                insertInput.TinhId = dataTinh.Id;
-                await _repos.InsertAsync(insertInput);
-            }
-            else
+                var _repos = Factory.Repository<DanhMucHuyenEntity, string>();
+                var _tinhRepos = Factory.Repository<DanhMucTinhEntity, string>();
+
+                var dataTinh = await _tinhRepos.FirstOrDefaultAsync(x => x.Ten.ToLower() == input.TenTinh.ToLower());
+                var data = await _repos.FirstOrDefaultAsync(x => x.Id == input.Id);
+
+                if(dataTinh != null)
+                {
+                    if (data == null)
+                    {
+                        var insertInput = new DanhMucHuyenEntity();
+                        Factory.ObjectMapper.Map(input, insertInput);
+                        insertInput.TinhId = dataTinh.Id;
+                        await _repos.InsertAsync(insertInput);
+                    }
+                    else
+                    {
+                        var updateData = await _repos.GetAsync(input.Id);
+                        Factory.ObjectMapper.Map(input, updateData);
+                        updateData.TinhId = dataTinh.Id;
+                        await _repos.UpdateAsync(updateData);
+                    }
+                }
+            } catch(Exception ex)
             {
-                var updateData = await _repos.GetAsync(input.Id);
-                Factory.ObjectMapper.Map(input, updateData);
-                updateData.TinhId = dataTinh.Id;
-                await _repos.UpdateAsync(updateData);
+                Console.WriteLine(ex.Message); 
             }
+           
         }
     }
 }

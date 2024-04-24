@@ -2,24 +2,27 @@
 
   .bg {
     max-width: 1920px;
-    width: 100%;
+    width: 100vw;
+    height: 100vh;
     margin: 0 auto;
     padding: 0 15px;
     position: relative;
-    min-height: 100vh;
-    //background: url(../../../../assets/images/bg-login-main.png), url(../../../../assets/images/bg-login-back.jpg);
-    background-position:  90% 80%, center;
+    background: url('./../../../../assets/images/bg-login-main.png');
+    background-position: 75% 7%;
     background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    overflow: hidden;
   }
 
   .ct {
     position: absolute;
-    left: 155px;
+    left: 140px;
     top: 50%;
     transform: translateY(-50%);
     backdrop-filter: blur(3.5px);
     border-radius: 8px;
-    background: rgba(255, 255, 255);
+    background-color: rgb(255, 255, 255);
     max-width: 700px;
     width: 100%;
   }
@@ -37,16 +40,10 @@
     img {
       display: inline-block;
       margin: 87px 0 16px;
-      width: 97px;
-      height: 92px;
+      width: 180px;
+
     }
   }
-  //
-  //.ant-input-affix-wrapper {
-  //  background: #fff;
-  //  border: 1px solid #bdbdbd;
-  //  border-radius: 6px;
-  //}
 
   .forgot-password {
     font-weight: 600;
@@ -96,9 +93,10 @@
     font-weight: 700;
     line-height: 32px;
     color: #255586;
-    margin-bottom: 75px;
+    margin-bottom: 50px;
     text-align: center;
   }
+
   .c-r {
     text-align: center;
     font-size: 16px;
@@ -107,9 +105,10 @@
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
-    color: #fff;
+    color: rgb(76, 76, 255);
     width: 100%;
   }
+
   .login-title {
     font-size: 20px;
     font-style: normal;
@@ -198,7 +197,7 @@
       padding: 12px !important;
       border-radius: 8px;
       border: 1px solid #D2D5D8;
-      background:  #FFF;
+      background: #FFF;
 
       &:-webkit-autofill,
       &:-webkit-autofill:focus {
@@ -211,8 +210,7 @@
     }
 
     .anticon.anticon-ora\:login-user,
-    .anticon.anticon-ora\:login-password
-    {
+    .anticon.anticon-ora\:login-password {
       color: #fff !important;
       font-size: 24px;
     }

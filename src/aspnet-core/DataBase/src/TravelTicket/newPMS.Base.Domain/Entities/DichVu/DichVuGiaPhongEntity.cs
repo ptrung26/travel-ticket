@@ -11,6 +11,7 @@ namespace newPMS.Entities.DichVu
     [Table("DV_GiaPhong")]
     public class DichVuGiaPhongEntity : FullAuditedEntity<long>
     {
+        public long NhaCungCapKhachSanId { get; set; }
         public long HangPhongId { get; set; }
         public string LoaiPhongCode { get; set; }
         public string LoaiTienTeCode { get; set; }

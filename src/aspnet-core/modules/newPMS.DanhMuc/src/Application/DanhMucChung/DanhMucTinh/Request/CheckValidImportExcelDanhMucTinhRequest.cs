@@ -35,20 +35,14 @@ namespace newPMS.DanhMuc.Request
             foreach (var item in request.Input)
             {
                 item.ListError = new List<string>();
-                var tinhId = _DanhMucTinhRepos.FirstOrDefault(t => t.Id == item.Id);
                 var maTinh = _DanhMucTinhRepos.FirstOrDefault(t => t.Ma == item.Ma);
-
-                if (tinhId != null)
-                {
-                    item.ListError.Add("Tỉnh Id đã tồn tại!");
-                }
 
                 if (maTinh != null)
                 {
                     item.ListError.Add("Mã tỉnh đã tồn tại!");
                 }
 
-                if (string.IsNullOrEmpty(item.Ten.Trim()) || string.IsNullOrEmpty(item.Id.Trim()) || string.IsNullOrEmpty(item.Cap.Trim()))
+                if (string.IsNullOrEmpty(item.Ten.Trim()) ||  string.IsNullOrEmpty(item.Cap.Trim()))
                 {
                     item.ListError.Add("Dữ liệu không hợp lệ!");
                 }

@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using newPMS.Entities;
 using OrdBaseApplication;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -25,11 +26,19 @@ namespace newPMS.DanhMuc.Dtos
 
         public async Task<Unit> Handle(UploadExcelQuocGiaRequest request, CancellationToken cancellationToken)
         {
-            foreach (var qg in request.ListData)
+            try
             {
-                await CreateOrUpdate(qg);
+                foreach (var qg in request.ListData)
+                {
+                    await CreateOrUpdate(qg);
+                }
+                return await Task.FromResult(Unit.Value);
+            } catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw; 
             }
-            return await Task.FromResult(Unit.Value);
+
         }
 
         private async Task CreateOrUpdate(CheckValidImportExcelQuocTichDto input)
