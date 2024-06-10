@@ -1,0 +1,118 @@
+<div clas="payment">
+    <header class="payment-heading">
+        <div class="payment-wrapper" style="display:flex; align-items:center;"><a routerLink="/home"
+                style="color:red">MTravel</a></div>
+    </header>
+
+    <div class="payment-detail">
+        <div class="payment-wrapper">
+            <div nz-row style="display:flex; gap: 32px; flex-wrap: nowrap">
+                <div nz-col [nzSpan]="16" class="payment-info">
+                    <h3 class="payment-title">Điền thông tin</h3>
+                    <div class="payment-general">
+                        <h4 class="payment-sub-title">Thông tin đơn hàng</h4>
+                        <div class="payment-sp" nz-row [nzGutter]="16">
+                            <div nz-col>
+                                <img nz-image [nzSrc]="imageUrl" />
+                            </div>
+                            <div nz-col [nzSpan]="20">
+                                <h4 class="payment-sp-name">{{bookingInfo.tenTour}}
+                                </h4>
+                                <p class="payment-sp-ma">Mã: {{bookingInfo.maTour}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="payment-contact">
+                        <h4 class="payment-sub-title">Thông tin liên lạc</h4>
+                        <p class="payment-sub-desc">Chúng tôi sẽ thông báo mọi thay đổi về đơn hàng cho bạn</p>
+                        <form [formGroup]="rfForm" class="payment-contact-info">
+                            <div nz-row [nzGutter]="16">
+                                <div nz-col [nzSpan]="12">
+                                    <nz-form-item class="m12">
+                                        <nz-form-label class="m-label" [nzSpan]="24" nzRequired>Họ và
+                                            tên</nz-form-label>
+                                        <nz-form-control [nzSpan]="24" [nzErrorTip]="'Trường này không được bỏ trống'">
+                                            <input nz-input formControlName="tenKhachHang" />
+                                        </nz-form-control>
+                                    </nz-form-item>
+                                </div>
+                                <div nz-col [nzSpan]="12">
+                                    <nz-form-item class="m12">
+                                        <nz-form-label class="m-label" [nzSpan]="24" nzRequired>Quốc gia</nz-form-label>
+                                        <nz-form-control [nzSpan]="24" [nzErrorTip]="'Trường này không được bỏ trống'">
+                                            <input nz-input />
+                                        </nz-form-control>
+                                    </nz-form-item>
+                                </div>
+                            </div>
+                            <div nz-row [nzGutter]="16">
+                                <div nz-col [nzSpan]="12">
+                                    <nz-form-item class="m12">
+                                        <nz-form-label class="m-label" [nzSpan]="24" nzRequired>Số điện
+                                            thoại</nz-form-label>
+                                        <nz-form-control [nzSpan]="24" [nzErrorTip]="'Trường này không được bỏ trống'">
+                                            <input nz-input formControlName="soDienThoai" />
+                                        </nz-form-control>
+                                    </nz-form-item>
+                                </div>
+                                <div nz-col [nzSpan]="12">
+                                    <nz-form-item class="m12">
+                                        <nz-form-label class="m-label" [nzSpan]="24">Email</nz-form-label>
+                                        <nz-form-control [nzSpan]="24">
+                                            <input nz-input formControlName="email" />
+                                        </nz-form-control>
+                                    </nz-form-item>
+                                </div>
+                            </div>
+                            <div nz-row [nzGutter]="16">
+                                <div nz-col [nzSpan]="24">
+                                    <nz-form-item class="m12">
+                                        <nz-form-label class="m-label" [nzSpan]="24">Địa chỉ</nz-form-label>
+                                        <nz-form-control [nzSpan]="24">
+                                            <textarea nz-input formControlName="diaChi"></textarea>
+                                        </nz-form-control>
+                                    </nz-form-item>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="payment-cam-ket">
+                        <label nz-checkbox [(ngModel)]="isCamKet"> Tôi đã hiểu và đông ý các <a>Chính sách</a> và <a>Cam
+                                kết</a> của MTravel</label>
+                    </div>
+                    <div class="payment-tags">
+                        <p class="payment-tags-info">Hoàn huỷ miễn phí trong 48h</p>
+                        <p class="payment-tags-warning">Vui lòng điền thông tin chính xác. Một khi đã gửi thông tin, bạn
+                            sẽ
+                            không thay đổi được.</p>
+                    </div>
+                    <div class="payment-btn" style="text-align:right">
+                        <button nz-button nzType="primary" (click)="createPayment()">Thanh toán</button>
+                    </div>
+                </div>
+                <div nz-col [nzSpan]="8" class="payment-prices">
+                    <h3 class="payment-sub-title">Chi tiết dịch vụ</h3>
+                    <div class="payment-choice">
+                        <div class="payment-choice-item">
+                            <span class="payment-choice-label">Ngày</span>
+                            <span class="payment-choice-value">{{bookingInfo.ngayBatDau | date:'dd/MM/yyyy'}}</span>
+                        </div>
+                        <div class="payment-choice-item">
+                            <span class="payment-choice-label">Số lượng thành viên đoàn</span>
+                            <span class="payment-choice-value">{{bookingInfo.soLuongNguoiLon}}</span>
+                        </div>
+                        <div class="payment-choice-item">
+                            <span class="payment-choice-label">Đơn giá</span>
+                            <span class="payment-choice-value">{{bookingInfo.donGia | currencyVND}}</span>
+                        </div>
+                    </div>
+                    <div class="payment-total">
+                        <span class="payment-total-label">Tổng cộng</span>
+                        <span class="payment-total-value">{{(bookingInfo.donGia * bookingInfo.soLuongNguoiLon)|
+                            currencyVND}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

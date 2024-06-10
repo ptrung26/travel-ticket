@@ -1,0 +1,31 @@
+<div class="filter">
+    <div class="filter-banner"></div>
+    <div class="filter-heading">
+        <h1>Tour du lịch trên toàn quốc</h1>
+    </div>
+    <ora-layout-filter (onSearch)="refresh()">
+        <form nz-form [formGroup]="rfForm" nzLayout="vertical">
+            <nz-row nzGutter="8">
+                <nz-col nzLg="6" nzSm="6">
+                    <input formControlName="filter" nz-input placeholder="Nhập mã, tên để tìm kiếm..." />
+                </nz-col>
+                <nz-col nzLg="6" nzSm="6">
+                    <ora-select formControlName="quocGiaId" dirQuocGia
+                        placeHolder="Tìm kiếm theo quốc gia"></ora-select>
+                </nz-col>
+                <nz-col nzLg="6" nzSm="6">
+                    <ora-select formControlName="tinhId" dirTinh placeHolder="Tìm kiếm theo thành phố"></ora-select>
+                </nz-col>
+            </nz-row>
+        </form>
+    </ora-layout-filter>
+    <div nz-row class="filter-list">
+        <ng-container *ngFor="let item of dataList">
+            <div class="filter-item">
+                <card-tour-san-pham [tour]="item"></card-tour-san-pham>
+            </div>
+        </ng-container>
+    </div>
+    <nz-pagination [nzPageIndex]="pageNumber" [nzTotal]="totalItems" nzShowSizeChanger [nzPageSize]="10"
+        (nzPageIndexChange)="onPageNumberChange($event)"></nz-pagination>
+</div>

@@ -12,13 +12,7 @@
   "DanhMuc_MonAn": "Món ăn",
   "DanhMuc_DinhDuong": "Dinh dưỡng",
   "DanhMuc_NhomDinhDuong": "Nhóm dinh dưỡng",
-  "DanhMuc_BenhLy": "Bệnh lý",
   "DanhMuc_CategoryTree": "Thuật ngữ",
-  "DanhMuc_ThapDinhDuong": "Tháp dinh dưỡng",
-  "Them_ChatDinhDuong": "Thêm mới Chất dinh dưỡng: ",
-  "Sua_ChatDinhDuong": "Sửa thông tin Chất dinh dưỡng: ",
-  "Them_NhomDinhDuong": "Thêm mới nhóm dinh dưỡng: ",
-  "Sua_NhomDinhDuong": "Sửa thông tin nhóm dinh dưỡng: ",
   "DanhMuc_NgheNghiep": "Nghề nghiệp",
   "DanhMuc_DonVi": "Đơn vị",
   "DanhMuc_NhomDonVi": "Nhóm đơn vị",
@@ -35,13 +29,7 @@
   "Them_NhaSanXuat": "Thêm mới nhà sản xuất ",
   "Them": "Thêm",
   "Sua_QuocTich": "Sửa thông tin Quốc gia: ",
-  "DanhMuc_CoSoKhamChuaBenhBhyt": "Cơ sở khám chữa bệnh BHYT",
-  "Them_CoSoKhamChuaBenhBhyt": "Thêm mới Cơ sở khám chữa bệnh BHYT: ",
-  "Sua_CoSoKhamChuaBenhBhyt": "Sửa thông tin Cơ sở khám chữa bệnh BHYT: ",
   "Sua_NhaSanXuat": "Sửa thông tin nhà sản xuất ",
-  "DanhMuc_DVKT_XetNghiem": "Danh mục xét nghiệm",
-  "Them_DVKT_XetNghiem": "Thêm mới danh mục xét nghiệm: ",
-  "Sua_DVKT_XetNghiem": "Sửa thông tin danh mục xét nghiệm: ",
   "Ma": "Mã",
   "Cap": "Cấp",
   "Ten": "Tên",
@@ -79,7 +67,9 @@
   "DanhMuc.NhaSanXuat": "Nhà Sản Xuất",
   "DanhMuc.NhaTaiTro": "Nhà tài trợ",
   "DanhMuc.CodeSystem": "Danh mục chung",
-  "DanhMuc.SystemConfig": "Cấu hình hệ thống"
+  "DanhMuc.SystemConfig": "Cấu hình hệ thống", 
+  "DanhMuc.NhaCungCap" : "Nhà cung cấp",
+  "KhachHang.Booking": "Booking"
 }
 
 

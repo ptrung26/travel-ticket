@@ -11,14 +11,14 @@ namespace newPMS.Entities
     [Table("DV_HangPhong")]
     public class DichVuHangPhongEntity : FullAuditedEntity<long>
     {
-        public string CategoryCode { get; set; }
+        public string LoaiPhongCode { get; set; }
         public long NhaCungCapId { get; set; }
-        public string TenPhong { get; set; }
+        public string TenHangPhong { get; set; }
         public string MoTa { get; set; }
-        public int SoLuongPhong { get; set; }   
-        public int SoKhachToiDa { get; set; } 
-        public int KichThuocPhong { get; set; }
-        public int SlPhongFOC { get; set; }
+        public int? SoLuongPhong { get; set; }
+        public int? SoKhachToiDa { get; set; }
+        public int? KichThuocPhong { get; set; }
+        public int? SlPhongFOC { get; set; }
         public string TienIchPhong { get; set; }
 
         public string JsonTaiLieu { get; set; }

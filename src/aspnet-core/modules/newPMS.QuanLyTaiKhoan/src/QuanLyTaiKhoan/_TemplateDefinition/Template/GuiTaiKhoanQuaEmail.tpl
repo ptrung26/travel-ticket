@@ -70,8 +70,8 @@
          <img src="{{model.logo}}" alt="logo" />
       </div>
       <h1>
-       <span class="title-bottom"> Đại học Y Dược Thành Phố Hồ Chí Minh </span> <br />
-        <span class="title-top">Trung Tâm Kiểm Chuẩn Chất Lượng <br /> Xét Nghiệm Y Học </span> 
+       <span class="title-bottom">MTravel</span> <br />
+        <span class="title-top">Đi mọi nơi <br /> Chơi mọi chỗ </span> 
       </h1>
       <p>Xin chào <b>{{model.ten}}</b></p>
       <p>Tài khoản truy cập hệ thống của bạn:</p>

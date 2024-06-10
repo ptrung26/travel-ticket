@@ -1,0 +1,46 @@
+<ora-page-header [action]="action">
+    <ng-template #action>
+        <button (click)="close()" nz-button nzType="default" type="button"><i nz-icon nzType="arrow-left"></i> Quay
+            lại</button>
+        <button (click)="save()" nz-button nzType="primary" type="button" style="margin-left: 8px">Lưu thông
+            tin</button>
+    </ng-template>
+</ora-page-header>
+<form [formGroup]="rfForm">
+    <nz-table [nzData]="data">
+        <thead>
+            <tr>
+                <th nzAlign="center">Khoảng khách</th>
+                <th nzAlign="center">Tên nhà cung cấp</th>
+                <th nzAlign="center">Tên dịch vụ</th>
+                <th nzAlign="center">Giá Nett</th>
+                <th nzAlign="center">Thuế VAT</th>
+                <th nzAlign="center">Tổng chi phí</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+        <tbody formArrayName="listChietTinhVe">
+            <ng-container *ngFor="let item of listChietTinh.controls; let i = index" [formGroupName]="i">
+                <tr>
+                    <td nzAlign="center">{{ item.get('khoangKhachDisplay').value }}</td>
+                    <td>
+                        <select-dich-vu-ve [nhaCungCapId]="item.get('nhaCungCapId').value"
+                            (luaChonEvent)="luaChon($event, i)"></select-dich-vu-ve>
+                    </td>
+                    <td nzAlign="center">
+                        <input nz-input formControlName="tenDichVu" />
+                    </td>
+                    <td nzAlign="center">
+                        <input nz-input formControlName="giaNett" />
+                    </td>
+                    <td nzAlign="center">
+                        <label nz-checkbox formControlName="isHasThueVAT"></label>
+                    </td>
+                    <td nzAlign="center">
+                        {{ item.get('tongChiPhi').value | currencyVND }}
+                    </td>
+                </tr>
+            </ng-container>
+        </tbody>
+    </nz-table>
+</form>

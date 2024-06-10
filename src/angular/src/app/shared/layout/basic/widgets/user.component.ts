@@ -11,16 +11,21 @@ import { UpdateProfileModalComponent } from '@shared/layout/basic/widgets/update
 import { Observable } from 'rxjs';
 import { AccountAvatarComponent } from './account-avatar/account-avatar.component';
 import { LEVEL } from '@app/shared/service-proxies/danh-muc-service-proxies';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'header-user',
   template: `
-    <div class="alain-default__nav-item d-flex align-items-center px-sm" nz-dropdown nzPlacement="bottomRight" [nzDropdownMenu]="userMenu">
-      <ng-container *ngIf="userSession$ | async as user">
+    <div class="alain-default__nav-item d-flex align-items-center px-sm"   >
+      <ng-container *ngIf="userSession$ | async as user; else publicWeb">
+      <div nz-dropdown [nzDropdownMenu]="userMenu" nzPlacement="bottomRight">  
         <img id="avatar" style="width: 40px; border-radius: 50%" src="{{ srcUrl }}" (error)="imageError()" class="mr-sm" />
         <span style="font-size: 16px; line-height: 24px; font-weight: 500; color: #255586">{{ user.username }}</span>
+      </div>
       </ng-container>
-      <!-- nzSrc="assets/common/no-avatar.png" -->
+      <ng-template #publicWeb>
+      <button nz-button nzType="primary" (click)="navigateToLogin()">Đăng nhập</button>
+      </ng-template>
     </div>
     <nz-dropdown-menu #userMenu="nzDropdownMenu">
       <div nz-menu class="width-sm" style="width: fit-content !important">
@@ -36,17 +41,9 @@ import { LEVEL } from '@app/shared/service-proxies/danh-muc-service-proxies';
           <i nz-icon nzType="user" class="mr-sm"></i>
           Thông tin tài khoản
         </div>
-        <!-- <div nz-menu-item routerLink="/pro/account/settings">
-                <i nz-icon nzType="setting" class="mr-sm"></i>
-                Cấu hình
-              </div> -->
         <div nz-menu-item (click)="changeAvatar()">
           <i nz-icon nzType="camera" class="mr-sm"></i>
           Thay đổi hình ảnh đại diện
-        </div>
-        <div nz-menu-item (click)="updateSoThutuchungChi()" *ngIf="sessionUser.hocVienId > 0">
-          <i nz-icon nzType="edit" class="mr-sm"></i>
-          Cập nhật số cấp chứng chỉ/Giấy chứng nhận
         </div>
         <li nz-menu-divider></li>
         <div nz-menu-item (click)="logout()">
@@ -55,6 +52,8 @@ import { LEVEL } from '@app/shared/service-proxies/danh-muc-service-proxies';
         </div>
       </div>
     </nz-dropdown-menu>
+    
+    
   `,
   providers: [SubscriptionService],
 })
@@ -73,16 +72,14 @@ export class HeaderUserComponent implements OnInit {
     private taiKhoanService: UserExtensionServiceProxy,
     public readonly tokenService: TokenStorageService,
     private userExtensionService: UserExtensionServiceProxy,
-  ) {}
+    private _router: Router,
+  ) { }
 
   ngOnInit(): void {
-    this.userId = this.config.getAll().currentUser.id;
+    this.userId = this.config.getAll()?.currentUser?.id;
     this.hasReturnAdmin = this.tokenService.hasReturnAdmin();
     this.srcUrl = AppConsts.abpEnvironment.apis.taiKhoan.url + `/api/tai-khoan/file/GetAvatar?userId=${this.userId}`;
     this.userExtensionService.userSession().subscribe((res: UserSessionDto) => {
-      if (res?.dateBlackList === undefined) {
-        res.dateBlackList = null;
-      }
       this.sessionUser = res;
       sessionStorage.setItem('userSession', JSON.stringify(res));
     });
@@ -92,7 +89,7 @@ export class HeaderUserComponent implements OnInit {
     this.taiKhoanService.clearUserSessionCache().subscribe(() => {
       localStorage.clear();
       sessionStorage.clear();
-      location.href = '/account/login';
+      location.href = '/home';
     });
   }
 
@@ -117,7 +114,7 @@ export class HeaderUserComponent implements OnInit {
         nzFooter: null,
         nzTitle: 'Thay đổi ảnh đại diện',
       })
-      .afterClose.subscribe((result) => {});
+      .afterClose.subscribe((result) => { });
   }
 
   showProfileModal() {
@@ -136,5 +133,10 @@ export class HeaderUserComponent implements OnInit {
 
   imageError() {
     this.srcUrl = './assets/no-avatar.png';
+  }
+
+  navigateToLogin() {
+    this._router.navigateByUrl("/account/login", { replaceUrl: true });
+
   }
 }

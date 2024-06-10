@@ -1,5 +1,5 @@
-import {Injectable} from '@angular/core';
-import {AuthService, PermissionService} from '@node_modules/@abp/ng.core';
+import { Injectable } from '@angular/core';
+import { AuthService, PermissionService } from '@node_modules/@abp/ng.core';
 import {
   ActivatedRouteSnapshot,
   CanActivate,
@@ -11,12 +11,12 @@ import {
   UrlSegment,
   UrlTree,
 } from '@node_modules/@angular/router';
-import {OAuthService} from '@node_modules/angular-oauth2-oidc';
-import {Observable, of} from '@node_modules/rxjs';
-import {UserSessionDto} from '@service-proxies/tai-khoan-service-proxies';
-import {AppSessionState} from '@app/stores/app-session/state';
-import {Select} from '@node_modules/@ngxs/store';
-import {map} from 'rxjs/operators';
+import { OAuthService } from '@node_modules/angular-oauth2-oidc';
+import { Observable, of } from '@node_modules/rxjs';
+import { UserSessionDto } from '@service-proxies/tai-khoan-service-proxies';
+import { AppSessionState } from '@app/stores/app-session/state';
+import { Select } from '@node_modules/@ngxs/store';
+import { map } from 'rxjs/operators';
 
 @Injectable()
 export class AuthGuardService implements CanActivate, CanActivateChild, CanLoad {
@@ -37,10 +37,10 @@ export class AuthGuardService implements CanActivate, CanActivateChild, CanLoad 
     //   });
     // }
     return this.userSession$.pipe(map((user) => {
-      if (!user) {
-        this._router.navigateByUrl('/account/login').then();
-        return false;
-      }
+      // if (!user) {
+      //   this._router.navigateByUrl('/account/login').then();
+      //   return false;
+      // }
       if (!data || !data['permission']) {
         return true;
       }

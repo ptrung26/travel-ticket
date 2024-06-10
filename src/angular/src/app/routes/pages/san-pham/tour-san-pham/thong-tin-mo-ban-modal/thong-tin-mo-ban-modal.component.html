@@ -1,0 +1,24 @@
+<form [formGroup]="rfForm">
+    <div nz-row>
+        <div nz-col [nzSpan]="24">
+            <nz-form-item [nzGutter]="12">
+                <nz-form-label [nzSpan]="8" class="m-label" nzRequired>Số lượng</nz-form-label>
+                <nz-form-control [nzErrorTip]="'Trường này không được bỏ trống!'">
+                    <nz-input-number [nzMin]="0" formControlName="soLuongMoBan"></nz-input-number>
+                </nz-form-control>
+            </nz-form-item>
+        </div>
+        <div nz-col [nzSpan]="24">
+            <nz-form-item [nzGutter]="12">
+                <nz-form-label [nzSpan]="8" class="m-label" nzRequired>Thời gian mở bán</nz-form-label>
+                <nz-form-control [nzErrorTip]="'Trường này không được bỏ trống!'" [nzSpan]="8">
+                    <ora-date-picker formControlName="thoiGianMoBan"></ora-date-picker>
+                </nz-form-control>
+            </nz-form-item>
+        </div>
+    </div>
+</form>
+<div *nzModalFooter>
+    <button type="button" nz-button nzType="default" (click)="close()">Đóng</button>
+    <button nz-button nzType="primary" (click)="save()"><i nz-icon nzType="save"></i> Lưu</button>
+</div>

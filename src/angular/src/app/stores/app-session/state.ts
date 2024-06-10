@@ -1,12 +1,14 @@
-import {Action, Selector, State, StateContext} from '@ngxs/store';
-import {tap} from 'rxjs/operators';
-import {Injectable} from '@angular/core';
-import {GetUserSession} from './action';
-import {environment} from '@env/environment';
-import {ConfigStateService} from '@node_modules/@abp/ng.core';
-import {OrdApplicationConfigurationServiceProxy} from '@service-proxies/danh-muc-service-proxies';
-import {forkJoin} from 'rxjs';
-import {UserExtensionServiceProxy, UserSessionDto} from '@app/stores/app-session/user-api-proxy';
+import { Action, Selector, State, StateContext } from '@ngxs/store';
+import { tap } from 'rxjs/operators';
+import { Injectable } from '@angular/core';
+import { GetUserSession } from './action';
+import { environment } from '@env/environment';
+import { ConfigStateService } from '@node_modules/@abp/ng.core';
+import { OrdApplicationConfigurationServiceProxy } from '@service-proxies/danh-muc-service-proxies';
+import { forkJoin } from 'rxjs';
+import { UserExtensionServiceProxy, UserSessionDto } from '@app/stores/app-session/user-api-proxy';
+import { Router } from '@angular/router';
+import { ReuseTabService } from '@delon/abc/reuse-tab';
 
 export class AppSessionStateModel {
   user: UserSessionDto;
@@ -24,6 +26,8 @@ export class AppSessionState {
     private userService: UserExtensionServiceProxy,
     private config: ConfigStateService,
     private appConfig_SP: OrdApplicationConfigurationServiceProxy,
+    private router: Router,
+    private reuseTabService: ReuseTabService
   ) {
   }
 
@@ -33,7 +37,7 @@ export class AppSessionState {
   }
 
   @Action(GetUserSession)
-  getUserSession({getState, setState}: StateContext<AppSessionStateModel>) {
+  getUserSession({ getState, setState }: StateContext<AppSessionStateModel>) {
     return forkJoin([this.userService.userSession(), this.appConfig_SP.getConfiguration()]).pipe(
       tap(([user, config]) => {
         if (config) {
@@ -45,7 +49,7 @@ export class AppSessionState {
           user: user,
         });
         if (environment.production === false) {
-          // console.log('usersession', user);
+          this.reuseTabService.clear();
         }
       }),
     );

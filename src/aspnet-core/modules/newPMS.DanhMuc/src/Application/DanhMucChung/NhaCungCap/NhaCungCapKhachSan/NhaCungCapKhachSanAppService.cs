@@ -7,6 +7,7 @@ using Abp.Application.Services;
 using Microsoft.AspNetCore.Mvc;
 using newPMS.DanhMuc.Request;
 using newPMS.DanhMucChung.Dtos;
+using newPMS.DanhMucChung.Request;
 using OrdBaseApplication.Dtos;
 using OrdBaseApplication.Factory;
 using Volo.Abp.Application.Dtos;
@@ -25,7 +26,7 @@ namespace newPMS.DanhMuc.Services
         public async Task<PagedResultDto<NhaCungCapKhachSanDto>> PagingList(PagingListNhaCungCapKhachSanRequest request)
         {
             var result = await _factory.Mediator.Send(request);
-            return result; 
+            return result;
         }
 
         [HttpPost(Utilities.ApiUrlBase + "CreateOrUpdate")]
@@ -34,5 +35,14 @@ namespace newPMS.DanhMuc.Services
             var result = await _factory.Mediator.Send(request);
             return result;
         }
+
+
+        [HttpPost(Utilities.ApiUrlBase + "ViewDetail")]
+        public async Task<CommonResultDto<NhaCungCapKhachSanDto>> ViewDetail(ViewDetailNhaCungCapKhachSanRequest request)
+        {
+            var result = await _factory.Mediator.Send(request);
+            return result;
+        }
+
     }
 }

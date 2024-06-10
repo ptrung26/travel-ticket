@@ -33,7 +33,9 @@
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\..\..\..\DataBase\src\TravelTicket\newPMS.Base.EntityFrameworkCore\newPMS.Base.EntityFrameworkCore.csproj" />
+		<ProjectReference Include="..\..\..\..\shared\OrdBaseApplication\OrdBaseApplication.csproj" />
 		<ProjectReference Include="..\..\..\..\shared\OrdBaseHttpApi\OrdBaseHttpApi.csproj" />
+		<ProjectReference Include="..\..\..\newPMS.ApplicationShared\newPMS.ApplicationShared.csproj" />
 		<ProjectReference Include="..\Application\newPMS.SanPham.Application.csproj" />
 	</ItemGroup>
 

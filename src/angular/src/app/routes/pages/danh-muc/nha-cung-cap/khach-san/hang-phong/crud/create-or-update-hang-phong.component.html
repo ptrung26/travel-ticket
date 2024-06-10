@@ -1,0 +1,41 @@
+<form [formGroup]="rfForm">
+    <div nz-row>
+        <div nz-col [nzSpan]="24">
+            <nz-form-item>
+                <nz-form-label nzRequired [nzSpan]="24">Tên hạng phòng</nz-form-label>
+                <nz-form-control>
+                    <input nz-input formControlName="tenHangPhong" />
+                </nz-form-control>
+            </nz-form-item>
+        </div>
+        <div nz-col [nzSpan]="24">
+            <nz-form-item>
+                <nz-form-label nzRequired [nzSpan]="24">Số lượng phòng</nz-form-label>
+                <nz-form-control>
+                    <input nz-input formControlName="soLuongPhong" />
+                </nz-form-control>
+            </nz-form-item>
+        </div>
+        <div nz-col [nzSpan]="24">
+            <nz-form-item>
+                <nz-form-label nzRequired [nzSpan]="24">Kích thước phòng (M2)</nz-form-label>
+                <nz-form-control>
+                    <input nz-input formControlName="kichThuocPhong" />
+                </nz-form-control>
+            </nz-form-item>
+        </div>
+        <div nz-col [nzSpan]="24">
+            <nz-form-item>
+                <nz-form-label nzRequired [nzSpan]="24">Mô tả</nz-form-label>
+                <nz-form-control>
+                    <textarea nz-input formControlName="mô tả"></textarea>
+                </nz-form-control>
+            </nz-form-item>
+        </div>
+    </div>
+</form>
+<div *nzModalFooter>
+    <button type="button" nz-button nzType="primary" (click)="save()">
+        <i nz-icon nzType="save"></i>{{ 'Save' | translate }}
+    </button>
+</div>

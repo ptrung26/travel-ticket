@@ -1,0 +1,9 @@
+<div class="card">
+  <div class="card-image" nz-image [ngStyle]="{ 'background-image': 'url(' + imageUrl + ')' }"></div>
+  <div class="card-info">
+    <h3>{{ tour.ten }}</h3>
+    <p>Điểm đến: {{tour.tinh}}</p>
+    <p style="color:rgb(255, 61, 0); padding: 10px 0 50px;">Giá tiền: {{giaTien | currencyVND}}</p>
+    <a class="btn-detail" nz-button [routerLink]="['/home/tour-du-lich', tour.id]">Xem chi tiết</a>
+  </div>
+</div>

@@ -50,7 +50,7 @@ namespace newPMS.DanhMuc.Request
                 }
             } catch(Exception ex)
             {
-
+                 
             }
            
         }

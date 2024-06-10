@@ -1,0 +1,48 @@
+<ng-container *ngIf="viewShow == 'list'">
+    <nz-table [nzBordered]="true" [nzData]="data" nzTemplateMode>
+        <thead>
+            <tr>
+                <th style="text-align: left" [attr.colspan]="listKhoangNguoiArr.length + 2">
+                    <span>Vé thắng cảnh</span>
+                    <a nz-button nzType="link" nz-tooltip="{{ 'Edit' | translate }}" (click)="cauHinh()">
+                        <i nz-icon nzType="edit"></i>
+                    </a>
+                </th>
+            </tr>
+            <tr>
+                <th style="width: 100px">Ngày thứ</th>
+                <ng-container *ngFor="let key of listKhoangNguoiArr">
+                    <th>
+                        {{ key }}<ng-container *ngIf="+listKhoangNguoi[key] > 0">/{{ listKhoangNguoi[key]
+                            }}</ng-container>
+                    </th>
+                </ng-container>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-container *ngFor="let item of listGroupTheoNgay">
+                <tr>
+                    <td style="width: 50px">{{ item.ngay }}</td>
+                    <ng-container *ngFor="let ct of item.listChietTinh">
+                        <ng-container *ngIf="+ct.giaNett > 0; else thongBao">
+                            <td>{{ (ct.giaNett ? ct.giaNett * (ct.isHasThueVAT ? 1.1 : 1) : 0) | currencyVND }}</td>
+                        </ng-container>
+                        <ng-template #thongBao>
+                            <td>Chưa có thông tin</td>
+                        </ng-template>
+                    </ng-container>
+                </tr>
+            </ng-container>
+            <tr>
+                <td><b>Tổng tiền</b></td>
+                <ng-container *ngFor="let key of listKhoangNguoiArr">
+                    <td>
+                        {{ getTongTienTungKhoangKhach(key) | currencyVND }}
+                    </td>
+                </ng-container>
+            </tr>
+        </tbody>
+    </nz-table>
+</ng-container>
+<crud-chiet-tinh-ve *ngIf="viewShow == 'crud-chiet-tinh-ve'" [data]="data" [listKhoangNguoi]="listKhoangNguoi"
+    [listGroupTheoNgay]="listGroupTheoNgay" (closeEvent)="thayDoiView($event)"></crud-chiet-tinh-ve>

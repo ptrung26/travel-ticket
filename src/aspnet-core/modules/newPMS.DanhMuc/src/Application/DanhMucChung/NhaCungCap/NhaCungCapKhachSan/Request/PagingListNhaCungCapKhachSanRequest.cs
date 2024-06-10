@@ -40,11 +40,23 @@ namespace newPMS.DanhMuc.Request
                 var result = (from ks in _factory.Repository<NhaCungCapKhachSanEntity, long>()
                               select new NhaCungCapKhachSanDto
                               {
+                                  Id = ks.Id, 
                                   Ma = ks.Ma,
                                   Ten = ks.Ten,
                                   Email = ks.Email,
                                   Fax = ks.Fax,
                                   SoSao = ks.SoSao,
+                                  TinhTrang = ks.TinhTrang, 
+                                  NgayCuoiTuan = ks.NgayCuoiTuan, 
+                                  AnhDaiDienUrl = ks.AnhDaiDienUrl, 
+                                  DiaChi = ks.DiaChi, 
+                                  NgayHetHanHopDong = ks.NgayHetHanHopDong, 
+                                  MoTa = ks.MoTa, 
+                                  QuocGiaId = ks.QuocGiaId, 
+                                  TinhId = ks.TinhId, 
+                                  Website = ks.Website, 
+                                  DichVu = ks.DichVu, 
+                                  IsHasVAT = ks.IsHasVAT, 
                               }).WhereIf(!string.IsNullOrEmpty(request.Filter), x => EF.Functions.Like(x.Ten, request.FilterFullText))
                           .WhereIf(request.SoSao.HasValue, x => x.SoSao == request.SoSao.Value);
                 

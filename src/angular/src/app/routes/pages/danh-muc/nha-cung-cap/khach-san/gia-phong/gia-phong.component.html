@@ -1,0 +1,55 @@
+<ora-page-header [action]="actionHeader" [title]="'Thông tin giá phòng'">
+    <ng-template #actionHeader>
+        <button nz-button nzType="primary" (click)="showCreateOrUpdate()">
+            <i nz-icon nzType="plus-circle" nzTheme="outline"></i>Thêm mới
+        </button>
+    </ng-template>
+</ora-page-header>
+<ora-layout-filter (onSearch)="refresh()">
+    <form nz-form [formGroup]="rfForm" nzLayout="vertical">
+        <nz-row nzGutter="8">
+            <nz-col nzLg="6" nzSm="6">
+                <input formControlName="filter" nz-input placeholder="Nhập mã, tên để tìm kiếm" />
+            </nz-col>
+        </nz-row>
+    </form>
+</ora-layout-filter>
+
+<nz-table nzTemplateMode>
+    <thead>
+        <tr>
+            <th [attr.rowspan]="2">Hạng phòng</th>
+            <th [attr.rowspan]="2">Ngày áp dụng</th>
+            <th [attr.colspan]="2">Giá ngày thường</th>
+            <th [attr.colspan]="2">Giá cuối tuần</th>
+            <th [attr.rowspan]="2"> Thao tác</th>
+        </tr>
+        <tr>
+            <th>Giá Nett</th>
+            <th>Giá bán</th>
+            <th>Giá Nett</th>
+            <th>Giá bán</th>
+        </tr>
+    </thead>
+    <tbody>
+        <ng-container *ngFor="let item of dataList">
+            <tr>
+                <th [attr.rowspan]="2">{{item?.tenHangPHong}}</th>
+                <th [attr.rowspan]="2"> {{ item?.ngayApDungTu | date: 'dd/MM/yyyy' }} - {{ item?.ngayApDungDen | date:
+                    'dd/MM/yyyy' }}</th>
+                <th>{{item?.giaFOTNettNgayThuong | currencyVND}}</th>
+                <th>{{item?.giaFOTBanNgayThuong | currencyVND}}</th>
+                <th>{{item?.giaFOTNettNgayLe | currencyVND}}</th>
+                <th>{{item?.giaFOTBanNgayLe | currencyVND}}</th>
+                <th>
+                    <a nz-button nzType="link" nz-tooltip="{{ 'Edit' | translate }}" (click)="showCreateOrUpdate(data)">
+                        <i nz-icon nzType="edit"></i>
+                    </a>
+                    <a nz-button nzType="link" nzDanger nz-tooltip="{{ 'Delete' | translate }}" (click)="delete(data)">
+                        <i nz-icon nzType="delete"></i>
+                    </a>
+                </th>
+            </tr>
+        </ng-container>
+    </tbody>
+</nz-table>

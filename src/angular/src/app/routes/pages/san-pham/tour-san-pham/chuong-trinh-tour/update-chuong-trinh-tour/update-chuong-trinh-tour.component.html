@@ -1,0 +1,59 @@
+<form [formGroup]="rfForm">
+    <nz-row [nzGutter]="12">
+        <nz-col [nzSpan]="24">
+            <nz-form-item>
+                <nz-form-label style="display:flex; align-items:center" [nzSpan]="2">Ngày thứ</nz-form-label>
+                <nz-form-control [nzSpan]="4">
+                    <input nz-input formControlName="ngayThu" />
+                </nz-form-control>
+            </nz-form-item>
+        </nz-col>
+        <nz-col [nzSpan]="24">
+            <nz-form-item>
+                <nz-form-label [nzSpan]="24" nzRequired>Tên hành trình</nz-form-label>
+                <nz-form-control [nzErrorTip]="'Trường này không được bỏ trống'">
+                    <input nz-input formControlName="tenHanhTrinh" />
+                </nz-form-control>
+            </nz-form-item>
+        </nz-col>
+        <nz-col [nzSpan]="24">
+            <nz-form-item>
+                <nz-form-label [nzSpan]="24">Nội dung</nz-form-label>
+                <nz-form-control>
+                    <ora-ckeditor formControlName="noiDung"></ora-ckeditor>
+                </nz-form-control>
+            </nz-form-item>
+        </nz-col>
+        <nz-col [nzSpan]="24">
+            <nz-form-item>
+                <nz-form-label [nzSpan]="24">Điểm đến</nz-form-label>
+                <nz-form-control>
+                    <input nz-input formControlName="diemDen" />
+                </nz-form-control>
+            </nz-form-item>
+        </nz-col>
+    </nz-row>
+</form>
+<nz-row>
+    <nz-col [nzSpan]="24">
+        <nz-form-item>
+            <nz-form-label [nzSpan]="24">Dịch vụ</nz-form-label>
+            <nz-form-control>
+                <nz-checkbox-wrapper style="width: 100%;" (nzOnChange)="handleAddDichVu($event)">
+                    <div nz-row [nzGutter]="12">
+                        <ng-container *ngFor="let item of listDichVu">
+                            <div nz-col><label nz-checkbox [nzValue]="item.value"
+                                    [ngModel]="isCheckDichVu(item.value)">{{item.displayText}}</label>
+                            </div>
+                        </ng-container>
+                    </div>
+                </nz-checkbox-wrapper>
+            </nz-form-control>
+        </nz-form-item>
+    </nz-col>
+</nz-row>
+<div class="footerbutton">
+    <button type="button" nz-button nzType="primary" (click)="save()">
+        <i nz-icon nzType="save"></i>Lưu thông tin
+    </button>
+</div>

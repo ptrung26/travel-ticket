@@ -1,7 +1,7 @@
 <ng-container *ngIf="viewShow=='list'">
     <ora-page-header title="Khách sạn" [action]="actionHeader">
         <ng-template #actionHeader>
-            <button nz-button nzType="primary" (click)="add()">
+            <button nz-button nzType="primary" (click)="showCreateOrUpdate()">
                 <i nz-icon nzType="plus-circle" nzTheme="outline"></i>Thêm mới
             </button>
         </ng-template>
@@ -28,7 +28,6 @@
         </ora-column>
         <ora-column header="Mã" key="ma" align="center" width="200px"></ora-column>
         <ora-column [sort]="true" header="Tên" key="ten" align="center"></ora-column>
-        <ora-column [sort]="true" header="Số phòng" key="soPhong" align="center"></ora-column>
         <ora-column header="Email" key="email" align="center"></ora-column>
         <ora-column header="Số điện thoại" key="fax" align="center"></ora-column>
         <ora-column header="Trạng thái" key="tinhTrang" align="center" [content]="trangThaiContent" width="200px">
@@ -53,4 +52,5 @@
         </ora-column>
     </ora-table>
 </ng-container>
-<create-or-update-khach-san *ngIf="viewShow == 'create-or-update'" (closeEvent)="close()"></create-or-update-khach-san>
+<create-or-update-khach-san *ngIf="viewShow == 'create-or-update'" (closeEvent)="close()"
+    [nhaCungCapId]="dataItem.id"></create-or-update-khach-san>

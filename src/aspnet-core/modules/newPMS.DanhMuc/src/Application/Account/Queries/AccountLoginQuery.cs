@@ -62,7 +62,7 @@ namespace newPMS.Account.Queries
                 else
                 {
                     result.IsSuccessful=true;
-                    result.authJwtDto= await _factory.Mediator.Send(new AccountCreateJwtCommand()
+                    result.AuthJwtDto= await _factory.Mediator.Send(new AccountCreateJwtCommand()
                     {
                         User = user,
                         Roles = await _userManager.GetRolesAsync(user)

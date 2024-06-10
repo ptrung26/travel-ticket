@@ -19,6 +19,678 @@ namespace newPMS.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 64)
                 .HasAnnotation("ProductVersion", "5.0.13");
 
+            modelBuilder.Entity("newPMS.Entities.Booking.BookingDichVuTourEntity", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("BookingId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("CreationTime");
+
+                    b.Property<Guid?>("CreatorId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("CreatorId");
+
+                    b.Property<Guid?>("DeleterId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("DeleterId");
+
+                    b.Property<DateTime?>("DeletionTime")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("DeletionTime");
+
+                    b.Property<string>("DiemDen")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<DateTime?>("GioDon")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("tinyint(1)")
+                        .HasDefaultValue(false)
+                        .HasColumnName("IsDeleted");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("LastModificationTime");
+
+                    b.Property<Guid?>("LastModifierId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("LastModifierId");
+
+                    b.Property<DateTime?>("NgayBatDau")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<int?>("SoLuongNguoiLon")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("SoLuongTreEm")
+                        .HasColumnType("int");
+
+                    b.Property<string>("TenTour")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<long?>("TourId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Sys_BookingDichVuTour");
+                });
+
+            modelBuilder.Entity("newPMS.Entities.Booking.BookingEntity", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("CreationTime");
+
+                    b.Property<Guid?>("CreatorId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("CreatorId");
+
+                    b.Property<Guid?>("DeleterId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("DeleterId");
+
+                    b.Property<DateTime?>("DeletionTime")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("DeletionTime");
+
+                    b.Property<string>("GhiChu")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("tinyint(1)")
+                        .HasDefaultValue(false)
+                        .HasColumnName("IsDeleted");
+
+                    b.Property<string>("KenhBanHang")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<long>("KhachHangId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("LastModificationTime");
+
+                    b.Property<Guid?>("LastModifierId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("LastModifierId");
+
+                    b.Property<string>("LoaiKhachHangCode")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("Ma")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50) CHARACTER SET utf8mb4");
+
+                    b.Property<DateTime?>("NgayLap")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<long?>("NhanVienId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("PhuongThucCode")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("SoTaiKhoan")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<decimal?>("SoTienHoan")
+                        .HasColumnType("decimal(65,30)");
+
+                    b.Property<long?>("SysUerId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Ten")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<decimal?>("ThanhTien")
+                        .HasColumnType("decimal(65,30)");
+
+                    b.Property<DateTime?>("ThoiGianHoanTien")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<long?>("TinhId")
+                        .HasColumnType("bigint");
+
+                    b.Property<int?>("TrangThai")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("sys_Booking");
+                });
+
+            modelBuilder.Entity("newPMS.Entities.Booking.ChiTietBookingDichVuLeEntity", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("BookingId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("CreationTime");
+
+                    b.Property<Guid?>("CreatorId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("CreatorId");
+
+                    b.Property<Guid?>("DeleterId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("DeleterId");
+
+                    b.Property<DateTime?>("DeletionTime")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("DeletionTime");
+
+                    b.Property<long?>("DichVuId")
+                        .HasColumnType("bigint");
+
+                    b.Property<decimal?>("DonGia")
+                        .HasColumnType("decimal(65,30)");
+
+                    b.Property<string>("GhiChu")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("tinyint(1)")
+                        .HasDefaultValue(false)
+                        .HasColumnName("IsDeleted");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("LastModificationTime");
+
+                    b.Property<Guid?>("LastModifierId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("LastModifierId");
+
+                    b.Property<int?>("NgayThu")
+                        .HasColumnType("int");
+
+                    b.Property<string>("NhaCungCapCode")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<long?>("NhaCungCapId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("PhuongThucCod")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<int?>("SoLuong")
+                        .HasColumnType("int");
+
+                    b.Property<string>("TenDichVu")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<decimal?>("ThanhTien")
+                        .HasColumnType("decimal(65,30)");
+
+                    b.Property<int>("TrangThai")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Sys_ChiTietBookingDichVuLe");
+                });
+
+            modelBuilder.Entity("newPMS.Entities.Booking.ChiTietBookingDichVuTourEntity", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("BookingId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("BookingTourId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("CreationTime");
+
+                    b.Property<Guid?>("CreatorId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("CreatorId");
+
+                    b.Property<Guid?>("DeleterId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("DeleterId");
+
+                    b.Property<DateTime?>("DeletionTime")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("DeletionTime");
+
+                    b.Property<decimal>("GiaBan")
+                        .HasColumnType("decimal(65,30)");
+
+                    b.Property<decimal>("GiaNett")
+                        .HasColumnType("decimal(65,30)");
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("tinyint(1)")
+                        .HasDefaultValue(false)
+                        .HasColumnName("IsDeleted");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("LastModificationTime");
+
+                    b.Property<Guid?>("LastModifierId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("LastModifierId");
+
+                    b.Property<string>("LoaiDoTuoi")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<int>("SoLuong")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("ThanhTien")
+                        .HasColumnType("decimal(65,30)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Sys_ChiTietBookingDichVuTour");
+                });
+
+            modelBuilder.Entity("newPMS.Entities.Booking.ChiTietLichHenBookingTour", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("BookingId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("CreationTime");
+
+                    b.Property<Guid?>("CreatorId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("CreatorId");
+
+                    b.Property<Guid?>("DeleterId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("DeleterId");
+
+                    b.Property<DateTime?>("DeletionTime")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("DeletionTime");
+
+                    b.Property<string>("DiaDiem")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("tinyint(1)")
+                        .HasDefaultValue(false)
+                        .HasColumnName("IsDeleted");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("LastModificationTime");
+
+                    b.Property<Guid?>("LastModifierId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("LastModifierId");
+
+                    b.Property<DateTime?>("NgayBatDau")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<DateTime?>("NgayKetThuc")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("NoiDung")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("TieuDe")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Sys_ChiTietLichHenBookingTour");
+                });
+
+            modelBuilder.Entity("newPMS.Entities.Booking.ChiTietPhieuThuBookingTour", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("BookingId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("CreationTime");
+
+                    b.Property<Guid?>("CreatorId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("CreatorId");
+
+                    b.Property<Guid?>("DeleterId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("DeleterId");
+
+                    b.Property<DateTime?>("DeletionTime")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("DeletionTime");
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("tinyint(1)")
+                        .HasDefaultValue(false)
+                        .HasColumnName("IsDeleted");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("LastModificationTime");
+
+                    b.Property<Guid?>("LastModifierId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("LastModifierId");
+
+                    b.Property<string>("LoaiThuCode")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<DateTime?>("NgayCapNhat")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<DateTime?>("NgayChungTu")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<DateTime?>("NgayHachToan")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("PhuongThucThanhToanCode")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("SoChungTu")
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50) CHARACTER SET utf8mb4");
+
+                    b.Property<decimal>("TongTien")
+                        .HasColumnType("decimal(65,30)");
+
+                    b.Property<int>("TrangThai")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Sys_ChiTietPhieuThuBookingTour");
+                });
+
+            modelBuilder.Entity("newPMS.Entities.Booking.ChiTietThanhVienDoanBooking", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("BookingId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("CreationTime");
+
+                    b.Property<Guid?>("CreatorId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("CreatorId");
+
+                    b.Property<Guid?>("DeleterId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("DeleterId");
+
+                    b.Property<DateTime?>("DeletionTime")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("DeletionTime");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("tinyint(1)")
+                        .HasDefaultValue(false)
+                        .HasColumnName("IsDeleted");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("LastModificationTime");
+
+                    b.Property<Guid?>("LastModifierId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("LastModifierId");
+
+                    b.Property<long>("QuocTichId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("SoDienThoai")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("Ten")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("VaiTroCode")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Sys_ChiTietThanhVienDoanBooking");
+                });
+
+            modelBuilder.Entity("newPMS.Entities.ChietTinh.ChietTinhDichVuVeEntity", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("CreationTime");
+
+                    b.Property<Guid?>("CreatorId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("CreatorId");
+
+                    b.Property<Guid?>("DeleterId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("DeleterId");
+
+                    b.Property<DateTime?>("DeletionTime")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("DeletionTime");
+
+                    b.Property<long?>("DichVuVeId")
+                        .HasColumnType("bigint");
+
+                    b.Property<decimal?>("GiaNett")
+                        .HasColumnType("decimal(65,30)");
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("tinyint(1)")
+                        .HasDefaultValue(false)
+                        .HasColumnName("IsDeleted");
+
+                    b.Property<string>("KhoangKhachCode")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("LastModificationTime");
+
+                    b.Property<Guid?>("LastModifierId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("LastModifierId");
+
+                    b.Property<int>("NgayThu")
+                        .HasColumnType("int");
+
+                    b.Property<long?>("NhaCungCapId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("TourSanPhamId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ct_DichVuVe");
+                });
+
+            modelBuilder.Entity("newPMS.Entities.ChietTinh.ChietTinhDichVuXeEntity", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasMaxLength(40)
+                        .HasColumnType("varchar(40) CHARACTER SET utf8mb4")
+                        .HasColumnName("ConcurrencyStamp");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("CreationTime");
+
+                    b.Property<Guid?>("CreatorId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("CreatorId");
+
+                    b.Property<Guid?>("DeleterId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("DeleterId");
+
+                    b.Property<DateTime?>("DeletionTime")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("DeletionTime");
+
+                    b.Property<long?>("DichVuXeId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("ExtraProperties")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4")
+                        .HasColumnName("ExtraProperties");
+
+                    b.Property<decimal?>("GiaNett")
+                        .HasColumnType("decimal(65,30)");
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("tinyint(1)")
+                        .HasDefaultValue(false)
+                        .HasColumnName("IsDeleted");
+
+                    b.Property<string>("KhoangKhachCode")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("LastModificationTime");
+
+                    b.Property<Guid?>("LastModifierId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("LastModifierId");
+
+                    b.Property<int>("NgayThu")
+                        .HasColumnType("int");
+
+                    b.Property<long?>("NhaCungCapId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("TourSanPhamId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ct_DichVuXe");
+                });
+
+            modelBuilder.Entity("newPMS.Entities.ChuongTrinhTourEntity", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("CreationTime");
+
+                    b.Property<Guid?>("CreatorId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("CreatorId");
+
+                    b.Property<Guid?>("DeleterId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("DeleterId");
+
+                    b.Property<DateTime?>("DeletionTime")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("DeletionTime");
+
+                    b.Property<string>("DiemDen")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("tinyint(1)")
+                        .HasDefaultValue(false)
+                        .HasColumnName("IsDeleted");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("LastModificationTime");
+
+                    b.Property<Guid?>("LastModifierId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("LastModifierId");
+
+                    b.Property<string>("ListDichVuJson")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<int>("NgayThu")
+                        .HasColumnType("int");
+
+                    b.Property<string>("NoiDung")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("TenHanhTrinh")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("TepDinhKemJson")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<long>("TourSanPhamId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("SP_ChuongTrinhTour");
+                });
+
             modelBuilder.Entity("newPMS.Entities.CodeSystemEntity", b =>
                 {
                     b.Property<long>("Id")
@@ -376,6 +1048,70 @@ namespace newPMS.Migrations
                     b.ToTable("CV_CongViecUser");
                 });
 
+            modelBuilder.Entity("newPMS.Entities.DanhMuc.NhaCungCap.NguoiLienHeNCCEntity", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("ChucVu")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("CreationTime");
+
+                    b.Property<Guid?>("CreatorId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("CreatorId");
+
+                    b.Property<Guid?>("DeleterId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("DeleterId");
+
+                    b.Property<DateTime?>("DeletionTime")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("DeletionTime");
+
+                    b.Property<string>("DienThoai")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("HoVaTen")
+                        .IsRequired()
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("tinyint(1)")
+                        .HasDefaultValue(false)
+                        .HasColumnName("IsDeleted");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("LastModificationTime");
+
+                    b.Property<Guid?>("LastModifierId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("LastModifierId");
+
+                    b.Property<string>("NhaCungCapCode")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<long>("NhaCungCapId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("PhongBan")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("DM_NguoiLienHeNCC");
+                });
+
             modelBuilder.Entity("newPMS.Entities.DanhMuc.NhaCungCap.NhaCungCapKhachSanEntity", b =>
                 {
                     b.Property<long>("Id")
@@ -438,6 +1174,9 @@ namespace newPMS.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("varchar(50) CHARACTER SET utf8mb4");
 
+                    b.Property<string>("MaSoThue")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
                     b.Property<string>("MoTa")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
@@ -471,7 +1210,197 @@ namespace newPMS.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("NhaCungCapKhachSanEntity");
+                    b.ToTable("DM_NhaCungCapKhachSan");
+                });
+
+            modelBuilder.Entity("newPMS.Entities.DanhMuc.NhaCungCap.NhaCungCapVeEntity", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("AnhDaiDienUrl")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("CreationTime");
+
+                    b.Property<Guid?>("CreatorId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("CreatorId");
+
+                    b.Property<Guid?>("DeleterId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("DeleterId");
+
+                    b.Property<DateTime?>("DeletionTime")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("DeletionTime");
+
+                    b.Property<string>("DiaChi")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("DichVu")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("Fax")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("tinyint(1)")
+                        .HasDefaultValue(false)
+                        .HasColumnName("IsDeleted");
+
+                    b.Property<bool>("IsHasVAT")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("LastModificationTime");
+
+                    b.Property<Guid?>("LastModifierId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("LastModifierId");
+
+                    b.Property<string>("Ma")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50) CHARACTER SET utf8mb4");
+
+                    b.Property<string>("MaSoThue")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("MoTa")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<DateTime>("NgayHetHanHopDong")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<long?>("QuocGiaId")
+                        .HasColumnType("bigint");
+
+                    b.Property<int?>("SoSaoDanhGia")
+                        .HasColumnType("int");
+
+                    b.Property<string>("TaiLieuJson")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("Ten")
+                        .IsRequired()
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<long?>("TinhId")
+                        .HasColumnType("bigint");
+
+                    b.Property<bool>("TinhTrang")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("Website")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("DM_NhaCungCapVe");
+                });
+
+            modelBuilder.Entity("newPMS.Entities.DanhMuc.NhaCungCap.NhaCungCapXeEntity", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("AnhDaiDienUrl")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("CreationTime");
+
+                    b.Property<Guid?>("CreatorId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("CreatorId");
+
+                    b.Property<Guid?>("DeleterId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("DeleterId");
+
+                    b.Property<DateTime?>("DeletionTime")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("DeletionTime");
+
+                    b.Property<string>("DiaChi")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("DichVu")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("Fax")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("tinyint(1)")
+                        .HasDefaultValue(false)
+                        .HasColumnName("IsDeleted");
+
+                    b.Property<bool>("IsHasVAT")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("LastModificationTime");
+
+                    b.Property<Guid?>("LastModifierId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("LastModifierId");
+
+                    b.Property<string>("Ma")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50) CHARACTER SET utf8mb4");
+
+                    b.Property<string>("MaSoThue")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("MoTa")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<DateTime>("NgayHetHanHopDong")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<long?>("QuocGiaId")
+                        .HasColumnType("bigint");
+
+                    b.Property<int?>("SoSaoDanhGia")
+                        .HasColumnType("int");
+
+                    b.Property<string>("TaiLieuJson")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("Ten")
+                        .IsRequired()
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<long?>("TinhId")
+                        .HasColumnType("bigint");
+
+                    b.Property<bool>("TinhTrang")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("Website")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("DM_NhaCungCapXe");
                 });
 
             modelBuilder.Entity("newPMS.Entities.DanhMucHuyenEntity", b =>
@@ -630,16 +1559,16 @@ namespace newPMS.Migrations
                     b.Property<string>("GhiChu")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<decimal>("GiaFOTBanNgayLe")
+                    b.Property<decimal?>("GiaFOTBanNgayLe")
                         .HasColumnType("decimal(65,30)");
 
-                    b.Property<decimal>("GiaFOTBanNgayThuong")
+                    b.Property<decimal?>("GiaFOTBanNgayThuong")
                         .HasColumnType("decimal(65,30)");
 
-                    b.Property<decimal>("GiaFOTNettNgayLe")
+                    b.Property<decimal?>("GiaFOTNettNgayLe")
                         .HasColumnType("decimal(65,30)");
 
-                    b.Property<decimal>("GiaFOTNettNgayThuong")
+                    b.Property<decimal?>("GiaFOTNettNgayThuong")
                         .HasColumnType("decimal(65,30)");
 
                     b.Property<long>("HangPhongId")
@@ -651,7 +1580,7 @@ namespace newPMS.Migrations
                         .HasDefaultValue(false)
                         .HasColumnName("IsDeleted");
 
-                    b.Property<bool>("IsHasThueVas")
+                    b.Property<bool>("IsHasThueVAT")
                         .HasColumnType("tinyint(1)");
 
                     b.Property<DateTime?>("LastModificationTime")
@@ -668,28 +1597,28 @@ namespace newPMS.Migrations
                     b.Property<string>("LoaiTienTeCode")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<DateTime>("NgayApDungDen")
+                    b.Property<DateTime?>("NgayApDungDen")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<DateTime>("NgayApDungTu")
+                    b.Property<DateTime?>("NgayApDungTu")
                         .HasColumnType("datetime(6)");
 
                     b.Property<long>("NhaCungCapKhachSanId")
                         .HasColumnType("bigint");
+
+                    b.Property<string>("TenPhong")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.HasKey("Id");
 
                     b.ToTable("DV_GiaPhong");
                 });
 
-            modelBuilder.Entity("newPMS.Entities.DichVuCungCapXeEntity", b =>
+            modelBuilder.Entity("newPMS.Entities.DichVu.DichVuVeEntity", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint");
-
-                    b.Property<string>("CategoryCode")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<DateTime>("CreationTime")
                         .HasColumnType("datetime(6)")
@@ -707,13 +1636,16 @@ namespace newPMS.Migrations
                         .HasColumnType("datetime(6)")
                         .HasColumnName("DeletionTime");
 
+                    b.Property<DateTime?>("DenNgay")
+                        .HasColumnType("datetime(6)");
+
                     b.Property<string>("GhiChu")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<decimal>("GiaBan")
+                    b.Property<decimal?>("GiaBan")
                         .HasColumnType("decimal(65,30)");
 
-                    b.Property<decimal>("GiaNett")
+                    b.Property<decimal?>("GiaNett")
                         .HasColumnType("decimal(65,30)");
 
                     b.Property<bool>("IsDeleted")
@@ -722,7 +1654,84 @@ namespace newPMS.Migrations
                         .HasDefaultValue(false)
                         .HasColumnName("IsDeleted");
 
-                    b.Property<bool>("IsHasThueVas")
+                    b.Property<bool>("IsHasThueVAT")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("JsonTaiLieu")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("LastModificationTime");
+
+                    b.Property<Guid?>("LastModifierId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("LastModifierId");
+
+                    b.Property<string>("LoaiTienTeCode")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("Ma")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<long>("NhaCungCapVeId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Ten")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<bool>("TinhTrang")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<DateTime?>("TuNgay")
+                        .HasColumnType("datetime(6)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("DV_VE");
+                });
+
+            modelBuilder.Entity("newPMS.Entities.DichVuCungCapXeEntity", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("CreationTime");
+
+                    b.Property<Guid?>("CreatorId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("CreatorId");
+
+                    b.Property<Guid?>("DeleterId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("DeleterId");
+
+                    b.Property<DateTime?>("DeletionTime")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("DeletionTime");
+
+                    b.Property<DateTime?>("DenNgay")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("GhiChu")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<decimal?>("GiaBan")
+                        .HasColumnType("decimal(65,30)");
+
+                    b.Property<decimal?>("GiaNett")
+                        .HasColumnType("decimal(65,30)");
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("tinyint(1)")
+                        .HasDefaultValue(false)
+                        .HasColumnName("IsDeleted");
+
+                    b.Property<bool>("IsHasThueVAT")
                         .HasColumnType("tinyint(1)");
 
                     b.Property<string>("JsonTaiLieu")
@@ -745,18 +1754,27 @@ namespace newPMS.Migrations
                     b.Property<string>("Ma")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<int>("SoCho")
-                        .HasColumnType("int");
-
-                    b.Property<long?>("SoChoCode")
+                    b.Property<long>("NhaCungCapXeId")
                         .HasColumnType("bigint");
 
-                    b.Property<int>("SoKMDuTinh")
+                    b.Property<string>("SoChoCode")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<int?>("SoKMDuTinh")
                         .HasColumnType("int");
+
+                    b.Property<string>("Ten")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<bool>("TinhTrang")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<DateTime?>("TuNgay")
+                        .HasColumnType("datetime(6)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("DichVuCungCapXeEntity");
+                    b.ToTable("DV_Xe");
                 });
 
             modelBuilder.Entity("newPMS.Entities.DichVuHangPhongEntity", b =>
@@ -764,9 +1782,6 @@ namespace newPMS.Migrations
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint");
-
-                    b.Property<string>("CategoryCode")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<DateTime>("CreationTime")
                         .HasColumnType("datetime(6)")
@@ -793,7 +1808,7 @@ namespace newPMS.Migrations
                     b.Property<string>("JsonTaiLieu")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<int>("KichThuocPhong")
+                    b.Property<int?>("KichThuocPhong")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("LastModificationTime")
@@ -804,22 +1819,25 @@ namespace newPMS.Migrations
                         .HasColumnType("char(36)")
                         .HasColumnName("LastModifierId");
 
+                    b.Property<string>("LoaiPhongCode")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
                     b.Property<string>("MoTa")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<long>("NhaCungCapId")
                         .HasColumnType("bigint");
 
-                    b.Property<int>("SlPhongFOC")
+                    b.Property<int?>("SlPhongFOC")
                         .HasColumnType("int");
 
-                    b.Property<int>("SoKhachToiDa")
+                    b.Property<int?>("SoKhachToiDa")
                         .HasColumnType("int");
 
-                    b.Property<int>("SoLuongPhong")
+                    b.Property<int?>("SoLuongPhong")
                         .HasColumnType("int");
 
-                    b.Property<string>("TenPhong")
+                    b.Property<string>("TenHangPhong")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("TienIchPhong")
@@ -896,6 +1914,222 @@ namespace newPMS.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("DichVuNhaHangEntity");
+                });
+
+            modelBuilder.Entity("newPMS.Entities.HopDongNCCEntity", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("CreationTime");
+
+                    b.Property<Guid?>("CreatorId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("CreatorId");
+
+                    b.Property<Guid?>("DeleterId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("DeleterId");
+
+                    b.Property<DateTime?>("DeletionTime")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("DeletionTime");
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("tinyint(1)")
+                        .HasDefaultValue(false)
+                        .HasColumnName("IsDeleted");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("LastModificationTime");
+
+                    b.Property<Guid?>("LastModifierId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("LastModifierId");
+
+                    b.Property<string>("LoaiHopDongCode")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("Ma")
+                        .IsRequired()
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("MoTa")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<DateTime>("NgayHetHan")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<DateTime>("NgayHieuLuc")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<DateTime>("NgayKy")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("NguoiLapHopDong")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<long>("NhaCungCapId")
+                        .HasColumnType("bigint");
+
+                    b.Property<int>("TinhTrang")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("DM_HopDongNCC");
+                });
+
+            modelBuilder.Entity("newPMS.Entities.KhachHang.HuongDanVienEntity", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("CreationTime");
+
+                    b.Property<Guid?>("CreatorId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("CreatorId");
+
+                    b.Property<Guid?>("DeleterId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("DeleterId");
+
+                    b.Property<DateTime?>("DeletionTime")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("DeletionTime");
+
+                    b.Property<string>("DiaChi")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("tinyint(1)")
+                        .HasDefaultValue(false)
+                        .HasColumnName("IsDeleted");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("LastModificationTime");
+
+                    b.Property<Guid?>("LastModifierId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("LastModifierId");
+
+                    b.Property<string>("Ma")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<DateTime?>("NgayLamViec")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<long?>("NguoiTaoId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("SoDienThoai")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<long?>("SysuserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Ten")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("TenNguoiTao")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("ThongThaoNgonNguJSON")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("TrangThai")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<Guid?>("UserId")
+                        .HasColumnType("char(36)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Sys_HuongDanVien");
+                });
+
+            modelBuilder.Entity("newPMS.Entities.KhachHang.KhachHangEntity", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("CreationTime");
+
+                    b.Property<Guid?>("CreatorId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("CreatorId");
+
+                    b.Property<Guid?>("DeleterId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("DeleterId");
+
+                    b.Property<DateTime?>("DeletionTime")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("DeletionTime");
+
+                    b.Property<string>("DiaChi")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("tinyint(1)")
+                        .HasDefaultValue(false)
+                        .HasColumnName("IsDeleted");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("LastModificationTime");
+
+                    b.Property<Guid?>("LastModifierId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("LastModifierId");
+
+                    b.Property<string>("Ma")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50) CHARACTER SET utf8mb4");
+
+                    b.Property<long?>("NguoiTaoId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("QuocTichId")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("SoDienThoai")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<long?>("SysUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Ten")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("TenNguoiTao")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Sys_KhachHang");
                 });
 
             modelBuilder.Entity("newPMS.Entities.NhaCungCapEntity", b =>
@@ -1503,6 +2737,9 @@ namespace newPMS.Migrations
                         .HasColumnType("datetime(6)")
                         .HasColumnName("DeletionTime");
 
+                    b.Property<string>("DiemDen")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
                     b.Property<string>("DiemKhoiHanh")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
@@ -1534,13 +2771,13 @@ namespace newPMS.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("varchar(50) CHARACTER SET utf8mb4");
 
-                    b.Property<string>("MaQuocGiaCode")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<string>("MaTinhCode")
+                    b.Property<string>("QuocGiaId")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<int>("SoDem")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("SoLuongMoBan")
                         .HasColumnType("int");
 
                     b.Property<int>("SoNgay")
@@ -1553,12 +2790,30 @@ namespace newPMS.Migrations
                     b.Property<string>("TepDinhKemJson")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
+                    b.Property<string>("ThanhTienKhoangNguoiJson")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<DateTime?>("ThoiGianMoBan")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("ThongTinChung")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("TinhId")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
                     b.Property<int>("TinhTrang")
                         .HasColumnType("int");
 
+                    b.Property<string>("UrlAnhBia")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("UrlHinhAnh")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
                     b.HasKey("Id");
 
-                    b.ToTable("TourSanPhamEntity");
+                    b.ToTable("SP_TourSanPham");
                 });
 
             modelBuilder.Entity("newPMS.Entities.UserFireBaseTokenEntity", b =>

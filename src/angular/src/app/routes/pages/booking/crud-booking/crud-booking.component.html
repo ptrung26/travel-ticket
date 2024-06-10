@@ -1,0 +1,24 @@
+<ora-page-header [title]="title" [action]="action">
+  <ng-template #action>
+    <button type="button" nz-button nzType="default" (click)="close()"><i nz-icon nzType="arrow-left"></i> Quay
+      lại</button>
+  </ng-template>
+</ora-page-header>
+<nz-tabset [nzSelectedIndex]="selectedIdx" *ngIf="isShowTab">
+  <nz-tab nzTitle="Thông tin chung">
+    <thong-tin-chung-booking #thongTinBooking [thongTinChung]="thongTinChung"
+      (navigateEvt)="navigateTabThongTin($event)" (saveEvt)="updateThongTin($event)"></thong-tin-chung-booking>
+  </nz-tab>
+  <nz-tab nzTitle="Dịch vụ Tour" *ngIf="selectedIdx >= 1 || isEdit">
+    <dich-vu-booking-tour #bookingTour [selectedTour]="dichVuBooking" [thongTinChung]="thongTinChung"
+      (saveEvt)="updateDichVuTour($event)"></dich-vu-booking-tour>
+  </nz-tab>
+  <nz-tab nzTitle="Chi tiết dịch vụ" *ngIf="selectedIdx >= 1 || isEdit">
+    <dich-vu-booking-le [bookingId]="dichVuBooking?.bookingId"></dich-vu-booking-le>
+  </nz-tab>
+  <nz-tab nzTitle="Thành viên đoàn" *ngIf="dichVuBooking?.bookingId && dichVuBooking?.soLuongNguoiLon > 1">
+    <chi-tiet-thanh-vien-doan [bookingId]="dichVuBooking?.bookingId"
+      [soLuongThanhVienDoan]="dichVuBooking?.soLuongNguoiLon"></chi-tiet-thanh-vien-doan>
+  </nz-tab>
+
+</nz-tabset>

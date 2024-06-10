@@ -1,0 +1,18 @@
+<ora-table [rows]="dataList" [isLoading]="isTableLoading" [totalRows]="totalItems" [(pageSize)]="pageSize"
+    [(page)]="pageNumber" (pageChange)="pageNumberChange()" (sortChange)="gridSort($event)">
+    <ora-column header="Ngày thứ" key="ngayThu" align="center"></ora-column>
+    <ora-column header="Hành trình" key="tenHanhTrinh" align="center"></ora-column>
+    <ora-column header="Dịch vụ" key="listDichVuJson" align="center" [content]="trangThaiContent" width="200px">
+        <ng-template #trangThaiContent let-data="dataItem">
+            {{getListDichVu(data)}}
+        </ng-template>
+    </ora-column>
+    <ora-column header="Thao tác" [content]="contentAction" width="150px" align="center">
+        <ng-template #contentAction let-data="dataItem">
+            <a nz-button nzType="link" nz-tooltip="{{ 'Edit' | translate }}" (click)="showUpdateChuongTrinhTour(data)">
+                <i nz-icon nzType="edit"></i>
+            </a>
+        </ng-template>
+    </ora-column>
+
+</ora-table>

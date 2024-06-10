@@ -1,7 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using newPMS.Entities;
+using newPMS.Entities.Booking;
+using newPMS.Entities.ChietTinh;
 using newPMS.Entities.DanhMuc.NhaCungCap;
 using newPMS.Entities.DichVu;
+using newPMS.Entities.KhachHang;
 using newPMS.Entities.TableDungChung;
 using Volo.Abp.Data;
 using Volo.Abp.EntityFrameworkCore;
@@ -32,8 +35,12 @@ namespace newPMS.EntityFrameworkCore
         public virtual DbSet<DanhMucXaEntity> DanhMucXaEntity { get; set; }
         public virtual DbSet<DanhMucQuocGiaEntity> DanhMucQuocGiaEntity { get; set; }
         public virtual DbSet<NhaCungCapEntity> NhaCungCapEntity { get; set; }
-
         public virtual DbSet<NhaCungCapKhachSanEntity> NhaCungCapKhachSanEntity { get;set; }
+        public virtual DbSet<NhaCungCapXeEntity> NhaCungCapXeEntity { get; set; }
+        public virtual DbSet<NhaCungCapVeEntity> NhaCungCapVeEntity { get; set; }
+        public virtual DbSet<HopDongNCCEntity> HopDongNCCEntity { get; set; } 
+        public virtual DbSet<NguoiLienHeNCCEntity> NguoiLienHeNCCEntity { get; set; }
+
         #endregion "Danh mục dùng chung"
 
         #region Dịch vụ
@@ -41,6 +48,7 @@ namespace newPMS.EntityFrameworkCore
         public virtual DbSet<DichVuGiaPhongEntity> DichVuGiaPhongEntity { get; set; }
         public virtual DbSet<DichVuCungCapXeEntity> DichVuCungCapXeEntity { get; set; }
         public virtual DbSet<DichVuNhaHangEntity> DichVuNhaHangEnity { get; set; }
+        public virtual DbSet<DichVuVeEntity> DichVuVeEntity { get; set; }
         #endregion
 
         #region Quản lý tài khoản
@@ -58,6 +66,11 @@ namespace newPMS.EntityFrameworkCore
         #region Sản phẩm 
         public virtual DbSet<TourSanPhamEntity> TourSanPhamEntity { get; set; }
         public virtual DbSet<ChuongTrinhTourEntity> ChuongTrinhTourEntity { get; set; }
+        #endregion
+
+        #region Chiết tính
+        public virtual DbSet<ChietTinhDichVuXeEntity> ChietTinhDichVuXeEntity { get; set; }
+        public virtual DbSet<ChietTinhDichVuVeEntity> ChietTinhDichVuVeEntity { get; set; }
 
         #endregion
 
@@ -66,6 +79,22 @@ namespace newPMS.EntityFrameworkCore
         public virtual DbSet<CongViecUserEntity> CongViecUserEntity { get; set; }
         public virtual DbSet<CongViecTraoDoiEntity> CongViecTraoDoiEntity { get; set; }
         public virtual DbSet<CongViecLichSuEntity> CongViecLichSuEntity { get; set; }
+        #endregion
+
+        #region Khách hàng 
+        public virtual DbSet<KhachHangEntity> KhachHangEntity { get; set; }
+        public virtual DbSet<HuongDanVienEntity> HuongDanVienEntity { get; set; }
+        #endregion
+
+        #region Booking
+        public virtual DbSet<BookingDichVuTourEntity> BookingDichVuTourEntity { get; set; }
+        public virtual DbSet<BookingEntity> BookingEntity { get; set; }
+        public virtual DbSet<ChiTietBookingDichVuLeEntity> ChiTietBookingDichVuLeEntity { get; set; }
+        public virtual DbSet<ChiTietBookingDichVuTourEntity> ChiTietBookingDichVuTourEntity { get; set; }
+        public virtual DbSet<ChiTietLichHenBookingTour> ChiTietLichHenBookingTour { get; set; }
+        public virtual DbSet<ChiTietPhieuThuBookingTour> ChiTietPhieuThuBookingTour { get; set; }
+
+        public virtual DbSet<ChiTietThanhVienDoanBooking> ChiTietThanhVienDoanBooking { get; set; }
         #endregion
 
         /* Add DbSet properties for your Aggregate Roots / Entities here.

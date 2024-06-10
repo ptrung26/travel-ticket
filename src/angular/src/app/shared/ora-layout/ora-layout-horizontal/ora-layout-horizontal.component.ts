@@ -28,7 +28,6 @@ export class OraLayoutHorizontalComponent implements OnInit, OnDestroy {
   @Input() content: TemplateRef<void>;
   @Input() rightContent: TemplateRef<void>;
   @Input() options: LayoutDefaultOptions = {
-    // logoExpanded: `./assets/logo.png`,
     logoExpanded: ``,
     logoCollapsed: `./assets/logo-col.png`,
     hideAside: false,
@@ -37,12 +36,13 @@ export class OraLayoutHorizontalComponent implements OnInit, OnDestroy {
   currentUser: CurrentUserDto;
   $destroy = new Subject<boolean>();
   isFetching = false;
-  isPhongXetNghiemOrBenhVien = false;
   permissionUser = [];
-
   menusCongViec = [];
   menusDM = [];
   menusQT = [];
+  menusSP = [];
+  menusKH = [];
+  menusBK = [];
 
   constructor(msgSrv: NzMessageService, private _ordApplicationService: OrdApplicationConfigurationServiceProxy, private router: Router) {
     this.router.events.pipe(takeUntil(this.$destroy)).subscribe((evt) => {
@@ -78,22 +78,34 @@ export class OraLayoutHorizontalComponent implements OnInit, OnDestroy {
 
   getAllPermisionUser() {
     this._ordApplicationService.getConfiguration().subscribe((res: ApplicationConfigurationDto) => {
-      this.permissionUser = Object.keys(res.auth.grantedPolicies);
-      this.isPhongXetNghiemOrBenhVien = res.currentUser?.roles.some((x) => x.toLowerCase() === 'benhvien' || x.toLowerCase() === 'kpxn');
-      this.currentUser = res.currentUser;
-      this.addMenu();
+      if (res?.auth) {
+        this.permissionUser = Object.keys(res.auth.grantedPolicies);
+        // res.currentUser?.roles
+        this.currentUser = res.currentUser;
+        this.addMenu();
+      }
+
     });
   }
 
   addMenu() {
     //Công việc
-    this.menusCongViec = this.getMenus([Menus.LayoutMenuCV]).menu;
+    // this.menusCongViec = this.getMenus([Menus.LayoutMenuCV]).menu;
 
     //Danh mục
     this.menusDM = this.getMenus([Menus.LayoutMenuDM]).menu;
 
     //Quản trị
     this.menusQT = this.getMenus([Menus.LayoutMenuQT]).menu;
+
+    // Sản phẩm 
+    this.menusSP = this.getMenus([Menus.LayoutmenuSP]).menu;
+
+    // Khách hàng 
+    this.menusKH = this.getMenus([Menus.LayoutMenuKhachHang]).menu;
+
+    // Booking 
+    this.menusBK = this.getMenus([Menus.LayoutMenuBooking]).menu;
 
   }
 
@@ -155,18 +167,10 @@ export class OraLayoutHorizontalComponent implements OnInit, OnDestroy {
   filterMenuChild(menusChild: ILayoutMenu[], menuFilter: ILayoutMenu) {
     menusChild?.forEach((menuC) => {
       if (this.checkPermission(menuC)) {
-        if (this.isPhongXetNghiemOrBenhVien) {
-          this.renameMenu(menuC);
-        }
         menuFilter?.children.push(menuC);
       }
     });
   }
 
-  renameMenu(menu: ILayoutMenu) {
-    if (menu.link === '/ho-tro/khach-hang-khao-sat') {
-      menu.text = 'Tham gia khảo sát';
-    }
-  }
   //#endregion
 }

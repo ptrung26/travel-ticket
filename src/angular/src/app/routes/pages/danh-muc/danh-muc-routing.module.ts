@@ -8,7 +8,8 @@ import { NhaCungCapComponent } from './nha-cung-cap/nha-cung-cap.component';
 import { CauHinhChungComponent } from './cau-hinh-chung/cau-hinh-chung.component';
 import { DanhMucComponent } from './danh-muc-chung/danh-muc.component';
 import { NhaCungCapKhachSanComponent } from './nha-cung-cap/khach-san/nha-cung-cap-khach-san.component';
-
+import { NhaCungCapXeComponent } from './nha-cung-cap/nha-cung-cap-xe/nha-cung-cap-xe.component';
+import { NhaCungCapVeComponent } from './nha-cung-cap/nha-cung-cap-ve/nha-cung-cap-ve.component';
 const routes: Routes = [
   {
     path: 'danh-muc-chung',
@@ -43,7 +44,10 @@ const routes: Routes = [
   {
     path: 'nha-cung-cap',
     data: { permission: 'DanhMuc.NhaCungCap' },
-    children: [{ path: 'khach-san', component: NhaCungCapKhachSanComponent, data: { permission: 'DanhMuc.NhaCungCap' } }],
+    children: [{ path: 'xe-oto', component: NhaCungCapXeComponent, data: { permission: 'DanhMuc.NhaCungCap' } },
+    { path: 've-thang-canh', component: NhaCungCapVeComponent, data: { permission: 'DanhMuc.NhaCungCap' } },
+    { path: 'khach-san', component: NhaCungCapKhachSanComponent, data: { permission: 'DanhMuc.NhaCungCap' } }
+    ],
   },
 ];
 
@@ -51,4 +55,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class DanhMucRoutingModule {}
+export class DanhMucRoutingModule { }

@@ -1,0 +1,50 @@
+.banner {
+    height: 330px;
+    margin-bottom: 240px;
+    background: linear-gradient(93.7deg, rgb(21, 147, 255) 29.2%, rgba(21, 147, 255, 0) 100%);
+    position: relative;
+
+    &-content {
+        padding-top: 80px;
+        padding-left: 60px;
+        color: #fff;
+
+        h1 {
+            color: #fff;
+            font-size: 36px;
+            font-weight: 700;
+        }
+
+        p {
+            font-size: 24px;
+        }
+
+        img {
+            position: absolute;
+            bottom: -175px;
+            right: 20px;
+        }
+    }
+
+    .quote {
+        margin-top: 150px;
+        color: #000;
+    }
+}
+
+.su-menh {
+    display: flex;
+    align-items: flex-start;
+
+    &-text {
+        box-shadow: rgba(0, 0, 0, 0.12) 0px 2px 4px;
+        background: rgb(255, 255, 255);
+        border: 1px solid rgba(0, 0, 0, 0.12);
+        padding: 32px;
+        border-radius: 30px;
+        position: relative;
+        left: -70px;
+        top: 60px;
+        text-align: center;
+    }
+}

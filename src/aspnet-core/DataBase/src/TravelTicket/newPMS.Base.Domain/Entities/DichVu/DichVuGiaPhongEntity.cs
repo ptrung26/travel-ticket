@@ -12,16 +12,17 @@ namespace newPMS.Entities.DichVu
     public class DichVuGiaPhongEntity : FullAuditedEntity<long>
     {
         public long NhaCungCapKhachSanId { get; set; }
+        public string TenPhong { get; set; }
         public long HangPhongId { get; set; }
         public string LoaiPhongCode { get; set; }
         public string LoaiTienTeCode { get; set; }
-        public decimal GiaFOTNettNgayThuong { get; set; }
-        public decimal GiaFOTBanNgayThuong { get; set; }
-        public decimal GiaFOTNettNgayLe { get; set; }
-        public decimal GiaFOTBanNgayLe { get; set; }
-        public DateTime NgayApDungTu { get; set; }
-        public DateTime NgayApDungDen { get; set; }
+        public decimal? GiaFOTNettNgayThuong { get; set; }
+        public decimal? GiaFOTBanNgayThuong { get; set; }
+        public decimal? GiaFOTNettNgayLe { get; set; }
+        public decimal? GiaFOTBanNgayLe { get; set; }
+        public DateTime? NgayApDungTu { get; set; }
+        public DateTime? NgayApDungDen { get; set; }
         public string GhiChu { get; set; }
-        public bool IsHasThueVas { get; set; }
+        public bool IsHasThueVAT { get; set; }
     }
 }

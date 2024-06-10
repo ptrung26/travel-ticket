@@ -1,0 +1,23 @@
+.header {
+    padding: 8px 10px;
+    background-color: #F1F1F1;
+    color: #000;
+    font-weight: 600;
+}
+
+.mt20 {
+    margin-top: 20px;
+}
+
+.footerbutton {
+    float: right;
+
+    button {
+        margin-bottom: 20px;
+    }
+}
+
+.label {
+    display: flex;
+    align-items: center;
+}

@@ -1,15 +1,10 @@
 <div class="alain-default__progress-bar" *ngIf="isFetching"></div>
 <div class="ora-layout">
-  <div
-    class="ora-header"
-    style="
-      background: url('./../../../../assets/images/header-bg-layout.svg') no-repeat right center,
-        linear-gradient(to right, #e2f5fc, #e2f5fc) no-repeat;
-    "
-  >
+  <div class="ora-header" style="background: #fff;">
     <div class="logo">
-      <a [routerLink]="[options.logoLink ? options.logoLink : '/']" class="alain-default__header-logo-link">
-        <img [src]="options.logoExpanded" alt="logo" />
+      <a [routerLink]="'/'" class="alain-default__header-logo-link"
+        style="font-size: 30px; font-weight: 600; color: #000;">
+        <span style="color:red">MTravel</span>
       </a>
     </div>
     <div class="content-header">
@@ -17,12 +12,8 @@
     </div>
   </div>
   <div class="menu-top">
-    <layout-menu-top
-      [menusCongViec]="menusCongViec"
-      [menusDM]="menusDM"
-      [menusQT]="menusQT"
-      [currentUser]="currentUser"
-    ></layout-menu-top>
+    <layout-menu-top [menusSP]="menusSP" [menusDM]="menusDM" [menusQT]="menusQT" [menusKH]="menusKH" [menusBK]="menusBK"
+      [currentUser]="currentUser"></layout-menu-top>
   </div>
   <div class="inner-layout">
     <div class="inner-content-layout">

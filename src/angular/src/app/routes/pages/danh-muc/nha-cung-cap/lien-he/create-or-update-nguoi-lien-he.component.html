@@ -1,0 +1,45 @@
+<form nz-form [formGroup]="rfForm">
+    <div nz-row>
+        <div nz-col [nzSpan]="24">
+            <nz-form-item>
+                <nz-form-label [nzSpan]="24" nzRequired>Họ và tên</nz-form-label>
+                <nz-form-control [nzErrorTip]="'Trường này không được bỏ trống'">
+                    <input nz-input formControlName="hoVaTen" />
+                </nz-form-control>
+            </nz-form-item>
+        </div>
+        <div nz-col [nzSpan]="24">
+            <nz-form-item>
+                <nz-form-label [nzSpan]="24" nzRequired>Số điện thoại</nz-form-label>
+                <nz-form-control [nzErrorTip]="'Trường này không được bỏ trống'">
+                    <input nz-input formControlName="dienThoai" />
+                </nz-form-control>
+            </nz-form-item>
+        </div>
+        <div nz-col [nzSpan]="24">
+            <nz-form-item>
+                <nz-form-label [nzSpan]="24">Email</nz-form-label>
+                <nz-form-control>
+                    <input nz-input formControlName="email" />
+                </nz-form-control>
+            </nz-form-item>
+        </div>
+        <div nz-col [nzSpan]="24">
+            <nz-form-item [nzGutter]="16">
+                <nz-form-label class="m-label">Chức vụ</nz-form-label>
+                <nz-form-control [nzSpan]="8">
+                    <input nz-input formControlName="chucVu" />
+                </nz-form-control>
+                <nz-form-label class="m-label">Phòng ban</nz-form-label>
+                <nz-form-control [nzSpan]="8">
+                    <input nz-input formControlName="phongBan" />
+                </nz-form-control>
+            </nz-form-item>
+        </div>
+    </div>
+</form>
+<div *nzModalFooter>
+    <button type="button" nz-button nzType="primary" (click)="save()">
+        <i nz-icon nzType="save"></i>{{ 'Save' | translate }}
+    </button>
+</div>

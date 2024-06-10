@@ -1,0 +1,81 @@
+<div class="banner">
+    <img class="banner-image" src="assets/images/banner-travel.jpg" />
+    <div class="banner-content">
+        <h1>Tour & Trải nghiệm</h1>
+        <h2>Tour du lịch, trải nghiệm khám phá, spa và hơn thế nữa</h2>
+        <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton" style="width:480px;padding: 8px 0">
+            <input type="text" nz-input placeholder="Tìm kiếm tour du lịch" />
+        </nz-input-group>
+        <ng-template #suffixIconButton>
+            <button nz-button nzType="primary" nzSearch><span nz-icon nzType="search"></span></button>
+        </ng-template>
+    </div>
+</div>
+
+<main class="main">
+    <div class="uu-dai">
+        <h3 class="section-title">Ưu đãi cực hot</h3>
+        <div nz-row [nzGutter]="[24,24]">
+            <ng-container *ngFor="let item of uuDais">
+                <div nz-col [nzSpan]="8">
+                    <img style="max-width: 100%; object-fit:cover;height: 200px; border-radius: 30px;" [src]="item.img"
+                        alt="Ưu đãi" />
+                </div>
+            </ng-container>
+        </div>
+    </div>
+    <div class="vi-sao-chon">
+        <h3 class="section-title">Vì sao bạn nên chọn MTravel</h3>
+        <div nz-row [nzGutter]="[24,24]">
+            <ng-container *ngFor="let item of lyDoChons">
+                <div nz-col [nzSpan]="5">
+                    <img style="width:56px; height:56px;" [src]="item.icon" alt="lý do chọn" />
+                    <div class="ly-do-chi-tiet">
+                        <h4>{{item.title}}</h4>
+                        <p>{{item.desc}}</p>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+    <div class="san-pham-noi-bat">
+        <h3 class="section-title">Những chuyến du lịch đặc biệt</h3>
+        <div nz-row [nzGutter]="[24,24]">
+            <ng-container *ngFor="let item of topFiveTours">
+                <div nz-col [nzSpan]="5">
+                    <card-tour-san-pham [tour]="item"></card-tour-san-pham>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+    <div class="kham-pha-ngay">
+        <a nz-button [routerLink]="['/home/filter-tour']">Khám phá ngay <i nz-icon nzType="arrow-right"></i></a>
+    </div>
+    <div class="dang-ky-uu-dai">
+        <div nz-row [nzAlign]="'middle'">
+            <div nz-col [nzSpan]="12" class="dang-ky-uu-dai-content">
+                <h3>Đăng ký nhận ngay khuyến mãi</h3>
+                <p>Thông tin khuyến mãi mỗi tháng sẽ được gửi vào inbox cho các chuyến đi của bạn</p>
+            </div>
+            <div nz-col [nzSpan]="12" class="dang-ky-uu-dai-input">
+                <input style="width: 420px; height: 45px; border-radius:0" type="text" nz-input
+                    placeholder="Nhập gmail của bạn" />
+                <button style="height: 45px;" nz-button nzType="primary">Đăng ký ngay</button>
+            </div>
+        </div>
+    </div>
+</main>
+<footer class="footer" style="padding-top:40px; margin-top: 60px; border-top: 1px solid rgba(0, 0, 0, 0.12);">
+    <div class="footer-top">
+        <p style="font-size:30px; color:#000"><span style="font-weight:600; color:red">MTravel</span> - <i>Trải nghiệm
+                du lịch trên toàn đất nước</i></p>
+    </div>
+    <div class="footer-bottom">
+        <p style="max-width:750px">
+            © 2017 - 2024 Bản quyền thuộc về MTRAVEL.<br>
+            Công ty Cổ Phần Công Nghệ Đại Nam<br>
+            Phòng 402, Số 438 Khương Đình, Phường Hạ Đình, Quận Thanh Xuân, Hà Nội<br>
+            Hotline: 089 333 678 - Mail: info@mtravel.vn<br>
+        </p>
+    </div>
+</footer>

@@ -3,17 +3,28 @@
     <span nz-icon nzTheme="outline" nzType="ora:arrow-left-circle"></span>
   </button>
   <ul [nzSelectable]="false" menuLayoutHorizontal nz-menu nzInlineIndent="2" nzMode="horizontal">
-    <li nz-menu-item routerLink="/dashboard">
-      <span [ngClass]="{ active: keyActive === null, 'text-nav-item': true }">Dashboard</span>
+    <li nz-menu-item routerLink="/home" *ngIf="!isAdmin">
+      <span [ngClass]="{ active: keyActive === 7, 'text-nav-item': true }">Trang chủ</span>
     </li>
-    <li nz-menu-item *ngIf="currentUser?.roles?.includes('admin')">
-      <span [ngClass]="{ active: keyActive === 5, 'text-nav-item': true }">Sản phẩm</span>
+    <li nz-menu-item routerLink="/home/filter-tour" *ngIf="!isAdmin">
+      <span [ngClass]="{active: keyActive === 8, 'text-nav-item': true }">Tour du lịch</span>
     </li>
-    <!-- <ng-container *ngTemplateOutlet="tplMenu; context: { menu: menusNoiKiem, title: 'Nội kiểm', key: 4 }"></ng-container> -->
+    <li nz-menu-item routerLink="/home/about-me" *ngIf="!isAdmin">
+      <span [ngClass]="{active: keyActive === 9, 'text-nav-item': true }">Về chúng tôi</span>
+    </li>
+    <li nz-menu-item routerLink="/home/my-booking" *ngIf="isClient">
+      <span [ngClass]="{ active: keyActive === 10,'text-nav-item': true }">Booking</span>
+    </li>
+    <li nz-menu-item routerLink="/dashboard" *ngIf="isAdmin">
+      <span [ngClass]="{active: keyActive === 11, 'text-nav-item': true }">Dashboard</span>
+    </li>
+    <ng-container *ngTemplateOutlet="tplMenu; context: { menu: menusSP, title: 'Sản phẩm', key: 1 }"></ng-container>
+    <ng-container *ngTemplateOutlet="tplMenu; context: { menu: menusKH, title: 'Khách hàng', key: 2 }"></ng-container>
+    <ng-container *ngTemplateOutlet="tplMenu; context: { menu: menusBK, title: 'Booking', key: 3 }"></ng-container>
     <ng-container
-      *ngTemplateOutlet="tplMenu; context: { menu: menusCongViec, title: 'Công việc', key: 9 }"></ng-container>
-    <ng-container *ngTemplateOutlet="tplMenu; context: { menu: menusDM, title: 'Danh mục', key: 12 }"></ng-container>
-    <ng-container *ngTemplateOutlet="tplMenu; context: { menu: menusQT, title: 'Quản trị', key: 13 }"></ng-container>
+      *ngTemplateOutlet="tplMenu; context: { menu: menusCongViec, title: 'Công việc', key: 4 }"></ng-container>
+    <ng-container *ngTemplateOutlet="tplMenu; context: { menu: menusDM, title: 'Danh mục', key: 5 }"></ng-container>
+    <ng-container *ngTemplateOutlet="tplMenu; context: { menu: menusQT, title: 'Quản trị', key: 6 }"></ng-container>
     <!-- template -->
     <ng-template #tplMenu let-menu="menu" let-title="title" let-key="key">
       <li *ngIf="menu?.length" nzPopoverOverlayClassName="layout-menu-popover" [nzPopoverContent]="tplDropdown"

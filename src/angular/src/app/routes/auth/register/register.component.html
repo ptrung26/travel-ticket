@@ -1,140 +1,69 @@
 <div class="ct">
   <form nz-form [formGroup]="rfDataModal" (ngSubmit)="submitForm()">
     <img src="./../../../../assets/logo/logo-col.png" alt="logo-login" class="img-login" />
-    <p class="login-top-title">ĐẠI HỌC Y DƯỢC THÀNH PHỐ HỒ CHÍ MINH</p>
     <p class="login-bottom-title">
-      TRUNG TÂM KIỂM CHUẨN CHẤT LƯỢNG <br />
-      XÉT NGHIỆM Y HỌC
+      KHÁM PHÁ TOUR VI VU <br />
+      ĐI ĐÂU CŨNG CÓ ĐÃ CÓ MTRAVEL LO
     </p>
-    <h2>Đăng ký</h2>
-    <div nz-row [nzGutter]="16">
-      <div nz-col [nzSpan]="12">
+    <h2>Đăng ký tài khoản</h2>
+    <div nz-row [nzGutter]="[12, 12]">
+      <div nz-col [nzSpan]="24">
         <nz-form-item>
-          <!--          <nz-form-label [nzSpan]="24" nzRequired>Mã số thuế</nz-form-label>-->
-          <nz-form-control [nzSpan]="24" [nzErrorTip]="tplErr">
-            <input required nz-input placeholder="Mã số thuế" formControlName="maSoThue" />
+          <nz-form-control [nzErrorTip]="tplErr">
+            <input nz-input placeholder="Thông tin email" formControlName="email" />
           </nz-form-control>
         </nz-form-item>
       </div>
-
-      <div nz-col [nzSpan]="12">
+      <div nz-col [nzSpan]="24">
         <nz-form-item>
-          <!--          <nz-form-label [nzSpan]="24" nzRequired>Tên bệnh viện/đơn vị</nz-form-label>-->
-          <nz-form-control [nzSpan]="24" [nzErrorTip]="tplErr">
-            <input nz-input placeholder="Tên chính xác theo con dấu của đơn vị" formControlName="ten" />
+          <nz-form-control [nzErrorTip]="tplErr">
+            <input nz-input placeholder="Tài khoản đặt nhập" formControlName="userName" />
           </nz-form-control>
         </nz-form-item>
       </div>
-    </div>
-
-    <div nz-row [nzGutter]="16">
-      <div nz-col [nzSpan]="12">
+      <div nz-col [nzSpan]="24">
         <nz-form-item>
-          <!--          <nz-form-label [nzSpan]="24" nzRequired>Hạng bệnh viện</nz-form-label>-->
-          <nz-form-control [nzSpan]="24" [nzErrorTip]="tplErr">
-            <ora-select dirHangBenhVien formControlName="hang" placeHolder="Hạng bệnh viện"></ora-select>
+          <nz-form-control [nzErrorTip]="tplErr">
+            <nz-input-group [nzSuffix]="suffixTemplate">
+              <input [type]="passwordVisible ? 'text' : 'password'" nz-input placeholder="Nhập mật khẩu" formControlName="matKhau" />
+            </nz-input-group>
+            <ng-template #suffixTemplate>
+              <span nz-icon [nzType]="passwordVisible ? 'eye-invisible' : 'eye'" (click)="passwordVisible = !passwordVisible"></span>
+            </ng-template>
           </nz-form-control>
         </nz-form-item>
       </div>
-
-      <div nz-col [nzSpan]="12">
-        <nz-form-item>
-          <nz-form-label [nzSpan]="24">Loại hình doanh nghiệp</nz-form-label>
-          <nz-form-control [nzSpan]="24" [nzErrorTip]="tplErr">
-            <ora-radio formControlName="loaiHinhDoanhNghiep" dirLoaiHinhDoanhNghiep></ora-radio>
-          </nz-form-control>
-        </nz-form-item>
+      <div nz-col [nzSpan]="24">
+        <a class="btn-register" (click)="submitForm()" nz-button [nzLoading]="rfDataModal.status === 'PENDING'">Đăng ký</a>
       </div>
-    </div>
-
-    <div nz-row [nzGutter]="16">
-      <div nz-col [nzSpan]="12">
-        <nz-form-item>
-          <!--          <nz-form-label [nzSpan]="24" nzRequired>Tỉnh/Thành phố</nz-form-label>-->
-          <nz-form-control [nzSpan]="24" [nzErrorTip]="tplErr">
-            <ora-select dirTinh formControlName="tinhId" (onItemSelected)="changeTinh($event)"
-              placeHolder="Tỉnh/Thành phố"></ora-select>
-          </nz-form-control>
-        </nz-form-item>
-      </div>
-
-      <!-- <div nz-col [nzSpan]="12">
-        <nz-form-item>
-          <nz-form-control [nzSpan]="24" [nzErrorTip]="tplErr">
-            <ora-select dirHuyen [tinhId]="rfDataModal.get('tinhId').value" formControlName="huyenId" placeHolder="Quận/Huyện"></ora-select>
-          </nz-form-control>
-        </nz-form-item>
-      </div> -->
-    </div>
-
-    <div nz-row [nzGutter]="16">
-      <!-- <div nz-col [nzSpan]="12">
-        <nz-form-item>
-          <nz-form-control [nzSpan]="24" [nzErrorTip]="tplErr">
-            <ora-select dirXa [huyenId]="rfDataModal.get('huyenId').value" formControlName="xaId" placeHolder="Xã/Phường"></ora-select>
-          </nz-form-control>
-        </nz-form-item>
-      </div> -->
-
-      <div nz-col [nzSpan]="12">
-        <nz-form-item>
-          <!--          <nz-form-label [nzSpan]="24" nzRequired>Địa chỉ chi tiết</nz-form-label>-->
-          <nz-form-control [nzSpan]="24" [nzErrorTip]="tplErr">
-            <input nz-input placeholder="Địa chỉ chi tiết" formControlName="soNha" />
-          </nz-form-control>
-        </nz-form-item>
-      </div>
-    </div>
-
-    <div nz-row [nzGutter]="16">
-      <div nz-col [nzSpan]="12">
-        <nz-form-item>
-          <!--          <nz-form-label [nzSpan]="24" nzRequired>Email </nz-form-label>-->
-          <nz-form-control [nzSpan]="24" [nzErrorTip]="tplErr">
-            <input nz-input placeholder="Email dùng làm tài khoản đăng nhập" formControlName="email" />
-          </nz-form-control>
-        </nz-form-item>
-      </div>
-
-      <div nz-col [nzSpan]="12">
-        <nz-form-item>
-          <!--          <nz-form-label [nzSpan]="24" nzRequired>Số điện thoại</nz-form-label>-->
-          <nz-form-control [nzSpan]="24" [nzErrorTip]="tplErr">
-            <input nz-input placeholder="Số điện thoại" formControlName="dienThoai" />
-          </nz-form-control>
-        </nz-form-item>
-      </div>
-    </div>
-
-    <div nz-row [nzGutter]="16">
-      <div nz-col [nzSpan]="12">
-        <a class="btn-register" (click)="submitForm()" nz-button [nzLoading]="rfDataModal.status === 'PENDING'">Đăng
-          ký</a>
-      </div>
-      <div nz-col [nzSpan]="12">
-        <a routerLink="/login" class="btn-login">Đăng nhập</a>
+      <div nz-col [nzSpan]="24">
+        <a routerLink="/login" class="btn-login"
+          >Chuyển sang Đăng nhập <span style="margin-left: 10px" nz-icon nzType="arrow-right" nzTheme="outline"></span
+        ></a>
       </div>
     </div>
   </form>
-  <p class="c-r">Copyright @ 2023 Đại học Y Dược Thành phố Hồ Chí Minh - Bộ Y tế</p>
+  <p class="c-r">Copyright @ 2024 MTravel</p>
 </div>
 
 <ng-template #tplErr let-control>
   <ng-container *ngIf="control.hasError('required')">{{ 'Giá trị không được để trống!' }} </ng-container>
   <ng-container *ngIf="control.hasError('email')">{{ 'Email chưa đúng định dạng!' }}</ng-container>
   <ng-container *ngIf="control.hasError('isEmailExist')">{{ 'Email đã tồn tại!' }}</ng-container>
-  <ng-container *ngIf="control.hasError('isTenExist')">{{ 'Tên bệnh viện đã tồn tại!' }}</ng-container>
-  <ng-container *ngIf="control.hasError('minlength')">{{ 'Mã số thuế tối thiểu 10 số!' }} </ng-container>
-  <ng-container *ngIf="control.hasError('isMaSoThueExist')">{{ 'Mã số thuế đã tồn tại!' }}</ng-container>
-  <ng-container *ngIf="control.hasError('sdtKhongHopLe')">{{ 'Số điện thoại không đúng!' | translate }}</ng-container>
 </ng-template>
 
-<nz-modal [(nzVisible)]="isVisible" (nzOnCancel)="handleCancel()" [nzOkText]="null" nzClosable="true"
-  [nzCancelText]="null" [nzTitle]="null">
+<nz-modal
+  [(nzVisible)]="isVisible"
+  (nzOnCancel)="handleCancel()"
+  [nzOkText]="null"
+  nzClosable="true"
+  [nzCancelText]="null"
+  [nzTitle]="null"
+>
   <div class="modal-success" *nzModalContent>
     <img [ngClass]="'modal-success__img'" src="/assets/images/check-circle.png" alt="Check circle" />
     <h3 class="modal-success__title">Đăng ký tài khoản thành công</h3>
-    <p class="modal-success__desc">Cảm ơn bạn đã đăng ký. Chúng tôi sẽ xem xét và duyệt tài khoản của bạn!</p>
+    <p class="modal-success__desc">Đăng ký thành công, đăng nhập để sử dụng</p>
     <a class="modal-success__link" (click)="handleLogin()" routerLink="/account/login"> Đăng nhập </a>
   </div>
 </nz-modal>

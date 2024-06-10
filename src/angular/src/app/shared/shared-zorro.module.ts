@@ -28,6 +28,7 @@ import { NzAutocompleteModule } from 'ng-zorro-antd/auto-complete';
 import { NzTagModule } from '@node_modules/ng-zorro-antd/tag';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzImageModule } from 'ng-zorro-antd/image';
+import { NzSpaceModule } from 'ng-zorro-antd/space';
 
 export const SHARED_ZORRO_MODULES = [
   NzFormModule,
@@ -60,5 +61,6 @@ export const SHARED_ZORRO_MODULES = [
   NzAutocompleteModule,
   NzTagModule,
   NzDatePickerModule,
-  NzImageModule
+  NzImageModule,
+  NzSpaceModule
 ];

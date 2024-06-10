@@ -1,0 +1,39 @@
+<ora-page-header [action]="actionHeader" [title]="'Thông tin thành viên đoàn'">
+    <ng-template #actionHeader>
+        <button
+            *ngIf="!soLuongThanhVienDoan || !this.dataList?.length || ( soLuongThanhVienDoan <= this.dataList?.length)"
+            nz-button nzType="primary" (click)="showCreateOrUpdate()">
+            <i nz-icon nzType="plus-circle" nzTheme="outline"></i>Thêm mới
+        </button>
+    </ng-template>
+</ora-page-header>
+<ora-layout-filter (onSearch)="refresh()">
+    <form nz-form [formGroup]="rfForm" nzLayout="vertical">
+        <nz-row nzGutter="8">
+            <nz-col nzLg="6" nzSm="6">
+                <input formControlName="filter" nz-input placeholder="Nhập mã, tên để tìm kiếm" />
+            </nz-col>
+        </nz-row>
+    </form>
+</ora-layout-filter>
+<ora-table [rows]="dataList">
+    <ora-column header="STT" width="100px" align="center">
+        <ng-template oraCell let-data>
+            {{ skipCount + dataList.indexOf(data) + 1 }}
+        </ng-template>
+    </ora-column>
+    <ora-column header="Họ và tên" key="ten" align="center"></ora-column>
+    <ora-column header="Email" key="email" align="center"></ora-column>
+    <ora-column header="Số điện thoại" key="soKhachToiDa" align="center"></ora-column>
+    <ora-column header="Vai trò" key="vaiTroCode" align="center"></ora-column>
+    <ora-column header="Thao tác" [content]="contentAction" width="150px" align="center">
+        <ng-template #contentAction let-data="dataItem">
+            <a nz-button nzType="link" nz-tooltip="{{ 'Edit' | translate }}" (click)="showCreateOrUpdate(data)">
+                <i nz-icon nzType="edit"></i>
+            </a>
+            <a nz-button nzType="link" nzDanger nz-tooltip="{{ 'Delete' | translate }}" (click)="delete(data)">
+                <i nz-icon nzType="delete"></i>
+            </a>
+        </ng-template>
+    </ora-column>
+</ora-table>

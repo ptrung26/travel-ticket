@@ -1,0 +1,37 @@
+.footerbutton {
+    float: right;
+
+    button {
+        margin-bottom: 20px;
+    }
+}
+
+.label {
+    display: flex;
+    align-items: center;
+}
+
+.date-circle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    color: #fff;
+    background-color: #ccc;
+    font-size: 12px;
+    cursor: pointer;
+
+    &-list {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0 8px;
+    }
+
+    &.active {
+        background-color: #757474;
+        color: #fff;
+    }
+}

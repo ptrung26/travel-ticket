@@ -5,10 +5,8 @@ import { AfterViewInit, Component, Injector, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { LEVEL } from '@app/shared/service-proxies/danh-muc-service-proxies';
-import { UserExtensionServiceProxy } from '@service-proxies/tai-khoan-service-proxies';
 import { AppConsts } from '@shared/AppConsts';
 import { AppComponentBase } from '@shared/common/AppComponentBase';
-import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-dashboard',
@@ -18,112 +16,54 @@ import { finalize } from 'rxjs/operators';
 export class DashboardComponent extends AppComponentBase implements OnInit, AfterViewInit {
   test = AppConsts.abpEnvironment;
   rfFormGroup: FormGroup;
-  dataChiPhiXetNghiem = [
+  doanhThuTheoThang = [
     {
-      title: 'Vi sinh',
-      count: 6680000,
+      title: 1,
+      count: 15000000,
     },
     {
-      title: 'Hóa sinh',
-      count: 66680000,
+      title: 2,
+      count: 9000000,
     },
     {
-      title: 'Miễn dịch',
-      count: 38680000,
+      title: 3,
+      count: 12000000,
     },
     {
-      title: 'Khí máu',
-      count: 68680000,
+      title: 4,
+      count: 18000000,
     },
     {
-      title: 'Huyết Học',
-      count: 568680000,
+      title: 5,
+      count: 35000000,
     },
     {
-      title: 'Huyết thanh học',
-      count: 86680000,
+      title: 6,
+      count: 20000000,
     },
     {
-      title: 'HBV-DNA',
-      count: 168680000,
+      title: 7,
+      count: 40000000,
     },
     {
-      title: 'Định nhóm máu',
-      count: 468680000,
+      title: 8,
+      count: 50000000,
     },
     {
-      title: 'Giang mai',
-      count: 268680000,
+      title: 9,
+      count: 70000000,
     },
     {
-      title: 'Hóa sinh',
-      count: 668680000,
+      title: 10,
+      count: 12200000,
     },
     {
-      title: 'Miễn dịch',
-      count: 38680000,
+      title: 11,
+      count: 21000000,
     },
     {
-      title: 'Khí máu',
-      count: 68680000,
-    },
-    {
-      title: 'Huyết Học',
-      count: 568680000,
-    },
-  ];
-  dataSoPhieuXetNghiem = [
-    {
-      title: 'Vi sinh',
-      count: 68,
-    },
-    {
-      title: 'Hóa sinh',
-      count: 668,
-    },
-    {
-      title: 'Miễn dịch',
-      count: 38,
-    },
-    {
-      title: 'Khí máu',
-      count: 68,
-    },
-    {
-      title: 'Huyết Học',
-      count: 568,
-    },
-    {
-      title: 'Huyết thanh học',
-      count: 86,
-    },
-    {
-      title: 'HBV-DNA',
-      count: 168,
-    },
-    {
-      title: 'Định nhóm máu',
-      count: 468,
-    },
-    {
-      title: 'Giang mai',
-      count: 268,
-    },
-    {
-      title: 'Hóa sinh',
-      count: 668,
-    },
-    {
-      title: 'Miễn dịch',
-      count: 38,
-    },
-    {
-      title: 'Khí máu',
-      count: 68,
-    },
-    {
-      title: 'Huyết Học',
-      count: 568,
+      title: 12,
+      count: 31200000,
     },
   ];
   isAdmin = false;
@@ -144,8 +84,7 @@ export class DashboardComponent extends AppComponentBase implements OnInit, Afte
   }
 
   ngAfterViewInit() {
-    this.getChart('chiphixetnghiem', this.dataChiPhiXetNghiem);
-    this.getChart('sophieuxetnghiem', this.dataSoPhieuXetNghiem);
+    this.getChart('doanhThuTheoThang', this.doanhThuTheoThang);
   }
 
   getChart(selector: string, data: any[]) {

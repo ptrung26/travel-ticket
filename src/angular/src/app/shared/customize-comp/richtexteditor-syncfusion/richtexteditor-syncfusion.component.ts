@@ -1,35 +1,26 @@
 import {
   AfterViewInit,
   Component,
-  ElementRef,
   forwardRef,
   Injector,
   Input,
   OnDestroy,
   OnInit,
   Provider,
-  TemplateRef,
-  ViewChild,
-  ViewEncapsulation,
+  ViewChild
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { AppComponentBase } from '@app/shared/common/AppComponentBase';
-import { fromEvent, Subject } from '@node_modules/rxjs';
-import { debounceTime, distinctUntilChanged, takeUntil } from '@node_modules/rxjs/operators';
+import { Subject } from '@node_modules/rxjs';
+import { debounceTime, takeUntil } from '@node_modules/rxjs/operators';
 import {
-  ToolbarService,
-  LinkService,
-  ImageService,
-  TableService,
-  MarkdownEditorService,
-  QuickToolbarService,
-  ResizeService,
-  PasteCleanupService,
-  HtmlEditorService,
   FileManagerService,
+  HtmlEditorService,
+  ImageService,
+  LinkService,
   RichTextEditorComponent,
+  ToolbarService
 } from '@syncfusion/ej2-angular-richtexteditor';
-import { UrlServices } from '../../service-proxies/service-url-config/url-services';
 
 declare const ClassicEditor: any;
 
@@ -58,10 +49,8 @@ const VALUE_ACCESSOR: Provider = {
 export class RichTextEditorSyncfusionComponent extends AppComponentBase implements OnInit, ControlValueAccessor, OnDestroy, AfterViewInit {
   @ViewChild('fromRTE', { static: true }) rteEle: RichTextEditorComponent;
   // @ViewChild('valueTemplate') valueTemplate: TemplateRef;
-  // public hostUrl: string = UrlServices.portalUrl();
-  public hostUrl = '';
-  public height = 360;
-  public width = 1000;
+  @Input() height = 360;
+  @Input() width = 1000;
   public toolbarSettings: object = {
     type: 'MultiRow',
     items: [
@@ -99,12 +88,6 @@ export class RichTextEditorSyncfusionComponent extends AppComponentBase implemen
   public fileManagerSettings: object = {
     enable: true,
     path: '/',
-    ajaxSettings: {
-      url: this.hostUrl + '/api/portal/file-manager/fileoperations',
-      getImageUrl: this.hostUrl + '/api/portal/file-manager/getimage',
-      uploadUrl: this.hostUrl + '/api/portal/file-manager/upload',
-      downloadUrl: this.hostUrl + '/api/portal/file-manager/download',
-    },
   };
   public saveInterval = 500;
   _value = '';
@@ -137,8 +120,8 @@ export class RichTextEditorSyncfusionComponent extends AppComponentBase implemen
     super(injector);
   }
 
-  private onChange: Function = (v: any) => {};
-  private onTouched: Function = () => {};
+  private onChange: Function = (v: any) => { };
+  private onTouched: Function = () => { };
 
   ngOnInit() {
     this.$eventChange.pipe(takeUntil(this.$destroy), debounceTime(100)).subscribe((res) => {
@@ -146,7 +129,7 @@ export class RichTextEditorSyncfusionComponent extends AppComponentBase implemen
     });
   }
 
-  ngAfterViewInit(): void {}
+  ngAfterViewInit(): void { }
 
   ngOnDestroy(): void {
     // this.$destroy.next(true);

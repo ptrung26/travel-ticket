@@ -29,7 +29,6 @@ namespace newPMS.QuanLyTaiKhoan.Dtos
     public class CreateOrUpdateUserRequest : IRequest<CommonResultDto<SysUserDto>>
     {
         public CreateOrUpdateSysUserDto UserDto { get; set; }
-        //public long BenhVienId { get; set; }
         public List<long> ArrRoleIds { get; set; }
         public List<AddOrRemoveSysOrganizationunits> ListAddSysOrganizationunits { get; set; }
         public List<AddOrRemoveSysOrganizationunits> ListRemoveSysOrganizationunits { get; set; }
@@ -48,7 +47,6 @@ namespace newPMS.QuanLyTaiKhoan.Dtos
     }
 
 
-
     public class GetListUserAdminCoSoRequest : PagedFullRequestDto, IRequest<PagedResultDto<SysUserDto>>
     {
         public long? TinhId { get; set; }
@@ -57,6 +55,7 @@ namespace newPMS.QuanLyTaiKhoan.Dtos
         public long? Id { get; set; }
         public long? SysRoleId { get; set; }
     }
+
     public class GetListUserCoSoRequest : PagedFullRequestDto, IRequest<PagedResultDto<SysUserDto>>
     {
         public long? SysRoleId { get; set; }

@@ -1,10 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { validSDT } from '@app/shared/customValidator/validSDT';
-import { ComboBoxDto } from '@app/shared/service-proxies/danh-muc-service-proxies';
-import { finalize } from '@node_modules/rxjs/internal/operators';
+import { CreateOrUpdateSysUserDto, CreateOrUpdateUserRequest, TaiKhoanBaseCustomServiceProxy } from '@app/shared/service-proxies/tai-khoan-service-proxies';
+import { TitleService } from '@delon/theme';
 import { Subject } from 'rxjs';
-import { debounceTime, distinctUntilChanged, filter, startWith, switchMap, take, takeUntil, tap } from 'rxjs/operators';
+import { filter, finalize, startWith, switchMap, take, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'register',
@@ -13,29 +12,20 @@ import { debounceTime, distinctUntilChanged, filter, startWith, switchMap, take,
 })
 export class RegisterComponent implements OnInit, OnDestroy {
   rfDataModal: FormGroup;
-  // loaiHinhDoanhNghiep = LOAI_HINH_DOANH_NGHIEP;
   formSubmit$ = new Subject<any>();
   $destroy = new Subject<boolean>();
   isVisible = false;
+  passwordVisible: boolean = false;
 
-  // private _dataServiceClient: KhachHangClientServiceProxy
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private _dataService: TaiKhoanBaseCustomServiceProxy, private _title: TitleService) { }
 
   ngOnInit(): void {
+    this._title.setTitle("Đăng ký tài khoản");
     this.rfDataModal = this.fb.group({
-      maSoThue: ['', [Validators.required, Validators.minLength(10)]],
-      ten: ['', [Validators.required]],
-      hang: ['', [Validators.required]],
-      // loaiHinhDoanhNghiep: [this.loaiHinhDoanhNghiep.TU_NHAN, [Validators.required]],
-      tinhId: ['', [Validators.required]],
-      tenTinh: ['', [Validators.required]],
-      huyenId: ['', [Validators.required]],
-      xaId: ['', [Validators.required]],
-      soNha: ['', [Validators.required]],
-      email: ['', [Validators.required, Validators.email]],
-      dienThoai: ['', [Validators.required, validSDT]],
+      userName: ["", [Validators.required]],
+      email: ["", [Validators.required, Validators.email]],
+      matKhau: ["", [Validators.required]],
     });
-
     this.formSubmit$
       .pipe(
         tap(() => {
@@ -47,7 +37,6 @@ export class RegisterComponent implements OnInit, OnDestroy {
             }
           }
         }),
-
         switchMap(() =>
           this.rfDataModal.statusChanges.pipe(
             startWith(this.rfDataModal.status),
@@ -56,7 +45,6 @@ export class RegisterComponent implements OnInit, OnDestroy {
           ),
         ),
       )
-
       .subscribe((validation) => {
         if (validation === 'VALID') {
         } else {
@@ -64,25 +52,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
         }
       });
 
-    this.rfDataModal
-      .get('tinhId')
-      .valueChanges.pipe(debounceTime(300), distinctUntilChanged(), takeUntil(this.$destroy))
-      .subscribe((res) => {
-        if (!res) {
-          this.rfDataModal.get('huyenId').setValue(null);
-          this.rfDataModal.get('xaId').setValue(null);
-        }
-      });
-
-    this.rfDataModal
-      .get('huyenId')
-      .valueChanges.pipe(debounceTime(300), distinctUntilChanged(), takeUntil(this.$destroy))
-      .subscribe((res) => {
-        if (!res) {
-          this.rfDataModal.get('xaId').setValue(null);
-        }
-      });
   }
+
 
   ngOnDestroy(): void {
     this.$destroy.next();
@@ -97,24 +68,28 @@ export class RegisterComponent implements OnInit, OnDestroy {
         this.rfDataModal.controls[i].updateValueAndValidity();
       }
     } else {
-      ora.ui.setBusy();
-      // this._dataServiceClient
-      //   .khachHangDangKy(this.rfDataModal.value)
-      //   .pipe(finalize(ora.ui.clearBusy))
-      //   .subscribe((res) => {
-      //     if (res.isSuccessful) {
-      //       ora.notify.success('Đăng ký tài khoản thành công');
-      //       this.isVisible = true;
-      //       this.rfDataModal.reset();
-      //     } else {
-      //       ora.notify.error(res.errorMessage);
-      //     }
-      //   });
-    }
-  }
 
-  changeTinh(event: ComboBoxDto) {
-    this.rfDataModal.get('tenTinh').setValue(event.displayText);
+      const formValue = this.rfDataModal.value;
+      const input = new CreateOrUpdateUserRequest();
+      let userDto = new CreateOrUpdateSysUserDto();
+      userDto.email = formValue.email;
+      userDto.userName = formValue.userName;
+      userDto.matKhau = formValue.matKhau;
+      input.userDto = userDto;
+      input.arrRoleIds = [4];
+      ora.ui.setBusy();
+      this._dataService.createOrUpdateUser(input).pipe(finalize(() => {
+        ora.ui.clearBusy();
+      })).subscribe(res => {
+        if (res.isSuccessful) {
+          ora.notify.success('Đăng ký tài khoản thành công');
+          this.isVisible = true;
+        } else {
+          ora.notify.error(res.errorMessage);
+        }
+      })
+
+    }
   }
 
   handleCancel(): void {

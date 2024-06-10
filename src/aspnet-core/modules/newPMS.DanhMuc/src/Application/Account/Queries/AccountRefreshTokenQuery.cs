@@ -41,7 +41,7 @@ namespace Ord.Account.Queries
                 return cacheRefeshResult;
             }
             var userId = await RefreshTokenCache.GetAsync(refreshTokenKeyCache);
-            RefreshTokenCache.RemoveAsync(refreshTokenKeyCache);
+            await RefreshTokenCache.RemoveAsync(refreshTokenKeyCache);
             if (string.IsNullOrEmpty(userId))
             {
                 throw new UserFriendlyException("not_found_user", "error_login");
@@ -62,7 +62,8 @@ namespace Ord.Account.Queries
                 User = user,
                 Roles = await _userManager.GetRolesAsync(user)
             }, cancellationToken);
-            _jwtRefeshCache.SetAsync(refreshTokenKeyCache, result, new DistributedCacheEntryOptions()
+
+            await _jwtRefeshCache.SetAsync(refreshTokenKeyCache, result, new DistributedCacheEntryOptions()
             {
                 AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(1)
             });

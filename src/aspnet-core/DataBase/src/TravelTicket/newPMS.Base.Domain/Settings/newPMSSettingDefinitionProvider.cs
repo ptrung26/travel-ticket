@@ -15,8 +15,8 @@ namespace newPMS.Settings
             new SettingDefinition(EmailSettingNames.Smtp.EnableSsl, "true"),
             new SettingDefinition(EmailSettingNames.Smtp.UseDefaultCredentials, "false"),
             new SettingDefinition(EmailSettingNames.Smtp.Domain, ""),
-            new SettingDefinition(EmailSettingNames.Smtp.UserName, "viemganpath@gmail.com"),
-            new SettingDefinition(EmailSettingNames.Smtp.Password, "0n0eKQiMUo/tnDO+5rRSVQ==")
+            new SettingDefinition(EmailSettingNames.Smtp.UserName, "hoangvietpham75@gmail.com"),
+            new SettingDefinition(EmailSettingNames.Smtp.Password, "arwhrycgdswmvwsf")
             );
         }
     }

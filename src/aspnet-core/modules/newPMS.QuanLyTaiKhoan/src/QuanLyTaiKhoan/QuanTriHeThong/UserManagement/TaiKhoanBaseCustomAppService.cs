@@ -46,6 +46,8 @@ namespace newPMS.QuanLyTaiKhoan.Services
         //Task<int> SetRoleForUser(SetRoleForUserRequest request);
         //Task<CommonResultDto<Guid>> XoaTaiKhoan(XoaTaiKhoanRequest input);
     }
+
+
     [Authorize]
     public class TaiKhoanBaseCustomAppService : QuanLyTaiKhoanAppService, ITaiKhoanBaseCustomAppService
     {
@@ -57,8 +59,6 @@ namespace newPMS.QuanLyTaiKhoan.Services
         private readonly IRepository<SysUserRoleEntity, long> _userRoleRepos;
         private readonly IRepository<SysRoleLevelEntity, long> _roleLevelRepository;
         private readonly IRepository<SysOrganizationunits, long> _phongBanRepository;
-        private readonly IGuidGenerator _guidGenerator;
-        private readonly IConfiguration _configuration;
         //private readonly IIdentityUserAppService _userAppService;
         private readonly IdentityUserManager _userManager;
         private readonly IPasswordHasher<IdentityUser> _passwordHasher;
@@ -93,8 +93,6 @@ namespace newPMS.QuanLyTaiKhoan.Services
             _userRoleRepos = userRoleRepos;
             _roleLevelRepository = roleLevelRepository;
             _phongBanRepository = phongBanRepository;
-            _guidGenerator = guidGenerator;
-            _configuration = configuration;
             //_userAppService = userAppService;
             //_userAppService = factory.GetServiceDependency<IIdentityUserAppService>();
             _userManager = userManager;
@@ -107,18 +105,20 @@ namespace newPMS.QuanLyTaiKhoan.Services
         }
 
         #region Base
+
+        // Get list tài khoản V1
         [HttpPost]
         public async Task<PagedResultDto<SysUserDto>> GetList(GetListUserCoSoRequest input)
         {
             try
             {
-                var _yTeCoSoConnection = _factory.TravelTicketDbFactory.Connection;
+                var _travelConnection = _factory.TravelTicketDbFactory.Connection;
                 var prm = new
                 {
                     TextSearch = input.Filter.LikeTextSearch()
                 };
-                var tskItems = _yTeCoSoConnection.QueryAsync<SysUserDto>(GetQuerySqlUser(input, true), prm);
-                var tskTotal = _yTeCoSoConnection.QueryFirstOrDefaultAsync<int>(GetQuerySqlUser(input, false), prm);
+                var tskItems = _travelConnection.QueryAsync<SysUserDto>(GetQuerySqlUser(input, true), prm);
+                var tskTotal = _travelConnection.QueryFirstOrDefaultAsync<int>(GetQuerySqlUser(input, false), prm);
                 await Task.WhenAll(tskTotal, tskItems);
                 var ret = new PagedResultDto<SysUserDto>()
                 {
@@ -150,6 +150,7 @@ namespace newPMS.QuanLyTaiKhoan.Services
                 throw ex;
             }
         }
+
         private string GetQuerySqlUser(GetListUserCoSoRequest input, bool isItems = true)
         {
             var select = new StringBuilder(isItems == false ? "1" :
@@ -203,9 +204,8 @@ namespace newPMS.QuanLyTaiKhoan.Services
 
                 sql.Append($" and u.Level in ({strListLevel}) ");
             }
-            //sql.Append(" GROUP BY u.Id ");
-            sql.Append(" ORDER BY u.Level ");
 
+            sql.Append(" ORDER BY u.Level ");
             if (isItems)
             {
                 return $@"{sql} LIMIT {input.SkipCount},{input.MaxResultCount} ";
@@ -228,6 +228,7 @@ namespace newPMS.QuanLyTaiKhoan.Services
                     ListId = listId
                 });
         }
+
 
         #region GetlistUser Ver2
         [HttpPost(Utilities.ApiUrlBase + "GetListV2")]
@@ -301,7 +302,6 @@ namespace newPMS.QuanLyTaiKhoan.Services
                 TotalCount = totalCount.ToList().Count
             };
         }
-
         #endregion
 
         public async Task<GetUserForEditOutput> GetUserForEditNoAuthen(long? UserId)
@@ -384,6 +384,7 @@ namespace newPMS.QuanLyTaiKhoan.Services
             }
         }
 
+
         [HttpPost(Utilities.ApiUrlActionBase)]
         public async Task<List<RoleLevelDto>> GetRoleByLevelCoSo(GetRoleTaiKhoanDto input)
         {
@@ -411,6 +412,7 @@ namespace newPMS.QuanLyTaiKhoan.Services
             }
         }
 
+        [AllowAnonymous]
         [HttpPost(Utilities.ApiUrlActionBase)]
         public async Task<CommonResultDto<SysUserDto>> CreateOrUpdateUser(CreateOrUpdateUserRequest input)
         {
@@ -425,6 +427,9 @@ namespace newPMS.QuanLyTaiKhoan.Services
 
         }
 
+        #region Crud tài khoản người dùng
+
+        // Cập nhật người dùng 
         private async Task<CommonResultDto<SysUserDto>> UpdateUser(CreateOrUpdateUserRequest input)
         {
             try
@@ -489,6 +494,7 @@ namespace newPMS.QuanLyTaiKhoan.Services
                     Id = userEnt.Id
 
                 };
+
                 //update role
                 if (input.ArrRoleIds != null)
                 {
@@ -499,7 +505,7 @@ namespace newPMS.QuanLyTaiKhoan.Services
                     };
                     await SetRoleForUser(setRoleReq);
                 }
-                //Update Khách Hàng...
+
 
                 return new CommonResultDto<SysUserDto>(dto);
             }
@@ -510,6 +516,7 @@ namespace newPMS.QuanLyTaiKhoan.Services
 
         }
 
+        // Tạo mới người dùng
         private async Task<CommonResultDto<SysUserDto>> CreateUser(CreateOrUpdateUserRequest input)
         {
             try
@@ -517,7 +524,6 @@ namespace newPMS.QuanLyTaiKhoan.Services
                 var userExtensionRepos = _factory.Repository<SysUserEntity, long>();
                 var userDto = input.UserDto;
                 var hasMaUser = await _userRepos.AnyAsync(m => m.UserName == userDto.UserName && m.Id != userDto.Id);
-                //var hasMaUser = await CheckMaUser(userDto.Ma, userDto.KhachHangId.Value);
                 if (hasMaUser)
                 {
                     return new CommonResultDto<SysUserDto>("Đã có người dùng với tên đăng nhập: " + userDto.UserName);
@@ -526,9 +532,9 @@ namespace newPMS.QuanLyTaiKhoan.Services
                 var identityUserCreateDto = new AbpUserMapCreateDto()
                 {
                     UserName = userDto.UserName,
-                    Name = userDto.HoTen?.Length > 64 ? userDto.HoTen.Substring(0, 64) : userDto.HoTen,
-                    Surname = userDto.SurName?.Length > 64 ? userDto.SurName.Substring(0, 64) : userDto.SurName,
-                    Email = string.IsNullOrEmpty(userDto.Email) ? $"default_support_{Guid.NewGuid()}@ytcs.vn" : userDto.Email,
+                    Name = userDto.HoTen,
+                    Surname = userDto.SurName,
+                    Email =  userDto.Email,
                     PhoneNumber = userDto.SoDienThoai,
                     LockoutEnabled = false,
                     Password = userDto.MatKhau,
@@ -536,11 +542,10 @@ namespace newPMS.QuanLyTaiKhoan.Services
                 };
 
 
-
                 identityUser = _factory.ObjectMapper.Map<AbpUserMapCreateDto, IdentityUser>(identityUserCreateDto);
-                //var user = await _userAppService.CreateAsync(identityUserCreateDto);
                 var user = await _userManager.CreateAsync(identityUser);
                 await _factory.CurrentUnitOfWork.SaveChangesAsync();
+
                 if (user.Succeeded == true)
                 {
                     var sysUserEnt = _factory.ObjectMapper.Map<CreateOrUpdateSysUserDto, SysUserEntity>(userDto);
@@ -588,7 +593,7 @@ namespace newPMS.QuanLyTaiKhoan.Services
             }
             catch (Exception ex)
             {
-                return new CommonResultDto<SysUserDto>(ex.Message ?? "Lỗi xử lý !! ");
+                return new CommonResultDto<SysUserDto>(ex.Message ?? "Đã có lỗi xảy ra, vui lòng thử lại");
             }
 
         }
@@ -619,7 +624,7 @@ namespace newPMS.QuanLyTaiKhoan.Services
                         ErrorMessage = "Đã có người dùng trùng với Email: " + userDto.Email
                     };
                 }
-                var identityUser = new IdentityUser(new Guid(), userDto.UserName, string.IsNullOrEmpty(userDto.Email) ? $"default_support_{Guid.NewGuid()}@ytcs.vn" : userDto.Email);
+                var identityUser = new IdentityUser(new Guid(), userDto.UserName, userDto.Email);
                 var identityUserCreateDto = new AbpUserMapCreateDto()
                 {
                     UserName = userDto.UserName,
@@ -696,26 +701,26 @@ namespace newPMS.QuanLyTaiKhoan.Services
 
         }
 
-        private async Task<CommonResultDto<bool>> SendEmailTaiKhoanHocVien(CreateOrUpdateSysUserDto user)
+        private async Task<CommonResultDto<bool>> SendEmail(CreateOrUpdateSysUserDto user)
         {
             try
             {
-                var urlImage = "https://eqa.ump.edu.vn/assets/logo/logo-col.png";
                 var urlLogin = _factory.AppSettingConfiguration.GetSection("AuthServer").GetSection("UrlAdmin").Value;
                 var emailBody = await _templateRenderer.RenderAsync(TemplateName.GuiTaiKhoanQuaEmail,
                       new
                       {
                           ten = user.HoTen,
                           tendangnhap = user.UserName,
-                          logo = urlImage,
                           matkhau = user.MatKhau,
-                          urllogin = "https://eqa.ump.edu.vn/"
+                          urllogin = "localhost:4200/account/login"
                       });
 
-                var mail = new MailMessage(new MailAddress(BaseConsts.EmailAppDefault, BaseConsts.AppName), new MailAddress(user.Email));
-                mail.Subject = "Trung tâm kiểm chuẩn chất lượng xét nghiệm Y học - Đại học Y Dược thành phố Hồ Chí Minh";
-                mail.Body = emailBody;
-                mail.IsBodyHtml = true;
+                var mail = new MailMessage(new MailAddress(BaseConsts.EmailAppDefault, BaseConsts.AppName), new MailAddress(user.Email))
+                {
+                    Subject = "MTravel - Dịch vụ đặt Tour du lịch toàn quốc",
+                    Body = emailBody,
+                    IsBodyHtml = true
+                };
                 await _emailSender.SendAsync(mail);
 
                 return new CommonResultDto<bool>(true);
@@ -724,34 +729,6 @@ namespace newPMS.QuanLyTaiKhoan.Services
             {
                 return new CommonResultDto<bool>(ex.Message);
             }
-        }
-
-        [HttpPost(Utilities.ApiUrlBase + "TaoNhanhMultiTaiKhoan")]
-        public async Task<CommonResultDto<bool>> TaoNhanhMultiTaiKhoan(CreateMultiUserRequest input)
-        {
-            try
-            {
-                if (input.ArrUserDto != null && input.ArrUserDto.Count > 0)
-                {
-                    foreach (var item in input.ArrUserDto)
-                    {
-                        await TaoNhanhTaiKhoan(item);
-                    }
-                }
-                return new CommonResultDto<bool>
-                {
-                    IsSuccessful = true
-                };
-            }
-            catch (Exception ex)
-            {
-                return new CommonResultDto<bool>
-                {
-                    IsSuccessful = false,
-                    ErrorMessage = ex.Message ?? "Lỗi xử lý !! "
-                };
-            }
-
         }
 
         public async Task<int> SetRoleForUser(SetRoleForUserRequest request)
@@ -786,12 +763,12 @@ namespace newPMS.QuanLyTaiKhoan.Services
 
         private async Task<IEnumerable<string>> GetRoleNames(List<long> listSysRoleId)
         {
-            var _yTeCoSoConnection = _factory.TravelTicketDbFactory.Connection;
+            var _travelConnection = _factory.TravelTicketDbFactory.Connection;
             if (listSysRoleId?.Any() != true)
             {
                 return new List<string>();
             }
-            var lstAbpId = await _yTeCoSoConnection.QueryAsync<Guid>(
+            var lstAbpId = await _travelConnection.QueryAsync<Guid>(
                 $@"SELECT RoleId from SysRole WHERE Id in @ListId",
                 new
                 {
@@ -866,6 +843,8 @@ namespace newPMS.QuanLyTaiKhoan.Services
                         };
             return await query.ToListAsync();
         }
+
+        #endregion
 
         #region Lock
         public async Task<Guid> LockUser(LockUserRequest request)
@@ -1161,156 +1140,6 @@ namespace newPMS.QuanLyTaiKhoan.Services
                 return new CommonResultDto<bool>("Tài khoản chưa đăng nhập !!");
             }
         }
-
-        [HttpGet(Utilities.ApiUrlActionBase)]
-        public async Task<CommonResultDto<bool>> KhachHangLockUser(long khachHangId)
-        {
-            if (_factory.UserSession != null)
-            {
-                var sysUser = await _factory.Repository<SysUserEntity, long>().FirstOrDefaultAsync(x => x.KhachHangId == khachHangId);
-                if (sysUser != null)
-                {
-                    var sql = $@"UPDATE AbpUsers SET LockoutEnabled = @LockoutEnabled, LockoutEnd = @LockoutEnd WHERE Id = @Id";
-                    await _factory.DefaultDbFactory.Connection.ExecuteAsync(sql,
-                        new
-                        {
-                            LockoutEnabled = true,
-                            LockoutEnd = DateTime.Now.AddYears(100),
-                            Id = sysUser.UserId
-                        });
-                    return new CommonResultDto<bool>(true);
-                }
-                else
-                {
-                    return new CommonResultDto<bool>("Không tồn tại tài khoản của khách hàng !!");
-                }
-            }
-            else
-            {
-                return new CommonResultDto<bool>("Tài khoản chưa đăng nhập !!");
-            }
-        }
-        [HttpGet(Utilities.ApiUrlActionBase)]
-        public async Task<CommonResultDto<bool>> KhachHangUnLockUser(long khachHangId)
-        {
-            if (_factory.UserSession != null)
-            {
-                var sysUser = await _factory.Repository<SysUserEntity, long>().FirstOrDefaultAsync(x => x.KhachHangId == khachHangId);
-                if (sysUser != null)
-                {
-                    var sql = $@"UPDATE AbpUsers SET LockoutEnabled = @LockoutEnabled, LockoutEnd = null WHERE Id = @Id";
-                    await _factory.DefaultDbFactory.Connection.ExecuteAsync(sql,
-                        new
-                        {
-                            Id = sysUser.UserId,
-                            LockoutEnabled = false
-                        });
-                    return new CommonResultDto<bool>(true);
-                }
-                else
-                {
-                    return new CommonResultDto<bool>("Không tồn tại tài khoản của khách hàng !!");
-                }
-            }
-            else
-            {
-                return new CommonResultDto<bool>("Tài khoản chưa đăng nhập !!");
-            }
-        }
-        [HttpPost(Utilities.ApiUrlActionBase)]
-        public async Task<CommonResultDto<bool>> KhoaPhongSetPassword(KhoaPhongSetPasswordRequest input)
-        {
-            if (_factory.UserSession != null)
-            {
-
-                var sysUser = await _factory.Repository<SysUserEntity, long>().FirstOrDefaultAsync(x => x.Id == input.SysUserId);
-                if (sysUser != null)
-                {
-                    //Cập nhật mật khẩu AbpUsers
-                    var abpUser = await _userManager.GetByIdAsync(sysUser.UserId);
-                    var abpUserUpdate = new AbpUserMapUpdateDto
-                    {
-                        ConcurrencyStamp = abpUser.ConcurrencyStamp,
-                        UserName = sysUser.UserName,
-                        Name = sysUser.HoTen,
-                        Surname = sysUser.HoTen,
-                        Email = sysUser.Email,
-                        PhoneNumber = sysUser.SoDienThoai,
-                        PasswordHash = !string.IsNullOrWhiteSpace(input.Password) ? _passwordHasher.HashPassword(abpUser, input.Password) : abpUser.PasswordHash,
-                        LockoutEnabled = abpUser.LockoutEnabled,
-                    };
-                    _factory.ObjectMapper.Map(abpUserUpdate, abpUser);
-                    await _userManager.UpdateAsync(abpUser);
-                    await _factory.CurrentUnitOfWork.SaveChangesAsync();
-
-                    return new CommonResultDto<bool>(true);
-                }
-                else
-                {
-                    return new CommonResultDto<bool>("Không tồn tại tài khoản của khách hàng !!");
-                }
-            }
-            else
-            {
-                return new CommonResultDto<bool>("Tài khoản chưa đăng nhập !!");
-            }
-        }
-        [HttpGet(Utilities.ApiUrlActionBase)]
-        public async Task<CommonResultDto<bool>> KhoaPhongLockUser(long sysUserId)
-        {
-            if (_factory.UserSession != null)
-            {
-                var sysUser = await _factory.Repository<SysUserEntity, long>().FirstOrDefaultAsync(x => x.Id == sysUserId);
-                if (sysUser != null)
-                {
-                    var sql = $@"UPDATE AbpUsers SET LockoutEnabled = @LockoutEnabled, LockoutEnd = @LockoutEnd WHERE Id = @Id";
-                    await _factory.DefaultDbFactory.Connection.ExecuteAsync(sql,
-                        new
-                        {
-                            LockoutEnabled = true,
-                            LockoutEnd = DateTime.Now.AddYears(100),
-                            Id = sysUser.UserId
-                        });
-                    return new CommonResultDto<bool>(true);
-                }
-                else
-                {
-                    return new CommonResultDto<bool>("Không tồn tại tài khoản của khách hàng !!");
-                }
-            }
-            else
-            {
-                return new CommonResultDto<bool>("Tài khoản chưa đăng nhập !!");
-            }
-        }
-        [HttpGet(Utilities.ApiUrlActionBase)]
-        public async Task<CommonResultDto<bool>> KhoaPhongUnLockUser(long sysUserId)
-        {
-            if (_factory.UserSession != null)
-            {
-                var sysUser = await _factory.Repository<SysUserEntity, long>().FirstOrDefaultAsync(x => x.Id == sysUserId);
-                if (sysUser != null)
-                {
-                    var sql = $@"UPDATE AbpUsers SET LockoutEnabled = @LockoutEnabled, LockoutEnd = null WHERE Id = @Id";
-                    await _factory.DefaultDbFactory.Connection.ExecuteAsync(sql,
-                        new
-                        {
-                            Id = sysUser.UserId,
-                            LockoutEnabled = false
-                        });
-                    return new CommonResultDto<bool>(true);
-                }
-                else
-                {
-                    return new CommonResultDto<bool>("Không tồn tại tài khoản của khách hàng !!");
-                }
-            }
-            else
-            {
-                return new CommonResultDto<bool>("Tài khoản chưa đăng nhập !!");
-            }
-        }
-
         #endregion
 
         #region "Import user v1"
@@ -1535,19 +1364,20 @@ namespace newPMS.QuanLyTaiKhoan.Services
             await _emailSender.SendAsync(mail);
             return new CommonResultDto<bool>(true);
         }
-        #endregion
 
         [HttpGet(Utilities.ApiUrlBase + "VaiTroUserCombobox")]
         public async Task<List<ComboBoxDto>> VaiTroUserCombobox()
         {
-            var query = _factory.Repository<SysRoleEntity, long>().AsNoTracking()
+            var query = await _factory.Repository<SysRoleEntity, long>().AsNoTracking()
                 .Select(x => new ComboBoxDto()
                 {
                     Value = x.Id.ToString(),
                     DisplayText = $"{x.Ten}",
-                });
-            return query.ToList();
+                }).ToListAsync();
+
+            return query;
         }
+        #endregion
 
         #region "Quên mật khẩu"
         #endregion

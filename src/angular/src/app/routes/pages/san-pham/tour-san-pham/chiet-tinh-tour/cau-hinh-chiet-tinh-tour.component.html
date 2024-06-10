@@ -1,0 +1,18 @@
+<ora-page-header [title]="title" [action]="action">
+  <ng-template #action>
+    <button *ngIf="isChanged" (click)="calTongTien()" nz-button nzType="primary" type="button">Cập nhật giá
+      tour</button>
+    <button (click)="close()" nz-button nzType="default" type="button"><i nz-icon nzType="arrow-left"></i> Quay
+      lại</button>
+  </ng-template>
+</ora-page-header>
+<h3>Tổng tiền: {{tongTien1Nguoi | currencyVND}} / 1 người</h3>
+<div>
+  <div class="danh-muc-chiet-tinh" *ngIf="isExistDichVu('XeOto')">
+    <chiet-tinh-xe [tourSanPham]="data" (crudChiTiet)="calTongTienDon($event)" #ctxe></chiet-tinh-xe>
+  </div>
+  <div class="danh-muc-chiet-tinh" *ngIf="isExistDichVu('VeThangCanh')">
+    <chiet-tinh-ve class="danh-muc-chiet-tinh" [tourSanPham]="data" #ctve
+      (crudChiTiet)="calTongTienDon($event)"></chiet-tinh-ve>
+  </div>
+</div>

@@ -13,14 +13,10 @@ const routes: Routes = [
   {
     path: '',
     component: LayoutBasicComponent,
-    // component: OraLayoutVerticalComponent,
-    canActivate: [AuthGuardService],
-    canActivateChild: [AuthGuardService],
     children: [
       {
-        path: '',
-        redirectTo: 'dashboard',
-        pathMatch: 'full',
+        path: 'dashboard',
+        component: DashboardComponent,
       },
       {
         path: 'dashboard',
@@ -30,8 +26,38 @@ const routes: Routes = [
         },
       },
       {
+        path: 'home',
+        loadChildren: () => import('./pages/home/home.module').then(m => m.HomeModule)
+      },
+      {
         path: 'admin',
         loadChildren: () => import('./pages/admin/admin.module').then((m) => m.AdminModule),
+        canLoad: [AuthGuardService],
+      },
+      {
+        path: 'san-pham',
+        loadChildren: () => import('./pages/san-pham/san-pham.module').then((m) => m.SanPhamModule),
+        data: {
+          preload: true,
+        },
+        canLoad: [AuthGuardService],
+      }
+      ,
+      {
+        path: 'booking',
+        loadChildren: () => import('./pages/booking/booking.module').then((m) => m.BookingModule),
+        data: {
+          preload: true,
+        },
+        canLoad: [AuthGuardService],
+      },
+      {
+        path: 'khach-hang',
+        loadChildren: () => import('./pages/khach-hang/khach-hang.module').then((m) => m.KhachHangModule),
+        data: {
+          preload: true,
+        },
+        canLoad: [AuthGuardService],
       },
       {
         path: 'danh-muc',
@@ -64,7 +90,11 @@ const routes: Routes = [
     path: 'account',
     loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
   },
-  { path: '**', redirectTo: 'dashboard' },
+  {
+    path: 'payment',
+    loadChildren: () => import('./payment/payment.module').then((m) => m.PaymentModule)
+  },
+
 ];
 
 @NgModule({
@@ -80,4 +110,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule],
 })
-export class RouteRoutingModule {}
+export class RouteRoutingModule { }

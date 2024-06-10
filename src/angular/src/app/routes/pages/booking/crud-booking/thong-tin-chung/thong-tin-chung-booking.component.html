@@ -1,0 +1,56 @@
+<p class="header">Thông tin cơ bản</p>
+<form nz-form [formGroup]="rfForm">
+  <div nz-row>
+    <div nz-col [nzSpan]="24">
+      <nz-form-item [nzGutter]="12" class="mt12">
+        <nz-form-control [nzSpan]="6" [nzErrorTip]="'Trường này không được bỏ trống'">
+          <nz-form-label nzRequired [nzSpan]="4">Mã</nz-form-label>
+          <input nz-input formControlName="ma" />
+        </nz-form-control>
+        <nz-form-control [nzSpan]="8">
+          <nz-form-label [nzSpan]="8">Tên Booking</nz-form-label>
+          <input nz-input formControlName="ten" />
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+  </div>
+  <p class="header">Thông tin liên hệ</p>
+  <div nz-row>
+    <div nz-col [nzSpan]="24">
+      <nz-form-item [nzGutter]="[16, 16]" class="mt12">
+        <nz-form-control [nzSpan]="6" [nzErrorTip]="'Trường này không được bỏ trống'">
+          <nz-form-label [nzSpan]="12" nzRequired>Loại khách hàng</nz-form-label>
+          <ora-select formControlName="loaiKhachHangCode" dirLoaiKhach></ora-select>
+        </nz-form-control>
+        <nz-form-control [nzSpan]="8" [nzErrorTip]="'Trường này không được bỏ trống'">
+          <nz-form-label [nzSpan]="12" nzRequired>Khách hàng</nz-form-label>
+          <select-khach-hang [khachHangId]="thongTinChung?.khachHangId"
+            (luaChonEvent)="luaChonKhachKhang($event)"></select-khach-hang>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+    <div nz-col [nzSpan]="24">
+      <nz-form-item [nzGutter]="12" class="mt12">
+        <nz-form-label [nzSpan]="24">Địa chỉ</nz-form-label>
+        <nz-form-control [nzSpan]="12">
+          <input nz-input formControlName="diaChi" />
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+    <div nz-col [nzSpan]="24">
+      <nz-form-item [nzGutter]="[16, 16]" class="mt12">
+        <nz-form-control [nzSpan]="6">
+          <nz-form-label nzRequired [nzSpan]="12">Số điện thoại</nz-form-label>
+          <input nz-input formControlName="email" />
+        </nz-form-control>
+        <nz-form-control [nzSpan]="8" [nzErrorTip]="'Trường này không được bỏ trống'">
+          <nz-form-label [nzSpan]="12">Email</nz-form-label>
+          <input nz-input formControlName="soDienThoai" />
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+  </div>
+</form>
+<div class="footerbutton">
+  <button nz-button nzType="primary" (click)="navigate()">Tiếp theo <i nz-icon nzType="arrow-right"></i></button>
+</div>

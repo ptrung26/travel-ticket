@@ -12,7 +12,7 @@ namespace newPMS.Entities
     {
         public long SysRoleId { get; set; }
         /// <summary>
-        ///  tên quyền
+        ///  Tên quyền
         /// </summary>
         [StringLength(500)]
         public string Name { get; set; }

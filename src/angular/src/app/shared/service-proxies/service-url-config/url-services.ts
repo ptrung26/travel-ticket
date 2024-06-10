@@ -23,6 +23,10 @@ export class UrlServices {
   static congViecUrl() {
     return AbpEnvironment.apis.congViec.url;
   }
+
+  static sanPhamUrl() {
+    return AbpEnvironment.apis.sanPham.url;
+  }
 }
 
 export const ApiNameConfig = {
@@ -37,6 +41,9 @@ export const ApiNameConfig = {
   },
   congViec: {
     apiName: 'cong-viec',
-}
+  },
+  sanPham: {
+    apiName: 'san-pham',
+  }
 
 };

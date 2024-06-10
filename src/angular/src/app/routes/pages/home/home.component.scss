@@ -1,0 +1,83 @@
+.banner {
+    width: 100%;
+    height: 450px;
+    top: 0;
+    position: relative;
+
+    &-content {
+        max-width: 750px;
+        position: relative;
+        margin: 0 auto;
+        padding-top: 100px;
+        width: 100%;
+
+        h1 {
+            color: #fff;
+            text-align: left;
+            font-size: 60px;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        h2 {
+            color: #fff;
+            text-align: left;
+            font-size: 20px;
+            font-weight: 500;
+        }
+    }
+
+    &-image {
+        width: 100%;
+        height: 450px;
+        object-fit: cover;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+}
+
+.main {
+    margin-top: 60px;
+}
+
+.section-title {
+    font-size: 30px;
+    padding: 15px 0;
+    margin-top: 60px;
+    color: #1A2B49;
+}
+
+// Lý do lựa chọn 
+.ly-do-chi-tiet {
+    h4 {
+        font-size: 20px;
+        font-weight: 600;
+    }
+}
+
+// Khám phá ngay
+.kham-pha-ngay {
+    margin-top: 30px;
+    text-align: center;
+}
+
+// Đăng ký ngay 
+.dang-ky-uu-dai {
+    margin-top: 80px;
+    background-color: #1A2B49;
+    padding: 32px 60px;
+
+    &-content {
+        h3 {
+            color: #fff;
+            font-size: 26px;
+            margin-bottom: 8px;
+        }
+
+        p {
+            color: #fff;
+            font-size: 14px;
+        }
+    }
+}

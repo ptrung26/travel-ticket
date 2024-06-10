@@ -3,7 +3,9 @@ import { FormGroup, Validators } from '@angular/forms';
 import { AppConsts } from '@app/shared/AppConsts';
 import {
   CreateOrUpdateNhaCungCapKhachSanRequest,
+  NhaCungCapKhachSanDto,
   NhaCungCapKhachSanServiceProxy,
+  ViewDetailNhaCungCapKhachSanRequest,
 } from '@app/shared/service-proxies/danh-muc-service-proxies';
 import { ApiNameConfig } from '@app/shared/service-proxies/service-url-config/url-services';
 import { FormBuilder } from '@ngneat/reactive-forms';
@@ -19,7 +21,8 @@ import _ from 'lodash';
 })
 export class CreateOrUpdateKhachSanComponent implements OnInit {
   rfForm: FormGroup;
-  @Input() khachsanId!: number;
+  @Input() nhaCungCapId!: number;
+  dataItem: NhaCungCapKhachSanDto;
   @Output() closeEvent = new EventEmitter();
   title: string = 'Thêm mới';
   uploadUrl: string = AppConsts.abpEnvironment.apis.danhMuc.url + `/api/${ApiNameConfig.danhMuc.apiName}/file/UploadFile`;
@@ -52,7 +55,7 @@ export class CreateOrUpdateKhachSanComponent implements OnInit {
       text: 'Bảy',
     },
     {
-      value: 2,
+      value: 7,
       text: 'CN',
     },
   ];
@@ -60,32 +63,53 @@ export class CreateOrUpdateKhachSanComponent implements OnInit {
     this.rfForm = this.fb.group({
       ma: ['', [Validators.required]],
       ten: ['', [Validators.required]],
-      quocGiaId: null,
-      tinhId: null,
-      diaChi: '',
+      quocGiaId: [null],
+      tinhId: [null],
+      diaChi: [''],
       email: ['', [Validators.required]],
       fax: ['', [Validators.required]],
       maSoThue: ['', [Validators.required]],
       soSao: null,
+      isHasVAT: [false],
+      website: [""],
+      moTa: [""],
+      ngayHetHanHopDong: [null],
+      tinhTrang: [1],
+
     });
   }
+
   ngOnInit(): void {
-    if (this.khachsanId > 0) {
+    if (this.nhaCungCapId > 0) {
       this.title = 'Chỉnh sửa thông tin';
+      const input = new ViewDetailNhaCungCapKhachSanRequest();
+      input.id = this.nhaCungCapId;
+
+      ora.ui.setBusy();
+      this._dataService.viewdetail(input).pipe(finalize(() => {
+        ora.ui.clearBusy();
+      })).subscribe(res => {
+        if (res.isSuccessful) {
+          this.dataItem = res.dataResult;
+          this.rfForm.patchValue(this.dataItem);
+        }
+      })
     }
+
   }
 
   handleChangeDate(value: number) {
     const idx = this.ngayTrongTuan.findIndex((x) => x === value);
-    if (idx > 0) {
-      this.ngayTrongTuan = _.cloneDeep(this.ngayTrongTuan.splice(idx, 0));
+    if (idx >= 0) {
+      this.ngayTrongTuan.splice(idx, 1);
     } else {
       this.ngayTrongTuan.push(value);
     }
+
   }
 
-  filterDateOrBirth(value: number): boolean {
-    return this.ngayTrongTuan.findIndex((x) => x === value) > 0;
+  filterNgayCuoiTuan(value: number): boolean {
+    return this.ngayTrongTuan.findIndex((x) => x === value) >= 0;
   }
 
   createOrUpdate() {
@@ -99,6 +123,11 @@ export class CreateOrUpdateKhachSanComponent implements OnInit {
     } else {
       const input = new CreateOrUpdateNhaCungCapKhachSanRequest();
       Object.assign(input, this.rfForm.value);
+      if (this.dataItem?.id > 0) {
+        input.id = this.dataItem?.id;
+      }
+      input.ngayCuoiTuan = JSON.stringify(this.ngayTrongTuan);
+      input.anhDaiDienUrl = JSON.stringify(this.avatarUrl);
       ora.ui.setBusy();
       this._dataService
         .createorupdate(input)
@@ -109,11 +138,12 @@ export class CreateOrUpdateKhachSanComponent implements OnInit {
         )
         .subscribe((res) => {
           if (res.isSuccessful) {
-            if (this.khachsanId) {
+            if (this.nhaCungCapId) {
               ora.notify.success('Chỉnh sửa thông tin thành công!');
             } else {
-              ora.notify.error('Thêm mới thành công!');
+              ora.notify.success('Thêm mới thành công!');
             }
+            this.close();
           } else {
             ora.notify.error(res.errorMessage);
           }
@@ -142,7 +172,6 @@ export class CreateOrUpdateKhachSanComponent implements OnInit {
     if (info.file.status === 'done') {
       const fileInfo = this.transferData(info.file);
       this.avatarUrl = JSON.stringify(fileInfo);
-      console.log(this.avatarUrl);
       this.loading = false;
     } else if (info.file.status === 'error') {
       ora.notify.error('Tệp ' + info.file.name + ' tải lên không thành công!');

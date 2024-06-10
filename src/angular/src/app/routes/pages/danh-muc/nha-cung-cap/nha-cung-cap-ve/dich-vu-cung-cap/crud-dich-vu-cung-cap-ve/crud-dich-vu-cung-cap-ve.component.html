@@ -1,0 +1,71 @@
+<form [formGroup]="rfForm">
+  <nz-row [nzGutter]="[12, 12]">
+    <nz-col [nzSpan]="24">
+      <nz-form-item [nzGutter]="16">
+        <nz-form-label class="label" nzRequired [nzMd]="6" [nzSm]="6">Mã</nz-form-label>
+        <nz-form-control [nzMd]="6" [nzSm]="6" [nzErrorTip]="'Không được bỏ trống trường này'">
+          <input nz-input formControlName="ma" />
+        </nz-form-control>
+      </nz-form-item>
+    </nz-col>
+    <nz-col [nzSpan]="24">
+      <nz-form-item>
+        <nz-form-label class="label" nzRequired [nzMd]="6" [nzSm]="6">Tên dịch vụ</nz-form-label>
+        <nz-form-control [nzErrorTip]="'Trường này không được bỏ trống'">
+          <input nz-input formControlName="ten" />
+        </nz-form-control>
+      </nz-form-item>
+    </nz-col>
+    <nz-col [nzSpan]="24">
+      <nz-form-item [nzGutter]="16">
+        <nz-form-label class="label" [nzMd]="6" [nzSm]="6">Loại tiền tệ</nz-form-label>
+        <nz-form-control [nzMd]="6" [nzSm]="6">
+          <ora-select style="width: 100%" dirLoaiTienTe formControlName="loaiTienTeCode"></ora-select>
+        </nz-form-control>
+      </nz-form-item>
+    </nz-col>
+    <nz-col [nzSpan]="24">
+      <nz-form-item [nzGutter]="16">
+        <nz-form-label class="label" [nzMd]="6" [nzSm]="6">Giá Nett</nz-form-label>
+        <nz-form-control [nzMd]="6" [nzSm]="6">
+          <input nz-input formControlName="giaNett" />
+        </nz-form-control>
+        <nz-form-label class="label" [nzMd]="6" [nzSm]="6">Giá bán</nz-form-label>
+        <nz-form-control [nzMd]="6" [nzSm]="6">
+          <input nz-input formControlName="giaBan" />
+        </nz-form-control>
+      </nz-form-item>
+    </nz-col>
+    <nz-col [nzSpan]="24">
+      <nz-form-item style="display: flex; align-items: center" [nzGutter]="16">
+        <nz-form-label class="label" [nzMd]="6" [nzSm]="6">Thời gian áp dụng</nz-form-label>
+        <nz-form-control [nzMd]="8" [nzSm]="8">
+          <ora-date-picker formControlName="tuNgay"></ora-date-picker>
+        </nz-form-control>
+        <nz-form-control [nzSpan]="2" style="text-align: center"> Đến </nz-form-control>
+        <nz-form-control [nzMd]="8" [nzSm]="8">
+          <ora-date-picker formControlName="denNgay"></ora-date-picker>
+        </nz-form-control>
+      </nz-form-item>
+    </nz-col>
+    <nz-col [nzSpan]="24">
+      <nz-form-item [nzGutter]="12">
+        <nz-form-label class="label" [nzSpan]="24">Ghi chú</nz-form-label>
+        <nz-form-control>
+          <textarea nz-input formControlName="ghiChu"></textarea>
+        </nz-form-control>
+      </nz-form-item>
+    </nz-col>
+    <nz-col [nzSpan]="24">
+      <nz-form-item [nzGutter]="12">
+        <nz-form-control>
+          <label nz-checkbox formControlName="isHasThueVAT">Thuế VAT 10%</label>
+        </nz-form-control>
+      </nz-form-item>
+    </nz-col>
+    <nz-col [nzSpan]="24">
+      <button class="footerbutton" nz-button nzType="primary" (click)="save()" style="margin: 0 !important">Lưu thông
+        tin</button>
+    </nz-col>
+  </nz-row>
+</form>

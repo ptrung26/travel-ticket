@@ -1,0 +1,61 @@
+<nz-table #table nzFrontPagination="false" [nzData]="nhaCungCapTree">
+  <thead>
+    <tr>
+      <th></th>
+      <th nzAlign="center" style="min-width: 120px !important">Tên nhà cung cấp</th>
+      <th nzAlign="center" style="min-width: 120px !important">Số điện thoại</th>
+      <th nzAlign="center" style="min-width: 120px !important">Email</th>
+      <th nzAlign="center" style="min-width: 80px !important">Trạng thái</th>
+      <th nzAlign="center" style="min-width: 80px !important">Thao tác</th>
+    </tr>
+  </thead>
+  <tbody>
+    <ng-template ngFor let-data [ngForOf]="table.data" let-index="i">
+      <tr>
+        <td nzAlign="center" [(nzExpand)]="data.expand"></td>
+        <td nzAlign="center" style="min-width: 120px !important">
+          {{ data.tenNhaCungCap }}
+        </td>
+        <td style="min-width: 120px !important" nzAlign="center">{{ data.soDienThoai }}</td>
+        <td style="min-width: 120px !important">
+          {{ data.email }}
+        </td>
+        <td nzAlign="center">
+          <nz-tag *ngIf="data.trangThai == 1" [nzColor]="'magenta'">Chưa đặt dịch vụ</nz-tag>
+          <nz-tag *ngIf="data.trangThai == 2" [nzColor]="'cyan'">Đã liên hệ đặt dịch vụ</nz-tag>
+        </td>
+        <td nzAlign="center">
+          <button nz-button [nzType]="default" (click)="sendEmail(data.nhaCungCapId, data.nhaCungCapCode)">
+            <ng-container *ngIf="data.trangThai == 1;else datLai">Gửi email đặt dịch vụ</ng-container>
+            <ng-template #datLai>
+              Đặt lại dịch vụ
+            </ng-template>
+          </button>
+        </td>
+      </tr>
+      <tr [nzExpand]="data.expand && data.childrens?.length > 0">
+        <nz-table #innerTable [nzData]="data.childrens" nzSize="middle" [nzShowPagination]="false" [nzBordered]="true">
+          <thead>
+            <tr>
+              <th nzAlign="center" style="min-width: 80px !important">STT</th>
+              <th nzAlign="center" style="min-width: 80px !important">Ngày thứ</th>
+              <th nzAlign="center" style="min-width: 120px !important">Tên dịch vụ</th>
+              <th nzAlign="center" style="min-width: 120px !important">Số chỗ</th>
+              <th nzAlign="center" style="min-width: 100px !important">Giá Nett</th>
+            </tr>
+          </thead>
+  <tbody>
+    <tr *ngFor="let it of innerTable.data; let j = index">
+      <td nzAlign="center" style="min-width: 80px !important">{{ j + 1 }}</td>
+      <td nzAlign="center" style="min-width: 80px !important">{{ it.ngayThu }}</td>
+      <td nzAlign="center" style="min-width: 120px !important">{{ it.tenDichVu }}</td>
+      <td nzAlign="center" style="min-width: 120px !important">{{ it.soCho }}</td>
+      <td nzAlign="center" *ngIf="" style="min-width: 120px !important">{{ it.tenDichVu }}</td>
+      <td nzAlign="center" style="min-width: 100px !important">{{ it.gia | currencyVND }}</td>
+    </tr>
+  </tbody>
+</nz-table>
+</tr>
+</ng-template>
+</tbody>
+</nz-table>

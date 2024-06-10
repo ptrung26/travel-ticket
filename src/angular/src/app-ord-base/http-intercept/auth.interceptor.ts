@@ -15,14 +15,14 @@ import { filter, take } from '@node_modules/rxjs/internal/operators';
 import { of } from '@node_modules/rxjs';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { TokenStorageService } from '@app/routes/auth/services/token.service';
-import { AccountServiceProxy, AuthJwtDto, Body2 } from '@service-proxies/danh-muc-service-proxies';
+import { AccountServiceProxy, AuthJwtDto, Body2, Body3 } from '@service-proxies/danh-muc-service-proxies';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
   private isRefreshing = false;
   private refreshTokenSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null);
 
-  constructor(private tokenService: TokenStorageService, private account_SP: AccountServiceProxy) {}
+  constructor(private tokenService: TokenStorageService, private account_SP: AccountServiceProxy) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<Object>> {
     let authReq = req;
@@ -51,7 +51,7 @@ export class AuthInterceptor implements HttpInterceptor {
   }
 
   private refreshToken$(request: HttpRequest<any>, next: HttpHandler, access_token: string, refreshToken: string) {
-    const body = new Body2();
+    const body = new Body3();
     body.refresh_token = refreshToken;
     body.access_token = access_token;
     return this.account_SP.refreshToken(body).pipe(

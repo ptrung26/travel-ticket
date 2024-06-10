@@ -1,4 +1,4 @@
-import { AfterViewChecked, Component, Input, OnInit, ViewChild } from '@angular/core';
+import { AfterViewChecked, Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { CurrentUserDto } from '@app/shared/service-proxies/danh-muc-service-proxies';
 import { NavigationEnd, Router } from '@node_modules/@angular/router';
 
@@ -7,39 +7,81 @@ import { NavigationEnd, Router } from '@node_modules/@angular/router';
   templateUrl: './layout-menu-top.component.html',
   styleUrls: ['./layout-menu-top.component.scss'],
 })
-export class LayoutMenuTopComponent implements OnInit, AfterViewChecked {
+export class LayoutMenuTopComponent implements OnInit, AfterViewChecked, OnChanges {
   @ViewChild('btnRight') btnRight: any;
   @ViewChild('btnLeft') btnLeft: any;
   @Input() menusCongViec: any[];
   @Input() menusDM: any[]; // danh mục
   @Input() menusQT: any[]; // quản trị 
+  @Input() menusSP: any[]; // sản phẩm
+  @Input() menusKH: any[]; // khách hàng
+  @Input() menusBK: any[]; // khách hàng
   @Input() currentUser: CurrentUserDto;
-
+  isAdmin: boolean = false;
+  isClient: boolean = false;
   listMenuActive = [
     {
-      key: 1,
+      key: 5,
       url: '/cong-viec/',
     },
     {
-      key: 2,
+      key: 6,
       url: '/danh-muc/',
     },
     {
-      key: 3,
+      key: 5,
       url: '/admin/',
     },
-   
-   
+    {
+      key: 1,
+      url: '/san-pham/',
+    },
+    {
+      key: 2,
+      url: '/khach-hang/',
+    },
+    {
+      key: 3,
+      url: '/booking/',
+    },
+    {
+      key: 7,
+      url: '/home'
+    },
+    {
+      key: 8,
+      url: '/home/filter-tour'
+    },
+    {
+      key: 9,
+      url: '/home/about-me'
+    },
+    {
+      key: 10,
+      url: '/home/my-booking'
+    },
+    {
+      key: 11,
+      url: '/dashboard'
+    }
+
   ];
   keyActive = null;
 
-  constructor(private _router: Router) {}
+  constructor(private _router: Router) { }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (this.currentUser) {
+      this.checkRole();
+    }
+  }
 
   ngOnInit(): void {
     this.activeMenuInit();
     this._router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         const findItem = this.listMenuActive.find((x) => event.url.includes(x.url));
+        console.log(findItem, event, this.listMenuActive);
         if (findItem) {
           this.keyActive = findItem.key;
         } else {
@@ -47,6 +89,10 @@ export class LayoutMenuTopComponent implements OnInit, AfterViewChecked {
         }
       }
     });
+
+    this.checkRole();
+
+
   }
 
   ngAfterViewChecked(): void {
@@ -119,5 +165,19 @@ export class LayoutMenuTopComponent implements OnInit, AfterViewChecked {
       behavior: 'smooth',
     });
     this.showHideButton();
+  }
+
+  checkRole() {
+    if (!this.currentUser) {
+      this.isClient = false;
+      this.isAdmin = false;
+    } else {
+      if (this.currentUser.roles.includes("KhachHang")) {
+        this.isClient = true;
+      }
+      if (this.currentUser.roles.includes('admin')) {
+        this.isAdmin = true;
+      }
+    }
   }
 }

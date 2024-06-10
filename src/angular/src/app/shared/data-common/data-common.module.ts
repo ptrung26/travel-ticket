@@ -23,6 +23,19 @@ import { HuyenComboDirective } from './ora-select/directive/huyen.directive';
 import { XaComboDirective } from './ora-select/directive/xa.directive';
 import { CodeSystemComboDirective } from './ora-select/directive/code-system-combo.directive';
 import { SoSaoKhachSanComboDirective } from './ora-select/directive/so-sao-khach-san-combo.directive';
+import { ChoNgoiXeComboDirective } from './ora-select/directive/get-so-cho-combo.directive';
+import { LoaiXeComboDirective } from './ora-select/directive/get-loai-xe-combo.directive';
+import { LoaiTietTeComboDirective } from './ora-select/directive/get-loai-tien-te-combo.directive';
+import { LoaiHopDongComboDirective } from './ora-select/directive/get-loai-hop-dong-combo.directive';
+import { LoaiTourComboDirective } from './ora-select/directive/get-loai-tour-combo.directive';
+import { LoaiHinhThaiDuLichComboDirective } from './ora-select/directive/get-loai-hinh-thai-du-lich-combo.directive';
+import { TeleportDirective } from './ora-select/directive/teleport.directive';
+import { CurrencyVNDPipe } from './ora-select/directive/currencyVND.directive';
+import { CurrencyInputDirective } from './ora-select/directive/currency-input.directive';
+import { LoaiKhachComboDirective } from './ora-select/directive/get-loai-khach-combo.directive';
+import { TinhComboDirective } from './ora-select/directive/tinh.directive';
+import { QuocGiaComboDirective } from './ora-select/directive/quoc-gia.directive';
+import { QuocTichComboDirective } from './ora-select/directive/quoc-tich.diretive';
 const com = [
   OraSelectComponent,
   OraRadioComponent,
@@ -37,6 +50,20 @@ const com = [
   XaComboDirective,
   CodeSystemComboDirective,
   SoSaoKhachSanComboDirective,
+  ChoNgoiXeComboDirective,
+  LoaiXeComboDirective,
+  LoaiTietTeComboDirective,
+  LoaiHopDongComboDirective,
+  LoaiTourComboDirective,
+  LoaiHinhThaiDuLichComboDirective,
+  TeleportDirective,
+  CurrencyVNDPipe,
+  CurrencyInputDirective,
+  LoaiKhachComboDirective,
+  TinhComboDirective,
+  QuocGiaComboDirective,
+  QuocTichComboDirective
+
 ];
 
 @NgModule({
@@ -57,4 +84,4 @@ const com = [
     ...SHARED_ZORRO_MODULES,
   ],
 })
-export class DataCommonModule {}
+export class DataCommonModule { }

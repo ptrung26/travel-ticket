@@ -1,0 +1,75 @@
+<ng-container *ngIf="viewShow == 'list'">
+  <ora-page-header title="Danh sách booking" [action]="actionHeader">
+    <ng-template #actionHeader>
+      <button nz-button nzType="primary" (click)="showCreateOrUpdate()">
+        <i nz-icon nzType="plus-circle" nzTheme="outline"></i>Thêm mới
+      </button>
+    </ng-template>
+  </ora-page-header>
+  <ora-layout-filter (onSearch)="refresh()">
+    <form nz-form [formGroup]="rfForm" nzLayout="vertical">
+      <nz-row nzGutter="8">
+        <nz-col nzLg="6" nzSm="6">
+          <input formControlName="filter" nz-input placeholder="Nhập mã, tên khách hàng để tìm kiếm..." />
+        </nz-col>
+      </nz-row>
+    </form>
+  </ora-layout-filter>
+  <ora-table [rows]="dataList" [isLoading]="isTableLoading" [totalRows]="totalItems" [(pageSize)]="pageSize"
+    [(page)]="pageNumber" (pageChange)="pageNumberChange()" (sortChange)="gridSort($event)">
+    <ora-column header="STT" width="100px" align="center">
+      <ng-template oraCell let-data>
+        {{ skipCount + dataList.indexOf(data) + 1 }}
+      </ng-template>
+    </ora-column>
+    <ora-column header="Mã" key="ma" align="center" width="80px"></ora-column>
+    <ora-column header="Tên booking" key="ten" align="center"></ora-column>
+    <ora-column header="Tên khách hàng" key="tenKhachHang" align="center"></ora-column>
+    <ora-column header="Ngày lập" key="tenKhachHang" align="center">
+      <ng-template let-data oraCell>
+        {{ data.ngayLap | date : 'dd/MM/yyyy' }}
+      </ng-template>
+    </ora-column>
+    <ora-column header="Tổng tiền" align="center">
+      <ng-template let-data oraCell>
+        {{ data.thanhTien | currencyVND }}
+      </ng-template>
+    </ora-column>
+    <ora-column header="Trạng thái" key="tinhTrang" align="center" [content]="trangThaiContent" width="200px">
+      <ng-template #trangThaiContent let-data="dataItem">
+        <nz-tag *ngIf="data.trangThai === 1" [nzColor]="'#74E291'">Đang xử lý</nz-tag>
+        <nz-tag *ngIf="data.trangThai === 2" [nzColor]="'lime'">Đang điều hành</nz-tag>
+        <nz-tag *ngIf="data.trangThai === 4" [nzColor]="'#f50'">Đang xử lý huỷ</nz-tag>
+        <nz-tag *ngIf="data.trangThai === 5" [nzColor]="'#FF6868'">Đã huỷ</nz-tag>
+        <nz-tag *ngIf="data.trangThai === 6" [nzColor]="'blue'">Đã kết thúc</nz-tag>
+
+      </ng-template>
+    </ora-column>
+    <ora-column header="Thao tác" width="100px" align="center" fixRight>
+      <ng-template oraCell let-data>
+        <button nz-button nz-dropdown [nzDropdownMenu]="menu">
+          Thao tác
+          <i nz-icon nzType="down" style="font-size: 12px !important"></i>
+        </button>
+        <nz-dropdown-menu #menu="nzDropdownMenu">
+          <ul nz-menu nzSelectable>
+            <li style="font-size: 15px" nz-menu-item *ngIf="data.trangThai < 3">
+              <a (click)="showCreateOrUpdate(data)"> <i nz-icon nzType="edit" nzTheme="outline"></i> Chỉnh sửa </a>
+            </li>
+            <li style="font-size: 15px" nz-menu-item *ngIf="data.trangThai < 2">
+              <a (click)="chuyenTrangThai(data,2)"> <i nz-icon nzTheme="outline" nzType="swap"></i> Chuyển sang điều
+                hành </a>
+            </li>
+            <li style="font-size: 15px" nz-menu-item *ngIf="data.trangThai < 4">
+              <a (click)="chuyenTrangThai(data,6)"> <i nz-icon nzTheme="outline" nzType="close"></i> Kết thúc </a>
+            </li>
+            <li style="font-size: 15px" nz-menu-item *ngIf="data.trangThai < 4">
+              <a (click)="chuyenTrangThai(data,5)"> <i nz-icon nzType="delete" nzTheme="outline"></i> Huỷ booking </a>
+            </li>
+          </ul>
+        </nz-dropdown-menu>
+      </ng-template>
+    </ora-column>
+  </ora-table>
+</ng-container>
+<crud-booking *ngIf="viewShow == 'create-or-update'" (closeEvent)="closeEvent()" [id]="data?.id"></crud-booking>

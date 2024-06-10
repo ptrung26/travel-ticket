@@ -8,6 +8,7 @@ namespace newPMS.Entities
     public class SysUserRoleEntity : Entity<long>
     {
         public long SysRoleId { get; set; }
+
         /// <summary>
         /// Id của bảng UserExtension
         /// </summary>

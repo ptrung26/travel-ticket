@@ -64,20 +64,19 @@ export const LayoutMenuDM: ILayoutMenu[] = [
         level: 1,
         link: preFix + 'nha-cung-cap/khach-san',
       },
-    ],
-  },
-  {
-    text: 'Nhà tài trợ',
-    permission: '',
-    level: 0,
-    link: '',
-    children: [
       {
-        text: 'Nhà tài trợ',
-        permission: 'DanhMuc.NhaTaiTro',
+        text: 'Xe ô tô',
+        permission: 'DanhMuc.NhaCungCap',
         level: 1,
-        link: preFix + 'nha-tai-tro',
+        link: preFix + 'nha-cung-cap/xe-oto',
+      },
+      {
+        text: 'Vé thắng cảnh',
+        permission: 'DanhMuc.NhaCungCap',
+        level: 1,
+        link: preFix + 'nha-cung-cap/ve-thang-canh',
       },
     ],
-  },
+  }
+
 ];

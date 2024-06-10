@@ -1,0 +1,35 @@
+<ng-container *ngIf="viewShow == 'list' && !selectedTour?.id">
+  <ora-page-header title="Lựa chọn dịch vụ Tour"> </ora-page-header>
+  <ora-layout-filter (onSearch)="refresh()">
+    <form nz-form [formGroup]="rfForm" nzLayout="vertical">
+      <nz-row nzGutter="8">
+        <nz-col nzLg="6" nzSm="6">
+          <input formControlName="filter" nz-input placeholder="Nhập mã, tên để tìm kiếm..." />
+        </nz-col>
+      </nz-row>
+    </form>
+  </ora-layout-filter>
+  <ora-table [rows]="dataList" [isLoading]="isTableLoading" [totalRows]="totalItems" [(pageSize)]="pageSize"
+    [(page)]="pageNumber" (pageChange)="pageNumberChange()" (sortChange)="gridSort($event)">
+    <ora-column header="STT" width="100px" align="center">
+      <ng-template oraCell let-data>
+        {{ skipCount + dataList.indexOf(data) + 1 }}
+      </ng-template>
+    </ora-column>
+    <ora-column header="Mã" key="ma" align="center" width="200px"></ora-column>
+    <ora-column [sort]="true" header="Tên" key="ten" align="center"></ora-column>
+    <ora-column header="Loại hình thái du lịch" key="loaiHinhDuLichDisplay" align="center"></ora-column>
+    <ora-column header="Loại tour" key="loaiTourDisplay" align="center"></ora-column>
+    <ora-column header="Thao tác" width="100px" align="center" fixRight>
+      <ng-template oraCell let-data>
+        <button nz-button nzType="link" (click)="select(data)"><span nz-icon nzType="plus-square"
+            nzTheme="outline"></span></button>
+      </ng-template>
+    </ora-column>
+  </ora-table>
+</ng-container>
+<ng-container *ngIf="viewShow == 'lua-chon' || selectedTour?.id > 0">
+  <crud-dich-vu-booking-tour [dichVuTour]="selectedTour" [tourSp]="data" #crudBookingTour
+    (navigateEvt)="navigate($event)" (saveEvt)="updateThongTin($event)"
+    [thongTinChung]="thongTinChung"></crud-dich-vu-booking-tour>
+</ng-container>

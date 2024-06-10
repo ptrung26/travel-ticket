@@ -44,6 +44,8 @@ import { ShowImagePipe } from './pipe/show-img.pipe copy';
 import { LikeButtonComponent } from './like-button/like-button.component';
 import { ViewPdfSharedComponent } from '@shared/customize-comp/view-pdf/view-pdf.component';
 import { ViewVideoComponent } from './view-video/view-video.component';
+import { TemplateSendEmailComponent } from './template-send-email/template-send-email.component';
+import { SafeHtmlPipePipe } from './pipe/safe-html.pipe';
 
 //import { DialogModule } from '@syncfusion/ej2-angular-popups';
 const comCustomize = [
@@ -65,6 +67,7 @@ const comCustomize = [
   LikeButtonComponent,
   ViewPdfSharedComponent,
   ViewVideoComponent,
+  TemplateSendEmailComponent
 ];
 const PIPE = [
   CallbackPipe,
@@ -78,6 +81,7 @@ const PIPE = [
   SafePipe,
   ShowImagePipe,
   OraSearchFilterListPipe,
+  SafeHtmlPipePipe
 ];
 
 @NgModule({
@@ -106,4 +110,4 @@ const PIPE = [
     RichTextEditorModule,
   ],
 })
-export class CustomizeCompModule {}
+export class CustomizeCompModule { }

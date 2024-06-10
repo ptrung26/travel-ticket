@@ -1,0 +1,68 @@
+<div class="select-dvxe">
+  <input nz-input placeholder="Tìm kiếm nhà cung cấp" (focus)="isShow = true" (input)="onInputChange($event)"
+    [ngModel]="tenNhaCungCap" />
+  <ng-container *ngIf="isShow">
+    <div style="padding: 2px; background: #fff; border-radius: 4px; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1)"
+      class="dropdown" dirTeleport (clickOutSide)="isShow = false">
+      <nz-table #table nzFrontPagination="false" [nzLoading]="isLoading" [nzData]="this.nhaCungCapTree">
+        <thead>
+          <tr>
+            <th></th>
+            <th style="min-width: 120px !important">Tên</th>
+            <th style="min-width: 80px !important">Quốc gia</th>
+            <th style="min-width: 80px !important">Tỉnh</th>
+            <th style="min-width: 120px !important">Số điện thoại</th>
+            <th style="min-width: 120px !important">Email</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-template ngFor let-data [ngForOf]="table.data" let-index="i">
+            <tr>
+              <td [(nzExpand)]="data.expand"></td>
+              <td style="min-width: 120px !important">
+                {{ data.ten }}
+              </td>
+              <td style="min-width: 80px !important">Việt Nam</td>
+              <td style="min-width: 80px !important">Hà Nội</td>
+              <td style="min-width: 120px !important"></td>
+              <td style="min-width: 120px !important">
+                {{ data.email }}
+              </td>
+            </tr>
+            <tr [nzExpand]="data.expand && data.childrens?.length > 0">
+              <nz-table #innerTable [nzData]="data.childrens" nzSize="middle" [nzShowPagination]="false"
+                [nzBordered]="true">
+                <thead>
+                  <tr>
+                    <th style="min-width: 80px !important">STT</th>
+                    <th style="min-width: 120px !important">Hành trình</th>
+                    <th style="min-width: 120px !important">Loại xe</th>
+                    <th style="min-width: 120px !important">Số chỗ ngồi</th>
+                    <th style="min-width: 100px !important">Ngày bắt đầu</th>
+                    <th style="min-width: 100px !important">Ngày kết thúc</th>
+                    <th style="min-width: 100px !important">Giá Nett</th>
+                    <th style="min-width: 80px !important">Thuế VAT 10%</th>
+                  </tr>
+                </thead>
+        <tbody>
+          <tr style="cursor: pointer" (click)="cauHinh(data, it)" *ngFor="let it of innerTable.data; let j = index">
+            <td style="min-width: 80px !important">{{ j + 1 }}</td>
+            <td style="min-width: 120px !important">{{ it.ten }}</td>
+            <td style="min-width: 120px !important">{{ it.loaiXeDisplay }}</td>
+            <td style="min-width: 120px !important">{{ it.soChoDisplay }}</td>
+            <td style="min-width: 100px !important">{{ it.tuNgay | date : 'dd/MM/yyyy' }}</td>
+            <td style="min-width: 100px !important">{{ it.denNgay | date : 'dd/MM/yyyy' }}</td>
+            <td style="min-width: 100px !important">{{ it.giaNett }}</td>
+            <td style="min-width: 80px !important">
+              <label nz-checkbox [checked]="it.isHasThueVAT" [disabled]="true"></label>
+            </td>
+          </tr>
+        </tbody>
+      </nz-table>
+      </tr>
+      </ng-template>
+      </tbody>
+      </nz-table>
+    </div>
+  </ng-container>
+</div>

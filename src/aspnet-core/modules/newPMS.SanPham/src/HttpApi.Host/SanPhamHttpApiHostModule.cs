@@ -34,8 +34,8 @@ namespace TravelTicket.SanPham
             {
                 options.ConventionalControllers.Create(typeof(SanPhamApplicationModule).Assembly, opts =>
                 {
-                    opts.RootPath = configuration["Service:BaseUrl"];
-                    opts.RemoteServiceName = configuration["Service:Name"];
+                    opts.RootPath = "san-pham";
+                    opts.RemoteServiceName = "SanPham";
                 });
             });
         }

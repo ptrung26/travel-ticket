@@ -1,0 +1,95 @@
+<ora-page-header [title]="title" [action]="action">
+  <ng-template #action>
+    <button type="button" nz-button nzType="default" (click)="close()"><i nz-icon nzType="arrow-left"></i> Quay
+      lại</button>
+  </ng-template>
+</ora-page-header>
+<nz-tabset>
+  <nz-tab nzTitle="Thông tin chung">
+    <form nz-form [formGroup]="rfForm">
+      <div nz-row [nzGutter]="20">
+        <div nz-col [nzMd]="12" [nzSm]="16">
+          <nz-form-item [nzGutter]="12">
+            <nz-form-label class="label" [nzMd]="4" [nzSm]="4" nzRequired>Mã</nz-form-label>
+            <nz-form-control [nzMd]="8" [nzSm]="8" [nzErrorTip]="'Trường không được bỏ trống'">
+              <input nz-input formControlName="ma" />
+            </nz-form-control>
+          </nz-form-item>
+          <nz-form-item [nzGutter]="12">
+            <nz-form-label class="label" nzRequired [nzMd]="4" [nzSm]="4">Tên</nz-form-label>
+            <nz-form-control [nzMd]="20" [nzSm]="20" [nzErrorTip]="'Trường không được bỏ trống!'">
+              <input nz-input formControlName="ten" />
+            </nz-form-control>
+          </nz-form-item>
+          <nz-form-item [nzGutter]="12">
+            <nz-form-label class="label" [nzMd]="4" [nzSm]="4">Quốc gia</nz-form-label>
+            <nz-form-control>
+              <ora-select dirQuocGia formControlName="quocGiaId"></ora-select>
+            </nz-form-control>
+            <nz-form-label class="label" [nzMd]="4" [nzSm]="4">Tỉnh/Thành phố</nz-form-label>
+            <nz-form-control>
+              <ora-select dirTinh formControlName="tinhid"></ora-select>
+            </nz-form-control>
+          </nz-form-item>
+          <nz-form-item [nzGutter]="12">
+            <nz-form-label class="label" [nzMd]="4" [nzSm]="4">Địa chỉ</nz-form-label>
+            <nz-form-control [nzMd]="20" [nzSm]="20">
+              <input nz-input formControlName="diaChi" />
+            </nz-form-control>
+          </nz-form-item>
+          <nz-form-item [nzGutter]="12">
+            <nz-form-label class="label" [nzMd]="4" [nzSm]="4">Email</nz-form-label>
+            <nz-form-control [nzMd]="20" [nzSm]="20">
+              <input nz-input formControlName="email" />
+            </nz-form-control>
+            <nz-form-label class="label" nzRequired [nzMd]="4" [nzSm]="4">Số điện thoại</nz-form-label>
+            <nz-form-control [nzMd]="20" [nzSm]="20" [nzErrorTip]="'Trường không được bỏ trống'">
+              <input nz-input formControlName="fax" />
+            </nz-form-control>
+          </nz-form-item>
+          <nz-form-item [nzGutter]="12">
+            <nz-form-label class="label" nzRequired [nzMd]="4" [nzSm]="4">Mã số thuế</nz-form-label>
+            <nz-form-control [nzSpan]="20" [nzErrorTip]="'Trường không được bỏ trống'">
+              <input nz-input formControlName="maSoThue" />
+            </nz-form-control>
+          </nz-form-item>
+          <nz-form-item [nzGutter]="12">
+            <nz-form-label class="label" [nzMd]="4" [nzSm]="4" nzRequired>Mô tả</nz-form-label>
+            <nz-form-control>
+              <ora-ckeditor formControlName="moTa"></ora-ckeditor>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+        <div nz-col [nzMd]="12" [nzSm]="8">
+          <nz-form-item nzGutter="12">
+            <nz-form-label class="label" [nzMd]="6" [nzSm]="6">Logo</nz-form-label>
+            <nz-form-control [nzLg]="8" [nzMd]="8" [nzSm]="8">
+              <nz-upload nzType="drag" [nzAction]="uploadUrl" #upload (nzChange)="handleChange($event)"
+                style="width: 100%">
+                <ng-container *ngIf="!avatarUrl">
+                  <span class="upload-icon" nz-icon [nzType]="loading ? 'loading' : 'plus'"></span>
+                  <p class="ant-upload-text">Tải lên</p>
+                </ng-container>
+                <img *ngIf="avatarUrl" [src]="avatarUrl" style="width: 100%" />
+              </nz-upload>
+            </nz-form-control>
+          </nz-form-item>
+          <nz-form-item [nzGutter]="12">
+            <nz-form-label class="label" [nzMd]="6" [nzSm]="6" nzRequired>Ngày hết hạn hợp đồng</nz-form-label>
+            <nz-form-control [nzSpan]="16">
+              <ora-date-picker formControlName="ngayHetHanHopDong"></ora-date-picker>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+      </div>
+    </form>
+    <div class="footerbutton">
+      <button type="button" nz-button nzType="primary" (click)="save()"><i nz-icon nzType="save"></i>Lưu thông
+        tin</button>
+    </div>
+  </nz-tab>
+  <nz-tab *ngIf="id" nzTitle="Liên hệ"></nz-tab>
+  <nz-tab *ngIf="id" nzTitle="Dịch vụ cung cấp">
+    <dich-vu-cung-cap-xe [nhaCungCapXeId]="id"></dich-vu-cung-cap-xe>
+  </nz-tab>
+</nz-tabset>

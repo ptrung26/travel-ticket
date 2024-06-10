@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
     private account_SP: AccountServiceProxy,
     private store: Store,
     private titleSrv: TitleService,
-  ) {}
+  ) { }
 
   get f() {
     return this.loginForm.controls;
@@ -75,28 +75,19 @@ export class LoginComponent implements OnInit {
       )
       .subscribe(
         () => {
-          this.router.navigateByUrl('/');
+          const redirectAfterLogin = JSON.parse(sessionStorage.getItem('redirectAfterLogin'));
+          if (redirectAfterLogin && redirectAfterLogin.url) {
+            this.router.navigate([redirectAfterLogin.url]);
+            sessionStorage.removeItem('redirectAfterLogin');
+          } else {
+            this.router.navigateByUrl("/home");
+          }
         },
         (error) => {
           ora.notify.error('Tên đăng nhập hoặc mật khẩu không đúng!', 'Đăng nhập thất bại');
           throw error;
         },
       );
-    // this.isLoading$.next(true);
-    // const input = new Body();
-    // input.userName = this.loginForm.value.userName;
-    // input.password = this.loginForm.value.password;
-    // this.account_SP.login(input).pipe(tap(result => {
-    //   this.tokenStorageService.saveToken(result.access_token);
-    //   this.tokenStorageService.saveRefreshToken(result.refresh_token);
-    // }), switchMap(() => {
-    //   return this.userSessionService.getAccountBootstrap();
-    // }), finalize(() => {
-    //   this.isLoading$.next(false);
-    // })).subscribe(() => {
-    //   this.router.navigateByUrl('/');
-    //
-    // });
   }
 
   keyDownHandler(event) {

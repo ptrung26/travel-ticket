@@ -1,0 +1,61 @@
+<ora-page-header [title]="title" [action]="action">
+    <ng-template #action>
+        <button type="button" nz-button nzType="default" (click)="close()"><i nz-icon nzType="arrow-left"></i> Quay
+            lại</button>
+        <button type="button" nz-button nzType="primary" (click)="save()">
+            Lưu thông tin</button>
+    </ng-template>
+</ora-page-header>
+<form [formGroup]="rfForm">
+    <nz-row [nzGutter]="[12,12]">
+        <nz-col [nzSpan]="24">
+            <nz-form-item [nzGutter]="16">
+                <nz-form-label class="label" nzRequired [nzMd]="4" [nzSm]="4">Mã</nz-form-label>
+                <nz-form-control [nzErrorTip]="errMa" [nzMd]="6" [nzSm]="6">
+                    <input nz-input formControlName="ma" />
+                </nz-form-control>
+                <ng-template #errMa let-control>
+                    <ng-container *ngIf="control.hasError('required')">
+                        Trường này không được bỏ trống
+                    </ng-container>
+                </ng-template>
+            </nz-form-item>
+        </nz-col>
+        <nz-col [nzSpan]="24">
+            <nz-form-item [nzGutter]="16">
+                <nz-form-label class="label" nzRequired [nzMd]="4" [nzSm]="4">Ngày ký</nz-form-label>
+                <nz-form-control [nzMd]="6" [nzSm]="6" [nzErrorTip]="'Trường này không được bỏ trống'">
+                    <ora-date-picker formControlName="ngayKy"></ora-date-picker>
+                </nz-form-control>
+                <nz-form-label class="label" nzRequired [nzMd]="4" [nzSm]="4">Ngày hết hạn</nz-form-label>
+                <nz-form-control [nzMd]="6" [nzSm]="6" [nzErrorTip]="'Trường này không được bỏ trống'">
+                    <ora-date-picker formControlName="ngayHetHan"></ora-date-picker>
+                </nz-form-control>
+            </nz-form-item>
+        </nz-col>
+        <nz-col [nzSpan]="24">
+            <nz-form-item [nzGutter]="16">
+                <nz-form-label class="label" [nzMd]="4" [nzSm]="4">Loại hợp đồng</nz-form-label>
+                <nz-form-control>
+                    <ora-select dirLoaiHopDong formControlName="loaiHopDongCode"></ora-select>
+                </nz-form-control>
+            </nz-form-item>
+        </nz-col>
+        <nz-col [nzSpan]="24">
+            <nz-form-item [nzGutter]="16">
+                <nz-form-label class="label" nzRequired [nzMd]="4" [nzSm]="4">Người tạo hợp đồng</nz-form-label>
+                <nz-form-control [nzErrorTip]="'Trường này không được bỏ trống'">
+                    <input nz-input formControlName="nguoiTaoHopDong" />
+                </nz-form-control>
+            </nz-form-item>
+        </nz-col>
+        <nz-col [nzSpan]="24">
+            <nz-form-item [nzGutter]="16">
+                <nz-form-label class="label" nzRequired [nzMd]="4" [nzSm]="4">Mô tả</nz-form-label>
+                <nz-form-control>
+                    <textarea nz-input formControlName="moTa"></textarea>
+                </nz-form-control>
+            </nz-form-item>
+        </nz-col>
+    </nz-row>
+</form>

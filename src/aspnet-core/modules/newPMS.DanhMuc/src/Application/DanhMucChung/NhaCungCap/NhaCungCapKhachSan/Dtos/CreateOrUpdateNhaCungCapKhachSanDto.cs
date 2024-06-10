@@ -20,6 +20,7 @@ namespace newPMS.DanhMuc.Dtos
         public string Email { get; set; }
         public string Fax { get; set; }
         public string Website { get; set; }
+        public string MaSoThue { get; set; }
         public string MoTa { get; set; }
         public string AnhDaiDienUrl { get; set; }
         public string TaiLieuJson { get; set; }
@@ -27,5 +28,7 @@ namespace newPMS.DanhMuc.Dtos
         public string DichVu { get; set; }
         public DateTime NgayHetHanHopDong { get; set; }
         public string NgayCuoiTuan { get; set; }
+
+        public int SoSao { get; set; }
     }
 }

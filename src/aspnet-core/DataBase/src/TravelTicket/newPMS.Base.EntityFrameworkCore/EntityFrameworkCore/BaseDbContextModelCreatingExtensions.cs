@@ -1,7 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using JetBrains.Annotations;
+using Microsoft.EntityFrameworkCore;
 using newPMS.Entities;
+using newPMS.Entities.Booking;
+using newPMS.Entities.ChietTinh;
 using newPMS.Entities.DanhMuc.NhaCungCap;
 using newPMS.Entities.DichVu;
+using newPMS.Entities.KhachHang;
 using newPMS.Entities.TableDungChung;
 using Volo.Abp;
 using Volo.Abp.EntityFrameworkCore.Modeling;
@@ -62,6 +66,31 @@ namespace newPMS.EntityFrameworkCore
                 // index
             });
             builder.Entity<NhaCungCapKhachSanEntity>(b =>
+            {
+                b.ConfigureByConvention();
+                // index
+            });
+            builder.Entity<NhaCungCapXeEntity>(b =>
+            {
+                b.ConfigureByConvention();
+                // index
+            });
+            builder.Entity<HopDongNCCEntity>(b =>
+            {
+                b.ConfigureByConvention();
+                // index
+            });
+            builder.Entity<NhaCungCapVeEntity>(b =>
+            {
+                b.ConfigureByConvention();
+                // index
+            });
+            builder.Entity<DichVuVeEntity>(b =>
+            {
+                b.ConfigureByConvention();
+                // index
+            });
+            builder.Entity<NguoiLienHeNCCEntity>(b =>
             {
                 b.ConfigureByConvention();
                 // index
@@ -148,6 +177,23 @@ namespace newPMS.EntityFrameworkCore
             {
                 b.ConfigureByConvention();
             });
+            builder.Entity<ChuongTrinhTourEntity>(b =>
+            {
+                b.ConfigureByConvention();
+            });
+            #endregion
+
+            #region Chiết tính
+            builder.Entity<ChietTinhDichVuXeEntity>(b =>
+            {
+                b.ConfigureByConvention();
+                // index
+            });
+            builder.Entity<ChietTinhDichVuVeEntity>(b =>
+            {
+                b.ConfigureByConvention();
+                // index
+            });
             #endregion
 
             #region "Công việc"
@@ -169,7 +215,56 @@ namespace newPMS.EntityFrameworkCore
             });
             #endregion
 
+            #region Khách hàng 
+            builder.Entity<KhachHangEntity>(b =>
+            {
+                b.ConfigureByConvention();
+                // index
+            });
+            builder.Entity<HuongDanVienEntity>(b =>
+            {
+                b.ConfigureByConvention();
+                // index
+            });
+            #endregion
 
+            #region Booking
+            builder.Entity<BookingDichVuTourEntity>(b =>
+            {
+                b.ConfigureByConvention();
+                // index
+            });
+            builder.Entity<BookingEntity>(b =>
+            {
+                b.ConfigureByConvention();
+                // index
+            });
+            builder.Entity<ChiTietBookingDichVuLeEntity>(b =>
+            {
+                b.ConfigureByConvention();
+                // index
+            });
+            builder.Entity<ChiTietBookingDichVuTourEntity>(b =>
+            {
+                b.ConfigureByConvention();
+                // index
+            });
+            builder.Entity<ChiTietLichHenBookingTour>(b =>
+            {
+                b.ConfigureByConvention();
+                // index
+            });
+            builder.Entity<ChiTietPhieuThuBookingTour>(b =>
+            {
+                b.ConfigureByConvention();
+                // index
+            });
+            builder.Entity<ChiTietThanhVienDoanBooking>(b =>
+            {
+                b.ConfigureByConvention();
+                // index
+            });
+            #endregion
 
             /* Configure your own tables/entities inside here */
 

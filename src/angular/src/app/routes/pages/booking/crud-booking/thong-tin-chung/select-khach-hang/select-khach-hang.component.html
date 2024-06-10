@@ -1,0 +1,36 @@
+<div class="select-dvxe">
+  <input nz-input placeholder="Tìm kiếm khách hàng" (focus)="isShow = true" (input)="onInputChange($event)" [ngModel]="tenKhachHang" />
+  <ng-container *ngIf="isShow">
+    <div
+      style="padding: 2px; background: #fff; border-radius: 4px; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1)"
+      class="dropdown"
+      dirTeleport
+      (clickOutSide)="isShow = false"
+    >
+      <nz-table #table nzFrontPagination="false" [nzLoading]="isLoading" [nzData]="dataList" [nzTotal]="totalItems">
+        <thead>
+          <tr>
+            <th style="min-width: 120px !important">Tên</th>
+            <th style="min-width: 120px !important">Số điện thoại</th>
+            <th style="min-width: 120px !important">Email</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-template ngFor let-data [ngForOf]="table.data" let-index="i">
+            <tr style="cursor: pointer" (click)="luaChon(data)">
+              <td style="min-width: 120px !important">
+                {{ data.ten }}
+              </td>
+              <td style="min-width: 120px !important">
+                {{ data.soDienThoai }}
+              </td>
+              <td style="min-width: 120px !important">
+                {{ data.email }}
+              </td>
+            </tr>
+          </ng-template>
+        </tbody>
+      </nz-table>
+    </div>
+  </ng-container>
+</div>

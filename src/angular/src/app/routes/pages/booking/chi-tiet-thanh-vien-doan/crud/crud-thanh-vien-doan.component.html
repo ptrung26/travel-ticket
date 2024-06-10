@@ -1,0 +1,49 @@
+<form [formGroup]="rfForm">
+    <div nz-row>
+        <div nz-col [nzSpan]="24" style="margin-top:12px;">
+            <nz-form-item>
+                <nz-form-label nzRequired [nzSpan]="24">Họ và tên</nz-form-label>
+                <nz-form-control [nzErrorTip]="'Trường này không được bỏ trống'">
+                    <input nz-input formControlName="ten" />
+                </nz-form-control>
+            </nz-form-item>
+        </div>
+        <div nz-col [nzSpan]="24" style="margin-top:12px;">
+            <nz-form-item [nzGutter]="[16,16]">
+                <nz-form-label style="display:flex; align-items:center;" nzRequired [nzSpan]="4">Quốc
+                    gia</nz-form-label>
+                <nz-form-control [nzSpan]="8" [nzErrorTip]="'Trường này không được bỏ trống'">
+                    <ora-select dirQuocGia formControlName="quocTichId"></ora-select>
+                </nz-form-control>
+                <nz-form-label style="display:flex; align-items:center;" [nzSpan]="4">Vai
+                    trò</nz-form-label>
+                <nz-form-control [nzSpan]="8">
+                    <input nz-input formControlName="vaiTroCode" />
+                </nz-form-control>
+            </nz-form-item>
+        </div>
+        <div nz-col [nzSpan]="24" style="margin-top:12px;">
+            <nz-form-item>
+                <nz-form-label nzRequired [nzSpan]="24">Địa chỉ Email</nz-form-label>
+                <nz-form-control [nzErrorTip]="'Trường này không được bỏ trống'">
+                    <input nz-input formControlName="email" />
+                </nz-form-control>
+            </nz-form-item>
+        </div>
+        <div nz-col [nzSpan]="24" style="margin-top:12px;">
+            <nz-form-item>
+                <nz-form-label nzRequired [nzSpan]="24">Số điện thoại</nz-form-label>
+                <nz-form-control>
+                    <input nz-input formControlName="soDienThoai" />
+                </nz-form-control>
+            </nz-form-item>
+        </div>
+
+
+    </div>
+</form>
+<div *nzModalFooter>
+    <button type="button" nz-button nzType="primary" (click)="save()">
+        <i nz-icon nzType="save"></i>{{ 'Save' | translate }}
+    </button>
+</div>

@@ -1,0 +1,109 @@
+<div class="detail-heading">
+  <h2>{{ tour?.ten }}</h2>
+  <p>
+    Mã tour: <b>{{ tour?.ma }}</b>
+  </p>
+</div>
+<div class="detail-images">
+  <div nz-row [nzGutter]="[16, 16]">
+    <div nz-col [nzSpan]="24">
+      <img src="https://cdn.justfly.vn/1920x1440/media/202206/13/1655085737-justfly-cham-island-hoi-an30.jpg" />
+    </div>
+  </div>
+</div>
+<main class="detail-main">
+  <div nz-row [nzGutter]="[64, 64]">
+    <div nz-col [nzSpan]="12">
+      <div class="detail-general">
+        <h3 class="detail-section">Thông tin chung</h3>
+        <div class="detail-general-top"></div>
+        <div class="detail-general-bottom">
+          <div nz-row>
+            <div nz-col [nzSpan]="12">
+              <div class="detail-general-item">
+                <!-- <span class="detail-general-label">Khởi hành</span>
+                <span class="detail-general-text">Đã nẵng</span> -->
+              </div>
+            </div>
+            <div nz-col [nzSpan]="12">
+              <div class="detail-general-item">
+                <span class="detail-general-label">Quốc gia</span>
+                <span class="detail-general-text">{{ tour?.quocGia }}</span>
+              </div>
+              <div class="detail-general-item">
+                <span class="detail-general-label">Thành phố</span>
+                <span class="detail-general-text">{{ tour?.tinh }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="detail-general-desc">
+          <p>{{ tour?.ghiChu ? tour.ghiChu : 'Chưa có mô tả' }}</p>
+        </div>
+      </div>
+      <div class="detail-lich-trinh">
+        <h3 class="detail-section">Lịch trình</h3>
+        <div class="detail-lich-trinh-chi-tiet">
+          <nz-collapse nzAccordion>
+            <ng-container *ngFor="let item of collapseChuongTrinh">
+              <nz-collapse-panel [nzHeader]="item.name" [nzActive]="item.active">
+                <div [innerHTML]="item.content"></div>
+              </nz-collapse-panel>
+            </ng-container>
+          </nz-collapse>
+        </div>
+      </div>
+      <div class="detail-luu-y">
+        <h3 class="detail-section">Lưu ý khi đặt Tour</h3>
+        <ul class="detail-lưu ý-chi-tiet">
+          <li>
+            Quý khách vui lòng cung cấp chính xác thông tin cá nhân, bao gồm họ tên, số điện thoại, số lượng (người lớn
+            và trẻ em) và địa
+            điểm đón (địa chỉ nơi đón, khách sạn...).
+          </li>
+          <li>Lịch trình có thể thay đổi do thời tiết, con nước..</li>
+        </ul>
+      </div>
+    </div>
+    <div nz-col [nzSpan]="12">
+      <div class="detail-dat-ve">
+        <h3 class="detail-section" style="padding-bottom: 8px; border-bottom: 1px solid rgba(0, 0, 0, 0.12)">Thông tin
+          dịch vụ</h3>
+        <div class="detail-dat-ve-info">
+          <form [formGroup]="rfForm">
+            <h4 class="detail-dat-ve-title"
+              style="color: #1a2b49; font-size: 16px; padding-bottom: 15px; border-bottom: 1px solid rgba(0, 0, 0, 0.12)">
+              Vui lòng chọn ngày và số lượng người tham gia
+            </h4>
+            <p style="color: #757575">Lịch trình: {{ chuongTrinhTour.length }} ngày</p>
+            <nz-form-item [nzGutter]="24" class="mt20">
+              <nz-form-label class="m-label" [nzSpan]="5" required>Ngày bắt đầu</nz-form-label>
+              <nz-form-control [nzSpan]="10" [nzErrorTip]="'Trường này không được bỏ trống'">
+                <ora-date-picker formControlName="ngayBatDau"></ora-date-picker>
+              </nz-form-control>
+            </nz-form-item>
+            <nz-form-item [nzGutter]="24" class="mt20">
+              <nz-form-label class="m-label" class="m-label" [nzSpan]="5" required>Số lượng đoàn</nz-form-label>
+              <nz-form-control [nzSpan]="3" [nzErrorTip]="'Trường này không được bỏ trống'">
+                <nz-input-number formControlName="soLuongNguoiLon" [nzMin]="1"></nz-input-number>
+              </nz-form-control>
+            </nz-form-item>
+          </form>
+          <div class="detail-price" style="padding-top: 15px; border-top: 1px solid rgba(0, 0, 0, 0.12)">
+            <div nz-row [nzAlign]="'middle'">
+              <div nz-col [nzSpan]="12">
+                <span style="color: #1a2b49; font-size: 22px">{{ donGia | currencyVND }}</span>
+                <p style="color: #757575; font-size: 12px">Vui lòng hoàn tất các mục yêu cầu để chuyển đến bước tiếp
+                  theo</p>
+              </div>
+              <div nz-col [nzSpan]="12" style="text-align: right">
+                <button style="width: 120px; border-radius: 4px" nz-button nzType="primary" (click)="bookingTour()">Đặt
+                  ngay</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

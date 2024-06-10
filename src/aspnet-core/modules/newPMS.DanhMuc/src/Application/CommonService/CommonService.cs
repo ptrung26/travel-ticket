@@ -53,6 +53,12 @@ namespace newPMS.CommonService
             return GetPhanVungTinh();
         }
 
+        public List<ItemObj<TRANG_THAI_BOOKING>> TrangThaiBooking()
+        {
+            return GetTrangThaiBooking();
+        }
+
+
         [HttpGet(Utilities.ApiUrlActionBase)]
         public async Task<List<ComboBoxDto>> DanhMucTinhCombo()
         {
@@ -123,11 +129,87 @@ namespace newPMS.CommonService
         }
 
 
-        [HttpPost(Utilities.ApiUrlActionBase)]
-        public async Task<List<ComboBoxDto>> PhanLoaiNhaCungCap()
+        [HttpPost(Utilities.ApiUrlBase + "GetSoChoNgoiXeCombobox")]
+        public List<ComboBoxDto> GetSoChoNgoiXeCombobox()
         {
             var csRepos = _factory.Repository<CodeSystemEntity, long>().AsNoTracking();
-            var cs = csRepos.FirstOrDefault(x => x.Code == "PhanLoaiNhaCungCap");
+            var cs = csRepos.FirstOrDefault(x => x.Code == "SoChoXe");
+            var query = _factory.Repository<CodeSystemEntity, long>().AsNoTracking()
+                .Where(x => x.ParentId == cs.Id)
+                 .Select(x => new ComboBoxDto()
+                 {
+                     Value = x.Code.ToString(),
+                     DisplayText = $"{x.Display}",
+                 }).ToList();
+            return query;
+        }
+
+        [HttpPost(Utilities.ApiUrlBase + "GetLoaiXeCombobox")]
+        public List<ComboBoxDto> GetLoaiXeCombobox()
+        {
+            var csRepos = _factory.Repository<CodeSystemEntity, long>().AsNoTracking();
+            var cs = csRepos.FirstOrDefault(x => x.Code == "LoaiXe");
+            var query = _factory.Repository<CodeSystemEntity, long>().AsNoTracking()
+                .Where(x => x.ParentId == cs.Id)
+                 .Select(x => new ComboBoxDto()
+                 {
+                     Value = x.Code.ToString(),
+                     DisplayText = $"{x.Display}",
+                 }).ToList();
+            return query;
+        }
+
+        [HttpPost(Utilities.ApiUrlBase + "GetLoaiTienTeCombobox")]
+        public List<ComboBoxDto> GetLoaiTienTeCombobox()
+        {
+            var csRepos = _factory.Repository<CodeSystemEntity, long>().AsNoTracking();
+            var cs = csRepos.FirstOrDefault(x => x.Code == "LoaiTienTe");
+            var query = _factory.Repository<CodeSystemEntity, long>().AsNoTracking()
+                .Where(x => x.ParentId == cs.Id)
+                 .Select(x => new ComboBoxDto()
+                 {
+                     Value = x.Code.ToString(),
+                     DisplayText = $"{x.Display}",
+                 }).ToList();
+            return query;
+        }
+
+
+        [HttpPost(Utilities.ApiUrlBase + "GetLoaiHopDongCombobox")]
+        public List<ComboBoxDto> GetLoaiHopDongCombobox()
+        {
+            var csRepos = _factory.Repository<CodeSystemEntity, long>().AsNoTracking();
+            var cs = csRepos.FirstOrDefault(x => x.Code == "LoaiHopDong");
+            var query = _factory.Repository<CodeSystemEntity, long>().AsNoTracking()
+                .Where(x => x.ParentId == cs.Id)
+                 .Select(x => new ComboBoxDto()
+                 {
+                     Value = x.Code.ToString(),
+                     DisplayText = $"{x.Display}",
+                 }).ToList();
+            return query;
+        }
+
+        [HttpPost(Utilities.ApiUrlBase + "GetLoaiSoChoiXe")]
+        public List<ComboBoxDto> GetLoaiSoChoiXe()
+        {
+            var csRepos = _factory.Repository<CodeSystemEntity, long>().AsNoTracking();
+            var cs = csRepos.FirstOrDefault(x => x.Code == "SoChoXe");
+            var query = _factory.Repository<CodeSystemEntity, long>().AsNoTracking()
+                .Where(x => x.ParentId == cs.Id)
+                 .Select(x => new ComboBoxDto()
+                 {
+                     Value = x.Code.ToString(),
+                     DisplayText = $"{x.Display}",
+                 }).ToList();
+            return query;
+        }
+
+        [HttpPost(Utilities.ApiUrlBase + "GetLoaiKhach")]
+        public List<ComboBoxDto> GetLoaiKhach()
+        {
+            var csRepos = _factory.Repository<CodeSystemEntity, long>().AsNoTracking();
+            var cs = csRepos.FirstOrDefault(x => x.Code == "LoaiKhachHang");
             var query = _factory.Repository<CodeSystemEntity, long>().AsNoTracking()
                 .Where(x => x.ParentId == cs.Id)
                  .Select(x => new ComboBoxDto()
@@ -180,5 +262,26 @@ namespace newPMS.CommonService
         {
             return await Mediator.Send(new CodeSystemComboboxRequest());
         }
+
+        [HttpPost(Utilities.ApiUrlActionBase)]
+        public async Task<List<ComboBoxDto>> DanhMucQuocTichCombo()
+        {
+            return await Mediator.Send(new QuocTichComboboxRequest());
+        }
+
+        [HttpGet(Utilities.ApiUrlBase + "GetQuocGia")]
+        public List<ComboBoxDto> GetQuocGia()
+        {
+            var _repos = _factory.Repository<DanhMucQuocGiaEntity, string>();
+            var query = _repos.Select(x =>
+                 new ComboBoxDto
+                 {
+                     Value = x.Id,
+                     DisplayText = x.Ten
+                 }
+            );
+            return query.ToList();
+        }
+
     }
 }

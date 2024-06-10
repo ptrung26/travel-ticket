@@ -1,0 +1,36 @@
+.card {
+    text-align: center;
+    border-radius: 16px;
+    background-color: #ffffff;
+    border: solid 1px #e0e0e0;
+    overflow: hidden;
+    position: relative;
+
+    &-info {
+        padding: 8px 16px 16px;
+
+        h3 {
+            font-size: 15px;
+            padding-top: 10px;
+            height: 80px;
+
+        }
+    }
+
+    &-image {
+        padding-bottom: 66.6667%;
+        background-size: cover;
+    }
+
+    .btn-detail {
+        position: absolute;
+        bottom: 8px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}
+
+p {
+    margin: 0;
+    box-sizing: border-box;
+}

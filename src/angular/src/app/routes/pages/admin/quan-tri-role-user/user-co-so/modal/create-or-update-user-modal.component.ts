@@ -40,7 +40,8 @@ export class CreateOrUpdateUserModalComponent implements AfterContentInit {
   constructor(injector: Injector, private modal: NzModalRef, private _taiKhoanBaseService: TaiKhoanBaseCustomServiceProxy) {
     //super(injector);
   }
-  ngAfterContentInit(): void {}
+  ngAfterContentInit(): void { }
+
   getInfoUser(userId?: number) {
     ora.ui.setBusy();
     this._taiKhoanBaseService
@@ -137,73 +138,4 @@ export class CreateOrUpdateUserModalComponent implements AfterContentInit {
     }
   }
 
-  //#region code thừa
-
-  // clearFormInsertContinue() {
-  //   this.dataItem = _.cloneDeep(this.initDataCreate || {});
-  // }
-
-  // fullScreenClick() {
-  //   let idEle = '.full-screen';
-  //   var iCheck = true;
-  //   $(idEle).click(function () {
-  //     if (iCheck) {
-  //       $('.ng-trigger-modalContainer').addClass('ant-hidden');
-  //       $('.ant-modal').addClass('ant-modal-full');
-  //     } else {
-  //       $('.ng-trigger-modalContainer').removeClass('ant-hidden');
-  //       $('.ant-modal').removeClass('ant-modal-full');
-  //     }
-
-  //     iCheck = !iCheck;
-  //   });
-  // }
-
-  // dropDrapModal() {
-  //   let modalContent: any = $('.ant-modal-content');
-  //   modalContent.draggable({
-  //     handle: '.ant-modal-header',
-  //   });
-  // }
-
-  // ngAfterViewInit(): void {
-  //   // this.dropDrapModal();
-  //   this.fullScreenClick();
-  // }
-
-  // changeDonVi(item?: any) {
-  //   if (item != null) {
-  //     this.dataItem.donViCoSoId = item.id;
-  //     this.dataItem.level = item.level;
-  //     let req: any = {
-  //       level: this.dataItem.level,
-  //       isXNSangLoc: item.isXNSangLoc,
-  //       isXNKhangDinh: item.isXNKhangDinh,
-  //       isDieuTri: item.isDieuTri,
-  //     };
-  //     this.getRoleByLevelCoSo(req);
-  //     // this.nhanVienAuto.ngOnChanges()
-  //   } else {
-  //     this.dataItem.donViCoSoId = null;
-  //     this.roles = [];
-  //   }
-  // }
-  // getRoleByLevelCoSo(req) {
-  //   ora.ui.setBusy();
-  //   this._taiKhoanBaseService
-  //     .getRoleByLevelCoSo(req)
-  //     .pipe(finalize(ora.ui.clearBusy))
-  //     .subscribe((res) => {
-  //       this.roles = res;
-  //     });
-  // }
-  // changeNV(item?: any) {
-  //   if (item != null) {
-  //     this.dataItem.nhanVienId = item.id;
-  //     this.dataItem.hoTen = item.ten;
-  //     this.dataItem.soDienThoai = item.dienThoai;
-  //   }
-  // }
-
-  //#endregion
 }

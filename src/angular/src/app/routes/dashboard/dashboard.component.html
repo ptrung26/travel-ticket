@@ -1,62 +1,36 @@
-<div *ngIf="isAdmin" class="dashboard">
-  <h1>Tổng quan về hoạt động ngoại kiểm</h1>
+<div class="dashboard">
   <div class="general-box">
     <nz-row nzGutter="24">
       <nz-col nzLg="6">
         <div class="g-box one">
           <img src="../../../assets/images/g-one.png" />
-          <p>Số phiếu xét nghiệm tham gia</p>
+          <p>Số lượng booking dã đặt</p>
           <h3>125,600</h3>
         </div>
       </nz-col>
       <nz-col nzLg="6">
         <div class="g-box two">
           <img src="../../../assets/images/g-two.png" />
-          <p>Số chương trình ngoại kiểm</p>
-          <h3>600</h3>
+          <p>Số lượng khách hàng</p>
+          <h3>20</h3>
         </div>
       </nz-col>
       <nz-col nzLg="6">
         <div class="g-box three">
           <img src="../../../assets/images/g-three.png" />
-          <p>Số phiếu đăng ký</p>
-          <h3>30,600</h3>
-        </div>
-      </nz-col>
-      <nz-col nzLg="6">
-        <div class="g-box four">
-          <nz-row>
-            <nz-col nzLg="12">
-              <img src="../../../assets/images/g-four.png" />
-              <p>Số hợp đồng</p>
-              <h3>30,600</h3>
-            </nz-col>
-            <nz-col nzLg="12">
-              <img src="../../../assets/images/g-five.png" />
-              <p>Tổng tiền hợp đồng</p>
-              <h3>33,689,000,000</h3>
-            </nz-col>
-          </nz-row>
+          <p>Tổng doanh thu</p>
+          <h3>400.000,000</h3>
         </div>
       </nz-col>
     </nz-row>
   </div>
   <div class="dash-box">
     <div class="dash-head">
-      <h2>Số phiếu xét nghiệm</h2>
+      <h2>Doanh thu theo tháng</h2>
       <div class="filter" [formGroup]="rfFormGroup">
         <ora-date-picker formControlName="denNgay" placeHolder="Ngày bắt đầu"></ora-date-picker>
       </div>
     </div>
-    <div id="sophieuxetnghiem" style="height: 580px"></div>
-  </div>
-  <div class="dash-box">
-    <div class="dash-head">
-      <h2>Chi phí xét nghiệm</h2>
-      <div class="filter" [formGroup]="rfFormGroup">
-        <ora-date-picker formControlName="denNgay" placeHolder="Ngày bắt đầu"></ora-date-picker>
-      </div>
-    </div>
-    <div id="chiphixetnghiem" style="height: 580px"></div>
+    <div id="doanhThuTheoThang" style="height: 580px"></div>
   </div>
 </div>

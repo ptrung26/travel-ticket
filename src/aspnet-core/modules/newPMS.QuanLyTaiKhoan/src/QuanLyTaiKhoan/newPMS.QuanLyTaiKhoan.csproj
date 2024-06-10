@@ -8,6 +8,9 @@
     <GenerateEmbeddedFilesManifest>true</GenerateEmbeddedFilesManifest>
 	</PropertyGroup>
   <ItemGroup>
+    <Compile Remove="QuanTriHeThong\UserManagement\Request\**" />
+    <EmbeddedResource Remove="QuanTriHeThong\UserManagement\Request\**" />
+    <None Remove="QuanTriHeThong\UserManagement\Request\**" />
     <None Remove="_TemplateDefinition\Template\*.tpl" />
     <EmbeddedResource Include="_TemplateDefinition\Template\*.tpl" />
   </ItemGroup>
@@ -53,9 +56,5 @@
 	  <EmbeddedResource Update="_TemplateDefinition\Template\SendPasswordResetCode.tpl">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </EmbeddedResource>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="QuanTriHeThong\UserManagement\Request\" />
 	</ItemGroup>
 </Project>

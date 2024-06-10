@@ -1,6 +1,6 @@
 import { Component, Injector } from '@angular/core';
 import { PagedListingComponentBase, PagedRequestDto } from '@app/shared/common/paged-listing-component-base';
-import { NhaCungCapKhachSanServiceProxy, PagingListNhaCungCapKhachSanRequest } from '@app/shared/service-proxies/danh-muc-service-proxies';
+import { NhaCungCapKhachSanDto, NhaCungCapKhachSanDtoPagedResultDto, NhaCungCapKhachSanServiceProxy, PagingListNhaCungCapKhachSanRequest } from '@app/shared/service-proxies/danh-muc-service-proxies';
 import { FormBuilder, FormGroup } from '@ngneat/reactive-forms';
 import { finalize } from 'rxjs/operators';
 
@@ -11,6 +11,7 @@ import { finalize } from 'rxjs/operators';
 export class NhaCungCapKhachSanComponent extends PagedListingComponentBase<any> {
   rfForm: FormGroup;
   viewShow: 'list' | 'create-or-update' = 'list';
+  dataItem: NhaCungCapKhachSanDto;
 
   constructor(private injector: Injector, private fb: FormBuilder, private _dataService: NhaCungCapKhachSanServiceProxy) {
     super(injector);
@@ -44,8 +45,9 @@ export class NhaCungCapKhachSanComponent extends PagedListingComponentBase<any> 
       });
   }
 
-  add() {
+  showCreateOrUpdate(data?: NhaCungCapKhachSanDto) {
     this.viewShow = 'create-or-update';
+    this.dataItem = data;
   }
 
   close() {

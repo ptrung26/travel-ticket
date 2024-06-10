@@ -99,7 +99,7 @@ export class DanhMucComponent extends PagedListingComponentBase<CodeSystemDto> i
           ora.notify.success(this.l('DeleteSuccess'));
         });
       },
-      () => {},
+      () => { },
     );
   }
 
@@ -116,7 +116,7 @@ export class DanhMucComponent extends PagedListingComponentBase<CodeSystemDto> i
           ora.notify.success(this.l('DeleteSuccess'));
         });
       },
-      () => {},
+      () => { },
     );
   }
 
@@ -127,7 +127,6 @@ export class DanhMucComponent extends PagedListingComponentBase<CodeSystemDto> i
     const input = new ExportExcelCodeSystemRequest();
     input.filterInput = filterInput;
     input.parentCode = formValue.parentCode;
-    console.log(input);
     this._dataService
       .exportExcelDanhMucChung(input)
       .pipe(finalize(() => ora.ui.clearBusy()))

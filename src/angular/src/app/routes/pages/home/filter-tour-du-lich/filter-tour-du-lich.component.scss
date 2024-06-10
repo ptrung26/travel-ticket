@@ -1,0 +1,35 @@
+.filter {
+    &-banner {
+        min-height: 200px;
+        background-image: url('/assets/images/banner-tour-du-lich.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
+    &-heading {
+        margin: 30px 0;
+
+        h1 {
+            color: rgb(0, 105, 204);
+            font-size: 36px;
+            font-weight: bold;
+        }
+    }
+
+    &-list {
+        display: flex;
+        flex-wrap: wrap;
+        margin: 40px -12px;
+    }
+
+    &-item {
+        width: calc(20% - 24px);
+        margin: 12px;
+
+    }
+}
+
+.ant-pagination {
+    text-align: center;
+}

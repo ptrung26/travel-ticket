@@ -26,6 +26,9 @@
     },
     "congViec": {
       "url": "http://localhost:3012"
+    },
+    "sanPham": {
+      "url": "http://localhost:3003"
     }
   }
 }

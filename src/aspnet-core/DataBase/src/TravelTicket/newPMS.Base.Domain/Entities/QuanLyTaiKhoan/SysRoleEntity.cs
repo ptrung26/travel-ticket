@@ -13,6 +13,7 @@ namespace newPMS.Entities
         /// </summary>
         public Guid RoleId { get; set; }
         public int? Level { get; set; } //Enum
+
         /// <summary>
         /// Reference tới Name của bảng AbpRoles của Identity
         /// </summary>

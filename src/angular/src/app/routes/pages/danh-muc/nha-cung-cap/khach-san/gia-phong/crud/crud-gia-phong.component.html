@@ -1,0 +1,53 @@
+<form [formGroup]="rfForm">
+    <div nz-row>
+        <div nz-col [nzSpan]="24">
+            <nz-form-item>
+                <nz-form-label nzRequired [nzSpan]="24">Tên phòng</nz-form-label>
+                <nz-form-control [nzErrorTip]="'Trường này không được bỏ trống'">
+                    <input nz-input formControlName="tenPhong" />
+                </nz-form-control>
+            </nz-form-item>
+        </div>
+        <div nz-col [nzSpan]="24">
+            <nz-form-item>
+                <nz-form-label nzRequired [nzSpan]="24">Kiểu phòng</nz-form-label>
+            </nz-form-item>
+        </div>
+        <div nz-col [nzSpan]="24">
+            <nz-form-item>
+                <nz-form-label [nzSpan]="24">Thời gian áp dụng</nz-form-label>
+                <nz-form-control [nzSpan]="24">
+                    <ora-date-picker formControlName="ngayApDungTu" placeHolder="Từ ngày"></ora-date-picker>
+                    Đến <ora-date-picker formControlName="ngayApDungDen" placeHolder="Đến ngày"></ora-date-picker>
+                </nz-form-control>
+            </nz-form-item>
+        </div>
+        <div nz-col [nzSpan]="24">
+            <nz-form-item [nzGutter]="[16,16]">
+                <nz-form-label [nzSpan]="24">Giá ngày thường</nz-form-label>
+                <nz-form-control [nzSpan]="12">
+                    <input nz-input formControlName="giaFOTNettNgayThuong" placeholder="Giá Nett ngày thường" />
+                </nz-form-control>
+                <nz-form-control [nzSpan]="12">
+                    <input nz-input formControlName="giaFOTBanNgayThuong" placeholder="Giá bán ngày thường" />
+                </nz-form-control>
+            </nz-form-item>
+        </div>
+        <div nz-col [nzSpan]="24">
+            <nz-form-item [nzGutter]="[16,16]">
+                <nz-form-label [nzSpan]="24">Giá ngày cuối tuần</nz-form-label>
+                <nz-form-control [nzSpan]="12">
+                    <input nz-input formControlName="giaFOTNettNgayLe" placeholder="Giá Nett ngày lễ" />
+                </nz-form-control>
+                <nz-form-control [nzSpan]="12">
+                    <input nz-input formControlName="giaFOTBanNgayLe" placeholder="Giá bán ngày lễ" />
+                </nz-form-control>
+            </nz-form-item>
+        </div>
+    </div>
+</form>
+<div *nzModalFooter>
+    <button type="button" nz-button nzType="primary" (click)="save()">
+        <i nz-icon nzType="save"></i>{{ 'Save' | translate }}
+    </button>
+</div>

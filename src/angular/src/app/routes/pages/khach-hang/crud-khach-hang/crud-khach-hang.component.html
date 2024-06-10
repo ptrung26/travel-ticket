@@ -1,0 +1,47 @@
+<form [formGroup]="rfForm">
+  <nz-row [nzGutter]="16">
+    <nz-col [nzSpan]="24">
+      <nz-form-item [nzGutter]="16">
+        <nz-form-label class="label" [nzSpan]="4">Mã</nz-form-label>
+        <nz-form-control [nzSpan]="6">
+          <input nz-input formControlName="ma" />
+        </nz-form-control>
+      </nz-form-item>
+    </nz-col>
+    <nz-col [nzSpan]="24">
+      <nz-form-item [nzGutter]="16">
+        <nz-form-label class="label" [nzSpan]="4">Tên</nz-form-label>
+        <nz-form-control>
+          <input nz-input formControlName="ten" />
+        </nz-form-control>
+      </nz-form-item>
+    </nz-col>
+    <nz-col [nzSpan]="24">
+      <nz-form-item [nzGutter]="16">
+        <nz-form-label class="label" [nzSpan]="4">Địa chỉ</nz-form-label>
+        <nz-form-control>
+          <input nz-input formControlName="diaChi" />
+        </nz-form-control>
+      </nz-form-item>
+    </nz-col>
+    <nz-col [nzSpan]="24">
+      <nz-form-item [nzGutter]="16">
+        <nz-form-label class="label" [nzSpan]="4">Số điện thoại</nz-form-label>
+        <nz-form-control>
+          <input nz-input formControlName="soDienThoai" />
+        </nz-form-control>
+      </nz-form-item>
+    </nz-col>
+    <nz-col [nzSpan]="24">
+      <nz-form-item [nzGutter]="16">
+        <nz-form-label class="label" [nzSpan]="4">Email</nz-form-label>
+        <nz-form-control>
+          <input nz-input formControlName="email" />
+        </nz-form-control>
+      </nz-form-item>
+    </nz-col>
+  </nz-row>
+</form>
+<div class="footerbutton">
+  <button type="button" nz-button nzType="primary" (click)="save()"><i nz-icon nzType="save"></i>Lưu thông tin</button>
+</div>

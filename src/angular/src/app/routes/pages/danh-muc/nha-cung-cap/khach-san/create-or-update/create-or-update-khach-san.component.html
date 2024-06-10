@@ -8,11 +8,18 @@
     <nz-tab nzTitle="Thông tin chung">
         <form nz-form [formGroup]="rfForm">
             <div nz-row [nzGutter]="20">
-                <div nz-col [nzMd]="16" [nzSm]="16">
+                <div nz-col [nzMd]="12" [nzSm]="12">
                     <nz-form-item [nzGutter]="12">
                         <nz-form-label class="label" [nzMd]="4" [nzSm]="4" nzRequired>Mã</nz-form-label>
                         <nz-form-control [nzMd]="8" [nzSm]="8" [nzErrorTip]="'Trường không được bỏ trống'">
                             <input nz-input formControlName="ma" />
+                        </nz-form-control>
+                        <nz-form-label class="label" [nzMd]="4" [nzSm]="4" nzRequired>Tình trạng</nz-form-label>
+                        <nz-form-control [nzMd]="8" [nzSm]="8">
+                            <nz-select formControlName="tinhTrang">
+                                <nz-option [nzValue]="true" nzLabel="Kích hoạt"></nz-option>
+                                <nz-option [nzValue]="false" nzLabel="Không kích hoạt"></nz-option>
+                            </nz-select>
                         </nz-form-control>
                     </nz-form-item>
                     <nz-form-item [nzGutter]="12">
@@ -24,9 +31,13 @@
                     <nz-form-item [nzGutter]="12">
                         <nz-form-label class="label" [nzMd]="4" [nzSm]="4">Quốc gia</nz-form-label>
                         <nz-form-control>
+                            <ora-select dirQuocTich formControlName="quocGiaId"></ora-select>
                         </nz-form-control>
                         <nz-form-label class="label" [nzMd]="4" [nzSm]="4">Tỉnh/Thành phố</nz-form-label>
                         <nz-form-control>
+                            <nz-form-control>
+                                <ora-select dirTinh formControlName="tinhId"></ora-select>
+                            </nz-form-control>
                         </nz-form-control>
                     </nz-form-item>
                     <nz-form-item [nzGutter]="12">
@@ -55,10 +66,17 @@
                             <ora-select dirSoSaoKhachSan formControlName="soSao"></ora-select>
                         </nz-form-control>
                     </nz-form-item>
-                </div>
-                <div nz-col [nzMd]="8" [nzSm]="8">
                     <nz-form-item nzGutter="12">
-                        <nz-form-label class="label" [nzMd]="6" [nzSm]="6">Logo</nz-form-label>
+                        <nz-form-label class="label" [nzMd]="6" [nzSm]="6">Mô tả</nz-form-label>
+                        <nz-form-control nzSpan="24">
+                            <ora-ckeditor formControlName="moTa"></ora-ckeditor>
+                        </nz-form-control>
+                    </nz-form-item>
+
+                </div>
+                <div nz-col [nzMd]="12" [nzSm]="12">
+                    <nz-form-item nzGutter="12">
+                        <nz-form-label class="label" nzRequired [nzMd]="8" [nzSm]="8">Logo</nz-form-label>
                         <nz-form-control [nzLg]="8" [nzMd]="8" [nzSm]="8">
                             <nz-upload nzType="drag" [nzAction]="uploadUrl" #upload (nzChange)="handleChange($event)"
                                 style="width:100%;">
@@ -70,29 +88,59 @@
                             </nz-upload>
                         </nz-form-control>
                     </nz-form-item>
+                    <nz-form-item [nzGutter]="12">
+                        <nz-form-label class="label" [nzMd]="8" [nzSm]="8">Website</nz-form-label>
+                        <nz-form-control>
+                            <input nz-input formControlName="website" />
+                        </nz-form-control>
+                    </nz-form-item>
+                    <nz-form-item [nzGutter]="12">
+                        <nz-form-label class="label" nzRequired [nzMd]="8" [nzSm]="8">Ngày hết hạn hợp
+                            đồng</nz-form-label>
+                        <nz-form-control>
+                            <ora-date-picker formControlName="ngayHetHanHopDong"></ora-date-picker>
+                        </nz-form-control>
+                    </nz-form-item>
                     <nz-form-item nzGutter="12">
-                        <nz-form-label class="label" [nzMd]="6" [nzSm]="6">Ngày cuối tuần</nz-form-label>
-                        <nz-form-control [nzLg]="18" [nzMd]="18" [nzSm]="18">
+                        <nz-form-label class="label" [nzMd]="8" [nzSm]="8">Ngày cuối tuần</nz-form-label>
+                        <nz-form-control>
                             <div class="date-circle-list">
                                 <ng-container *ngIf="dateOfWeeks?.length > 0">
                                     <span *ngFor="let item of dateOfWeeks" class="date-circle"
-                                        [ngClass]="{'active': filterDateOrBirth(item.value)}"
+                                        [ngClass]="{'active': filterNgayCuoiTuan(item.value)}"
                                         (click)="handleChangeDate(item?.value)">
                                         {{ item?.text }}
                                     </span>
                                 </ng-container>
-
                             </div>
-
                         </nz-form-control>
                     </nz-form-item>
+                    <nz-form-item [nzGutter]="12">
+                        <nz-form-label class="label" nzRequired [nzMd]="8" [nzSm]="8">Thuế VAT 10%</nz-form-label>
+                        <nz-form-control>
+                            <nz-radio-group formControlName="isHasVAT">
+                                <label nz-radio [nzValue]="true">Giá đã bao gồm Thuế VAT</label>
+                                <label nz-radio [nzValue]="false">Giá không bao gồm thuế VAT</label>
+                            </nz-radio-group>
+                        </nz-form-control>
+                    </nz-form-item>
+                    <div class="footerbutton">
+                        <button type="button" nz-button nzType="primary" (click)="createOrUpdate()">
+                            <i nz-icon nzType="save"></i>Lưu thông tin
+                        </button>
+                    </div>
                 </div>
             </div>
         </form>
-        <div class="footerbutton">
-            <button type="button" nz-button nzType="primary">
-                <i nz-icon nzType="save"></i>Lưu thông tin
-            </button>
-        </div>
+
+    </nz-tab>
+    <nz-tab *ngIf="nhaCungCapId" nzTitle="Liên hệ">
+        <nguoi-lien-he-ncc [nhaCungCapId]="nhaCungCapId" [nhaCungCapCode]="khachSan"></nguoi-lien-he-ncc>
+    </nz-tab>
+    <nz-tab *ngIf="nhaCungCapId" nzTitle="Hạng phòng">
+        <hang-phong [nhaCungCapId]="nhaCungCapId"></hang-phong>
+    </nz-tab>
+    <nz-tab *ngIf="nhaCungCapId" nzTitle="Giá phòng">
+        <gia-phong [nhaCungCapId]="nhaCungCapId"></gia-phong>
     </nz-tab>
 </nz-tabset>

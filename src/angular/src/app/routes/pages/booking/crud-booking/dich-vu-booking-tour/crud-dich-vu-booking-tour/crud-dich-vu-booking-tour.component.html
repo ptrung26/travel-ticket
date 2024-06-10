@@ -1,0 +1,79 @@
+<ng-container *ngIf="isShowForm">
+  <p class="header">Thông tin dịch vụ</p>
+  <form [formGroup]="rfForm">
+    <nz-row>
+      <nz-col>
+        <nz-form-item [nzGutter]="24">
+          <nz-form-label class="label" [nzSpan]="6" nzRequired>Tên chương trình</nz-form-label>
+          <nz-form-control [nzSpan]="12" [nzErrorTip]="'Trường này không được bỏ trống'">
+            <input nz-input formControlName="tenTour" />
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item [nzGutter]="24" class="mt20">
+          <nz-form-label class="label" [nzSpan]="6" nzRequired>Ngày bắt đầu</nz-form-label>
+          <nz-form-control [nzSpan]="10" [nzErrorTip]="'Trường này không được bỏ trống'">
+            <ora-date-picker formControlName="ngayBatDau"></ora-date-picker>
+          </nz-form-control>
+          <nz-form-label class="label">Số ngày</nz-form-label>
+          <nz-form-control [nzSpan]="3">
+            <input nz-input formControlName="soNgay" />
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item [nzGutter]="24" class="mt20">
+          <nz-form-label class="label" [nzSpan]="6">Ngày kết thúc</nz-form-label>
+          <nz-form-control [nzSpan]="10">
+            <ora-date-picker formControlName="ngayKetThuc"></ora-date-picker>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item [nzGutter]="24" class="mt20">
+          <nz-form-label class="label" [nzSpan]="6" required>Số lượng đoàn</nz-form-label>
+          <nz-form-control [nzSpan]="5" [nzErrorTip]="'Trường này không được bỏ trống'">
+            <nz-input-number style="width: 80px; " formControlName="soLuongNguoiLon"></nz-input-number>
+          </nz-form-control>
+          <nz-form-label class="label" [nzSpan]="3">Điểm đón</nz-form-label>
+          <nz-form-control [nzSpan]="10">
+            <input nz-input formControlName="diemDen" />
+          </nz-form-control>
+        </nz-form-item>
+      </nz-col>
+    </nz-row>
+    <p class="header">Chi tiết dịch vụ</p>
+    <nz-table nzTemplateMode>
+      <thead>
+        <tr>
+          <th>Loại độ tuổi</th>
+          <th>Giá Nett</th>
+          <th>Giá bán</th>
+          <th style="width: 80px !important;">Số lượng</th>
+          <th>Thành tiền</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container formArrayName="listChiTiet">
+          <ng-container *ngFor="let item of listChiTietDV.controls; let i = index" [formGroupName]="i">
+            <tr>
+              <td>
+                {{item.get('loaiDoTuoi').value}}
+              </td>
+              <td>
+                <input nz-input formControlName="giaNett" />
+              </td>
+              <td>
+                <input nz-input formControlName="giaBan" />
+              </td>
+              <td style="width: 80px !important;">
+                <input nz-input formControlName="soLuong" />
+              </td>
+              <td>
+                {{ +item.get('thanhTien').value | currencyVND }}
+              </td>
+            </tr>
+          </ng-container>
+        </ng-container>
+      </tbody>
+    </nz-table>
+  </form>
+  <div class="footerbutton">
+    <button style="margin-right: 12px;" nz-button nzType="primary" (click)="save()">Lưu thông tin</button>
+  </div>
+</ng-container>

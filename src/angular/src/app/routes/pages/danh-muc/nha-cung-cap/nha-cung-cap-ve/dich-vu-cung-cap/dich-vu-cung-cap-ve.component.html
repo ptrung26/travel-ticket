@@ -1,0 +1,62 @@
+<ora-page-header title="Dịch vụ cung cấp" [action]="actionHeader">
+    <ng-template #actionHeader>
+        <button nz-button nzType="primary" (click)="showCreateOrUpdate()">
+            <i nz-icon nzType="plus-circle" nzTheme="outline"></i>Thêm mới
+        </button>
+    </ng-template>
+</ora-page-header>
+<ora-layout-filter (onSearch)="refresh()">
+    <form nz-form [formGroup]="rfForm" nzLayout="vertical">
+        <nz-row nzGutter="8">
+            <nz-col nzLg="6" nzSm="6">
+                <input formControlName="filter" nz-input placeholder="Nhập mã, tên để tìm kiếm..." />
+            </nz-col>
+        </nz-row>
+    </form>
+</ora-layout-filter>
+<ora-table [rows]="dataList" [isLoading]="isTableLoading" [totalRows]="totalItems" [(pageSize)]="pageSize"
+    [(page)]="pageNumber" (pageChange)="pageNumberChange()" (sortChange)="gridSort($event)">
+    <ora-column header="STT" width="100px" align="center">
+        <ng-template oraCell let-data>
+            <!-- {{data | json}} -->
+            {{ skipCount + dataList.indexOf(data) + 1 }}
+        </ng-template>
+    </ora-column>
+    <ora-column header="Mã" key="ma" align="center" width="80px"></ora-column>
+    <ora-column header="Tên dịch vụ" width="300px" key="ten" align="center"></ora-column>
+    <ora-column header="Giá Nett" key="denNgay" width="120px" [sort]="true">
+        <ng-template let-data oraCell>
+            {{ data.giaNett | currencyVND }}
+        </ng-template>
+    </ora-column>
+    <ora-column header="Giá bán" key="denNgay" width="120px" [sort]="true">
+        <ng-template let-data oraCell>
+            {{ data.giaBan | currencyVND }}
+        </ng-template>
+    </ora-column>
+    <ora-column header="Thời gian hợp đồng" width="250px">
+        <ng-template let-data oraCell>
+            {{ data.tuNgay | date : 'dd/MM/yyyy' }} - {{ data.denNgay | date : 'dd/MM/yyyy' }}
+        </ng-template>
+    </ora-column>
+    <ora-column header="Trạng thái" key="tinhTrang" align="center" [content]="trangThaiContent" width="200px">
+        <ng-template #trangThaiContent let-data="dataItem">
+            <nz-tag *ngIf="data.tinhTrang === true" [nzColor]="'#74E291'">
+                Hoạt động
+            </nz-tag>
+            <nz-tag *ngIf="data.tinhTrang === false" [nzColor]="'#f93e3e'">
+                Không hoạt động
+            </nz-tag>
+        </ng-template>
+    </ora-column>
+    <ora-column header="Thao tác" [content]="contentAction" width="150px" align="center">
+        <ng-template #contentAction let-data="dataItem">
+            <a nz-button nzType="link" nz-tooltip="{{ 'Edit' | translate }}" (click)="showCreateOrUpdate(data.id)">
+                <i nz-icon nzType="edit"></i>
+            </a>
+            <a nz-button nzType="link" nzDanger nz-tooltip="{{ 'Delete' | translate }}" (click)="delete(data)">
+                <i nz-icon nzType="delete"></i>
+            </a>
+        </ng-template>
+    </ora-column>
+</ora-table>

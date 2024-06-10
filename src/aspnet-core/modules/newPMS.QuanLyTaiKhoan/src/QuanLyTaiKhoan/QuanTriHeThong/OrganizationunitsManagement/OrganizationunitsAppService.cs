@@ -728,6 +728,7 @@ namespace newPMS.QuanLyTaiKhoan.Services
 	                      AND sr.IsDeleted = 0
                         WHERE
                           s.IsDeleted = 0 
+                          AND s.HoTen is not NULL
                           AND s.Id NOT IN ( SELECT SysUserId FROM sysorganizationunitsuser AS sy WHERE sy.IsDeleted = 0 AND SysOrganizationunitsId = @OrganizationunitsId ) 
             ");
             if (!string.IsNullOrEmpty(input.Filter))

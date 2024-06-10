@@ -44,12 +44,28 @@ namespace Ord.Account.Commands
             {
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
-                new Claim(JwtRegisteredClaimNames.Email, user.Email),
-                new Claim(AbpClaimTypes.UserName, user.UserName),
-                new Claim(AbpClaimTypes.Name, user.Name),
-                new Claim(AbpClaimTypes.UserId, user.Id.ToString()),
-                new Claim(AbpClaimTypes.TenantId , user.TenantId.ToString())
-        };
+                new Claim(AbpClaimTypes.UserId, user.Id.ToString())
+            };
+
+            if (!string.IsNullOrEmpty(user.Email))
+            {
+                permClaims.Add(new Claim(JwtRegisteredClaimNames.Email, user.Email));
+            }
+
+            if (!string.IsNullOrEmpty(user.UserName))
+            {
+                permClaims.Add(new Claim(AbpClaimTypes.UserName, user.UserName));
+            }
+
+            if (!string.IsNullOrEmpty(user.Name))
+            {
+                permClaims.Add(new Claim(AbpClaimTypes.Name, user.Name));
+            }
+
+            if (user.TenantId != null)
+            {
+                permClaims.Add(new Claim(AbpClaimTypes.TenantId, user.TenantId.ToString()));
+            }
             if (request.Roles?.Any() == true)
             {
                 foreach (var roleName in request.Roles)
@@ -65,13 +81,16 @@ namespace Ord.Account.Commands
                 permClaims,
                 expires: DateTime.UtcNow.AddMinutes(accessTokenLifetime),
                 signingCredentials: credentials);
+
             var result = new AuthJwtDto()
             {
                 access_token = new JwtSecurityTokenHandler().WriteToken(token),
                 refresh_token = GenerateRefreshToken(),
                 token_type = "Bearer"
             };
-            RefreshTokenCache.SetAsync($@"{result.refresh_token}{result.access_token}",
+
+
+           await  RefreshTokenCache.SetAsync($@"{result.refresh_token}{result.access_token}",
                 user.Id.ToString(),
                 new DistributedCacheEntryOptions()
                 {
@@ -79,6 +98,7 @@ namespace Ord.Account.Commands
                 });
             return result;
         }
+
         private string GenerateRefreshToken()
         {
             var randomNumber = new byte[16];
@@ -86,5 +106,6 @@ namespace Ord.Account.Commands
             rng.GetBytes(randomNumber);
             return Convert.ToBase64String(randomNumber);
         }
+
     }
 }

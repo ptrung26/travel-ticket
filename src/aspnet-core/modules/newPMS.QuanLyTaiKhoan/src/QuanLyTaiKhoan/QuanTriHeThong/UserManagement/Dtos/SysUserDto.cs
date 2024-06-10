@@ -12,6 +12,7 @@ namespace newPMS.QuanLyTaiKhoan.Dtos
     {
         public Guid UserId { get; set; }
         public string UserName { get; set; }
+
         public string Ma { get; set; }
         #region Thông tin của người dùng
         [StringLength(200)]
@@ -23,6 +24,7 @@ namespace newPMS.QuanLyTaiKhoan.Dtos
         [StringLength(20)]
         public string SoDienThoai { get; set; }
         #endregion
+
         public long? KhachHangId { get; set; }
         public long? PhongBanId { get; set; }
         public int? Level { get; set; }
@@ -36,10 +38,8 @@ namespace newPMS.QuanLyTaiKhoan.Dtos
         }
 
 
-        #region Thông tin cơ sở
+        #region Thông tin chung
 
-        public string MaCoSo { get; set; }
-        public string TenCoSo { get; set; }
         public string TenTinh { get; set; }
         public string TenHuyen { get; set; }
         public string TenXa { get; set; }
@@ -74,7 +74,7 @@ namespace newPMS.QuanLyTaiKhoan.Dtos
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
         public string SurName { get; set; }
-        public string Avatar { get; set; } //Lưu ảnh đại diện vào đây
+        public string Avatar { get; set; } 
         public List<string> PermissionNames { get; set; }
         public string RoleMobile { get; set; }
     }

@@ -23,6 +23,14 @@ namespace newPMS.Account
         {
             return await _mediator.Send(model);
         }
+
+        [Consumes("application/x-www-form-urlencoded")]
+        public async Task<LoginResultDto> Register([FromForm] AccountLoginQuery model)
+        {
+            return await _mediator.Send(model);
+        }
+
+
         [Consumes("application/x-www-form-urlencoded")]
         public async Task<AuthJwtDto> RefreshToken([FromForm] AccountRefreshTokenQuery model)
         {
